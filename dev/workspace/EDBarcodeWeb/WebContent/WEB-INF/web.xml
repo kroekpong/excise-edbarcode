@@ -32,6 +32,24 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	
+	
+	<!-- Spring for Web Service -->
+	<servlet>
+		<servlet-name>barcode-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/barcode-ws-config.xml</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>barcode-ws</servlet-name>
+		<url-pattern>/ws/*</url-pattern>
+	</servlet-mapping>
+   
+	
 	<!-- String for JSON Configuration -->
 <!-- 	<servlet> -->
 <!-- 		<servlet-name>spring-rest</servlet-name> -->
@@ -44,14 +62,6 @@
 <!-- 	</servlet-mapping> -->
 	
 	<!-- String for JSON Configuration -->
-	<servlet>
-		<servlet-name>spring-ws</servlet-name>
-		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
-		<load-on-startup>3</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>spring-ws</servlet-name>
-		<url-pattern>/ws/*</url-pattern>
-	</servlet-mapping>
+
 	
 </web-app>
