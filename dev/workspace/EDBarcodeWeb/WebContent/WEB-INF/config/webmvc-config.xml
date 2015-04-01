@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:component-scan base-package="
+		com.baiwa.core.common.dao,
+		th.mi.rta.cb.common,
+		th.mi.rta.cb.admin,
+		th.mi.rta.cb.course,
+		th.mi.rta.cb.report">
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController" />
+	</context:component-scan>
+	
+	<!-- Annotation and Inject localeChangeInterceptor -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+<!-- 		<property name="interceptors"> -->
+<!-- 			<ref bean="localeChangeInterceptor" /> -->
+<!-- 		</property> -->
+	</bean>
+	
+	<!-- Start Message -->
+<!-- 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> -->
+<!-- 		<property name="basenames"> -->
+<!-- 			<list> -->
+<!-- 				<value>classpath:messages</value> -->
+<!-- 				<value>classpath:errormessages</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 		<property name="defaultEncoding" value="UTF-8" /> -->
+<!-- 	</bean> -->
+	
+	<!-- Application Properties -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:application.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Properties File -->
+<!-- 	<bean id="appProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean"> -->
+<!-- 		<property name="singleton" value="true" /> -->
+<!-- 		<property name="locations"> -->
+<!-- 			<list> -->
+<!-- 				<value>classpath:application.properties</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"> -->
+<!-- 		<property name="paramName" value="lang" /> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"> -->
+<!-- 		<property name="defaultLocale" value="th" /> -->
+<!-- 	</bean> -->
+	<!-- End Message -->
+	
+	
+	<!-- Start Tiles -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".tiles" />
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+	</bean>
+	
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/defs/rta.xml</value>
+				<value>/WEB-INF/defs/rta-admin.xml</value>
+				<value>/WEB-INF/defs/rta-course.xml</value>
+				<value>/WEB-INF/defs/rta-report.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- End Tiles -->
+	
+	
+	<!-- Error Handling -->
+<!-- 	<bean class="com.buckwa.util.CustomSimpleMappingExceptionResolver"> -->
+<!-- 		<property name="defaultErrorView" value="general-error" /> -->
+<!-- 	</bean> -->
+	<!-- End Error Handling -->
+	
+	
+	<bean id="annotationHandlerAdaptor" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="synchronizeOnSession" value="true" />
+	</bean>
+	
+	<!-- Load and Set Time to Scheduler -->
+<!-- 	<bean id="scheduledScanner" class="com.buckwa.scheduler.ScheduledScanner" /> -->
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+		<property name="maxInMemorySize" value="1024000" />
+	</bean>
+
+</beans>
