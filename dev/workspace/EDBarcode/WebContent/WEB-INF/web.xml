@@ -4,38 +4,30 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	
-	<display-name>EDBarcode</display-name>
+	<display-name>EDBarcodeWeb</display-name>
 	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
-	<!-- Spring Configuration -->
+	
+	<!-- MVC Servlet -->
 	<servlet>
-		<servlet-name>spring</servlet-name>
+		<servlet-name>baiwa</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value></param-value>
-		</init-param>
+    <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/config/application-config.xml</param-value>
+    </init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>spring</servlet-name>
+		<servlet-name>baiwa</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/config/application-config.xml</param-value>
-	</context-param>
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
 	
-	
-	
-	<!--  Webservice	 -->
-	
+  
+	<!--  Webservice Servlet	 -->	
 	  <servlet>
     <servlet-name>barcodews</servlet-name>
     <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
