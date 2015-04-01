@@ -21,14 +21,34 @@ public class LoginEndpoint {
     public  LoginResponse  doEnpoint( @RequestPayload LoginRequest loginRequest) {    	 
     	  logger.info(" In doEnpoint loginRequest" );
     	  
+    	  String userName = loginRequest.getUserName();
+    	  String password = loginRequest.getPassword();
+    	  
+    	  
     	  logger.info(" User Name:" +loginRequest.getUserName());
     	  logger.info(" Password:" +loginRequest.getPassword());
     	  
     	  
-    	  
     	  LoginResponse response  =	new LoginResponse();
-    	  response.setStatus("0");
-    	  response.setDescription("Success");     	 
+    	  if(userName!=null&&userName!=null){
+    		  
+    		  if("001".equals(userName)&&"password".equals(password)){
+            	  response.setStatus("0");
+            	  response.setDescription("Success");   
+    		  }else if("002".equals(userName)&&"password".equals(password)){
+            	  response.setStatus("0");
+            	  response.setDescription("Success");   
+    		  }else{
+            	  response.setStatus("1");
+            	  response.setDescription("Invalid User Name or Password");       			  
+    		  }
+    		  
+    	  }else{
+        	  response.setStatus("1");
+        	  response.setDescription("Invalid User Name or Password");     		  
+    	  }
+    	 
+    	 
     	return response;
     }
     
