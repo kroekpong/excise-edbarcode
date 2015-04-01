@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.excise.go.th/xsd/barcode"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://www.excise.go.th/xsd/barcode">
 
   <!--  Common -->
   
+    <xs:complexType name="entrepreneur">
+    <xs:sequence>
+      <xs:element name="licenseNo" type="xs:string" maxOccurs="1" minOccurs="1"/>   
+      
+      
+      <xs:element name="productList" type="tns:product" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
   
+    <xs:complexType name="product">
+    <xs:sequence>
+      <xs:element name="productName" type="xs:string"  maxOccurs="1" minOccurs="1"/>   
+    </xs:sequence>
+  </xs:complexType> 
 
 
 
@@ -28,6 +42,30 @@
 	  </element> 
 	  
 	  
+    <!--  Service2: Login  -->
+	<element name="syncMasterDataRequest">
+		<complexType>
+			<sequence>
+				<element name="licenseNo" type="string" maxOccurs="1" minOccurs="1"> </element>
+				
+			</sequence>
+		</complexType>
+	</element>
+	
+		<element name="syncMasterDataResponse">
+		<complexType>
+			<sequence>				 
+				<element name="status" type="string" maxOccurs="1" minOccurs="1"> </element>
+				<element name="description" type="string" maxOccurs="1" minOccurs="1"> </element>
+				 
+				 <xs:element name="entrepreneur" type="tns:entrepreneur" minOccurs="1" maxOccurs="1"></xs:element>
+				
+			</sequence>
+		</complexType>
+	  </element> 
 	  
+	  
+	  
+	  	  
 
 </schema>

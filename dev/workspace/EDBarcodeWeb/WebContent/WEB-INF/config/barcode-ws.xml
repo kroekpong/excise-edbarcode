@@ -20,14 +20,18 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
  
   
 	
-	 	 	<!--  Service 1: Login -->
-	<bean id="LoginService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+	 	 	<!--  Service -->
+	<bean id="EDBarcodeService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
 		<property name="schema" ref="barcodeSchema" />
-		<property name="portTypeName" value="LoginService" />	 
-		<property name="locationUri"><value>${loginService.service}</value></property>
+		<property name="portTypeName" value="EDBarcodeService" />	 
+		<property name="locationUri"><value>${edBarcodeService.service}</value></property>
 		<property name="targetNamespace" value="http://www.excise.go.th/xsd/barcode" />
 	</bean>
 
+ 
+
+ 
+ 
 	<bean id="barcodeSchema" class="org.springframework.xml.xsd.SimpleXsdSchema">
 		<property name="xsd" value="/WEB-INF/classes/th/go/excise/edbarcode/ws/xsd/edbarcode.xsd" />
 	</bean>	

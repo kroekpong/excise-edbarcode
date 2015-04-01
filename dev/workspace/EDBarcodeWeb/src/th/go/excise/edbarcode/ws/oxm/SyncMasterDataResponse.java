@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="entrepreneur" type="{http://www.excise.go.th/xsd/barcode}entrepreneur"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,15 +39,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "status",
-    "description"
+    "description",
+    "entrepreneur"
 })
-@XmlRootElement(name = "loginResponse")
-public class LoginResponse {
+@XmlRootElement(name = "syncMasterDataResponse")
+public class SyncMasterDataResponse {
 
     @XmlElement(required = true)
     protected String status;
     @XmlElement(required = true)
     protected String description;
+    @XmlElement(required = true)
+    protected Entrepreneur entrepreneur;
 
     /**
      * Gets the value of the status property.
@@ -94,6 +98,30 @@ public class LoginResponse {
      */
     public void setDescription(String value) {
         this.description = value;
+    }
+
+    /**
+     * Gets the value of the entrepreneur property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Entrepreneur }
+     *     
+     */
+    public Entrepreneur getEntrepreneur() {
+        return entrepreneur;
+    }
+
+    /**
+     * Sets the value of the entrepreneur property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Entrepreneur }
+     *     
+     */
+    public void setEntrepreneur(Entrepreneur value) {
+        this.entrepreneur = value;
     }
 
 }
