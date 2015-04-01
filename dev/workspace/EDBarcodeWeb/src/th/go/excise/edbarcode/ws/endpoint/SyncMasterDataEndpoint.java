@@ -56,6 +56,7 @@ public class SyncMasterDataEndpoint {
     	  
     	  
     	  response.setEntrepreneur(entrepreneur);
+     
     	 
     	 
     	return response;
