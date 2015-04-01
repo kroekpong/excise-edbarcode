@@ -1,7 +1,10 @@
 package th.go.excise.edbarcode.ws.endpoint;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,53 +17,82 @@ import th.go.excise.edbarcode.ws.oxm.Product;
 import th.go.excise.edbarcode.ws.oxm.SyncMasterDataRequest;
 import th.go.excise.edbarcode.ws.oxm.SyncMasterDataResponse;
 
- 
 @Endpoint
-public class SyncMasterDataEndpoint {   
+public class SyncMasterDataEndpoint {
 	
 	private static final Logger logger = LogManager.getLogger();
-    
- 
+	
 	@PayloadRoot(localPart = "syncMasterDataRequest", namespace = "http://www.excise.go.th/xsd/barcode")
-    public  SyncMasterDataResponse  doEnpoint( @RequestPayload SyncMasterDataRequest syncMasterDataRequest) {    	 
-    	  logger.info(" In doEnpoint loginRequest" );
-    	  
-     
-    	  
-    	  
-    	  logger.info(" licenseNo:" +syncMasterDataRequest.getLicenseNo());
-    	  
-    	  
-    	  
-    	  SyncMasterDataResponse response  =	new SyncMasterDataResponse();
-    	  
-    	  
-    	  
-    	  Entrepreneur entrepreneur = new Entrepreneur();
-    	  
-    	  entrepreneur.setLicenseNo("XXX");
-    	  
-     
-    	  
-    	  Product p1 = new Product();
-    	  p1.setProductName("Test 1");
-    	  
-    	  Product p2 = new Product();
-    	  p2.setProductName("Test 2");
-    	  
-     
-    	  
-    	  
-    	  entrepreneur.getProductList().add(p1);
-    	  entrepreneur.getProductList().add(p2);
-    	  
-    	  
-    	  response.setEntrepreneur(entrepreneur);
-     
-    	 
-    	 
-    	return response;
-    }
-    
-    
+	public SyncMasterDataResponse doEnpoint(@RequestPayload SyncMasterDataRequest syncMasterDataRequest) throws DatatypeConfigurationException {
+		logger.info(" In doEnpoint loginRequest");
+		
+		String licenseNo = syncMasterDataRequest.getLicenseNo();
+		logger.info(" licenseNo:" + licenseNo);
+		
+		SyncMasterDataResponse response = new SyncMasterDataResponse();
+		
+//		if ("001".equals(licenseNo)) {
+			Entrepreneur entrepreneur = new Entrepreneur();
+			entrepreneur.setLicenseNo(licenseNo);
+			
+			Product p1 = new Product();
+			p1.setProductGroup("สุราแช่อื่นๆ");
+			p1.setProductCode("xxxbbb001");
+			p1.setProductName("สุราแช่ 1");
+			p1.setBrandMajor("แบรนด์หลัก");
+			p1.setBrandMinor("แบรนด์รอง");
+			p1.setModel("แบบหรือรุ่น");
+			p1.setSize("ขนาด");
+			p1.setUnit("หน่วยสินค้า");
+			p1.setDegree(BigDecimal.ONE);
+			p1.setTaxByValue(new BigDecimal("48"));
+			p1.setTaxByCapacity(new BigDecimal("155"));
+			p1.setTaxByLiter(new BigDecimal("8"));
+			p1.setLowestDegreeNoTax(new BigDecimal("7"));
+			p1.setTaxPlusByDegree(new BigDecimal("3"));
+			p1.setLowestSellingPriceNoTax(new BigDecimal("0"));
+			p1.setTaxPlusBySellingPrice(new BigDecimal("0"));
+			GregorianCalendar cal1 = new GregorianCalendar();
+			cal1.set(2015, 03, 30);
+			p1.setAnnouncePriceDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(cal1));
+			p1.setAnnouncePriceValue(new BigDecimal("0"));
+			
+			Product p2 = new Product();
+			p2.setProductGroup("สุราแช่อื่นๆ");
+			p2.setProductCode("xxxbbb002");
+			p2.setProductName("สุราแช่ 2");
+			p2.setBrandMajor("แบรนด์หลัก");
+			p2.setBrandMinor("แบรนด์รอง");
+			p2.setModel("แบบหรือรุ่น");
+			p2.setSize("ขนาด");
+			p2.setUnit("หน่วยสินค้า");
+			p2.setDegree(BigDecimal.TEN);
+			p2.setTaxByValue(new BigDecimal("49"));
+			p2.setTaxByCapacity(new BigDecimal("156"));
+			p2.setTaxByLiter(new BigDecimal("9"));
+			p2.setLowestDegreeNoTax(new BigDecimal("8"));
+			p2.setTaxPlusByDegree(new BigDecimal("4"));
+			p2.setLowestSellingPriceNoTax(new BigDecimal("0"));
+			p2.setTaxPlusBySellingPrice(new BigDecimal("0"));
+			GregorianCalendar cal2 = new GregorianCalendar();
+			cal2.set(2015, 03, 30);
+			p2.setAnnouncePriceDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(cal2));
+			p2.setAnnouncePriceValue(new BigDecimal("0"));
+			
+			entrepreneur.getProductList().add(p1);
+			entrepreneur.getProductList().add(p2);
+			
+			response.setStatus("0");
+			response.setDescription("Success");
+			response.setEntrepreneur(entrepreneur);
+//		} else if ("002".equals(licenseNo)) {
+//			
+//		} else {
+//			response.setStatus("1");
+//			response.setDescription("Invalid License No.");
+//		}
+		
+		return response;
+	}
+	
 }

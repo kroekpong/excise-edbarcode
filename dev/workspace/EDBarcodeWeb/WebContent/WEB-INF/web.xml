@@ -24,8 +24,6 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
- 
-	
 	
 	
 	<!-- Spring for Web Service -->
@@ -42,7 +40,7 @@
 		<servlet-name>barcode-ws</servlet-name>
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
-   
+	
 	
 	<!-- String for JSON Configuration -->
 <!-- 	<servlet> -->
@@ -54,8 +52,6 @@
 <!-- 		<servlet-name>spring-rest</servlet-name> -->
 <!-- 		<url-pattern>/json/*</url-pattern> -->
 <!-- 	</servlet-mapping> -->
-	
-	<!-- String for JSON Configuration -->
 
 	
 </web-app>
