@@ -61,18 +61,16 @@
 	
 	
 	<!-- Start Tiles -->
- 
-	<bean class="org.springframework.web.servlet.view.XmlViewResolver">
-		<property name="location">
-			<value>/WEB-INF/defs/excise/excise-views.xml</value>
-		</property>
-	</bean>	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<!-- <property name="prefix" value="/" /> -->
+		<!-- <property name="suffix" value=".tiles" /> -->
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+	</bean>
 	
-	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/defs/excise/excise.xml</value>
-		 
 			</list>
 		</property>
 	</bean>

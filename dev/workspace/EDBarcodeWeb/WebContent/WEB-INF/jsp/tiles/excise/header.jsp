@@ -8,8 +8,9 @@
       <div class="dropdown">
         <a class="trigger" href="#"></a>
         <ul class="drop-content">      
-          <li><a class=""href="#">Logging</a></li>
-          <li><a href="<%=request.getContextPath()%>/newDemoForm.htm">รายการใหม่</a></li> 
+          <li><a href="<%=request.getContextPath()%>/newDownloadPage.htm">ดาวน์โหลด</a></li>
+          <li><a href="<%=request.getContextPath()%>/newDemoForm.htm">รายการใหม่</a></li>
+          <li><a href="#">Logging</a></li>
         </ul>
       </div>
   </nav>
