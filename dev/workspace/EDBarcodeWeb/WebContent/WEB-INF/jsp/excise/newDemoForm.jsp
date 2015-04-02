@@ -1,8 +1,16 @@
 <!DOCTYPE html><%@ page pageEncoding="UTF-8"%>
 
-<script type="text/javascript">
+<script>
+var testData = '{"entrepreneur":{"licenseNo":"2558/456789ABCD","licenseAllowedName":"บริษัท สยามไวเนอรี่ จำกัด","factoryName":"บริษัท สยามไวเนอรี่ จำกัด","licenseStartDate":"01/01/2558","licenseEndDate":"31/12/2558","taxNo":"3-1015-1763-7","factoryAddress":"9/2 หมู่ 3 ต.บางโทรัด อ.เมืองสมุทรสาคร จ.สมุทรสาคร 74000","productList":[]}}';
 function fetchData() {
-	
+	var jsonObj = JSON.parse(testData);
+	document.getElementById('licenseNo').value = jsonObj.entrepreneur.licenseNo;
+	document.getElementById('licenseAllowedName').value = jsonObj.entrepreneur.licenseAllowedName;
+	document.getElementById('factoryName').value = jsonObj.entrepreneur.factoryName;
+	document.getElementById('licenseStartDate').value = jsonObj.entrepreneur.licenseStartDate;
+	document.getElementById('licenseEndDate').value = jsonObj.entrepreneur.licenseEndDate;
+	document.getElementById('taxNo').value = jsonObj.entrepreneur.taxNo;
+	document.getElementById('factoryAddress').value = jsonObj.entrepreneur.factoryAddress;
 }
 </script>
 
@@ -11,10 +19,15 @@ function fetchData() {
 <form action="#" method="post" >
 <h4 class="stag-sans-section-heading" align="center">สร. 120-11</h4>
 
-<!-- <div align="right"> -->
-<!-- 	<input type="text"> -->
-<!-- 	<input type="button" onclick="fetchData()"> -->
-<!-- </div> -->
+<table style="width: 90%; border: 0px solid green;">
+<tr>
+	<td width="70%"></td>
+	<td align="right">
+		<input type="text">
+		<input type="button" value="Scan" onclick="fetchData()">
+	</td>
+</tr>
+</table>
 
 <table style="width: 90%; border: 1px solid green;">
 <tr>
