@@ -16,8 +16,8 @@ public class LoginEndpoint {
 	private static final Logger logger = LogManager.getLogger();
 
 	@PayloadRoot(localPart = "loginRequest", namespace = "http://www.excise.go.th/xsd/barcode")
-	public LoginResponse doEnpoint(@RequestPayload LoginRequest loginRequest) {
-		logger.info(" In doEnpoint loginRequest");
+	public LoginResponse doEndpoint(@RequestPayload LoginRequest loginRequest) {
+		logger.info(" In doEndpoint loginRequest");
 
 		String userName = loginRequest.getUserName();
 		String password = loginRequest.getPassword();

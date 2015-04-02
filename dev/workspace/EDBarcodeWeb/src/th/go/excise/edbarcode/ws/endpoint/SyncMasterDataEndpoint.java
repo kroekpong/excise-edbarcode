@@ -23,8 +23,8 @@ public class SyncMasterDataEndpoint {
 	private static final Logger logger = LogManager.getLogger();
 	
 	@PayloadRoot(localPart = "syncMasterDataRequest", namespace = "http://www.excise.go.th/xsd/barcode")
-	public SyncMasterDataResponse doEnpoint(@RequestPayload SyncMasterDataRequest syncMasterDataRequest) throws DatatypeConfigurationException {
-		logger.info(" In doEnpoint loginRequest");
+	public SyncMasterDataResponse doEndpoint(@RequestPayload SyncMasterDataRequest syncMasterDataRequest) throws DatatypeConfigurationException {
+		logger.info(" In doEndpoint syncMasterDataRequest");
 		
 		String licenseNo = syncMasterDataRequest.getLicenseNo();
 		logger.info(" licenseNo:" + licenseNo);
@@ -34,6 +34,16 @@ public class SyncMasterDataEndpoint {
 //		if ("001".equals(licenseNo)) {
 			Entrepreneur entrepreneur = new Entrepreneur();
 			entrepreneur.setLicenseNo(licenseNo);
+			entrepreneur.setLicenseAllowedName("บริษัท สยามไวเนอรี่ จำกัด");
+			entrepreneur.setFactoryName("บริษัท สยามไวเนอรี่ จำกัด");
+			GregorianCalendar calStartDate = new GregorianCalendar();
+			calStartDate.set(2015, 1, 1);
+			entrepreneur.setLicenseStartDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(calStartDate));
+			GregorianCalendar calEndDate = new GregorianCalendar();
+			calEndDate.set(2015, 12, 31);
+			entrepreneur.setLicenseEndDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(calEndDate));
+			entrepreneur.setTaxNo("3-1015-1763-7");
+			entrepreneur.setFactoryAddress("9/2 หมู่ 3 ต.บางโทรัด อ.เมืองสมุทรสาคร จ.สมุทรสาคร 74000");
 			
 			Product p1 = new Product();
 			p1.setProductGroup("สุราแช่อื่นๆ");

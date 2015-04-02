@@ -10,11 +10,11 @@
 		</File>
 	</Appenders>
 	<Loggers>
-		<Root level="debug">
+		<Root level="ERROR">
 			<AppenderRef ref="Console" />
 <!-- 			<AppenderRef ref="MyFile" /> -->
 		</Root>
-		<Logger name="th.mi.rta" level="info" additivity="false">
+		<Logger name="th.go.excise.edbarcode" level="debug" additivity="false">
 			<AppenderRef ref="Console" />
 		</Logger>
 	</Loggers>
