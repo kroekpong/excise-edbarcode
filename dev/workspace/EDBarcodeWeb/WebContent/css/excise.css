@@ -1441,9 +1441,9 @@ form {
     display: none; }
   form input[type="text"], form input[type="password"], form input[type="email"], form input[type="search"],
   form textarea {
-    min-width: 17.74em;
+/*     min-width: 17.74em; */
     margin: .421em 0;
-    width: 100%;
+/*     width: 100%; */
     padding: 1em;
     border: none;
     background: #eeeeed;
