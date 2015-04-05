@@ -9,6 +9,7 @@
 		<xs:sequence>
 			<xs:element name="licenseNo" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="licenseAllowedName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="factoryId" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="factoryName" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="licenseStartDate" type="xs:date" minOccurs="1" maxOccurs="1" />
 			<xs:element name="licenseEndDate" type="xs:date" minOccurs="1" maxOccurs="1" />

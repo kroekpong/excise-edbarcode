@@ -35,6 +35,7 @@ public class SyncMasterDataEndpoint {
 			Entrepreneur entrepreneur = new Entrepreneur();
 			entrepreneur.setLicenseNo(licenseNo);
 			entrepreneur.setLicenseAllowedName("บริษัท สยามไวเนอรี่ จำกัด");
+			entrepreneur.setFactoryId("51175744");
 			entrepreneur.setFactoryName("บริษัท สยามไวเนอรี่ จำกัด");
 			GregorianCalendar calStartDate = new GregorianCalendar();
 			calStartDate.set(2015, 1, 1);
