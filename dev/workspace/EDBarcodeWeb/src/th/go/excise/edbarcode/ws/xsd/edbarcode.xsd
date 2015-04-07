@@ -9,10 +9,9 @@
 		<xs:sequence>
 			<xs:element name="licenseNo" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="licenseAllowedName" type="xs:string" minOccurs="1" maxOccurs="1" />
-			<xs:element name="factoryId" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="factoryName" type="xs:string" minOccurs="1" maxOccurs="1" />
-			<xs:element name="licenseStartDate" type="xs:date" minOccurs="1" maxOccurs="1" />
-			<xs:element name="licenseEndDate" type="xs:date" minOccurs="1" maxOccurs="1" />
+			<xs:element name="licenseStartDate" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="licenseEndDate" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="taxNo" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="factoryAddress" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="productList" type="tns:product" minOccurs="0" maxOccurs="unbounded" />
@@ -37,7 +36,7 @@
 			<xs:element name="taxPlusByDegree" type="xs:decimal" minOccurs="1" maxOccurs="1" />
 			<xs:element name="lowestSellingPriceNoTax" type="xs:decimal" minOccurs="1" maxOccurs="1" />
 			<xs:element name="taxPlusBySellingPrice" type="xs:decimal" minOccurs="1" maxOccurs="1" />
-			<xs:element name="announcePriceDate" type="xs:date" minOccurs="1" maxOccurs="1" />
+			<xs:element name="announcePriceDate" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="announcePriceValue" type="xs:decimal" minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
