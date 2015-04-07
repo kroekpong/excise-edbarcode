@@ -24,8 +24,6 @@
 		<servlet-name>baiwa</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
- 
-	
 	
 	
 	<!-- Spring for Web Service -->
@@ -42,20 +40,17 @@
 		<servlet-name>barcode-ws</servlet-name>
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
-   
+	
 	
 	<!-- String for JSON Configuration -->
-<!-- 	<servlet> -->
-<!-- 		<servlet-name>spring-rest</servlet-name> -->
-<!-- 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class> -->
-<!-- 		<load-on-startup>2</load-on-startup> -->
-<!-- 	</servlet> -->
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>spring-rest</servlet-name> -->
-<!-- 		<url-pattern>/json/*</url-pattern> -->
-<!-- 	</servlet-mapping> -->
-	
-	<!-- String for JSON Configuration -->
-
+	<servlet>
+		<servlet-name>barcode-rest</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>barcode-rest</servlet-name>
+		<url-pattern>/json/*</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

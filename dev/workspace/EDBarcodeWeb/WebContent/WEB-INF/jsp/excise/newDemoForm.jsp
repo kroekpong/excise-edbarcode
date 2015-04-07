@@ -14,7 +14,7 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
 <form action="#" method="post" >
 <h4 class="stag-sans-section-heading" align="center">สร. 120-11</h4>
 
-<table style="width: 90%; border: 0px solid green;">
+<table style="width: 90%; border: 0px solid black;">
 <tr>
 	<td width="70%"></td>
 	<td align="right">
@@ -25,14 +25,15 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
 </tr>
 <tr>
 	<td></td>
-	<td align="right"><input type="text">
+	<td align="right">
+		<input type="text" id="barcode">
 		<input type="button" value="Scan" onclick="fetchData()">
 		<input type="button" value="Clear" onclick="clearData()">
 	</td>
 </tr>
 </table>
 
-<table style="width: 90%; border: 1px solid green;">
+<table style="width: 90%; border: 1px solid black;">
   <tr>
     <td width="20%"><strong>ผู้ประกอบการ</strong></td>
     <td width="30%">&nbsp;</td>
@@ -59,63 +60,63 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
     </tr>
 </table>
 <br>
-<table id="alcoholTable" border="1" style="width: 90%; border: 1px solid green;">
+<table id="alcoholTable" border="1" style="width: 90%; border: 1px solid black;">
 <tbody>
 <tr>
-    <td rowspan="3">ลำ<br>
+    <td rowspan="3" bgcolor="#6699FF">ลำ<br>
       ดับ</td>
-    <td rowspan="3"><p align="center">(๓)<br>
+    <td rowspan="3" bgcolor="#6699FF"><p align="center">(๓)<br>
       ชนิด<br>
       สุรา</p></td>
-    <td colspan="8"><p align="center">(๔)<br>
+    <td colspan="8" bgcolor="#6699FF"><p align="center">(๔)<br>
       รายการสุรา</p></td>
-    <td colspan="4"><p align="center">(๕)<br>
+    <td colspan="4" bgcolor="#6699FF"><p align="center">(๕)<br>
       ภาษีสุราต่อภาชนะ</p></td>
-    <td colspan="2"><p align="center">(๖)<br>
+    <td colspan="2" bgcolor="#6699FF"><p align="center">(๖)<br>
       รวมภาษีสุรา</p></td>
-    <td rowspan="3">เลข<br>
+    <td rowspan="3" bgcolor="#6699FF">เลข<br>
       ที่ถัง<br>
       เบียร์</td>
     </tr>
   <tr>
-    <td rowspan="2"><p align="center">(๔.๑)<br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๔.๑)<br>
       ชื่อสุรา</p></td>
-    <td rowspan="2">(๔.๒)<br>
+    <td rowspan="2" bgcolor="#6699FF">(๔.๒)<br>
 ดีกรี</td>
-    <td rowspan="2"><p align="center">(๔.๓) <br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๔.๓) <br>
       ขนาดบรรจุ<br>
       (ลิตร)</p></td>
-    <td rowspan="2"><p align="center">(๔.๔) <br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๔.๔) <br>
       จำนวน<br>
       ภาชนะ</p></td>
-    <td rowspan="2"><p align="center">(๔.๕) <br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๔.๕) <br>
       ปริมาณ<br>
       สุรา <br>
       ที่เสีย<br>
       ภาษี<br>
       (ลิตร)</p></td>
-    <td colspan="2"><p align="center">(๔.๖) <br>
+    <td colspan="2" bgcolor="#6699FF"><p align="center">(๔.๖) <br>
       ราคาขายส่ง<br>
       ช่วงสุดท้าย<br>
       ของสุรา <br>
       (บาท/ภาชนะ)<br>
       ไม่รวมภาษี<br>
       มูลค่าเพิ่ม</p></td>
-    <td rowspan="2">มูลค่า<br>
+    <td rowspan="2" bgcolor="#6699FF">มูลค่า<br>
       (บาท)</td>
-    <td rowspan="2"><p align="center">(๕.๑) <br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๕.๑) <br>
       ภาษี<br>
       ตาม <br>
       มูลค่า<br>
       (บาท/<br>
       ภาชนะ)</p></td>
-    <td rowspan="2"><p align="center">(๕.๒) <br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๕.๒) <br>
       ภาษี<br>
       ตาม <br>
       ปริมาณ<br>
       (บาท/<br>
       ภาชนะ)</p></td>
-    <td rowspan="2"><p align="center">(๕.๓) <br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๕.๓) <br>
       ภาษี<br>
       ตาม <br>
       ปริมาณ <br>
@@ -124,7 +125,7 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
       ดีกรีเกิน<br>
       (บาท/<br>
 ภาชนะ)</p></td>
-    <td rowspan="2"><p align="center">(๕.๔) <br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๕.๔) <br>
       รวมภาษี<br>
       สุรา <br>
       ตาม<br>
@@ -132,7 +133,7 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
       (บาท/<br>
       ภาชนะ)<br>
       (๕.๒+๕.๓)</p></td>
-    <td rowspan="2"><p align="center">(๖.๑) <br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๖.๑) <br>
       ตาม<br>
       มูลค่า<br>
       (บาท)
@@ -140,7 +141,7 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
       (๔.๔)<br>
       *<br>
 (๕.๑)</p></td>
-    <td rowspan="2"><p align="center">(๖.๒) <br>
+    <td rowspan="2" bgcolor="#6699FF"><p align="center">(๖.๒) <br>
       ตาม<br>
       ปริมาณ<br>
       (บาท)<br>
@@ -149,20 +150,38 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
       (๕.๔)</p></td>
     </tr>
 <tr>
-    <td>ตามแจ้ง</td>
-    <td>ตามประกาศ</td>
+    <td bgcolor="#6699FF">ตามแจ้ง</td>
+    <td bgcolor="#6699FF">ตามประกาศ</td>
 </tr>
 </tbody>
 </table>
 <br>
-<table border="1" style="width: 90%; border: 1px solid green;">
+<br>
+<table id="alcoholSummaryTable" border="0" style="width: 90%;">
+  <tbody>
+    <tr>
+      <td align="right" bgcolor="#6699FF">รวม</td>
+      <td width="80" align="center" bgcolor="#6699FF">ตามมูลค่า</td>
+      <td width="100" bgcolor="#6699FF"><p align="center">
+        <input type="text" id="pageSumTaxByValue" style="width: 90%;">
+      </p></td>
+      <td width="80" align="center" bgcolor="#6699FF">ตามปริมาณ</td>
+      <td width="100" bgcolor="#6699FF"><p align="center">
+        <input id="pageSumTaxByCapacity" type="text" style="width: 90%;">
+      </p></td>
+      <td width="5%" bgcolor="#6699FF"><p align="center">&nbsp;</p></td>
+      </tr>
+    </tbody>
+</table>
+<br>
+<table border="1" style="width: 90%; border: 1px solid black;">
   <tr>
-    <td width="40%">&nbsp;</td>
-    <td>สุรา</td>
-    <td>มหาดไทย</td>
-    <td>กองทุน สสส.</td>
-    <td>กองทุน สสท.</td>
-    <td>กองทุน กพฬ.</td>
+    <td width="40%" bgcolor="#6699FF">&nbsp;</td>
+    <td bgcolor="#6699FF">สุรา</td>
+    <td bgcolor="#6699FF">มหาดไทย</td>
+    <td bgcolor="#6699FF">กองทุน สสส.</td>
+    <td bgcolor="#6699FF">กองทุน สสท.</td>
+    <td bgcolor="#6699FF">กองทุน กพฬ.</td>
   </tr>
   <tr>
     <td>(๗) รวมภาษีสุรา   (6.1) + (6.2)</td>

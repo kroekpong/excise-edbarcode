@@ -1,4 +1,15 @@
 var count = 1;
+var pageSumTaxByValue = 0;
+var pageSumTaxByCapacity = 0;
+
+$(document).ready(function(e){
+    $("#barcode").keypress(function(e) {
+		if (e.which == 13) {
+			fetchData();
+			$("#barcode").val('');
+		}
+    });
+});
 
 function getScanType() {
 	var scanType = $("input[type='radio'][name='scanType']:checked").val();
@@ -7,15 +18,14 @@ function getScanType() {
 
 function fetchData() {
 	var scanType = getScanType();
+	console.log('scanType: ' + scanType);
+	console.log('scanValue: ' + $("#barcode").val());
 	if ('scanType1' == scanType) {
-		var jsonObj = JSON.parse(testDataEntrepreneur);
-		fetchDataEntrepreneur(jsonObj.entrepreneur);
+		fetchDataEntrepreneur($("#barcode").val());
 	} else if ('scanType2' == scanType) {
-		var jsonObject = JSON.parse(testDataAlcohol);
-		fetchDataAlcoholList(jsonObject.alcohol);
+		fetchDataProduct($("#barcode").val());
 	} else if ('scanType3' == scanType) {
-		var jsonObj = JSON.parse(testDataTaxSummary);
-		fetchDataTaxSummary(jsonObj.taxSummary);
+		fetchDataTaxSummary($("#barcode").val());
 	}
 }
 
@@ -23,14 +33,36 @@ function clearData() {
 	var scanType = getScanType();
 	if ('scanType1' == scanType) {
 		clearDataEntrepreneur();
-	} else if ('scanType2' == scanType) {
-		
 	} else if ('scanType3' == scanType) {
 		clearDataTaxSummary();
 	}
 }
 
-function fetchDataEntrepreneur(ent) {
+function fetchDataEntrepreneur(licenseNo) {
+	var param = {
+		'licenseNo': licenseNo
+	};
+	$.ajax({
+		url: contextPath + "/json/getEntrepreneurInfo",
+		type: 'GET',
+		data: param,
+		async: false,
+		cache: false,
+		success: function(result, textStatus, jqXHR) {
+			console.log(result);
+			console.log(textStatus);
+			console.log(jqXHR);
+			fillDataEntrepreneur(result)
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+		}
+	});
+}
+
+function fillDataEntrepreneur(ent) {
 	$('#licenseNo').val(ent.licenseNo);
 	$('#licenseAllowedName').val(ent.licenseAllowedName);
 	$('#factoryName').val(ent.factoryName);
@@ -51,30 +83,44 @@ function clearDataEntrepreneur() {
 }
 
 function fetchDataTaxSummary(taxSummary) {
-	$('#sumTaxProduct1').val(taxSummary.sumTaxProduct1);
-	$('#sumTaxProduct2').val(taxSummary.sumTaxProduct2);
-	$('#sumTaxProduct3').val(taxSummary.sumTaxProduct3);
-	$('#sumTaxProduct4').val(taxSummary.sumTaxProduct4);
-	$('#sumTaxProduct5').val(taxSummary.sumTaxProduct5);
-	$('#reduceTaxProductBaht').val(taxSummary.reduceTaxProductBaht);
-	$('#receipt').val(taxSummary.receipt);
-	$('#remain1').val(taxSummary.remain1);
-	$('#remain2').val(taxSummary.remain2);
-	$('#remain3').val(taxSummary.remain3);
-	$('#remain4').val(taxSummary.remain4);
-	$('#remain5').val(taxSummary.remain5);
-	$('#reduceTaxByDepBookNoBaht1').val(taxSummary.reduceTaxByDepBookNoBaht1);
-	$('#reduceTaxByDepBookNoBaht2').val(taxSummary.reduceTaxByDepBookNoBaht2);
-	$('#reduceTaxByDepBookNoBaht3').val(taxSummary.reduceTaxByDepBookNoBaht3);
-	$('#reduceTaxByDepBookNoBaht4').val(taxSummary.reduceTaxByDepBookNoBaht4);
-	$('#reduceTaxByDepBookNoBaht5').val(taxSummary.reduceTaxByDepBookNoBaht5);
-	$('#sumAllAfterReduce1').val(taxSummary.sumAllAfterReduce1);
-	$('#sumAllAfterReduce2').val(taxSummary.sumAllAfterReduce2);
-	$('#other').val(taxSummary.other);
-	$('#sumFinal2').val(taxSummary.sumFinal2);
-	$('#sumFinal3').val(taxSummary.sumFinal3);
-	$('#sumFinal4').val(taxSummary.sumFinal4);
-	$('#sumFinal5').val(taxSummary.sumFinal5);
+	var summarys = taxSummary.split('|');
+	var taxSummary = {
+		sumTaxByValue: summarys[0],
+		sumTaxByCapacity: summarys[1],
+		receipt: summarys[2],
+		reduceTaxProductBaht: summarys[3],
+		reduceTaxByDepBookNoBaht: summarys[4],
+		taxByMOI: summarys[5],
+		taxByThaiHealth: summarys[6],
+		taxByThaiPBS: summarys[7],
+		taxByNSDF: summarys[8]
+	};
+	
+	var sumTaxAlcohol = parseFloat(taxSummary.sumTaxByValue) + parseFloat(taxSummary.sumTaxByCapacity);
+	$('#sumTaxProduct1').val(sumTaxAlcohol);
+	$('#sumTaxProduct2').val(taxSummary.taxByMOI);
+	$('#sumTaxProduct3').val(taxSummary.taxByThaiHealth);
+	$('#sumTaxProduct4').val(taxSummary.taxByThaiPBS);
+	$('#sumTaxProduct5').val(taxSummary.taxByNSDF);
+	$('#reduceTaxProductBaht').val(0);
+	$('#receipt').val('');
+	$('#remain1').val(sumTaxAlcohol);
+	$('#remain2').val(taxSummary.taxByMOI);
+	$('#remain3').val(taxSummary.taxByThaiHealth);
+	$('#remain4').val(taxSummary.taxByThaiPBS);
+	$('#remain5').val(taxSummary.taxByNSDF);
+	$('#reduceTaxByDepBookNoBaht1').val(0);
+	$('#reduceTaxByDepBookNoBaht2').val(0);
+	$('#reduceTaxByDepBookNoBaht3').val(0);
+	$('#reduceTaxByDepBookNoBaht4').val(0);
+	$('#reduceTaxByDepBookNoBaht5').val(0);
+	$('#sumAllAfterReduce1').val(sumTaxAlcohol);
+	$('#sumAllAfterReduce2').val(taxSummary.taxByMOI);
+	$('#other').val(0);
+	$('#sumFinal2').val(taxSummary.taxByMOI);
+	$('#sumFinal3').val(taxSummary.taxByThaiHealth);
+	$('#sumFinal4').val(taxSummary.taxByThaiPBS);
+	$('#sumFinal5').val(taxSummary.taxByNSDF);
 }
 
 function clearDataTaxSummary() {
@@ -104,7 +150,47 @@ function clearDataTaxSummary() {
 	$('#sumFinal5').val('');
 }
 
-function fetchDataAlcoholList(alcohol) {
+function fetchDataProduct(productStr) {
+	var products = productStr.split('|');
+	console.log(products);
+	
+	var alcohol = {
+		'productCode': products[0],
+		'piece': products[1],
+		'sellingPriceByOwner': products[2],
+		'sellingPriceByDepartment': products[3],
+		'taxByValue' : products[4],
+		'taxByCapacity' : products[5],
+		'taxByValuePlus' : products[6]
+	};
+	$.ajax({
+		url: contextPath + "/json/getProductInfo",
+		type: 'GET',
+		data: alcohol,
+		async: false,
+		cache: false,
+		success: function(result, textStatus, jqXHR) {
+			console.log(result);
+			console.log(textStatus);
+			console.log(jqXHR);
+			console.log(alcohol);
+			
+			alcohol.productGroup = result.productGroup;
+			alcohol.productName = result.productName;
+			alcohol.degree = result.degree;
+			alcohol.size = result.size;
+			
+			fillDataAlcoholList(alcohol);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+		}
+	});
+}
+
+function fillDataAlcoholList(alcohol) {
 	$('#alcoholTable > tbody:last').append($('<tr>').attr('id', count));
 	var recordNo = $("#alcoholTable > tbody > tr").length - 3;
 	$('#alcoholTable > tbody:last > tr:last').append(
@@ -120,7 +206,8 @@ function fetchDataAlcoholList(alcohol) {
 	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.degree));
 	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.size));
 	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.piece));
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.capacityTax));
+	var capacityTax = parseFloat(alcohol.size) * parseFloat(alcohol.piece);
+	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(capacityTax));
 	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.sellingPriceByOwner));
 	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.sellingPriceByDepartment));
 	var value = parseFloat(alcohol.piece) * parseFloat(alcohol.sellingPriceByOwner);
@@ -142,6 +229,11 @@ function fetchDataAlcoholList(alcohol) {
             )
 	);
 	count++;
+	
+	pageSumTaxByValue += parseFloat(alcohol.taxByValue);
+	pageSumTaxByCapacity += parseFloat(alcohol.taxByCapacity);
+	$("#pageSumTaxByValue").val(pageSumTaxByValue);
+	$("#pageSumTaxByCapacity").val(pageSumTaxByCapacity);
 }
 
 function removeDataAlcoholList(trId) {
