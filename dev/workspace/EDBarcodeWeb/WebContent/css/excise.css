@@ -1445,8 +1445,8 @@ form {
     margin: .421em 0;
 /*     width: 100%; */
     padding: 1em;
-    border: none;
-    background: #eeeeed;
+/*     border: none; */
+    background: #ffffff;
     color: #070c0f; }
     form input[type="text"].error, form input[type="password"].error, form input[type="email"].error, form input[type="search"].error,
     form textarea.error {
@@ -4266,3 +4266,7 @@ img.border {
     min-height: 5px;
     padding: 12px !important;
     background-color: #eceae5; } }
+    
+
+    
+    
