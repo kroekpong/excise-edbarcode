@@ -10,7 +10,9 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<context:component-scan base-package="th.go.excise.edbarcode.web">
+	<context:component-scan base-package="
+		th.go.excise.edbarcode.main,
+		th.go.excise.edbarcode.demo">
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController" />
 	</context:component-scan>
 	

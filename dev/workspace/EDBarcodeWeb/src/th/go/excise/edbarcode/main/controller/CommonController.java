@@ -1,4 +1,4 @@
-package th.go.excise.edbarcode.web.controller;
+package th.go.excise.edbarcode.main.controller;
 
 import javax.servlet.http.HttpServletRequest;
 

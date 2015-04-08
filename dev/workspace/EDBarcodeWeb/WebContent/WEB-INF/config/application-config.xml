@@ -8,6 +8,7 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<import resource="webmvc-config.xml" /> 
+	<import resource="webmvc-config.xml" />
+	<import resource="data-access-config.xml" />
 	
 </beans>
