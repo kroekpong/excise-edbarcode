@@ -16,5 +16,6 @@
 	<mvc:annotation-driven />
 	
 	<import resource="barcode-ws.xml" />
+	<import resource="data-access-config.xml" />
 	
 </beans>

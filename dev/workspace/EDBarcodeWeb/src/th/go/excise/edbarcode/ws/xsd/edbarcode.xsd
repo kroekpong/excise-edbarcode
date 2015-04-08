@@ -84,7 +84,7 @@
 	<!-- Service3: Submit Online -->
 	<xs:complexType name="alcoholTaxForm">
 		<xs:sequence>
-			<xs:element name="entrepreneur" type="tns:entrepreneur" minOccurs="1" maxOccurs="1" />
+			<xs:element name="licenseNo" type="xs:string" minOccurs="1" maxOccurs="1" />
 			<xs:element name="productTaxList" type="tns:productTax" minOccurs="1" maxOccurs="unbounded" />
 			<xs:element name="alcoholTaxFormSummary" type="tns:alcoholTaxFormSummary" minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
