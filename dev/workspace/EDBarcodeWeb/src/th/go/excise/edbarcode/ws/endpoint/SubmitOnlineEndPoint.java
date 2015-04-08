@@ -14,7 +14,6 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 
 import th.go.excise.edbarcode.ws.oxm.AlcoholTaxFormSummary;
 import th.go.excise.edbarcode.ws.oxm.Entrepreneur;
-import th.go.excise.edbarcode.ws.oxm.OtherTaxForm;
 import th.go.excise.edbarcode.ws.oxm.ProductTax;
 import th.go.excise.edbarcode.ws.oxm.SubmitOnlineRequest;
 import th.go.excise.edbarcode.ws.oxm.SubmitOnlineResponse;
@@ -31,7 +30,6 @@ public class SubmitOnlineEndPoint {
 		Entrepreneur entrepreneur = submitOnlineRequest.getAlcoholTaxForm().getEntrepreneur();
 		List<ProductTax> productTaxList = submitOnlineRequest.getAlcoholTaxForm().getProductTaxList();
 		AlcoholTaxFormSummary alcoholTaxFormSummary = submitOnlineRequest.getAlcoholTaxForm().getAlcoholTaxFormSummary();
-		OtherTaxForm otherTaxForm = submitOnlineRequest.getOtherTaxForm();
 		
 		logger.debug(ToStringBuilder.reflectionToString(entrepreneur, ToStringStyle.MULTI_LINE_STYLE));
 		if (!productTaxList.isEmpty()) {
@@ -41,7 +39,6 @@ public class SubmitOnlineEndPoint {
 			}
 		}
 		logger.debug(ToStringBuilder.reflectionToString(alcoholTaxFormSummary, ToStringStyle.MULTI_LINE_STYLE));
-		logger.debug(ToStringBuilder.reflectionToString(otherTaxForm, ToStringStyle.MULTI_LINE_STYLE));
 		
 		SubmitOnlineResponse response = new SubmitOnlineResponse();
 		response.setStatus("0");
