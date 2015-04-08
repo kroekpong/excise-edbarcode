@@ -7,9 +7,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import th.go.excise.edbarcode.ws.dao.SyncMasterDataDao;
 import th.go.excise.edbarcode.ws.oxm.Entrepreneur;
 import th.go.excise.edbarcode.ws.oxm.Product;
-import th.go.excise.edbarcode.ws.persistence.dao.SyncMasterDataDao;
 
 @Service("syncMasterDataService")
 public class SyncMasterDataServiceImpl implements SyncMasterDataService {

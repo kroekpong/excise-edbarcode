@@ -9,11 +9,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import th.go.excise.edbarcode.common.persistence.domain.TmpTaxDocDetail;
+import th.go.excise.edbarcode.common.persistence.domain.TmpTaxDocMaster;
+import th.go.excise.edbarcode.ws.dao.SubmitOnlineDao;
 import th.go.excise.edbarcode.ws.oxm.AlcoholTaxFormSummary;
 import th.go.excise.edbarcode.ws.oxm.ProductTax;
-import th.go.excise.edbarcode.ws.persistence.dao.SubmitOnlineDao;
-import th.go.excise.edbarcode.ws.persistence.model.TmpTaxDocDetail;
-import th.go.excise.edbarcode.ws.persistence.model.TmpTaxDocMaster;
 
 @Service("submitOnlineService")
 public class SubmitOnlineServiceImpl implements SubmitOnlineService {
