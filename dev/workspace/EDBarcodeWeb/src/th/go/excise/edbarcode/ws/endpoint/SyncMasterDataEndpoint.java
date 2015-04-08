@@ -1,10 +1,8 @@
 package th.go.excise.edbarcode.ws.endpoint;
 
 import java.math.BigDecimal;
-import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,25 +33,20 @@ public class SyncMasterDataEndpoint {
 			Entrepreneur entrepreneur = new Entrepreneur();
 			entrepreneur.setLicenseNo(licenseNo);
 			entrepreneur.setLicenseAllowedName("บริษัท สยามไวเนอรี่ จำกัด");
-			entrepreneur.setFactoryId("51175744");
 			entrepreneur.setFactoryName("บริษัท สยามไวเนอรี่ จำกัด");
-			GregorianCalendar calStartDate = new GregorianCalendar();
-			calStartDate.set(2015, 1, 1);
-			entrepreneur.setLicenseStartDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(calStartDate));
-			GregorianCalendar calEndDate = new GregorianCalendar();
-			calEndDate.set(2015, 12, 31);
-			entrepreneur.setLicenseEndDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(calEndDate));
+			entrepreneur.setLicenseStartDate("01/01/2558");
+			entrepreneur.setLicenseEndDate("31/12/2558");
 			entrepreneur.setTaxNo("3-1015-1763-7");
 			entrepreneur.setFactoryAddress("9/2 หมู่ 3 ต.บางโทรัด อ.เมืองสมุทรสาคร จ.สมุทรสาคร 74000");
 			
 			Product p1 = new Product();
 			p1.setProductGroup("สุราแช่อื่นๆ");
-			p1.setProductCode("xxxbbb001");
+			p1.setProductCode("P001");
 			p1.setProductName("สุราแช่ 1");
 			p1.setBrandMajor("แบรนด์หลัก");
 			p1.setBrandMinor("แบรนด์รอง");
 			p1.setModel("แบบหรือรุ่น");
-			p1.setSize("ขนาด");
+			p1.setSize(BigDecimal.ONE);
 			p1.setUnit("หน่วยสินค้า");
 			p1.setDegree(BigDecimal.ONE);
 			p1.setTaxByValue(new BigDecimal("48"));
@@ -63,9 +56,7 @@ public class SyncMasterDataEndpoint {
 			p1.setTaxPlusByDegree(new BigDecimal("3"));
 			p1.setLowestSellingPriceNoTax(new BigDecimal("0"));
 			p1.setTaxPlusBySellingPrice(new BigDecimal("0"));
-			GregorianCalendar cal1 = new GregorianCalendar();
-			cal1.set(2015, 03, 30);
-			p1.setAnnouncePriceDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(cal1));
+			p1.setAnnouncePriceDate("30/03/2558");
 			p1.setAnnouncePriceValue(new BigDecimal("0"));
 			
 			Product p2 = new Product();
@@ -75,7 +66,7 @@ public class SyncMasterDataEndpoint {
 			p2.setBrandMajor("แบรนด์หลัก");
 			p2.setBrandMinor("แบรนด์รอง");
 			p2.setModel("แบบหรือรุ่น");
-			p2.setSize("ขนาด");
+			p2.setSize(BigDecimal.TEN);
 			p2.setUnit("หน่วยสินค้า");
 			p2.setDegree(BigDecimal.TEN);
 			p2.setTaxByValue(new BigDecimal("49"));
@@ -85,9 +76,7 @@ public class SyncMasterDataEndpoint {
 			p2.setTaxPlusByDegree(new BigDecimal("4"));
 			p2.setLowestSellingPriceNoTax(new BigDecimal("0"));
 			p2.setTaxPlusBySellingPrice(new BigDecimal("0"));
-			GregorianCalendar cal2 = new GregorianCalendar();
-			cal2.set(2015, 03, 30);
-			p2.setAnnouncePriceDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(cal2));
+			p2.setAnnouncePriceDate("30/03/2558");
 			p2.setAnnouncePriceValue(new BigDecimal("0"));
 			
 			entrepreneur.getProductList().add(p1);
