@@ -16,18 +16,19 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
 
 <table style="width: 90%; border: 0px solid black;">
 <tr>
-	<td width="70%"></td>
+	<td width="60%"></td>
 	<td align="right">
-		<input type="radio" name="scanType" id="scanType1" value="scanType1" checked="checked" > ผู้ประกอบการ
+		<input type="radio" name="scanType" id="scanType1" value="scanType1" checked="checked"> ผู้ประกอบการ
 		<input type="radio" name="scanType" id="scanType2" value="scanType2"> รายการสุรา
 		<input type="radio" name="scanType" id="scanType3" value="scanType3"> ผลรวม
+		<input type="radio" name="scanType" id="scanType4" value="scanType4"> Submit Online
 	</td>
 </tr>
 <tr>
 	<td></td>
 	<td align="right">
 		<input type="text" id="barcode" style="width: 70%;">
-		<input type="button" value="Scan" onclick="fetchData()">
+<!-- 		<input type="button" value="Scan" onclick="fetchData()"> -->
 		<input type="button" value="Clear" onclick="clearData()">
 	</td>
 </tr>

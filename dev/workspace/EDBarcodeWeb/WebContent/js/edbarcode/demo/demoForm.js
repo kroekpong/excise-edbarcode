@@ -26,6 +26,8 @@ function fetchData() {
 		fetchDataProduct($("#barcode").val());
 	} else if ('scanType3' == scanType) {
 		fetchDataTaxSummary($("#barcode").val());
+	} else if ('scanType4' == scanType) {
+		fetchDataSumbitOnline($("#barcode").val());
 	}
 }
 
@@ -34,6 +36,9 @@ function clearData() {
 	if ('scanType1' == scanType) {
 		clearDataEntrepreneur();
 	} else if ('scanType3' == scanType) {
+		clearDataTaxSummary();
+	} else if ('scanType4' == scanType) {
+		clearDataEntrepreneur();
 		clearDataTaxSummary();
 	}
 }
@@ -82,8 +87,8 @@ function clearDataEntrepreneur() {
 	$('#factoryAddress').val('');
 }
 
-function fetchDataTaxSummary(taxSummary) {
-	var summarys = taxSummary.split('|');
+function fetchDataTaxSummary(taxSummaryStr) {
+	var summarys = taxSummaryStr.split('|');
 	var taxSummary = {
 		sumTaxByValue: summarys[0],
 		sumTaxByCapacity: summarys[1],
@@ -95,7 +100,10 @@ function fetchDataTaxSummary(taxSummary) {
 		taxByThaiPBS: summarys[7],
 		taxByNSDF: summarys[8]
 	};
-	
+	fillDataTaxSummary(taxSummary);
+}
+
+function fillDataTaxSummary(taxSummary) {
 	var sumTaxAlcohol = parseFloat(taxSummary.sumTaxByValue) + parseFloat(taxSummary.sumTaxByCapacity);
 	$('#sumTaxProduct1').val(sumTaxAlcohol);
 	$('#sumTaxProduct2').val(taxSummary.taxByMOI);
@@ -240,4 +248,33 @@ function removeDataAlcoholList(trId) {
 	if (confirm('ต้องการลบรายการนี้ ?')) {
 		$('#alcoholTable > tbody:last > tr#' + trId).remove();
 	}
+}
+
+function fetchDataSumbitOnline(referenceCode) {
+	var param = {
+		'referenceCode': referenceCode
+	};
+	$.ajax({
+		url: contextPath + "/json/getDataFromRefCode",
+		type: 'GET',
+		data: param,
+		async: false,
+		cache: false,
+		success: function(result, textStatus, jqXHR) {
+			fillDataSubmitOnline(result)
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+		}
+	});
+}
+
+function fillDataSubmitOnline(taxDoc) {
+	fillDataEntrepreneur(taxDoc.entrepreneur);
+	for (var i = 0; i < taxDoc.procudeList.length; i++) {
+		fillDataAlcoholList(taxDoc.procudeList[i]);
+	}
+	fillDataTaxSummary(taxDoc.summary);
 }

@@ -2,19 +2,27 @@ package th.go.excise.edbarcode.demo.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import th.go.excise.edbarcode.common.bean.EntrepreneurDemo;
-import th.go.excise.edbarcode.common.bean.ProductDemo;
+import th.go.excise.edbarcode.demo.bean.EntrepreneurDemo;
+import th.go.excise.edbarcode.demo.bean.ExciseDataFromRefCode;
+import th.go.excise.edbarcode.demo.bean.ProductDemo;
+import th.go.excise.edbarcode.demo.service.ExciseDemoService;
 
 @RestController
 public class ExciseDemoAjaxController {
 	
 	private static final Logger logger = LogManager.getLogger();
+	
+	@Autowired
+	private ExciseDemoService exciseDemoService;
 	
 	@RequestMapping(value = "/getEntrepreneurInfo", method = RequestMethod.GET, headers = "Accept=application/json")
 	public EntrepreneurDemo getEntrepreneurInfo(HttpServletRequest httpRequest) {
@@ -23,15 +31,8 @@ public class ExciseDemoAjaxController {
 		String licenseNo = httpRequest.getParameter("licenseNo");
 		logger.info("licenseNo: " + licenseNo);
 		
-		EntrepreneurDemo entDemo = new EntrepreneurDemo();
-		
-		entDemo.setLicenseNo("2558/70605817600002");
-		entDemo.setLicenseAllowedName("บริษัท สยามไวเนอรี่ จำกัด");
-		entDemo.setFactoryName("บริษัท สยามไวเนอรี่ จำกัด");
-		entDemo.setLicenseStartDate("01/01/2558");
-		entDemo.setLicenseEndDate("31/12/2558");
-		entDemo.setTaxNo("3-1015-1763-7");
-		entDemo.setFactoryAddress("9/2 หมู่ 3 ต.บางโทรัด อ.เมืองสมุทรสาคร จ.สมุทรสาคร 74000");
+		EntrepreneurDemo entDemo = exciseDemoService.getEntrepreneurDetail(licenseNo);
+		logger.debug(ToStringBuilder.reflectionToString(entDemo, ToStringStyle.MULTI_LINE_STYLE));
 		
 		return entDemo;
 	}
@@ -43,19 +44,23 @@ public class ExciseDemoAjaxController {
 		String productCode = httpRequest.getParameter("productCode");
 		logger.info("productCode: " + productCode);
 		
-		ProductDemo prdDemo = new ProductDemo();
-		
-		prdDemo.setProductGroup("สุราแช่อื่นๆ");
-		prdDemo.setProductName("สุราแช่ผลไม้ Berri Estates Five Star White");
-		prdDemo.setDegree("12.50");
-		prdDemo.setSize("3.000");
-		
-//		prdDemo.setProductGroup("สุราแช่อื่นๆ");
-//		prdDemo.setProductName("สุราแช่ผลไม้ Finca de Malpica Smooth Red");
-//		prdDemo.setDegree("13.50");
-//		prdDemo.setSize("0.750");
+		ProductDemo prdDemo = exciseDemoService.getProductDetail(productCode);
+		logger.debug(ToStringBuilder.reflectionToString(prdDemo, ToStringStyle.MULTI_LINE_STYLE));
 		
 		return prdDemo;
+	}
+	
+	@RequestMapping(value = "/getDataFromRefCode", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ExciseDataFromRefCode getDataFromRefCode(HttpServletRequest httpRequest) {
+		logger.info("Inside getDataFromRefCode()");
+		
+		String referenceCode = httpRequest.getParameter("referenceCode");
+		logger.info("referenceCode: " + referenceCode);
+		
+		ExciseDataFromRefCode data = exciseDemoService.getDataFromRefCode(referenceCode);
+		logger.debug(ToStringBuilder.reflectionToString(data, ToStringStyle.MULTI_LINE_STYLE));
+		
+		return data;
 	}
 	
 }
