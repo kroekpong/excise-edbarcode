@@ -18,18 +18,9 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
 <tr>
 	<td width="60%"></td>
 	<td align="right">
-		<input type="radio" name="scanType" id="scanType1" value="scanType1" checked="checked"> ผู้ประกอบการ
-		<input type="radio" name="scanType" id="scanType2" value="scanType2"> รายการสุรา
-		<input type="radio" name="scanType" id="scanType3" value="scanType3"> ผลรวม
-		<input type="radio" name="scanType" id="scanType4" value="scanType4"> Submit Online
-	</td>
-</tr>
-<tr>
-	<td></td>
-	<td align="right">
-		<input type="text" id="barcode" style="width: 70%;">
+		Barcode: <input type="text" id="barcode" style="width: 70%;">
 <!-- 		<input type="button" value="Scan" onclick="fetchData()"> -->
-		<input type="button" value="Clear" onclick="clearData()">
+<!-- 		<input type="button" value="Clear" onclick="clearData()"> -->
 	</td>
 </tr>
 </table>
@@ -163,12 +154,12 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
     <tr>
       <td align="right" bgcolor="#E0E0E0">รวม</td>
       <td width="80" align="center" bgcolor="#E0E0E0">ตามมูลค่า</td>
-      <td width="100" bgcolor="#E0E0E0"><p align="center">
-        <input type="text" id="pageSumTaxByValue" style="width: 90%;">
+      <td width="150" bgcolor="#E0E0E0"><p align="center">
+        <input type="text" id="pageSumTaxByValue" style="width: 90%; text-align: right;">
       </p></td>
       <td width="80" align="center" bgcolor="#E0E0E0">ตามปริมาณ</td>
-      <td width="100" bgcolor="#E0E0E0"><p align="center">
-        <input id="pageSumTaxByCapacity" type="text" style="width: 90%;">
+      <td width="150" bgcolor="#E0E0E0"><p align="center">
+        <input id="pageSumTaxByCapacity" type="text" style="width: 90%; text-align: right;">
       </p></td>
       <td width="5%" bgcolor="#E0E0E0"><p align="center">&nbsp;</p></td>
       </tr>
@@ -177,54 +168,54 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
 <br>
 <table border="1" style="width: 90%; border: 1px solid glay;">
   <tr>
-    <td width="40%" bgcolor="#E0E0E0">&nbsp;</td>
-    <td bgcolor="#E0E0E0" align="center">สุรา</td>
-    <td bgcolor="#E0E0E0" align="center">มหาดไทย</td>
-    <td bgcolor="#E0E0E0" align="center">กองทุน สสส.</td>
-    <td bgcolor="#E0E0E0" align="center">กองทุน สสท.</td>
-    <td bgcolor="#E0E0E0" align="center">กองทุน กพฬ.</td>
+    <td width="25%" bgcolor="#E0E0E0">&nbsp;</td>
+    <td width="15%" bgcolor="#E0E0E0" align="center">สุรา</td>
+    <td width="15%" bgcolor="#E0E0E0" align="center">มหาดไทย</td>
+    <td width="15%" bgcolor="#E0E0E0" align="center">กองทุน สสส.</td>
+    <td width="15%" bgcolor="#E0E0E0" align="center">กองทุน สสท.</td>
+    <td width="15%" bgcolor="#E0E0E0" align="center">กองทุน กพฬ.</td>
   </tr>
   <tr>
     <td>&nbsp;(๗) รวมภาษีสุรา   (6.1) + (6.2)</td>
-    <td align="center"><input id="sumTaxProduct1" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="sumTaxProduct2" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="sumTaxProduct3" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="sumTaxProduct4" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="sumTaxProduct5" type="text" style="width: 90%;"></td>
+    <td align="center"><input id="sumTaxProduct1" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="sumTaxProduct2" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="sumTaxProduct3" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="sumTaxProduct4" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="sumTaxProduct5" type="text" style="width: 90%; text-align: right;"></td>
   </tr>
   <tr>
     <td>&nbsp;(๘) หัก ค่าภาษีสุราที่ชำระไว้แล้ว</td>
-    <td align="center"><input id="reduceTaxProductBaht" type="text" style="width: 90%;"></td>
+    <td align="center"><input id="reduceTaxProductBaht" type="text" style="width: 90%; text-align: right;"></td>
     <td align="center">เลขที่ใบเสร็จ</td>
     <td colspan="3" align="center"><input id="receipt" type="text" style="width: 90%;"></td>
     </tr>
   <tr>
     <td>&nbsp;คงเหลือ</td>
-    <td align="center"><input id="remain1" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="remain2" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="remain3" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="remain4" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="remain5" type="text" style="width: 90%;"></td>
+    <td align="center"><input id="remain1" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="remain2" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="remain3" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="remain4" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="remain5" type="text" style="width: 90%; text-align: right;"></td>
   </tr>
   <tr>
     <td>&nbsp;(๙) หัก คืนภาษี สุรา</td>
-    <td align="center"><input id="reduceTaxByDepBookNoBaht1" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="reduceTaxByDepBookNoBaht2" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="reduceTaxByDepBookNoBaht3" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="reduceTaxByDepBookNoBaht4" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="reduceTaxByDepBookNoBaht5" type="text" style="width: 90%;"></td>
+    <td align="center"><input id="reduceTaxByDepBookNoBaht1" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="reduceTaxByDepBookNoBaht2" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="reduceTaxByDepBookNoBaht3" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="reduceTaxByDepBookNoBaht4" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="reduceTaxByDepBookNoBaht5" type="text" style="width: 90%; text-align: right;"></td>
   </tr>
   <tr>
     <td>&nbsp;(๑๐) คงเหลือภาษี สุรา</td>
-    <td align="center"><input id="sumAllAfterReduce1" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="sumAllAfterReduce2" type="text" style="width: 90%;"></td>
+    <td align="center"><input id="sumAllAfterReduce1" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="sumAllAfterReduce2" type="text" style="width: 90%; text-align: right;"></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td>&nbsp;(๑๓) อื่นๆ</td>
-    <td align="center"><input id="other" type="text" style="width: 90%;"></td>
+    <td align="center"><input id="other" type="text" style="width: 90%; text-align: right;"></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -233,10 +224,10 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
   <tr>
     <td>&nbsp;(๑๔) รวมภาษีที่ต้องชำระ</td>
     <td>&nbsp;</td>
-    <td align="center"><input id="sumFinal2" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="sumFinal3" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="sumFinal4" type="text" style="width: 90%;"></td>
-    <td align="center"><input id="sumFinal5" type="text" style="width: 90%;"></td>
+    <td align="center"><input id="sumFinal2" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="sumFinal3" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="sumFinal4" type="text" style="width: 90%; text-align: right;"></td>
+    <td align="center"><input id="sumFinal5" type="text" style="width: 90%; text-align: right;"></td>
   </tr>
 </table>
 <p>&nbsp;</p>

@@ -35,6 +35,7 @@
 <%-- <script type="text/javascript" src='<c:url value="/kendo/js/kendo.all.min.js"/>'></script>	 --%>
 
 <script type="text/javascript" src='<c:url value="/js/jquery/jquery-1.9.1.min.js"/>'></script>
+<script type="text/javascript" src='<c:url value="/js/numeraljs/numeral-1.5.3.min.js"/>'></script>
 
 <script type="text/javascript">
 	var contextPath = '${contextPath}';

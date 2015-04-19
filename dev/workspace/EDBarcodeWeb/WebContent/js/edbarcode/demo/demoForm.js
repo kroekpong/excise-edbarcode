@@ -11,41 +11,57 @@ $(document).ready(function(e){
     });
 });
 
-function getScanType() {
-	var scanType = $("input[type='radio'][name='scanType']:checked").val();
-	return scanType;
+//function getScanType() {
+//	var scanType = $("input[type='radio'][name='scanType']:checked").val();
+//	return scanType;
+//}
+
+function getFlag(data) {
+	var flag;
+	var tmp = data.split('|');
+	if (tmp.length == 1) {
+		flag = 'R';
+	} else {
+		flag = tmp[0];
+	}
+	return flag;
 }
 
 function fetchData() {
-	var scanType = getScanType();
-	console.log('scanType: ' + scanType);
-	console.log('scanValue: ' + $("#barcode").val());
-	if ('scanType1' == scanType) {
-		fetchDataEntrepreneur($("#barcode").val());
-	} else if ('scanType2' == scanType) {
-		fetchDataProduct($("#barcode").val());
-	} else if ('scanType3' == scanType) {
-		fetchDataTaxSummary($("#barcode").val());
-	} else if ('scanType4' == scanType) {
-		fetchDataSumbitOnline($("#barcode").val());
+	var barcode = $("#barcode").val();
+	//console.log('scanValue: ' + barcode);
+	var dataArray = barcode.split('||');
+	for (var i = 0; i < dataArray.length; i++) {
+		var flag = getFlag(dataArray[i]);
+		//console.log('flag: ' + flag);
+		if ('H' == flag) {
+			fetchDataEntrepreneur(dataArray[i]);
+		} else if ('D' == flag) {
+			fetchDataProduct(dataArray[i]);
+		} else if ('S' == flag) {
+			fetchDataTaxSummary(dataArray[i]);
+		} else if ('R' == flag) {
+			fetchDataSumbitOnline(dataArray[i]);
+		}
 	}
 }
 
-function clearData() {
-	var scanType = getScanType();
-	if ('scanType1' == scanType) {
-		clearDataEntrepreneur();
-	} else if ('scanType3' == scanType) {
-		clearDataTaxSummary();
-	} else if ('scanType4' == scanType) {
-		clearDataEntrepreneur();
-		clearDataTaxSummary();
-	}
-}
+//function clearData() {
+//	var scanType = getScanType();
+//	if ('scanType1' == scanType) {
+//		clearDataEntrepreneur();
+//	} else if ('scanType3' == scanType) {
+//		clearDataTaxSummary();
+//	} else if ('scanType4' == scanType) {
+//		clearDataEntrepreneur();
+//		clearDataTaxSummary();
+//	}
+//}
 
-function fetchDataEntrepreneur(licenseNo) {
+function fetchDataEntrepreneur(entrepreneurStr) {
+	var header = entrepreneurStr.split('|');
 	var param = {
-		'licenseNo': licenseNo
+		'licenseNo': header[1]
 	};
 	$.ajax({
 		url: contextPath + "/json/getEntrepreneurInfo",
@@ -54,15 +70,15 @@ function fetchDataEntrepreneur(licenseNo) {
 		async: false,
 		cache: false,
 		success: function(result, textStatus, jqXHR) {
-			console.log(result);
-			console.log(textStatus);
-			console.log(jqXHR);
+//			console.log(result);
+//			console.log(textStatus);
+//			console.log(jqXHR);
 			fillDataEntrepreneur(result)
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			console.log(jqXHR);
-			console.log(textStatus);
-			console.log(errorThrown);
+//			console.log(jqXHR);
+//			console.log(textStatus);
+//			console.log(errorThrown);
 		}
 	});
 }
@@ -90,45 +106,47 @@ function clearDataEntrepreneur() {
 function fetchDataTaxSummary(taxSummaryStr) {
 	var summarys = taxSummaryStr.split('|');
 	var taxSummary = {
-		sumTaxByValue: summarys[0],
-		sumTaxByCapacity: summarys[1],
-		receipt: summarys[2],
-		reduceTaxProductBaht: summarys[3],
-		reduceTaxByDepBookNoBaht: summarys[4],
-		taxByMOI: summarys[5],
-		taxByThaiHealth: summarys[6],
-		taxByThaiPBS: summarys[7],
-		taxByNSDF: summarys[8]
+		sumTaxByValue: summarys[1],
+		sumTaxByCapacity: summarys[2],
+		//receipt: summarys[2],
+		//reduceTaxProductBaht: summarys[3],
+		//reduceTaxByDepBookNoBaht: summarys[4],
+		taxByMOI: summarys[3],
+		taxByThaiHealth: summarys[4],
+		taxByThaiPBS: summarys[5],
+		taxByNSDF: summarys[6],
+		other: summarys[7]
 	};
 	fillDataTaxSummary(taxSummary);
 }
 
 function fillDataTaxSummary(taxSummary) {
 	var sumTaxAlcohol = parseFloat(taxSummary.sumTaxByValue) + parseFloat(taxSummary.sumTaxByCapacity);
-	$('#sumTaxProduct1').val(sumTaxAlcohol);
-	$('#sumTaxProduct2').val(taxSummary.taxByMOI);
-	$('#sumTaxProduct3').val(taxSummary.taxByThaiHealth);
-	$('#sumTaxProduct4').val(taxSummary.taxByThaiPBS);
-	$('#sumTaxProduct5').val(taxSummary.taxByNSDF);
-	$('#reduceTaxProductBaht').val(0);
+	$('#sumTaxProduct1').val(numeral(sumTaxAlcohol).format('0,0.00'));
+	$('#sumTaxProduct2').val(numeral(taxSummary.taxByMOI).format('0,0.00'));
+	$('#sumTaxProduct3').val(numeral(taxSummary.taxByThaiHealth).format('0,0.00'));
+	$('#sumTaxProduct4').val(numeral(taxSummary.taxByThaiPBS).format('0,0.00'));
+	$('#sumTaxProduct5').val(numeral(taxSummary.taxByNSDF).format('0,0.00'));
+	//$('#reduceTaxProductBaht').val(numeral(0).format('0,0.00'));
+	$('#reduceTaxProductBaht').val('');
 	$('#receipt').val('');
-	$('#remain1').val(sumTaxAlcohol);
-	$('#remain2').val(taxSummary.taxByMOI);
-	$('#remain3').val(taxSummary.taxByThaiHealth);
-	$('#remain4').val(taxSummary.taxByThaiPBS);
-	$('#remain5').val(taxSummary.taxByNSDF);
-	$('#reduceTaxByDepBookNoBaht1').val(0);
-	$('#reduceTaxByDepBookNoBaht2').val(0);
-	$('#reduceTaxByDepBookNoBaht3').val(0);
-	$('#reduceTaxByDepBookNoBaht4').val(0);
-	$('#reduceTaxByDepBookNoBaht5').val(0);
-	$('#sumAllAfterReduce1').val(sumTaxAlcohol);
-	$('#sumAllAfterReduce2').val(taxSummary.taxByMOI);
-	$('#other').val(0);
-	$('#sumFinal2').val(taxSummary.taxByMOI);
-	$('#sumFinal3').val(taxSummary.taxByThaiHealth);
-	$('#sumFinal4').val(taxSummary.taxByThaiPBS);
-	$('#sumFinal5').val(taxSummary.taxByNSDF);
+	$('#remain1').val(numeral(sumTaxAlcohol).format('0,0.00'));
+	$('#remain2').val(numeral(taxSummary.taxByMOI).format('0,0.00'));
+	$('#remain3').val(numeral(taxSummary.taxByThaiHealth).format('0,0.00'));
+	$('#remain4').val(numeral(taxSummary.taxByThaiPBS).format('0,0.00'));
+	$('#remain5').val(numeral(taxSummary.taxByNSDF).format('0,0.00'));
+	$('#reduceTaxByDepBookNoBaht1').val(numeral(0).format('0,0.00'));
+	$('#reduceTaxByDepBookNoBaht2').val(numeral(0).format('0,0.00'));
+	$('#reduceTaxByDepBookNoBaht3').val(numeral(0).format('0,0.00'));
+	$('#reduceTaxByDepBookNoBaht4').val(numeral(0).format('0,0.00'));
+	$('#reduceTaxByDepBookNoBaht5').val(numeral(0).format('0,0.00'));
+	$('#sumAllAfterReduce1').val(numeral(sumTaxAlcohol).format('0,0.00'));
+	$('#sumAllAfterReduce2').val(numeral(taxSummary.taxByMOI).format('0,0.00'));
+	$('#other').val(numeral(taxSummary.other).format('0,0.00'));
+	$('#sumFinal2').val(numeral(taxSummary.taxByMOI).format('0,0.00'));
+	$('#sumFinal3').val(numeral(taxSummary.taxByThaiHealth).format('0,0.00'));
+	$('#sumFinal4').val(numeral(taxSummary.taxByThaiPBS).format('0,0.00'));
+	$('#sumFinal5').val(numeral(taxSummary.taxByNSDF).format('0,0.00'));
 }
 
 function clearDataTaxSummary() {
@@ -163,13 +181,13 @@ function fetchDataProduct(productStr) {
 	console.log(products);
 	
 	var alcohol = {
-		'productCode': products[0],
-		'piece': products[1],
-		'sellingPriceByOwner': products[2],
-		'sellingPriceByDepartment': products[3],
-		'taxByValue' : products[4],
-		'taxByCapacity' : products[5],
-		'taxByValuePlus' : products[6]
+		'productCode': products[1],
+		'piece': products[2],
+		'sellingPriceByOwner': products[3],
+		'sellingPriceByDepartment': products[4],
+		'taxByValue' : products[5],
+		'taxByCapacity' : products[6],
+		'taxByValuePlus' : products[7]
 	};
 	$.ajax({
 		url: contextPath + "/json/getProductInfo",
@@ -178,10 +196,10 @@ function fetchDataProduct(productStr) {
 		async: false,
 		cache: false,
 		success: function(result, textStatus, jqXHR) {
-			console.log(result);
-			console.log(textStatus);
-			console.log(jqXHR);
-			console.log(alcohol);
+//			console.log(result);
+//			console.log(textStatus);
+//			console.log(jqXHR);
+//			console.log(alcohol);
 			
 			alcohol.productGroup = result.productGroup;
 			alcohol.productName = result.productName;
@@ -191,9 +209,9 @@ function fetchDataProduct(productStr) {
 			fillDataAlcoholList(alcohol);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			console.log(jqXHR);
-			console.log(textStatus);
-			console.log(errorThrown);
+//			console.log(jqXHR);
+//			console.log(textStatus);
+//			console.log(errorThrown);
 		}
 	});
 }
@@ -211,24 +229,24 @@ function fillDataAlcoholList(alcohol) {
 	);
 	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.productGroup));
 	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.productName));
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.degree));
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.size));
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.piece));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(alcohol.degree).format('0.00')));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(alcohol.size).format('0.000')));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(alcohol.piece).format('0,0')));
 	var capacityTax = parseFloat(alcohol.size) * parseFloat(alcohol.piece);
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(capacityTax));
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.sellingPriceByOwner));
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.sellingPriceByDepartment));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(capacityTax).format('0,0.0000')));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(alcohol.sellingPriceByOwner).format('0,0.0000')));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(alcohol.sellingPriceByDepartment).format('0,0.0000')));
 	var value = parseFloat(alcohol.piece) * parseFloat(alcohol.sellingPriceByOwner);
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(value));
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.taxByValue));
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.taxByCapacity));
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(alcohol.taxByValuePlus));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(value).format('0,0.0000')));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(alcohol.taxByValue).format('0,0.0000')));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(alcohol.taxByCapacity).format('0,0.0000')));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(alcohol.taxByValuePlus).format('0,0.0000')));
 	var sumTaxByCapacity = parseFloat(alcohol.taxByCapacity) + parseFloat(alcohol.taxByValuePlus);
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(sumTaxByCapacity));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(sumTaxByCapacity).format('0,0.0000')));
 	var sumAllByValue = parseFloat(alcohol.piece) * parseFloat(alcohol.taxByValue);
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(sumAllByValue));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(sumAllByValue).format('0,0.00')));
 	var sumAllByCapacity = parseFloat(alcohol.piece) * parseFloat(sumTaxByCapacity);
-	$('#alcoholTable > tbody:last > tr:last').append($('<td>').append(sumAllByCapacity));
+	$('#alcoholTable > tbody:last > tr:last').append($('<td align=\'right\'>').append(numeral(sumAllByCapacity).format('0,0.00')));
 	$('#alcoholTable > tbody:last > tr:last').append(
 		$('<td>')
 			.append($('<input>')
@@ -238,10 +256,10 @@ function fillDataAlcoholList(alcohol) {
 	);
 	count++;
 	
-	pageSumTaxByValue += parseFloat(alcohol.taxByValue);
-	pageSumTaxByCapacity += parseFloat(alcohol.taxByCapacity);
-	$("#pageSumTaxByValue").val(pageSumTaxByValue);
-	$("#pageSumTaxByCapacity").val(pageSumTaxByCapacity);
+	pageSumTaxByValue += sumAllByValue;
+	pageSumTaxByCapacity += sumAllByCapacity;
+	$("#pageSumTaxByValue").val(numeral(pageSumTaxByValue).format('0,0.00'));
+	$("#pageSumTaxByCapacity").val(numeral(pageSumTaxByCapacity).format('0,0.00'));
 }
 
 function removeDataAlcoholList(trId) {
