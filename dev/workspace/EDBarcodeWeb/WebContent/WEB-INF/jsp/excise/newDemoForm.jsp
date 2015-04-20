@@ -231,15 +231,5 @@ var testDataTaxSummary = '{"taxSummary":{"sumTaxProduct1":"71,326.00","sumTaxPro
   </tr>
 </table>
 <p>&nbsp;</p>
-<br>
-<br>
-
-<table style="width: 90%;">
-<tr>
-	<td><a href="#" class="button secondary with-chevron temp lg-free js-subscribe-link">คำนวนภาษี</a></td>
-	<td><a href="#" class="button secondary with-chevron temp lg-free js-subscribe-link">Submit</a></td>
-</tr>
-</table>
-
 </form>
 </div>

@@ -554,7 +554,7 @@ html:hover [class^="ss-"] {
   font-stretch: normal; }
 
 .stag-body-book, body, .book {
-  font-size: 1em;
+  font-size: 14px;
   letter-spacing: .5px;
   line-height: 1.777em;
   -webkit-font-smoothing: subpixel-antialiased;
