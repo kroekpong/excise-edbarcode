@@ -49,8 +49,8 @@ public class MyTestEDReport {
 		sb.append(" 			<UnitPrice>454.8900</UnitPrice> ");
 		sb.append(" 			<DeclarePrice>0.0000</DeclarePrice> ");
 		sb.append(" 			<TaxByValue>22.7445</TaxByValue> ");
-		sb.append(" 			<TaxByQuantity>30.0000</TaxByQuantity> ");
-		sb.append(" 			<TaxByQuantityOver>0.0000</TaxByQuantityOver> ");
+		sb.append(" 			<TaxByQuantity>31.0000</TaxByQuantity> ");
+		sb.append(" 			<TaxByQuantityOver>40.0000</TaxByQuantityOver> ");
 		sb.append(" 		</GoodsEntry> ");
 		sb.append(" 		<GoodsEntry> ");
 		sb.append(" 			<ProductTypeDesc>สุราแช่อื่นๆ</ProductTypeDesc> ");
@@ -62,8 +62,8 @@ public class MyTestEDReport {
 		sb.append(" 			<UnitPrice>209.5700</UnitPrice> ");
 		sb.append(" 			<DeclarePrice>0.0000</DeclarePrice> ");
 		sb.append(" 			<TaxByValue>10.4785</TaxByValue> ");
-		sb.append(" 			<TaxByQuantity>30.0000</TaxByQuantity> ");
-		sb.append(" 			<TaxByQuantityOver>0.0000</TaxByQuantityOver> ");
+		sb.append(" 			<TaxByQuantity>32.0000</TaxByQuantity> ");
+		sb.append(" 			<TaxByQuantityOver>50.0000</TaxByQuantityOver> ");
 		sb.append(" 		</GoodsEntry> ");
 		sb.append(" 		<GoodsEntry> ");
 		sb.append(" 			<ProductTypeDesc>สุราแช่อื่นๆ</ProductTypeDesc> ");
@@ -75,8 +75,8 @@ public class MyTestEDReport {
 		sb.append(" 			<UnitPrice>209.5700</UnitPrice> ");
 		sb.append(" 			<DeclarePrice>0.0000</DeclarePrice> ");
 		sb.append(" 			<TaxByValue>10.4785</TaxByValue> ");
-		sb.append(" 			<TaxByQuantity>30.0000</TaxByQuantity> ");
-		sb.append(" 			<TaxByQuantityOver>0.0000</TaxByQuantityOver> ");
+		sb.append(" 			<TaxByQuantity>33.0000</TaxByQuantity> ");
+		sb.append(" 			<TaxByQuantityOver>60.0000</TaxByQuantityOver> ");
 		sb.append(" 		</GoodsEntry> ");
 		sb.append(" 	</GoodsList> ");
 		sb.append(" </SR12011Form> ");
