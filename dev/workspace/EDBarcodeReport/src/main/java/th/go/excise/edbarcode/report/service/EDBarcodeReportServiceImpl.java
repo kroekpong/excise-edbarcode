@@ -124,7 +124,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("taxpayerAddress", "MOCK ADDRESS");
 		
 		JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(form.getGoodsList(), true);
-		JasperPrint jasperPrint = getJasperPrintWithJasper(ReportConstant.REPORT.SR12011, paramMap, datasource);
+		JasperPrint jasperPrint = complieReportWithJrxml(ReportConstant.REPORT.SR12011, paramMap, datasource);
 		
 		logger.info("Inside getSR12011Report() - End");
 		
@@ -180,7 +180,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		
 		// TODO Add paymentTax for Fund Report
 		
-		return getJasperPrintWithJasper(fileName, paramMap);
+		return complieReportWithJrxml(fileName, paramMap);
 	}
 	
 	private JasperPrint complieReportWithJrxml(String jrxmlFile, Map<String, Object> paramMap) throws JRException {
