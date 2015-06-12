@@ -23,8 +23,8 @@ public class GoodsEntry {
 //	private String taxValue;
 //	private String priceFlag;
 //	private String informPrice;
-	private String declarePrice;
-	private String unitPrice;
+	private BigDecimal declarePrice;
+	private BigDecimal unitPrice;
 //	private String goodsNum;
 //	private String goodsValue;
 //	private String taxAmount;
@@ -39,20 +39,20 @@ public class GoodsEntry {
 	private BigDecimal taxByQuantityOver;
 	
 	@XmlElement(name = "DeclarePrice")
-	public String getDeclarePrice() {
+	public BigDecimal getDeclarePrice() {
 		return declarePrice;
 	}
 
-	public void setDeclarePrice(String declarePrice) {
+	public void setDeclarePrice(BigDecimal declarePrice) {
 		this.declarePrice = declarePrice;
 	}
 	
 	@XmlElement(name = "UnitPrice")
-	public String getUnitPrice() {
+	public BigDecimal getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(String unitPrice) {
+	public void setUnitPrice(BigDecimal unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
