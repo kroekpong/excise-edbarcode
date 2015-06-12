@@ -122,6 +122,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("expireDate", form.getTaxpayerInformation().getLicenseInfo().getExpireDate());
 		paramMap.put("tin", form.getTaxpayerInformation().getTin());
 		paramMap.put("taxpayerAddress", "MOCK ADDRESS");
+		paramMap.put("logoImage", ReportUtil.getImagePath(ReportConstant.REPORT.SR12011));
 		
 		JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(form.getGoodsList(), true);
 		JasperPrint jasperPrint = complieReportWithJrxml(ReportConstant.REPORT.SR12011, paramMap, datasource);
@@ -187,7 +188,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		logger.info("Complie Report from jrxml file");
 		logger.debug("jrxmlFile: " + jrxmlFile);
 		
-		InputStream inputStream = ReportUtil.getReportInputStream(jrxmlFile + "." + ReportConstant.INPUT_JRXML);
+		InputStream inputStream = ReportUtil.getReportInputStream(jrxmlFile + "." + ReportConstant.FILE.JRXML);
 		JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramMap, new JREmptyDataSource());
 		return jasperPrint;
@@ -197,7 +198,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		logger.info("Complie Report from jrxml file");
 		logger.debug("jrxmlFile: " + jrxmlFile);
 		
-		InputStream inputStream = ReportUtil.getReportInputStream(jrxmlFile + "." + ReportConstant.INPUT_JRXML);
+		InputStream inputStream = ReportUtil.getReportInputStream(jrxmlFile + "." + ReportConstant.FILE.JRXML);
 		JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramMap, dataSource);
 		return jasperPrint;
@@ -207,7 +208,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		logger.info("Get JasperPrint from jasper file");
 		logger.debug("jasperFile: " + jasperFile);
 		
-		InputStream inputStream = ReportUtil.getReportInputStream(jasperFile + "." + ReportConstant.INPUT_JASPER);
+		InputStream inputStream = ReportUtil.getReportInputStream(jasperFile + "." + ReportConstant.FILE.JASPER);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, paramMap, new JREmptyDataSource());
 		return jasperPrint;
 	}
@@ -216,7 +217,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		logger.info("Get JasperPrint from jasper file");
 		logger.debug("jasperFile: " + jasperFile);
 		
-		InputStream inputStream = ReportUtil.getReportInputStream(jasperFile + "." + ReportConstant.INPUT_JASPER);
+		InputStream inputStream = ReportUtil.getReportInputStream(jasperFile + "." + ReportConstant.FILE.JASPER);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, paramMap, dataSource);
 		return jasperPrint;
 	}

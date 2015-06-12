@@ -35,4 +35,8 @@ public class ReportUtil {
 		return outputFile.getPath();
 	}
 	
+	public static InputStream getImagePath(String imageName) {
+		return ClassLoader.getSystemResourceAsStream("images/" + imageName + "." + ReportConstant.FILE.PNG);
+	}
+	
 }

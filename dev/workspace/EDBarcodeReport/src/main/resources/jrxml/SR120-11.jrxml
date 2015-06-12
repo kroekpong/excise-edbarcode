@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-06-12T15:59:41 -->
+<!-- 2015-06-12T17:25:45 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SR120-11" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="b028837b-4b98-440d-8ef1-edc36f8c0def">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="THSarabunStyle" fontName="TH Sarabun New" fontSize="9"/>
@@ -11,6 +11,7 @@
 	<parameter name="expireDate" class="java.lang.String"/>
 	<parameter name="tin" class="java.lang.String"/>
 	<parameter name="taxpayerAddress" class="java.lang.String"/>
+	<parameter name="logoImage" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -99,7 +100,7 @@
 						<property name="local_mesure_unitwidth" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
-					<imageExpression><![CDATA["../EDBarcodeReport/src/main/resources/images/SR12011.png"]]></imageExpression>
+					<imageExpression><![CDATA[$P{logoImage}]]></imageExpression>
 				</image>
 			</frame>
 			<frame>

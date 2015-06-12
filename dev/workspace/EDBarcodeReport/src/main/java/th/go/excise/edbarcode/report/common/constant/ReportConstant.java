@@ -6,8 +6,11 @@ public class ReportConstant {
 	
 	public static final ResourceBundle rbMyReport = ResourceBundle.getBundle("report-config");
 	
-	public static final String INPUT_JASPER = "jasper";
-	public static final String INPUT_JRXML  = "jrxml";
+	public static final class FILE {
+		public static final String JASPER = "jasper";
+		public static final String JRXML  = "jrxml";
+		public static final String PNG    = "png";
+	}
 	
 	public static final class REPORT {
 		public static final String SR12011 = "SR120-11";
