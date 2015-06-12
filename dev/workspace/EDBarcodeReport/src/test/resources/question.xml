@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Question id="1">
+	<Answers>
+		<Answername>java is a programming language</Answername>
+		<Id>101</Id>
+		<Postedby>ravi</Postedby>
+	</Answers>
+	<Answers>
+		<Answername>java is a platform</Answername>
+		<Id>102</Id>
+		<Postedby>john</Postedby>
+	</Answers>
+	<Questionname>What is java?</Questionname>
+</Question>

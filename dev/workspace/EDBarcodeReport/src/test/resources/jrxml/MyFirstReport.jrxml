@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.4.final using JasperReports Library version 6.0.4  -->
+<!-- 2015-04-22T12:35:01 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MyFirstReport" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d6744211-84ec-4aa8-a3ed-81b9c1f0bae1">
+	<style name="MyStyle" fontName="TH Sarabun New" fontSize="14"/>
+	<parameter name="my_param" class="java.lang.String"/>
+	<parameter name="my_qr_code" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="product_group" class="java.lang.String">
+		<fieldDescription><![CDATA[productGroup]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement style="MyStyle" x="102" y="18" width="100" height="30" uuid="674b8bc0-a004-48c0-9235-189bc1dd0504"/>
+				<text><![CDATA[Static Text]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="270" y="10" width="100" height="30" uuid="dbeda736-1973-464a-ab32-cacd21966210"/>
+				<textFieldExpression><![CDATA[$P{my_param}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="MyStyle" x="430" y="0" width="100" height="30" uuid="9eb21bf2-5431-4803-aa1b-4850b38e3b7f"/>
+				<text><![CDATA[ทดสอบภาษาไทย]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement style="MyStyle" x="0" y="0" width="100" height="20" uuid="e8152542-23df-4989-9089-606566b4fef1"/>
+				<text><![CDATA[product_group]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="MyStyle" x="0" y="0" width="100" height="20" uuid="62ff3a46-8088-41d5-bf1e-4407f9044657"/>
+				<textFieldExpression><![CDATA[$F{product_group}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="53" splitType="Stretch">
+			<componentElement>
+				<reportElement key="" x="180" y="0" width="60" height="53" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="2684093f-7aa3-456a-bbbf-e1ea5406e96d"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA["123456789"]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
