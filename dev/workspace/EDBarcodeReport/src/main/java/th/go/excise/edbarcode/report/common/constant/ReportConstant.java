@@ -14,8 +14,8 @@ public class ReportConstant {
 	
 	public static final class REPORT {
 		public static final String SR120_11 = "SR120-11";
-		public static final String SSS1_01 = "SSS1-01";
-		public static final String SST1_01 = "SST1-01";
-		public static final String KKT1_01 = "KKT1-01";
+		public static final String SSS1_01 = "SSS1_01";
+		public static final String SST1_01 = "SST1_01";
+		public static final String KKT1_01 = "KKT1_01";
 	}
 }
