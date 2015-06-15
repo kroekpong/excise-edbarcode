@@ -122,10 +122,10 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("expireDate", form.getTaxpayerInformation().getLicenseInfo().getExpireDate());
 		paramMap.put("tin", form.getTaxpayerInformation().getTin());
 		paramMap.put("taxpayerAddress", "MOCK ADDRESS");
-		paramMap.put("logoImage", ReportUtil.getImagePath(ReportConstant.REPORT.SR12011));
+		paramMap.put("logoImage", ReportUtil.getImagePath(ReportConstant.REPORT.SR120_11));
 		
 		JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(form.getGoodsList(), true);
-		JasperPrint jasperPrint = complieReportWithJrxml(ReportConstant.REPORT.SR12011, paramMap, datasource);
+		JasperPrint jasperPrint = complieReportWithJrxml(ReportConstant.REPORT.SR120_11, paramMap, datasource);
 		
 		logger.info("Inside getSR12011Report() - End");
 		
@@ -134,9 +134,14 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	
 	private JasperPrint getSSS101Report(SR12011Form form) throws JRException {
 		logger.info("Inside getSSS101Report() - Start");
+		//<Sharge
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("logoImage", ReportUtil.getImagePath(ReportConstant.REPORT.SSS1_01));
 		
-		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, form.getTaxpayerInformation());
+		JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(form.getGoodsList(), true);
 		
+		JasperPrint jasperPrint = complieReportWithJrxml(ReportConstant.REPORT.SSS1_01, paramMap, datasource);
+		//Sharge>
 		logger.info("Inside getSSS101Report() - End");
 		
 		return jasperPrint;
@@ -144,9 +149,14 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	
 	private JasperPrint getSST101Report(SR12011Form form) throws JRException {
 		logger.info("Inside getSST101Report() - Start");
+		//<Sharge
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("logoImage", ReportUtil.getImagePath(ReportConstant.REPORT.SST1_01));
 		
-		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SST1_01, form.getTaxpayerInformation());
+		JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(form.getGoodsList(), true);
 		
+		JasperPrint jasperPrint = complieReportWithJrxml(ReportConstant.REPORT.SST1_01, paramMap, datasource);
+		//Sharge>
 		logger.info("Inside getSST101Report() - End");
 		
 		return jasperPrint;
@@ -154,9 +164,14 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	
 	private JasperPrint getKKT101Report(SR12011Form form) throws JRException {
 		logger.info("Inside getKKT101Report() - Start");
+		//<Sharge
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("logoImage", ReportUtil.getImagePath(ReportConstant.REPORT.KKT1_01));
 		
-		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.KKT1_01, form.getTaxpayerInformation());
+		JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(form.getGoodsList(), true);
 		
+		JasperPrint jasperPrint = complieReportWithJrxml(ReportConstant.REPORT.KKT1_01, paramMap, datasource);
+		//Sharge>
 		logger.info("Inside getKKT101Report() - End");
 		
 		return jasperPrint;
