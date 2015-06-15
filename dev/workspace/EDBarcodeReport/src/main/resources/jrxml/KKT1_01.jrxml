@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-06-12T14:54:09 -->
+<!-- 2015-06-15T10:58:23 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportTest1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b028837b-4b98-440d-8ef1-edc36f8c0def">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="StyleFont" fontName="TH Sarabun New" fontSize="9"/>
@@ -18,6 +18,7 @@
 	<parameter name="provinceName" class="java.lang.String"/>
 	<parameter name="postcode" class="java.lang.String"/>
 	<parameter name="telNumber" class="java.lang.String"/>
+	<parameter name="logoImage" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -73,7 +74,7 @@
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<imageExpression><![CDATA["C:/Users/Sharge/workspaceTest/EDBarcodeReport/src/main/resources/images/KKT1_01.png"]]></imageExpression>
+					<imageExpression><![CDATA[$P{logoImage}]]></imageExpression>
 				</image>
 			</frame>
 			<frame>
