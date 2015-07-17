@@ -2,7 +2,15 @@ package th.go.excise.edbarcode.report.common.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.Map;
+
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRAbstractBeanDataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,10 +25,11 @@ public class ReportUtil {
 	
 	private static final Log logger = LogFactory.getLog(ReportUtil.class);
 	
-	public static InputStream getReportInputStream(String fileName) {
-		String inputPath = ReportConstant.rbMyReport.getString("path.input");
-		logger.debug("inputFile: " + inputPath + fileName);
-		return ClassLoader.getSystemResourceAsStream(inputPath + fileName);
+	public static String getReportFile(String fileName) {
+		String inputPath = ReportConstant.rbMyReport.getString("path.input.jrxml");
+		String jrxmlFile = ReportConstant.CURRENT_PATH + inputPath + fileName;
+		logger.debug("jrxmlFile: " + jrxmlFile);
+		return jrxmlFile;
 	}
 	
 	// For Test
@@ -35,8 +44,45 @@ public class ReportUtil {
 		return outputFile.getPath();
 	}
 	
-	public static InputStream getImagePath(String imageName) {
-		return ClassLoader.getSystemResourceAsStream("images/" + imageName + "." + ReportConstant.FILE.PNG);
+	public static String getImageFile(String imageName) {
+		String inputPath = ReportConstant.rbMyReport.getString("path.input.image");
+		String imageFile = ReportConstant.CURRENT_PATH + inputPath + imageName + "." + ReportConstant.FILE.PNG;
+		logger.debug("imageFile: " + imageFile);
+		return imageFile;
+	}
+	
+	public static JasperPrint complieReportWithJrxml(String jrxmlFileName, Map<String, Object> paramMap) throws JRException, IOException {
+		logger.info("Complie Report from jrxml file");
+		
+		String jrxmlFile = getReportFile(jrxmlFileName + "." + ReportConstant.FILE.JRXML);
+		JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFile);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramMap, new JREmptyDataSource());
+		return jasperPrint;
+	}
+	
+	public static JasperPrint complieReportWithJrxml(String jrxmlFileName, Map<String, Object> paramMap, JRAbstractBeanDataSource dataSource) throws JRException, IOException {
+		logger.info("Complie Report from jrxml file");
+		
+		String jrxmlFile = getReportFile(jrxmlFileName + "." + ReportConstant.FILE.JRXML);
+		JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFile);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramMap, dataSource);
+		return jasperPrint;
+	}
+	
+	public static JasperPrint getJasperPrintWithJasper(String jasperFileName, Map<String, Object> paramMap) throws JRException, IOException {
+		logger.info("Get JasperPrint from jasper file");
+		
+		String jrxmlFile = getReportFile(jasperFileName + "." + ReportConstant.FILE.JASPER);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jrxmlFile, paramMap, new JREmptyDataSource());
+		return jasperPrint;
+	}
+	
+	public static JasperPrint getJasperPrintWithJasper(String jasperFileName, Map<String, Object> paramMap, JRAbstractBeanDataSource dataSource) throws JRException, IOException {
+		logger.info("Get JasperPrint from jasper file");
+		
+		String jrxmlFile = getReportFile(jasperFileName + "." + ReportConstant.FILE.JASPER);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jrxmlFile, paramMap, dataSource);
+		return jasperPrint;
 	}
 	
 }

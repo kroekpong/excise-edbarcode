@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>EDBarcodeReport</groupId>
 	<artifactId>EDBarcodeReport</artifactId>
@@ -12,8 +11,9 @@
 
 	<properties>
 		<jdk.version>1.7</jdk.version>
+		<jasperreport.version>6.1.0</jasperreport.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.0.4</version>
+			<version>${jasperreport.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>bcprov-jdk14</artifactId>
@@ -124,11 +124,11 @@
 			<version>3.2.0</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<finalName>barcodeReport</finalName>
 		<plugins>
-			
+
 			<!-- download source code in Eclipse, best practice -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -139,7 +139,7 @@
 					<downloadJavadocs>false</downloadJavadocs>
 				</configuration>
 			</plugin>
-			
+
 			<!-- we want JDK 1.7 source and binary compatiblility -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -149,7 +149,7 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-			
+
 			<!-- Specifying a character encoding to UTF-8 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -159,19 +159,20 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<!-- Make this jar executable -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<excludes>
-						<exclude>**/log4j.properties</exclude>
-					</excludes>
+<!-- 					<excludes> -->
+<!-- 						<exclude>**/log4j.properties</exclude> -->
+<!-- 					</excludes> -->
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
+							<mainClass>th.go.excise.edbarcode.report.main.EDBarcodeReportApp</mainClass>
 							<classpathPrefix>dependency-jars/</classpathPrefix>
 						</manifest>
 					</archive>
@@ -198,7 +199,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 

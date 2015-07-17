@@ -1,6 +1,5 @@
 package th.go.excise.edbarcode.report.test;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +10,9 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.export.ExporterInputItem;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleExporterInputItem;
@@ -25,7 +26,7 @@ public class MyFirstReport {
 		
 		long start = System.currentTimeMillis();
 		
-		InputStream inputStream  = ReportUtil.getReportInputStream("MyFirstReport.jrxml");
+		String jrxmlFile  = ReportUtil.getReportFile("MyFirstReport.jrxml");
 		String outputFile = ReportUtil.getReportOutputPath("MyFirstReport.pdf");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -41,7 +42,8 @@ public class MyFirstReport {
 			productList.add(product);
 		}
 		
-		JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+		JasperDesign jasperDesign = JRXmlLoader.load(jrxmlFile);
+		JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 		JasperPrint jasperPrint1 = JasperFillManager.fillReport(jasperReport, map, new JRBeanCollectionDataSource(productList, true));
 		JasperPrint jasperPrint2 = JasperFillManager.fillReport(jasperReport, map, new JRBeanCollectionDataSource(productList, true));
 		JasperPrint jasperPrint3 = JasperFillManager.fillReport(jasperReport, map, new JRBeanCollectionDataSource(productList, true));
