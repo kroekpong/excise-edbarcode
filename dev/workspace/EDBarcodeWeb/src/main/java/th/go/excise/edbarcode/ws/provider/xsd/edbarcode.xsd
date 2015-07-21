@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.excise.go.th/xsd/barcode"
+	targetNamespace="http://www.excise.go.th/xsd/barcode">
+
+	<!-- Common - Start -->
+	<xs:complexType name="entrepreneur">
+		<xs:sequence>
+			<xs:element name="taxNo" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="licenseAllowedName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="factoryList" type="tns:factory" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="productList" type="tns:product" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="factory">
+		<xs:sequence>
+			<xs:element name="licenseNo" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="factoryName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="licenseStartDate" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="licenseEndDate" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="factoryAddress" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="product">
+		<xs:sequence>
+			<xs:element name="productGroupCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="productGroupName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="productCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="productName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="brandMajorCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="brandMajorName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="brandMinorCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="brandMinorName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="modelCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="modelName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="sizeCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="sizeValue" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="unitCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="unitName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="degreeCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="degreeValue" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByValue" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByCapacity" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByLiter" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="lowestDegreeNoTax" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxPlusByDegree" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="lowestSellingPriceNoTax" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxPlusBySellingPrice" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="announcePriceDate" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="announcePriceValue" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Common - End -->
+	
+	
+	<!-- Service1: Login -->
+	<element name="loginRequest">
+		<complexType>
+			<sequence>
+				<element name="userName" type="string" minOccurs="1" maxOccurs="1" />
+				<element name="password" type="string" minOccurs="1" maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="loginResponse">
+		<complexType>
+			<sequence>
+				<element name="status" type="string" minOccurs="1" maxOccurs="1" />
+				<element name="description" type="string" minOccurs="1" maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	
+	<!-- Service2: Sync Master Data -->
+	<element name="syncMasterDataRequest">
+		<complexType>
+			<sequence>
+				<element name="taxNo" type="string" minOccurs="1" maxOccurs="1" />
+				<element name="userName" type="string" minOccurs="1" maxOccurs="1" />
+				<element name="password" type="string" minOccurs="1" maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="syncMasterDataResponse">
+		<complexType>
+			<sequence>
+				<element name="status" type="string" minOccurs="1" maxOccurs="1" />
+				<element name="description" type="string" minOccurs="1" maxOccurs="1" />
+				<xs:element name="entrepreneur" type="tns:entrepreneur" minOccurs="1" maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	
+	<!-- Service3: Submit Online -->
+	<xs:complexType name="alcoholTaxForm">
+		<xs:sequence>
+			<xs:element name="licenseNo" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="productTaxList" type="tns:productTax" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="alcoholTaxFormSummary" type="tns:alcoholTaxFormSummary" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productTax">
+		<xs:sequence>
+			<xs:element name="recordNo" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="productCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="piece" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="sellingPriceByOwner" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="sellingPriceByDepartment" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByValue" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByCapacity" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByValuePlus" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="alcoholTaxFormSummary">
+		<xs:sequence>
+			<xs:element name="sumTaxByValue" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="sumTaxByCapacity" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="reductTaxProduct" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="receipt" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="reduceTaxProductBaht" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="reduceTaxByDepBookNo" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="reduceTaxByDepBookNoBaht" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxRateByMOI" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByMOI" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="other" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByThaiHealth" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByThaiPBS" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+			<xs:element name="taxByNSDF" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<element name="submitOnlineRequest">
+		<complexType>
+			<sequence>
+				<xs:element name="alcoholTaxForm" type="tns:alcoholTaxForm" minOccurs="1" maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="submitOnlineResponse">
+		<complexType>
+			<sequence>
+				<element name="status" type="string" minOccurs="1" maxOccurs="1" />
+				<element name="description" type="string" minOccurs="1" maxOccurs="1" />
+				<element name="referenceCode" type="string" minOccurs="1" maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+	
+</schema>
