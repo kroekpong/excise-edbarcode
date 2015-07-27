@@ -79,8 +79,8 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		wsTaxpayerList.getTaxpayerDetail().add(wsTaxpayerDetail1);
 		
 		// Factory 2
-		TaxpayerDetail wsTaxpayerDetail2 = getFactory2();
-		wsTaxpayerList.getTaxpayerDetail().add(wsTaxpayerDetail2);
+//		TaxpayerDetail wsTaxpayerDetail2 = getFactory2();
+//		wsTaxpayerList.getTaxpayerDetail().add(wsTaxpayerDetail2);
 		
 		wsCompany.setTaxpayerList(wsTaxpayerList);
 		
@@ -143,12 +143,12 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		GoodsList wsGoodsList = new GoodsList();
 		
 		Goods goods1 = new Goods();
-		goods1.setGoodsCode("70010101#001,00,000,008,97#1#0#00##-");
+		goods1.setGoodsCode("70010101#001,00,000,011,97#2#0#00##-");
 		goods1.setProductTypeCode("70010101");
 		goods1.setProductTypeDescriptionText("เบียร์");
-		goods1.setGoodsDescriptionText("สิงห์ OLD 0.330 4.9000");
+		goods1.setGoodsDescriptionText("สิงห์ OLD 0.630 4.9000");
 		goods1.setGoodsPrice(0D);
-		goods1.setGoodsSize("0.330");
+		goods1.setGoodsSize("0.630");
 		goods1.setGoodsSizeUnitDescriptionText("");
 		goods1.setTaxRateByPriceAmount(0D);
 		goods1.setTaxRateByQuantityAmount(0D);
@@ -160,7 +160,7 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		goods1.setUnitCode("00");
 		goods1.setGoodsUnitsDescriptionText("");
 		goods1.setIncomeCode("204020");
-		goods1.setSeqNo("1");
+		goods1.setSeqNo("2");
 		goods1.setBrandName("สิงห์ OLD");
 		goods1.setSubbrandName("");
 		goods1.setModelName("");
@@ -174,37 +174,37 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		goods1.setRatePerLitreMax(0D);
 		wsGoodsList.getGoods().add(goods1);
 		
-		Goods goods3 = new Goods();
-		goods3.setGoodsCode("");
-		goods3.setProductTypeCode("");
-		goods3.setProductTypeDescriptionText("");
-		goods3.setGoodsDescriptionText("");
-		goods3.setGoodsPrice(0D);
-		goods3.setGoodsSize("");
-		goods3.setGoodsSizeUnitDescriptionText("");
-		goods3.setTaxRateByPriceAmount(0D);
-		goods3.setTaxRateByQuantityAmount(0D);
-		goods3.setFundSSSRateAmount(0D);
-		goods3.setFundSSTRateAmount(0D);
-		goods3.setDegree("");
-		goods3.setPriceFlag("");
-		goods3.setDeclarePrice(0D);
-		goods3.setUnitCode("");
-		goods3.setGoodsUnitsDescriptionText("");
-		goods3.setIncomeCode("");
-		goods3.setSeqNo("");
-		goods3.setBrandName("");
-		goods3.setSubbrandName("");
-		goods3.setModelName("");
-		goods3.setInformDate("");
-		goods3.setProductNameEng("");
-		goods3.setRatePerLitre(0D);
-		goods3.setDegreeMin(0D);
-		goods3.setRateDegreeOver(0D);
-		goods3.setWholesaleMin(0D);
-		goods3.setRateWholesaleOver(0D);
-		goods3.setRatePerLitreMax(0D);
-		wsGoodsList.getGoods().add(goods3);
+		Goods goods2 = new Goods();
+		goods2.setGoodsCode("");
+		goods2.setProductTypeCode("");
+		goods2.setProductTypeDescriptionText("");
+		goods2.setGoodsDescriptionText("");
+		goods2.setGoodsPrice(0D);
+		goods2.setGoodsSize("");
+		goods2.setGoodsSizeUnitDescriptionText("");
+		goods2.setTaxRateByPriceAmount(0D);
+		goods2.setTaxRateByQuantityAmount(0D);
+		goods2.setFundSSSRateAmount(0D);
+		goods2.setFundSSTRateAmount(0D);
+		goods2.setDegree("");
+		goods2.setPriceFlag("");
+		goods2.setDeclarePrice(0D);
+		goods2.setUnitCode("");
+		goods2.setGoodsUnitsDescriptionText("");
+		goods2.setIncomeCode("");
+		goods2.setSeqNo("");
+		goods2.setBrandName("");
+		goods2.setSubbrandName("");
+		goods2.setModelName("");
+		goods2.setInformDate("");
+		goods2.setProductNameEng("");
+		goods2.setRatePerLitre(0D);
+		goods2.setDegreeMin(0D);
+		goods2.setRateDegreeOver(0D);
+		goods2.setWholesaleMin(0D);
+		goods2.setRateWholesaleOver(0D);
+		goods2.setRatePerLitreMax(0D);
+		wsGoodsList.getGoods().add(goods2);
 		
 		wsTaxpayerDetail.setGoodsList(wsGoodsList);
 		

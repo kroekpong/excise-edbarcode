@@ -11,8 +11,8 @@
 	<properties>
 		<jdk.version>1.7</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.1.6.RELEASE</spring.version>
-		<spring.security.version>4.0.1.RELEASE</spring.security.version>
+		<spring.version>3.2.14.RELEASE</spring.version>
+		<spring.security.version>3.2.8.RELEASE</spring.security.version>
 		<spring.ws.version>2.2.1.RELEASE</spring.ws.version>
 		<jstl.version>1.2</jstl.version>
 		<mysql.version>5.1.35</mysql.version>
@@ -72,7 +72,7 @@
 		</dependency>
 
 
-		<!-- Spring 4 dependencies -->
+		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>

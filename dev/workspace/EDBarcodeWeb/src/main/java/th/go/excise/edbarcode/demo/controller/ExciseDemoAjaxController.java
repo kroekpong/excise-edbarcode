@@ -7,16 +7,17 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import th.go.excise.edbarcode.demo.bean.EntrepreneurDemo;
 import th.go.excise.edbarcode.demo.bean.ExciseDataFromRefCode;
 import th.go.excise.edbarcode.demo.bean.ProductDemo;
 import th.go.excise.edbarcode.demo.service.ExciseDemoService;
 
-//@RestController
+@Controller
 public class ExciseDemoAjaxController {
 	
 	private static final Logger logger = LogManager.getLogger();
@@ -25,7 +26,7 @@ public class ExciseDemoAjaxController {
 	private ExciseDemoService exciseDemoService;
 	
 	@RequestMapping(value = "/getEntrepreneurInfo", method = RequestMethod.GET, headers = "Accept=application/json")
-	public EntrepreneurDemo getEntrepreneurInfo(HttpServletRequest httpRequest) {
+	public @ResponseBody EntrepreneurDemo getEntrepreneurInfo(HttpServletRequest httpRequest) {
 		logger.info("Inside getEntrepreneurInfo()");
 		
 		String licenseNo = httpRequest.getParameter("licenseNo");
