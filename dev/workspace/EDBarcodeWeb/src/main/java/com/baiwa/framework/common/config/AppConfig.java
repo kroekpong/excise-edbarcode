@@ -20,6 +20,12 @@ import org.springframework.context.annotation.PropertySource;
 			type = FilterType.REGEX,
 			pattern = ".*.dao"
 		)
+	},
+	excludeFilters = {
+		@ComponentScan.Filter(
+			type = FilterType.ANNOTATION,
+			value = Configuration.class
+		)
 	}
 )
 @PropertySource(value = {
