@@ -1,11 +1,7 @@
 package th.go.excise.edbarcode.ws.provider.endpoint;
 
-import java.util.List;
-
 import javax.xml.datatype.DatatypeConfigurationException;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +11,8 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
-import th.go.excise.edbarcode.ws.provider.oxm.AlcoholTaxFormSummary;
-import th.go.excise.edbarcode.ws.provider.oxm.ProductTax;
-import th.go.excise.edbarcode.ws.provider.oxm.SubmitOnlineRequest;
-import th.go.excise.edbarcode.ws.provider.oxm.SubmitOnlineResponse;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
 import th.go.excise.edbarcode.ws.provider.service.SubmitOnlineService;
 
 @Endpoint
@@ -29,30 +23,21 @@ public class SubmitOnlineEndPoint {
 	@Autowired
 	private SubmitOnlineService submitOnlineService;
 	
-	@PayloadRoot(localPart = "submitOnlineRequest", namespace = WebServiceConstant.NAMESPACE_URI)
+	@PayloadRoot(localPart = "EbarcodeSubmitOnlineRequest", namespace = WebServiceConstant.NAMESPACE_URI)
 	@ResponsePayload
-	public SubmitOnlineResponse doEnpoint(@RequestPayload SubmitOnlineRequest submitOnlineRequest) throws DatatypeConfigurationException {
+	public EbarcodeSubmitOnlineResponse doEnpoint(@RequestPayload EbarcodeSubmitOnlineRequest request) throws DatatypeConfigurationException {
 		logger.info(" In doEndpoint submitOnlineRequest");
 		
-		String licenseNo = submitOnlineRequest.getAlcoholTaxForm().getLicenseNo();
-		List<ProductTax> productTaxList = submitOnlineRequest.getAlcoholTaxForm().getProductTaxList();
-		AlcoholTaxFormSummary alcoholTaxFormSummary = submitOnlineRequest.getAlcoholTaxForm().getAlcoholTaxFormSummary();
-		
-		logger.debug("licenseNo: " + licenseNo);
-		if (!productTaxList.isEmpty()) {
-			logger.debug("productTaxList.size(): " + productTaxList.size());
-			for (ProductTax productTax : productTaxList) {
-				logger.debug(ToStringBuilder.reflectionToString(productTax, ToStringStyle.MULTI_LINE_STYLE));
-			}
+		EbarcodeSubmitOnlineResponse response = null;
+
+		try {
+			response = submitOnlineService.getResponse(request);
+			// Status Code & Description
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			response = new EbarcodeSubmitOnlineResponse();
+			// Status Code & Description
 		}
-		logger.debug(ToStringBuilder.reflectionToString(alcoholTaxFormSummary, ToStringStyle.MULTI_LINE_STYLE));
-		
-		String referenceCode = submitOnlineService.createTmpData(licenseNo, productTaxList, alcoholTaxFormSummary);
-		
-		SubmitOnlineResponse response = new SubmitOnlineResponse();
-		response.setStatus("0");
-		response.setDescription("Submit Online Successful");
-		response.setReferenceCode(referenceCode);
 		
 		return response;
 	}

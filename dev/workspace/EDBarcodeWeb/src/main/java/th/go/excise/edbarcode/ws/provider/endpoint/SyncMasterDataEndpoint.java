@@ -11,9 +11,8 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
-import th.go.excise.edbarcode.ws.provider.oxm.Entrepreneur;
-import th.go.excise.edbarcode.ws.provider.oxm.SyncMasterDataRequest;
-import th.go.excise.edbarcode.ws.provider.oxm.SyncMasterDataResponse;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSyncMasterDataRequest;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSyncMasterDataResponse;
 import th.go.excise.edbarcode.ws.provider.service.SyncMasterDataService;
 
 @Endpoint
@@ -24,26 +23,20 @@ public class SyncMasterDataEndpoint {
 	@Autowired
 	private SyncMasterDataService syncMasterDataService;
 	
-	@PayloadRoot(localPart = "syncMasterDataRequest", namespace = WebServiceConstant.NAMESPACE_URI)
+	@PayloadRoot(localPart = "EbarcodeSyncMasterDataRequest", namespace = WebServiceConstant.NAMESPACE_URI)
 	@ResponsePayload
-	public SyncMasterDataResponse doEndpoint(@RequestPayload SyncMasterDataRequest syncMasterDataRequest) throws DatatypeConfigurationException {
+	public EbarcodeSyncMasterDataResponse doEndpoint(@RequestPayload EbarcodeSyncMasterDataRequest request) throws DatatypeConfigurationException {
 		logger.info(" In doEndpoint syncMasterDataRequest");
 		
-		String taxNo = syncMasterDataRequest.getTaxNo();
-		logger.info(" licenseNo:" + taxNo);
-		
-		SyncMasterDataResponse response = new SyncMasterDataResponse();
+		EbarcodeSyncMasterDataResponse response = null;
 
 		try {
-			Entrepreneur entrepreneur = syncMasterDataService.getMasterData(taxNo);
-
-			response.setStatus("0");
-			response.setDescription("Success");
-			response.setEntrepreneur(entrepreneur);
+			response = syncMasterDataService.getResponse(request);
+			// Status Code & Description
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			response.setStatus("1");
-			response.setDescription("Failed");
+			response = new EbarcodeSyncMasterDataResponse();
+			// Status Code & Description
 		}
 		
 		return response;

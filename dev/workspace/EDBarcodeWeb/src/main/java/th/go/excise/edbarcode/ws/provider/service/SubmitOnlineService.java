@@ -1,12 +1,10 @@
 package th.go.excise.edbarcode.ws.provider.service;
 
-import java.util.List;
-
-import th.go.excise.edbarcode.ws.provider.oxm.AlcoholTaxFormSummary;
-import th.go.excise.edbarcode.ws.provider.oxm.ProductTax;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
 
 public interface SubmitOnlineService {
 	
-	public String createTmpData(String licenseNo, List<ProductTax> productTaxList, AlcoholTaxFormSummary alcoholTaxFormSummary);
+	public EbarcodeSubmitOnlineResponse getResponse(EbarcodeSubmitOnlineRequest request);
 	
 }
