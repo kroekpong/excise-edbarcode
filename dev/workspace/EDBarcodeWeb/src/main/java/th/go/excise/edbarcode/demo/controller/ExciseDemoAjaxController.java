@@ -16,7 +16,7 @@ import th.go.excise.edbarcode.demo.bean.ExciseDataFromRefCode;
 import th.go.excise.edbarcode.demo.bean.ProductDemo;
 import th.go.excise.edbarcode.demo.service.ExciseDemoService;
 
-@RestController
+//@RestController
 public class ExciseDemoAjaxController {
 	
 	private static final Logger logger = LogManager.getLogger();

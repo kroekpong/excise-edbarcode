@@ -16,7 +16,7 @@ import th.go.excise.edbarcode.demo.bean.ProductDemo;
 
 import com.baiwa.framework.persistence.dao.AbstractCommonJdbcDao;
 
-@Repository("exciseDemoDao")
+//@Repository("exciseDemoDao")
 public class ExciseDemoDaoImpl extends AbstractCommonJdbcDao implements ExciseDemoDao {
 	
 	private static final Logger logger = LogManager.getLogger();

@@ -15,19 +15,19 @@ public class DataAccessConfig {
 	@Autowired
     Environment env;
 	
-	@Bean(name = "dataSource", destroyMethod = "close")
-	public DataSource dataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-		dataSource.setUrl(env.getProperty("jdbc.url"));
-		dataSource.setUsername(env.getProperty("jdbc.username"));
-		dataSource.setPassword(env.getProperty("jdbc.password"));
-		return dataSource;
-	}
-	
-	@Bean(name = "jdbcTemplate")
-	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(dataSource());
-	}
+//	@Bean(name = "dataSource", destroyMethod = "close")
+//	public DataSource dataSource() {
+//		BasicDataSource dataSource = new BasicDataSource();
+//		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+//		dataSource.setUrl(env.getProperty("jdbc.url"));
+//		dataSource.setUsername(env.getProperty("jdbc.username"));
+//		dataSource.setPassword(env.getProperty("jdbc.password"));
+//		return dataSource;
+//	}
+//	
+//	@Bean(name = "jdbcTemplate")
+//	public JdbcTemplate jdbcTemplate() {
+//		return new JdbcTemplate(dataSource());
+//	}
 	
 }

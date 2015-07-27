@@ -17,7 +17,7 @@ import th.go.excise.edbarcode.demo.bean.ExciseTaxSummaryDemo;
 import th.go.excise.edbarcode.demo.bean.ProductDemo;
 import th.go.excise.edbarcode.demo.dao.ExciseDemoDao;
 
-@Service("exciseDemoService")
+//@Service("exciseDemoService")
 public class ExciseDemoServiceImpl implements ExciseDemoService {
 	
 	private static final Logger logger = LogManager.getLogger();
