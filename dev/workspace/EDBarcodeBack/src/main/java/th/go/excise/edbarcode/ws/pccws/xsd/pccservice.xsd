@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.excise.go.th/xsd/barcode"
+	targetNamespace="http://www.excise.go.th/xsd/barcode">
+
+	<!-- Service1: Sync Master Data -->
+
+	<!-- Service2: Submit Online -->
+	<element name="PCCRequest">
+		<complexType>
+			<sequence>
+				<element name="Header" type="tns:RequestHeader"/>
+				<element name="Body" type="tns:RequestBody"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="PCCResponse">
+		<complexType>
+			<sequence>
+				<element name="Header" type="tns:ResponseHeader"/>
+				<element name="Body" type="tns:ReponseBody"/>
+			</sequence>
+		</complexType>
+	</element>
+
+
+	<!-- ***********************   Business Data Tags   ************************ -->
+
+
+	<complexType name="RequestHeader">
+		<sequence> 
+			<element name="serviceID"			type="string"			minOccurs="1" />
+			<element name="systemID"						type="string"			minOccurs="1" />
+			<element name="IPAddress"					type="string"			minOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="RequestBody">
+		<sequence>
+			<element name="userID"			type="string"			minOccurs="1" />
+			<element name="password"						type="string"			minOccurs="1" />
+			<element name="InquiryForm"					type="tns:InquiryForm"			minOccurs="1" />
+ 		</sequence>
+	</complexType>
+	
+		<complexType name="ResponseHeader">
+		<sequence> 
+			<element name="serviceID"			type="string"			minOccurs="1" />
+			<element name="systemID"						type="string"			minOccurs="1" />
+			<element name="IPAddress"					type="string"			minOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="ReponseBody">
+		<sequence>
+			<element name="returnCode"			type="string"			minOccurs="1" />
+			<element name="returnDesc"						type="string"			minOccurs="1" />
+ 		</sequence>
+	</complexType>
+	<complexType name="InquiryForm">
+		<sequence> 
+			<element name="serviceID"			type="string"			minOccurs="1" />
+			<element name="systemID"						type="string"			minOccurs="1" />
+			<element name="IPAddress"					type="string"			minOccurs="1" />
+		</sequence>
+	</complexType>
+
+
+
+</schema>
