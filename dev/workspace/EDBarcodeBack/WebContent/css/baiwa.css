@@ -1,0 +1,66 @@
+.main_div {
+	width: 100%;
+	height: 100%; 
+	background-color: white;
+	 
+}
+
+.head_div { 
+	width: 100%;
+	height: 70px; 
+	background: url(../images/h_bg.png) repeat-x; 
+	border-bottom: 1px solid rgb(220,220,220);
+	 
+}
+
+
+.left_div { 
+	width: 20%;
+	height: 600px;
+	padding-left: 30px;
+	float: left; 
+	background-color: rgb(245,247,248); 
+	border-right: 1px solid rgb(220,220,220);
+	
+}
+
+.right_main { 
+	width: 90%;	 
+	background-color: white;	 	 
+	margin-left: 5%;
+	padding-top: 3%;
+	 
+}
+
+.right_div { 
+	width: 75%;
+	float: right; 
+	background-color: white;
+
+	 
+}
+
+.foot_div {
+	clear: both;
+	width: 100%;
+	text-align: center;  
+	height: 50px;
+	background-color: rgb(245,247,248);
+ 
+}
+
+form input[type="text"] { 
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px; 
+    border: 1px solid #848484; 
+    outline:0; 
+/*     height:20px;  */
+/*     width: 150px;  */
+  } 
+  
+
+  
+
+
+

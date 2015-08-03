@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="th.go.excise.edbarcode.ws">
+		<context:include-filter type="regex" expression=".*.endpoint" />
+	</context:component-scan>
+
+	<bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
+		<property name="interceptors">
+			<list>
+				<bean class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Service -->
+	<bean id="EDBarcodeService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schema" ref="barcodeSchema" />
+		<property name="portTypeName" value="EDBarcodeService" />
+		<property name="locationUri">
+			<value>${edBarcodeService.service}</value>
+		</property>
+		<property name="targetNamespace" value="http://www.excise.go.th/xsd/barcode" />
+	</bean>
+
+	<bean id="barcodeSchema" class="org.springframework.xml.xsd.SimpleXsdSchema">
+		<property name="xsd" value="/WEB-INF/classes/th/go/excise/edbarcode/ws/provider/xsd/edbarcode.xsd" />
+	</bean>
+
+	<bean class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
+		<constructor-arg ref="marshaller" />
+	</bean>
+
+	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="packagesToScan">
+			<list>
+				<value>th.go.excise.edbarcode.ws.provider.oxm</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="loggingInterceptor" class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor" />
+
+</beans>
