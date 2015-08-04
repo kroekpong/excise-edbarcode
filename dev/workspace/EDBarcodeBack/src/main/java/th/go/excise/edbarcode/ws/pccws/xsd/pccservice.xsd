@@ -1,181 +1,179 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:tns="http://www.excise.go.th/xsd/barcode"
-	targetNamespace="http://www.excise.go.th/xsd/barcode">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.excise.go.th/xsd/barcode" targetNamespace="http://www.excise.go.th/xsd/barcode">
 
-	<!-- Service1: Sync Master Data -->
+	<!-- Service1: Sync Master Data -->
+
+
 
 	<!-- Service2: Submit Online -->
 	<element name="PCCRequest">
 		<complexType>
 			<sequence>
-				<element name="Header" type="tns:RequestHeader"/>
-				<element name="Body" type="tns:RequestBody"/>
+				<element name="Header" type="tns:RequestHeader" />
+				<element name="Body" type="tns:RequestBody" />
 			</sequence>
 		</complexType>
 	</element>
 	<element name="PCCResponse">
 		<complexType>
 			<sequence>
-				<element name="Header" type="tns:ResponseHeader"/>
-				<element name="Body" type="tns:ReponseBody"/>
+				<element name="Header" type="tns:ResponseHeader" />
+				<element name="Body" type="tns:ReponseBody" />
 			</sequence>
 		</complexType>
 	</element>
 
 
-	<!-- ***********************   Business Data Tags   ************************ -->
+	<!-- *********************** Business Data Tags ************************ -->
 
 
 	<complexType name="RequestHeader">
-		<sequence> 
-			<element name="serviceID"			type="string"			minOccurs="1" />
-			<element name="systemID"						type="string"			minOccurs="1" />
-			<element name="IPAddress"					type="string"			minOccurs="1" />
+		<sequence>
+			<element name="serviceID" type="string" minOccurs="1" />
+			<element name="systemID" type="string" minOccurs="1" />
+			<element name="IPAddress" type="string" minOccurs="1" />
 		</sequence>
 	</complexType>
 
 	<complexType name="RequestBody">
 		<sequence>
-			<element name="userID"			type="string"			minOccurs="1" />
-			<element name="password"						type="string"			minOccurs="1" />
-			<element name="InquiryForm"					type="tns:InquiryForm"			minOccurs="1" />
- 		</sequence>
+			<element name="userID" type="string" minOccurs="1" />
+			<element name="password" type="string" minOccurs="1" />
+			<element name="InquiryForm" type="tns:InquiryForm" minOccurs="1" />
+		</sequence>
 	</complexType>
-	
+
 	<complexType name="ResponseHeader">
-		<sequence> 
-			<element name="serviceID"			type="string"			minOccurs="1" />
-			<element name="systemID"						type="string"			minOccurs="1" />
-			<element name="IPAddress"					type="string"			minOccurs="1" />
+		<sequence>
+			<element name="serviceID" type="string" minOccurs="1" />
+			<element name="systemID" type="string" minOccurs="1" />
+			<element name="IPAddress" type="string" minOccurs="1" />
 		</sequence>
 	</complexType>
 
 	<complexType name="ReponseBody">
 		<sequence>
-			<element name="returnCode"			type="string"			minOccurs="1" />
-			<element name="returnDesc"						type="string"			minOccurs="1" />
- 		</sequence>
-	</complexType>
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Sharge -->
-	<complexType name="InquiryForm">
-		<sequence> 
-			<element name="TaxpayerInformation" type="tns:TaxpayerInformation"/>
-			<element name="SubmissionInformation" type="tns:SubmissionInformation"/>
+			<element name="returnCode" type="string" minOccurs="1" />
+			<element name="returnDesc" type="string" minOccurs="1" />
 		</sequence>
 	</complexType>
-	<complexType name="TaxpayerInformation">
-		<sequence> 
-			<element name="RegistrationId"			type="decimal"			minOccurs="1" />
-			<element name="CustomerId"						type="decimal"			minOccurs="0" />
-			<element name="Tin"					type="decimal"			minOccurs="0" />
-			<element name="Pin_Nit_Id"					type="decimal"			minOccurs="0" />
+
+	<complexType name="InquiryForm">
+		<sequence>
+			<element name="TaxpayerInformation" type="tns:TaxpayerInformation" />
+			<element name="SubmissionInformation" type="tns:SubmissionInformation" />
+			<element name="FormInformation" type="tns:FormInformation" />
 		</sequence>
 	</complexType>
-	
+
+	<complexType name="TaxpayerInformation">
+		<sequence>
+			<element name="RegistrationId" type="decimal" minOccurs="1" />
+			<element name="CustomerId" type="decimal" minOccurs="0" />
+			<element name="Tin" type="decimal" minOccurs="0" />
+			<element name="Pin_Nit_Id" type="decimal" minOccurs="0" />
+		</sequence>
+	</complexType>
+
 	<complexType name="SubmissionInformation">
-		<sequence> 
-			<element name="IpAddress"			type="string"			minOccurs="1" />
-			<element name="InternetId"						type="string"			minOccurs="0" />
-			<element name="SubmissionEmail"					type="string"			minOccurs="0" />
-			<element name="SubmitDateTime"					type="decimal"			minOccurs="1" />
-			<element name="FormInformation" type="tns:FormInformation"/>
+		<sequence>
+			<element name="IpAddress" type="string" minOccurs="1" />
+			<element name="InternetId" type="string" minOccurs="0" />
+			<element name="SubmissionEmail" type="string" minOccurs="0" />
+			<element name="SubmitDateTime" type="decimal" minOccurs="1" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="FormInformation">
-		<sequence> 
-			<element name="FormType"			type="string"			minOccurs="0" />
-			<element name="FormCode"						type="string"			minOccurs="1" />
-			<element name="FormEffectiveDate"					type="decimal"			minOccurs="1" />
-			<element name="FormReferenceNumber"					type="string"			minOccurs="1" />
-			<element name="FormData" type="tns:FormData"/>
+		<sequence>
+			<element name="FormType" type="string" minOccurs="0" />
+			<element name="FormCode" type="string" minOccurs="1" />
+			<element name="FormEffectiveDate" type="decimal" minOccurs="1" />
+			<element name="FormReferenceNumber" type="string" minOccurs="1" />
+			<element name="FormData" type="tns:FormData" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="FormData">
-		<sequence> 
-			<element name="PS0112Form" type="tns:PS0112Form"/>
+		<sequence>
+			<element name="PS0112Form" type="tns:PS0112Form" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="PS0112Form">
-		<sequence> 
-			<element name="PaymentReferenceId"			type="integer"			minOccurs="1" />
-			<element name="BankReferenceId"						type="string"			minOccurs="1" />
-			<element name="PayType12"					type="string"			minOccurs="1" />
-			<element name="TaxMonth"					type="decimal"			minOccurs="1" />
-			<element name="TaxYear"					type="decimal"			minOccurs="1" />
-			<element name="IncomeCode"					type="decimal"			minOccurs="1" />
-			<element name="FactoryDateBegin"					type="decimal"			minOccurs="1" />
-			<element name="FactoryDteEnd"					type="decimal"			minOccurs="1" />
-			<element name="ExciseTax"			type="decimal"			minOccurs="1" />
-			<element name="ReduceAmt"						type="double"			minOccurs="1" />
-			<element name="PenaltyAmt"					type="double"			minOccurs="1" />
-			<element name="SurchargeAmt"					type="double"			minOccurs="1" />
-			<element name="MoiRate"					type="double"			minOccurs="1" />
-			<element name="MoiTax"					type="double"			minOccurs="1" />
-			<element name="SumCreditExciseTax"					type="double"			minOccurs="1" />
-			<element name="SumCreditMoiTax"					type="double"			minOccurs="1" />
-			<element name="NetExciseTax"					type="double"			minOccurs="1" />
-			<element name="NetMoiTax"					type="double"			minOccurs="1" />
-			<element name="PrnType"					type="string"			minOccurs="0" />
-			<element name="RecType"					type="string"			minOccurs="1" />
+		<sequence>
+			<element name="PaymentReferenceId" type="integer" minOccurs="1" />
+			<element name="BankReferenceId" type="string" minOccurs="1" />
+			<element name="PayType12" type="string" minOccurs="1" />
+			<element name="TaxMonth" type="decimal" minOccurs="1" />
+			<element name="TaxYear" type="decimal" minOccurs="1" />
+			<element name="IncomeCode" type="decimal" minOccurs="1" />
+			<element name="FactoryDateBegin" type="decimal" minOccurs="1" />
+			<element name="FactoryDteEnd" type="decimal" minOccurs="1" />
+			<element name="ExciseTax" type="decimal" minOccurs="1" />
+			<element name="ReduceAmt" type="double" minOccurs="1" />
+			<element name="PenaltyAmt" type="double" minOccurs="1" />
+			<element name="SurchargeAmt" type="double" minOccurs="1" />
+			<element name="MoiRate" type="double" minOccurs="1" />
+			<element name="MoiTax" type="double" minOccurs="1" />
+			<element name="SumCreditExciseTax" type="double" minOccurs="1" />
+			<element name="SumCreditMoiTax" type="double" minOccurs="1" />
+			<element name="NetExciseTax" type="double" minOccurs="1" />
+			<element name="NetMoiTax" type="double" minOccurs="1" />
+			<element name="PrnType" type="string" minOccurs="0" />
+			<element name="RecType" type="string" minOccurs="1" />
 			<element name="GoodsList" type="tns:GoodsList" />
 			<element name="FundList" type="tns:FundList" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="GoodsList">
 		<sequence>
 			<element name="GoodsEntry" type="tns:GoodsEntry" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="GoodsEntry">
 		<sequence>
-			<element name="UnitCode"					type="string"			minOccurs="1" />
-			<element name="RateFlag"					type="string"			minOccurs="1" />
-			<element name="TaxQuantity"			type="double"			minOccurs="1" />
-			<element name="TaxQuantityNumber"						type="double"			minOccurs="1" />
-			<element name="TaxQuantityPerUnit"					type="double"			minOccurs="1" />
-			<element name="TaxValue"					type="double"			minOccurs="1" />
-			<element name="PriceFlag"					type="string"			minOccurs="1" />
-			<element name="InformPrice"					type="double"			minOccurs="1" />
-			<element name="DeclarePrice"					type="double"			minOccurs="1" />
-			<element name="UnitPrice"					type="double"			minOccurs="1" />
-			<element name="GoodsNum"					type="double"			minOccurs="1" />
-			<element name="GoodsValue"					type="double"			minOccurs="1" />
-			<element name="TaxAmount"					type="double"			minOccurs="1" />
 			<element name="GoodsInformation" type="tns:GoodsInformation" />
+			<element name="UnitCode" type="string" minOccurs="1" />
+			<element name="RateFlag" type="string" minOccurs="1" />
+			<element name="TaxQuantity" type="double" minOccurs="1" />
+			<element name="TaxQuantityNumber" type="double" minOccurs="1" />
+			<element name="TaxQuantityPerUnit" type="double" minOccurs="1" />
+			<element name="TaxValue" type="double" minOccurs="1" />
+			<element name="PriceFlag" type="string" minOccurs="1" />
+			<element name="InformPrice" type="double" minOccurs="1" />
+			<element name="DeclarePrice" type="double" minOccurs="1" />
+			<element name="UnitPrice" type="double" minOccurs="1" />
+			<element name="GoodsNum" type="double" minOccurs="1" />
+			<element name="GoodsValue" type="double" minOccurs="1" />
+			<element name="TaxAmount" type="double" minOccurs="1" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="GoodsInformation">
 		<sequence>
-			<element name="ProductCode"					type="string"			minOccurs="1" />
-			<element name="CategoryCode1"					type="string"			minOccurs="1" />
-			<element name="CategoryCode2"					type="string"			minOccurs="1" />
-			<element name="CategoryCode3"					type="string"			minOccurs="1" />
-			<element name="CategoryCode4"					type="string"			minOccurs="1" />
-			<element name="CategoryCode5"					type="string"			minOccurs="1" />
+			<element name="ProductCode" type="string" minOccurs="1" />
+			<element name="CategoryCode1" type="string" minOccurs="1" />
+			<element name="CategoryCode2" type="string" minOccurs="1" />
+			<element name="CategoryCode3" type="string" minOccurs="1" />
+			<element name="CategoryCode4" type="string" minOccurs="1" />
+			<element name="CategoryCode5" type="string" minOccurs="1" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="FundList">
 		<sequence>
 			<element name="FundEntry" type="tns:FundEntry" />
 		</sequence>
 	</complexType>
-	
+
 	<complexType name="FundEntry">
-		<sequence> 
-			<element name="FundType"			type="string"			minOccurs="0" />
-			<element name="FundAmt"						type="double"			minOccurs="0" />
+		<sequence>
+			<element name="FundType" type="string" minOccurs="0" />
+			<element name="FundAmt" type="double" minOccurs="0" />
 		</sequence>
 	</complexType>
-
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Sharge -->
 
 </schema>
