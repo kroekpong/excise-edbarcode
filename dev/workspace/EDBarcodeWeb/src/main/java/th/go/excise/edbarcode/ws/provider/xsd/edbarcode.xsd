@@ -24,16 +24,16 @@
 	<element name="EbarcodeSubmitOnlineRequest">
 		<complexType>
 			<sequence>
-				<element name="SR12011" type="tns:SR12011"/>
+				<element name="SubmitOnlineHeader" type="tns:SubmitOnlineHeader"/>
+				<element name="SR12011Info" type="tns:SR12011Info"/>
 			</sequence>
 		</complexType>
 	</element>
 	<element name="EbarcodeSubmitOnlineResponse">
 		<complexType>
 			<sequence>
-				<element name="status" type="string" minOccurs="1" maxOccurs="1" />
-				<element name="description" type="string" minOccurs="1" maxOccurs="1" />
-				<element name="referenceCode" type="string" minOccurs="1" maxOccurs="1" />
+				<element name="StatusCode" type="string" minOccurs="1" maxOccurs="1" />
+				<element name="FormSubmissionId" type="string" minOccurs="1" maxOccurs="1" />
 			</sequence>
 		</complexType>
 	</element>
@@ -173,9 +173,122 @@
 		</sequence>
 	</complexType>
 
-	<complexType name="SR12011">
+	<complexType name="SubmitOnlineHeader">
 		<sequence>
-			<element name="CusId"						type="string"		minOccurs="1" />
+			<element name="RegistratronId"						type="double"		minOccurs="1" />
+			<element name="CusId"						type="double"		minOccurs="1" />
+			<element name="CompanyId"						type="double"		minOccurs="1" />
+			<element name="TaxpayerId"						type="double"		minOccurs="1" />
+			<element name="ExciseOfficeId"						type="double"		minOccurs="1" />
+			<element name="InternetUniqueId"						type="double"		minOccurs="1" />
+			<element name="IpAddress"						type="string"		minOccurs="1" />
+			<element name="SubmissionEmail"						type="string"		minOccurs="0" />
+		</sequence>
+	</complexType>
+
+	<complexType name="SR12011Info">
+		<sequence>
+			<element name="TaxpayerInfo" type="tns:TaxpayerInfo" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="GoodsListInfo" type="tns:GoodsListInfo" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="SummaryInfo" type="tns:SummaryInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="TaxpayerInfo">
+		<sequence>
+			<element name="CompanyName"						type="string"		minOccurs="1" />
+			<element name="Tin"						type="double"		minOccurs="1" />
+			<element name="LicenseNo"						type="string"		minOccurs="1" />
+			<element name="EffectiveDate"						type="string"		minOccurs="1" />
+			<element name="ExpireDate"						type="string"		minOccurs="1" />
+			<element name="TaxpayerName"						type="string"		minOccurs="1" />
+			<element name="TaxpayerAddressInfo"	type="tns:TaxpayerAddressInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="TaxpayerAddressInfo">
+		<sequence>
+			<element name="HouseIdNumber"						type="string"		minOccurs="0" />
+			<element name="BuildingName"						type="string"		minOccurs="0" />
+			<element name="RoomNumber"						type="string"		minOccurs="0" />
+			<element name="FloorNumber"						type="string"		minOccurs="0" />
+			<element name="VillageName"						type="string"		minOccurs="0" />
+			<element name="HouseNumber"						type="string"		minOccurs="0" />
+			<element name="MooNumber"						type="string"		minOccurs="0" />
+			<element name="TrokSoiName"						type="string"		minOccurs="0" />
+			<element name="StreetName"						type="string"		minOccurs="0" />
+			<element name="ThambolName"						type="string"		minOccurs="1" />
+			<element name="AmphurName"						type="string"		minOccurs="1" />
+			<element name="ProvinceName"						type="string"		minOccurs="1" />
+			<element name="Postcode"						type="string"		minOccurs="0" />
+			<element name="TelNumber"						type="string"		minOccurs="0" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="GoodsListInfo">
+		<sequence>
+			<element name="GoodsEntryInfo" type="tns:GoodsEntryInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="GoodsEntryInfo">
+		<sequence>
+			<element name="ProductCode"						type="string"		minOccurs="1" />
+			<element name="CategoryCode1"						type="string"		minOccurs="1" />
+			<element name="CategoryCode2"						type="string"		minOccurs="1" />
+			<element name="CategoryCode3"						type="string"		minOccurs="1" />
+			<element name="CategoryCode4"						type="string"		minOccurs="1" />
+			<element name="CategoryCode5"						type="string"		minOccurs="1" />
+			<element name="UnitCode"						type="string"		minOccurs="1" />
+			<element name="RateFlag"						type="string"		minOccurs="1" />
+			<element name="TaxQuantity"						type="double"		minOccurs="1" />
+			<element name="TaxQuantityNumber"						type="double"		minOccurs="1" />
+			<element name="TaxQuantityPerUnit"						type="double"		minOccurs="1" />
+			<element name="TaxValue"						type="double"		minOccurs="1" />
+			<element name="PriceFlag"						type="string"		minOccurs="1" />
+			<element name="InformPrice"						type="double"		minOccurs="1" />
+			<element name="DeclarePrice"						type="double"		minOccurs="1" />
+			<element name="UnitPrice"						type="double"		minOccurs="1" />
+			<element name="GoodsNum"						type="double"		minOccurs="1" />
+			<element name="GoodsValue"						type="double"		minOccurs="1" />
+			<element name="TaxAmount"						type="double"		minOccurs="1" />
+			<element name="SeqNo"						type="string"		minOccurs="1" />
+			<element name="ProductTypeDesc"						type="string"		minOccurs="1" />
+			<element name="GoodsDesc"						type="string"		minOccurs="1" />
+			<element name="Degree"						type="string"		minOccurs="1" />
+			<element name="GoodsSize"						type="string"		minOccurs="1" />
+			<element name="GoodsPiece"						type="string"		minOccurs="1" />
+			<element name="GoodsQuantity"						type="double"		minOccurs="1" />
+			<element name="TaxByValue"						type="double"		minOccurs="1" />
+			<element name="TaxByQuantity"						type="double"		minOccurs="1" />
+			<element name="TaxByQuantityOver"						type="double"		minOccurs="1" />
+			<element name="TaxByQuantityWithOver"						type="double"		minOccurs="1" />
+			<element name="NetTaxByValue"						type="double"		minOccurs="1" />
+			<element name="NetTaxByQuantity"						type="double"		minOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="SummaryInfo">
+		<sequence>
+			<element name="SumAllTaxByValue"						type="double"		minOccurs="1" />
+			<element name="SumAllTaxByQuantity"						type="double"		minOccurs="1" />
+			<element name="SumAllTax"						type="double"		minOccurs="1" />
+			<element name="TaxLessType"						type="string"		minOccurs="0" />
+			<element name="TaxLessFrom"						type="string"		minOccurs="0" />
+			<element name="TaxLessAmount"						type="double"		minOccurs="0" />
+			<element name="TaxDeductionOnBookNo"						type="string"		minOccurs="0" />
+			<element name="TaxDeductionOnBookAmount"						type="double"		minOccurs="0" />
+			<element name="PaymentExciseAmount"						type="double"		minOccurs="1" />
+			<element name="PaymentMunicipalAmount"						type="double"		minOccurs="1" />
+			<element name="PaymentFundHealthAmount"						type="double"		minOccurs="1" />
+			<element name="PaymentFundTVAmount"						type="double"		minOccurs="1" />
+			<element name="PaymentFundSportAmount"						type="double"		minOccurs="1" />
+			<element name="MoiRate"						type="double"		minOccurs="1" />
+			<element name="PrintType"						type="string"		minOccurs="1" />
+			<element name="RecType"						type="string"		minOccurs="1" />
+			<element name="PaymentExciseAndMunicipalTaxAmount"						type="double"		minOccurs="1" />
+			<element name="PaymentOtherAmount"						type="double"		minOccurs="0" />
+			<element name="PaymentNetTaxAmount"						type="double"		minOccurs="1" />
 		</sequence>
 	</complexType>
 
