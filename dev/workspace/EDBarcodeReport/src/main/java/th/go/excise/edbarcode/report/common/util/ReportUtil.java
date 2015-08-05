@@ -28,7 +28,7 @@ public class ReportUtil {
 	
 	public static InputStream getReportFile(String fileName) {
 		String inputPath = ReportConstant.rbMyReport.getString("path.input.jrxml");
-		InputStream jrxmlFile = Object.class.getResourceAsStream(inputPath + fileName);
+		InputStream jrxmlFile = ReportUtil.class.getResourceAsStream(inputPath + fileName);
 		logger.debug("jrxmlFile: " + jrxmlFile);
 		return jrxmlFile;
 	}
@@ -47,7 +47,7 @@ public class ReportUtil {
 	
 	public static InputStream getImageFile(String imageName) {
 		String inputPath = ReportConstant.rbMyReport.getString("path.input.image");
-		InputStream imageFile = Object.class.getResourceAsStream(inputPath + imageName + "." + ReportConstant.FILE.PNG);
+		InputStream imageFile = ReportUtil.class.getResourceAsStream(inputPath + imageName + "." + ReportConstant.FILE.PNG);
 		logger.debug("imageFile: " + imageFile);
 		return imageFile;
 	}
