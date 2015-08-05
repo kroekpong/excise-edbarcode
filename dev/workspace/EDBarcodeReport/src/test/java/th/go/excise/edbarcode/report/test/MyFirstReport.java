@@ -26,21 +26,21 @@ public class MyFirstReport {
 		
 		long start = System.currentTimeMillis();
 		
-		String jrxmlFile  = ReportUtil.getReportFile("MyFirstReport.jrxml");
+		String jrxmlFile  = "D:\\MyWork\\Project\\Baiwa\\EXCISE\\ED-Barcode\\SVN\\dev\\workspace\\EDBarcodeReport\\src\\test\\resources\\jrxml\\MyFirstReport.jrxml";
 		String outputFile = ReportUtil.getReportOutputPath("MyFirstReport.pdf");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("my_param", "Hello World");
-		map.put("my_qr_code", "31");
+		map.put("my_param", "123456789");
+		map.put("my_qr_code", "D25");
 		
 		List<Product> productList = new ArrayList<Product>();
-		Product product = null;
-		for (int i = 0; i < 10; i++) {
-			product = new Product();
-			product.setProductGroup("G" + (i + 1));
-			product.setProductName("Product" + (i + 1));
-			productList.add(product);
-		}
+//		Product product = null;
+//		for (int i = 0; i < 10; i++) {
+//			product = new Product();
+//			product.setProductGroup("G" + (i + 1));
+//			product.setProductName("Product" + (i + 1));
+//			productList.add(product);
+//		}
 		
 		JasperDesign jasperDesign = JRXmlLoader.load(jrxmlFile);
 		JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);

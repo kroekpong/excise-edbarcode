@@ -33,4 +33,27 @@ public class ReportConstant {
 		public static final int FAILED = 0;
 	}
 	
+	public static final class EVENT_CODE {
+		public static final String HEADER = "H";
+		public static final String DETAIL = "D";
+		public static final String SUMMARY = "S";
+		public static final String REFERENCE = "R";
+	}
+	
+	public static final int GOODS_PER_PAGE = 3;
+	public static final String FORMAT_FUND_AMT = "#,##0";
+	public static final String SEPERATE_STRING = "|";
+	public static final String SEPERATE_LINE = "}|}";
+	
+	public static final class DECIMAL_FORMAT {
+		public static final String ZERO_DIGIT = "#,##0";
+		public static final String TWO_DIGIT  = "#,##0.00";
+		public static final String FOUR_DIGIT = "#,##0.0000";
+	}
+	
+	public static final class DATE_FORMAT {
+		public static final String WS = "yyyyMMdd";
+		public static final String SHORT = "dd/MM/yyyy";
+	}
+	
 }

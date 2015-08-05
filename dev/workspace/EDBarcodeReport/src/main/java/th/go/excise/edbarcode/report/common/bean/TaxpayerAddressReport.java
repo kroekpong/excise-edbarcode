@@ -5,9 +5,8 @@ import javax.xml.bind.annotation.XmlElement;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class TaxpayerAddress {
+public class TaxpayerAddressReport {
 
-	private String taxpayerName;
 	private String houseIdNumber;
 	private String buildingName;
 	private String roomNumber;
@@ -22,17 +21,8 @@ public class TaxpayerAddress {
 	private String provinceName;
 	private String postcode;
 	private String telNumber;
-	private String emailAddress;
-
-	@XmlElement(name = "TaxpayerName")
-	public String getTaxpayerName() {
-		return taxpayerName;
-	}
-
-	public void setTaxpayerName(String taxpayerName) {
-		this.taxpayerName = taxpayerName;
-	}
-
+	
+	
 	@XmlElement(name = "HouseIdNumber")
 	public String getHouseIdNumber() {
 		return houseIdNumber;
@@ -157,15 +147,6 @@ public class TaxpayerAddress {
 
 	public void setTelNumber(String telNumber) {
 		this.telNumber = telNumber;
-	}
-
-	@XmlElement(name = "EmailAddress")
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
 	}
 
 	@Override
