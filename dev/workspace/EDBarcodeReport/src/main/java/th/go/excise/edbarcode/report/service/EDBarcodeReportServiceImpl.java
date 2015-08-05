@@ -1,5 +1,6 @@
 package th.go.excise.edbarcode.report.service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleExporterInputItem;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -36,26 +38,45 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	private static final Log logger = LogFactory.getLog(EDBarcodeReportServiceImpl.class);
 	
 	@Override
-	public void generateReport(String xml, String outputFile) throws EDBarcodeReportException {
+	public byte[] generateReport(String xml, String referenceNumber) throws EDBarcodeReportException {
 		logger.info("Generate Report - Start");
 		long start = System.currentTimeMillis();
-		
-		logger.info("Output File: " + outputFile);
+		ByteArrayOutputStream outputStream = null;
+		byte[] content = null;
 		
 		try {
 			SR12011FormReport form = EDBarcodeReportUtil.prepareDataWithXmlString(xml);
-			List<ExporterInputItem> items = getExportInputItemList(form);
+			form.getSummaryReport().setReferenceNumber(referenceNumber);
+			
+			List<ExporterInputItem> items = new ArrayList<ExporterInputItem>();
+			items.addAll(getSR12011ExportInputItemList(form));
+			items.addAll(getFundExportInputItemList(form));
 			
 			JRPdfExporter exporter = new JRPdfExporter();
 			exporter.setExporterInput(new SimpleExporterInput(items));
-			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputFile));
+			
+			outputStream = new ByteArrayOutputStream();
+			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputStream));
+			
 			exporter.exportReport();
+			content = outputStream.toByteArray();
+			
 		} catch (JRException e) {
 			logger.error(e.getMessage(), e);
 			new EDBarcodeReportException(e.getMessage(), e);
+		} finally {
+			try {
+				outputStream.close();
+			} catch (IOException e) {
+				logger.error(e.getMessage(), e);
+				new EDBarcodeReportException(e.getMessage(), e);
+			}
 		}
+		
 		logger.info("Generate Report - Finished");
 		logger.info("PDF creation time: " + (System.currentTimeMillis() - start) + " ms");
+		
+		return content;
 	}
 	
 	@Override
@@ -67,7 +88,6 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		
 		try {
 			SR12011FormReport form = EDBarcodeReportUtil.prepareDataWithXmlFile(xmlFile);
-			List<ExporterInputItem> items = getExportInputItemList(form);
 			
 			File outputDic = new File(outputPath);
 			if (outputDic.mkdirs()) {
@@ -76,17 +96,30 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			
 			JRPdfExporter exporter = new JRPdfExporter();
 			if (ReportConstant.MODE.SEPERATE.equalsIgnoreCase(mode)) {
-				for (int i = 0; i < items.size(); i++) {
-					exporter.setExporterInput(new SimpleExporterInput(items.get(i).getJasperPrint()));
-					exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputPath + ReportConstant.REPORT.NAME_LIST[i] + "." + ReportConstant.FILE.PDF));
+				// SR120-11 Report
+				List<ExporterInputItem> sr12011Items = getSR12011ExportInputItemList(form);
+				exporter.setExporterInput(new SimpleExporterInput(sr12011Items));
+				exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputPath + ReportConstant.REPORT.NAME_LIST[0] + "." + ReportConstant.FILE.PDF));
+				exporter.exportReport();
+				
+				// Fund Report
+				List<ExporterInputItem> fundItems = getFundExportInputItemList(form);
+				for (int i = 0; i < fundItems.size(); i++) {
+					exporter.setExporterInput(new SimpleExporterInput(fundItems.get(i).getJasperPrint()));
+					exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputPath + ReportConstant.REPORT.NAME_LIST[(i + 1)] + "." + ReportConstant.FILE.PDF));
 					exporter.exportReport();
 				}
 			} else if (ReportConstant.MODE.ALL.equalsIgnoreCase(mode)) {
+				// SR120-11 and Fund Report
+				List<ExporterInputItem> items = new ArrayList<ExporterInputItem>();
+				items.addAll(getSR12011ExportInputItemList(form));
+				items.addAll(getFundExportInputItemList(form));
+				
 				exporter.setExporterInput(new SimpleExporterInput(items));
-				exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputPath + "EXCISE.pdf"));
+				exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputPath + "ALL_EXCISE.pdf"));
 				exporter.exportReport();
 			} else{
-				
+				logger.warn("Incorrect mode, Please enter 'S' or 'A'");
 			}
 		} catch (JRException e) {
 			logger.error(e.getMessage(), e);
@@ -97,17 +130,11 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		return 0;
 	}
 
-	private List<ExporterInputItem> getExportInputItemList(SR12011FormReport form) throws EDBarcodeReportException {
+	private List<ExporterInputItem> getSR12011ExportInputItemList(SR12011FormReport form) throws EDBarcodeReportException {
 		
 		List<JasperPrint> sr12011ReportList;
-		JasperPrint sss101Report;
-		JasperPrint sst101Report;
-		JasperPrint kkt101Report;
 		try {
 			sr12011ReportList = getSR12011ReportList(form);
-			sss101Report = getSSS101Report(form);
-			sst101Report = getSST101Report(form);
-			kkt101Report = getKKT101Report(form);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			throw new EDBarcodeReportException(e.getMessage(), e);
@@ -117,6 +144,25 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		for (JasperPrint sr12011Report : sr12011ReportList) {
 			items.add(new SimpleExporterInputItem(sr12011Report));
 		}
+		
+		return items;
+	}
+	
+	private List<ExporterInputItem> getFundExportInputItemList(SR12011FormReport form) throws EDBarcodeReportException {
+		
+		JasperPrint sss101Report;
+		JasperPrint sst101Report;
+		JasperPrint kkt101Report;
+		try {
+			sss101Report = getSSS101Report(form);
+			sst101Report = getSST101Report(form);
+			kkt101Report = getKKT101Report(form);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			throw new EDBarcodeReportException(e.getMessage(), e);
+		}
+		
+		List<ExporterInputItem> items = new ArrayList<ExporterInputItem>();
 		items.add(new SimpleExporterInputItem(sss101Report));
 		items.add(new SimpleExporterInputItem(sst101Report));
 		items.add(new SimpleExporterInputItem(kkt101Report));
@@ -132,7 +178,6 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		DecimalFormat decimalFormatFourDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.FOUR_DIGIT);
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.SR120_11));
 		paramMap.put("companyName", form.getTaxpayerInfoReport().getCompanyName());
 		paramMap.put("taxpayerName", form.getTaxpayerInfoReport().getTaxpayerName());
 		paramMap.put("licenseNo", form.getTaxpayerInfoReport().getLicenseNo());
@@ -174,7 +219,6 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 				goodsEntry = form.getGoodsListReport().get(j);
 				goodsEntry.setGoodsPiece(decimalFormatZeroDigit.format(new BigDecimal(goodsEntry.getGoodsPiece())));
 				goodsEntry.setGoodsQuantity(decimalFormatFourDigit.format(new BigDecimal(goodsEntry.getGoodsQuantity())));
-				System.out.println(goodsEntry.getUnitPrice());
 				goodsEntry.setUnitPrice(decimalFormatFourDigit.format(new BigDecimal(goodsEntry.getUnitPrice())));
 				goodsEntry.setDeclarePrice(decimalFormatFourDigit.format(new BigDecimal(goodsEntry.getDeclarePrice())));
 				goodsEntry.setTaxByValue(decimalFormatFourDigit.format(new BigDecimal(goodsEntry.getTaxByValue())));
@@ -196,6 +240,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		JRBeanCollectionDataSource datasource = null;
 		List<JasperPrint> jasperPrintList = new ArrayList<JasperPrint>(totalPages);
 		StringBuilder builder = null;
+		boolean isRefNumFlag = StringUtils.isNotEmpty(form.getSummaryReport().getReferenceNumber());
 		
 		for (int i = 0; i < totalPages; i++) {
 			
@@ -203,11 +248,15 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			
 			// Set header data in barcode
 			if (i == 0) {
-				generateBarcodeHeaderData(builder, form.getTaxpayerInfoReport());
+				if (!isRefNumFlag) {
+					generateBarcodeHeaderData(builder, form.getTaxpayerInfoReport());
+				}
 			}
 			
 			// Set detail data in barcode
-			generateBarcodeDetailData(builder, goodsPerPageList.get(i));
+			if (!isRefNumFlag) {
+				generateBarcodeDetailData(builder, goodsPerPageList.get(i));
+			}
 			
 			if (i == (totalPages - 1)) {
 				// Last Page, Set summary data
@@ -228,14 +277,24 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 				paramMap.put("paymentNetTaxAmountString", "");
 				
 				// Set summary data in barcode
-				generateBarcodeSummaryData(builder, form.getSummaryReport());
+				if (!isRefNumFlag) {
+					generateBarcodeSummaryData(builder, form.getSummaryReport());
+				}
+			}
+			
+			if (isRefNumFlag) {
+				generateBarcodeReferenceData(builder, form.getSummaryReport().getReferenceNumber());
 			}
 			
 			System.out.println(builder);
 			paramMap.put("barcodeData", builder.toString());
 			
+			// InputStream will load every page
+			paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.SR120_11));
+			
 			datasource = new JRBeanCollectionDataSource(goodsPerPageList.get(i), true);
-			jasperPrint = ReportUtil.complieReportWithJrxml(ReportConstant.REPORT.SR120_11, paramMap, datasource);
+			//jasperPrint = ReportUtil.complieReportWithJrxml(ReportConstant.REPORT.SR120_11, paramMap, datasource);
+			jasperPrint = ReportUtil.getJasperPrintWithJasper(ReportConstant.REPORT.SR120_11, paramMap, datasource);
 			jasperPrintList.add(jasperPrint);
 		}
 		
@@ -333,7 +392,8 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("tin", taxpayerInfo.getTin());
 		putAddressData(paramMap, taxpayerInfo);
 		
-		return ReportUtil.complieReportWithJrxml(fileName, paramMap);
+		//return ReportUtil.complieReportWithJrxml(fileName, paramMap);
+		return ReportUtil.getJasperPrintWithJasper(fileName, paramMap);
 	}
 	
 	private void putAddressData(Map<String, Object> paramMap, TaxpayerInfoReport taxpayerInfo) {
@@ -437,8 +497,10 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		builder.append(summary.getPaymentFundSportAmount());
 	}
 	
-//	private void generateBarcodeReferenceData(StringBuilder builder, SummaryReport summary) {
-//		
-//	}
+	private void generateBarcodeReferenceData(StringBuilder builder, String referenceNumber) {
+		builder.append(ReportConstant.EVENT_CODE.REFERENCE);
+		builder.append(ReportConstant.SEPERATE_STRING);
+		builder.append(referenceNumber);
+	}
 	
 }

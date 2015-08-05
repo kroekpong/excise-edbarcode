@@ -4,7 +4,7 @@ import th.go.excise.edbarcode.report.common.exception.EDBarcodeReportException;
 
 public interface EDBarcodeReportService {
 	
-	public void generateReport(String xml, String outputFile) throws EDBarcodeReportException;
+	public byte[] generateReport(String xml, String referenceNumber) throws EDBarcodeReportException;
 	
 	public int generateReport(String xmlFile, String outputPath, String mode) throws EDBarcodeReportException;
 	

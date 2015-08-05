@@ -6,8 +6,6 @@ public class ReportConstant {
 	
 	public static final ResourceBundle rbMyReport = ResourceBundle.getBundle("report-config");
 	
-	public static final String CURRENT_PATH = System.getProperty("user.dir");
-	
 	public static final class FILE {
 		public static final String JASPER = "jasper";
 		public static final String JRXML  = "jrxml";
