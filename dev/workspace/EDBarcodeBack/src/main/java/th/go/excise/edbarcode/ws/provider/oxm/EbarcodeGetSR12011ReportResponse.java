@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="SubmitOnlineHeader" type="{http://www.excise.go.th/xsd/barcode}SubmitOnlineHeader"/>
- *         &lt;element name="SR12011Info" type="{http://www.excise.go.th/xsd/barcode}SR12011Info"/>
+ *         &lt;element name="StatusCode" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="PDFDocument" type="{http://www.excise.go.th/xsd/barcode}PDFDocument"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,63 +37,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "submitOnlineHeader",
-    "sr12011Info"
+    "statusCode",
+    "pdfDocument"
 })
-@XmlRootElement(name = "EbarcodeSubmitOnlineRequest")
-public class EbarcodeSubmitOnlineRequest {
+@XmlRootElement(name = "EbarcodeGetSR12011ReportResponse")
+public class EbarcodeGetSR12011ReportResponse {
 
-    @XmlElement(name = "SubmitOnlineHeader", required = true)
-    protected SubmitOnlineHeader submitOnlineHeader;
-    @XmlElement(name = "SR12011Info", required = true)
-    protected SR12011Info sr12011Info;
+    @XmlElement(name = "StatusCode", required = true)
+    protected String statusCode;
+    @XmlElement(name = "PDFDocument", required = true)
+    protected PDFDocument pdfDocument;
 
     /**
-     * Gets the value of the submitOnlineHeader property.
+     * Gets the value of the statusCode property.
      * 
      * @return
      *     possible object is
-     *     {@link SubmitOnlineHeader }
+     *     {@link String }
      *     
      */
-    public SubmitOnlineHeader getSubmitOnlineHeader() {
-        return submitOnlineHeader;
+    public String getStatusCode() {
+        return statusCode;
     }
 
     /**
-     * Sets the value of the submitOnlineHeader property.
+     * Sets the value of the statusCode property.
      * 
      * @param value
      *     allowed object is
-     *     {@link SubmitOnlineHeader }
+     *     {@link String }
      *     
      */
-    public void setSubmitOnlineHeader(SubmitOnlineHeader value) {
-        this.submitOnlineHeader = value;
+    public void setStatusCode(String value) {
+        this.statusCode = value;
     }
 
     /**
-     * Gets the value of the sr12011Info property.
+     * Gets the value of the pdfDocument property.
      * 
      * @return
      *     possible object is
-     *     {@link SR12011Info }
+     *     {@link PDFDocument }
      *     
      */
-    public SR12011Info getSR12011Info() {
-        return sr12011Info;
+    public PDFDocument getPDFDocument() {
+        return pdfDocument;
     }
 
     /**
-     * Sets the value of the sr12011Info property.
+     * Sets the value of the pdfDocument property.
      * 
      * @param value
      *     allowed object is
-     *     {@link SR12011Info }
+     *     {@link PDFDocument }
      *     
      */
-    public void setSR12011Info(SR12011Info value) {
-        this.sr12011Info = value;
+    public void setPDFDocument(PDFDocument value) {
+        this.pdfDocument = value;
     }
 
 }

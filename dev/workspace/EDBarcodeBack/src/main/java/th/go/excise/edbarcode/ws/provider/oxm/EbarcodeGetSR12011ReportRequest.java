@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="SubmitOnlineHeader" type="{http://www.excise.go.th/xsd/barcode}SubmitOnlineHeader"/>
- *         &lt;element name="SR12011Info" type="{http://www.excise.go.th/xsd/barcode}SR12011Info"/>
+ *         &lt;element name="SR12011ReportData" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="ReferenceNumber" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,63 +37,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "submitOnlineHeader",
-    "sr12011Info"
+    "sr12011ReportData",
+    "referenceNumber"
 })
-@XmlRootElement(name = "EbarcodeSubmitOnlineRequest")
-public class EbarcodeSubmitOnlineRequest {
+@XmlRootElement(name = "EbarcodeGetSR12011ReportRequest")
+public class EbarcodeGetSR12011ReportRequest {
 
-    @XmlElement(name = "SubmitOnlineHeader", required = true)
-    protected SubmitOnlineHeader submitOnlineHeader;
-    @XmlElement(name = "SR12011Info", required = true)
-    protected SR12011Info sr12011Info;
+    @XmlElement(name = "SR12011ReportData", required = true)
+    protected String sr12011ReportData;
+    @XmlElement(name = "ReferenceNumber", required = true)
+    protected String referenceNumber;
 
     /**
-     * Gets the value of the submitOnlineHeader property.
+     * Gets the value of the sr12011ReportData property.
      * 
      * @return
      *     possible object is
-     *     {@link SubmitOnlineHeader }
+     *     {@link String }
      *     
      */
-    public SubmitOnlineHeader getSubmitOnlineHeader() {
-        return submitOnlineHeader;
+    public String getSR12011ReportData() {
+        return sr12011ReportData;
     }
 
     /**
-     * Sets the value of the submitOnlineHeader property.
+     * Sets the value of the sr12011ReportData property.
      * 
      * @param value
      *     allowed object is
-     *     {@link SubmitOnlineHeader }
+     *     {@link String }
      *     
      */
-    public void setSubmitOnlineHeader(SubmitOnlineHeader value) {
-        this.submitOnlineHeader = value;
+    public void setSR12011ReportData(String value) {
+        this.sr12011ReportData = value;
     }
 
     /**
-     * Gets the value of the sr12011Info property.
+     * Gets the value of the referenceNumber property.
      * 
      * @return
      *     possible object is
-     *     {@link SR12011Info }
+     *     {@link String }
      *     
      */
-    public SR12011Info getSR12011Info() {
-        return sr12011Info;
+    public String getReferenceNumber() {
+        return referenceNumber;
     }
 
     /**
-     * Sets the value of the sr12011Info property.
+     * Sets the value of the referenceNumber property.
      * 
      * @param value
      *     allowed object is
-     *     {@link SR12011Info }
+     *     {@link String }
      *     
      */
-    public void setSR12011Info(SR12011Info value) {
-        this.sr12011Info = value;
+    public void setReferenceNumber(String value) {
+        this.referenceNumber = value;
     }
 
 }
