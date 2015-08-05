@@ -9,7 +9,7 @@
 	<name>EDBarcodeWeb</name>
 
 	<properties>
-		<jdk.version>1.7</jdk.version>
+		<jdk.version>1.6</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>3.2.14.RELEASE</spring.version>
 		<spring.security.version>3.2.8.RELEASE</spring.security.version>
