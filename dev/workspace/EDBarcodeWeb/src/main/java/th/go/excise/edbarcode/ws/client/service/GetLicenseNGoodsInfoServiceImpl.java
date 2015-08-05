@@ -79,8 +79,12 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		wsTaxpayerList.getTaxpayerDetail().add(wsTaxpayerDetail1);
 		
 		// Factory 2
-//		TaxpayerDetail wsTaxpayerDetail2 = getFactory2();
-//		wsTaxpayerList.getTaxpayerDetail().add(wsTaxpayerDetail2);
+		TaxpayerDetail wsTaxpayerDetail2 = getFactory2();
+		wsTaxpayerList.getTaxpayerDetail().add(wsTaxpayerDetail2);
+		
+		// Factory 3
+		TaxpayerDetail wsTaxpayerDetail3 = getFactory3();
+		wsTaxpayerList.getTaxpayerDetail().add(wsTaxpayerDetail3);
 		
 		wsCompany.setTaxpayerList(wsTaxpayerList);
 		
@@ -143,12 +147,12 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		GoodsList wsGoodsList = new GoodsList();
 		
 		Goods goods1 = new Goods();
-		goods1.setGoodsCode("70010101#001,00,000,011,97#2#0#00##-");
+		goods1.setGoodsCode("70010101#001,00,000,008,97#2#0#00##-");
 		goods1.setProductTypeCode("70010101");
 		goods1.setProductTypeDescriptionText("เบียร์");
-		goods1.setGoodsDescriptionText("สิงห์ OLD 0.630 4.9000");
+		goods1.setGoodsDescriptionText("สิงห์ OLD 0.330 4.9000");
 		goods1.setGoodsPrice(0D);
-		goods1.setGoodsSize("0.630");
+		goods1.setGoodsSize("0.330");
 		goods1.setGoodsSizeUnitDescriptionText("");
 		goods1.setTaxRateByPriceAmount(0D);
 		goods1.setTaxRateByQuantityAmount(0D);
@@ -160,7 +164,7 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		goods1.setUnitCode("00");
 		goods1.setGoodsUnitsDescriptionText("");
 		goods1.setIncomeCode("204020");
-		goods1.setSeqNo("2");
+		goods1.setSeqNo("1");
 		goods1.setBrandName("สิงห์ OLD");
 		goods1.setSubbrandName("");
 		goods1.setModelName("");
@@ -175,25 +179,25 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		wsGoodsList.getGoods().add(goods1);
 		
 		Goods goods2 = new Goods();
-		goods2.setGoodsCode("");
-		goods2.setProductTypeCode("");
-		goods2.setProductTypeDescriptionText("");
-		goods2.setGoodsDescriptionText("");
+		goods2.setGoodsCode("70010101#001,00,000,011,97#2#0#00##-");
+		goods2.setProductTypeCode("70010101");
+		goods2.setProductTypeDescriptionText("เบียร์");
+		goods2.setGoodsDescriptionText("สิงห์ OLD 0.630 4.9000");
 		goods2.setGoodsPrice(0D);
-		goods2.setGoodsSize("");
+		goods2.setGoodsSize("0.630");
 		goods2.setGoodsSizeUnitDescriptionText("");
 		goods2.setTaxRateByPriceAmount(0D);
 		goods2.setTaxRateByQuantityAmount(0D);
 		goods2.setFundSSSRateAmount(0D);
 		goods2.setFundSSTRateAmount(0D);
-		goods2.setDegree("");
-		goods2.setPriceFlag("");
+		goods2.setDegree("4.9000");
+		goods2.setPriceFlag("P");
 		goods2.setDeclarePrice(0D);
-		goods2.setUnitCode("");
+		goods2.setUnitCode("00");
 		goods2.setGoodsUnitsDescriptionText("");
-		goods2.setIncomeCode("");
-		goods2.setSeqNo("");
-		goods2.setBrandName("");
+		goods2.setIncomeCode("204020");
+		goods2.setSeqNo("2");
+		goods2.setBrandName("สิงห์ OLD");
 		goods2.setSubbrandName("");
 		goods2.setModelName("");
 		goods2.setInformDate("");
@@ -206,6 +210,38 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		goods2.setRatePerLitreMax(0D);
 		wsGoodsList.getGoods().add(goods2);
 		
+		Goods goods3 = new Goods();
+		goods3.setGoodsCode("70010101#004,00,000,011,99#3#0#07##-");
+		goods3.setProductTypeCode("70010101");
+		goods3.setProductTypeDescriptionText("เบียร์");
+		goods3.setGoodsDescriptionText("เบียร์ไฮเนเก้น(ขวด) 0.640 0.630 4.5000");
+		goods3.setGoodsPrice(0D);
+		goods3.setGoodsSize("0.630");
+		goods3.setGoodsSizeUnitDescriptionText("ขวด");
+		goods3.setTaxRateByPriceAmount(0D);
+		goods3.setTaxRateByQuantityAmount(0D);
+		goods3.setFundSSSRateAmount(0D);
+		goods3.setFundSSTRateAmount(0D);
+		goods3.setDegree("4.5000");
+		goods3.setPriceFlag("P");
+		goods3.setDeclarePrice(0D);
+		goods3.setUnitCode("07");
+		goods3.setGoodsUnitsDescriptionText("ขวด");
+		goods3.setIncomeCode("204020");
+		goods3.setSeqNo("3");
+		goods3.setBrandName("เบียร์ไฮเนเก้น(ขวด) 0.640");
+		goods3.setSubbrandName("");
+		goods3.setModelName("");
+		goods3.setInformDate("");
+		goods3.setProductNameEng("");
+		goods3.setRatePerLitre(0D);
+		goods3.setDegreeMin(0D);
+		goods3.setRateDegreeOver(0D);
+		goods3.setWholesaleMin(0D);
+		goods3.setRateWholesaleOver(0D);
+		goods3.setRatePerLitreMax(0D);
+		wsGoodsList.getGoods().add(goods3);
+		
 		wsTaxpayerDetail.setGoodsList(wsGoodsList);
 		
 		return wsTaxpayerDetail;
@@ -213,8 +249,8 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 	
 	private TaxpayerDetail getFactory2() {
 		TaxpayerDetail wsTaxpayerDetail = new TaxpayerDetail();
-		wsTaxpayerDetail.setTaxpayerId("");
-		wsTaxpayerDetail.setTaxpayerName("");
+		wsTaxpayerDetail.setTaxpayerId("53B00128");
+		wsTaxpayerDetail.setTaxpayerName("ตะวันแดงสุรากลั่น 2");
 		
 		Address taxpayerAddress = new Address();
 		taxpayerAddress.setHouseIdNumber("");
@@ -223,62 +259,211 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		taxpayerAddress.setFloorNumber("");
 		taxpayerAddress.setVillageName("");
 		taxpayerAddress.setHouseNumber("");
-		taxpayerAddress.setMooNumber("");
-		taxpayerAddress.setTrokSoiName("");
-		taxpayerAddress.setStreetName("");
-		taxpayerAddress.setThambolCode("");
+		taxpayerAddress.setMooNumber("7");
+		taxpayerAddress.setTrokSoiName("-");
+		taxpayerAddress.setStreetName("0026");
+		taxpayerAddress.setThambolCode("650801");
 		taxpayerAddress.setThambolName("");
 		taxpayerAddress.setAmphurCode("");
 		taxpayerAddress.setAmphurName("");
 		taxpayerAddress.setProvinceCode("");
 		taxpayerAddress.setProvinceName("");
-		taxpayerAddress.setPostcode("");
-		taxpayerAddress.setTelNumber("");
+		taxpayerAddress.setPostcode("65130");
+		taxpayerAddress.setTelNumber("06-0215411");
 		taxpayerAddress.setEmailAddress("");
 		wsTaxpayerDetail.setTaxpayerAddress(taxpayerAddress);
 		
 		LicenseList wsLicenseList = new LicenseList();
 		LicenseInfo wsLicenseInfo = new LicenseInfo();
-		wsLicenseInfo.setLicenseNo("");
-		wsLicenseInfo.setLicenseType("");
-		wsLicenseInfo.setLicenseCode("");
+		wsLicenseInfo.setLicenseNo("70605817400002");
+		wsLicenseInfo.setLicenseType("ส.1/72");
+		wsLicenseInfo.setLicenseCode("13");
 		wsLicenseInfo.setLicenseSeq("");
-		wsLicenseInfo.setLicenseName("");
+		wsLicenseInfo.setLicenseName("สุรากลั่น (โรงใหญ่)");
 		wsLicenseInfo.setLicenseCurrentPrice(0D);
-		wsLicenseInfo.setEffectiveDate("");
-		wsLicenseInfo.setExpireDate("");
+		wsLicenseInfo.setEffectiveDate("20150113");
+		wsLicenseInfo.setExpireDate("20151231");
 		wsLicenseInfo.setFirstDate("");
 		wsLicenseInfo.setOfficeCode("");
-		wsLicenseInfo.setLicBook("");
-		wsLicenseInfo.setLicDate("");
-		wsLicenseInfo.setDocNo("");
-		wsLicenseInfo.setDocType("");
-		wsLicenseInfo.setLineNo("");
+		wsLicenseInfo.setLicBook("2558");
+		wsLicenseInfo.setLicDate("20150113");
+		wsLicenseInfo.setDocNo("255800000142");
+		wsLicenseInfo.setDocType("05");
+		wsLicenseInfo.setLineNo("4");
 		wsLicenseList.getLicenseInfo().add(wsLicenseInfo);
 		wsTaxpayerDetail.setLicenseList(wsLicenseList);
 		
 		GoodsList wsGoodsList = new GoodsList();
 		
 		Goods goods1 = new Goods();
-		goods1.setGoodsCode("");
-		goods1.setProductTypeCode("");
-		goods1.setProductTypeDescriptionText("");
-		goods1.setGoodsDescriptionText("");
+		goods1.setGoodsCode("70010101#001,00,000,011,97#1#0#00##-");
+		goods1.setProductTypeCode("70010101");
+		goods1.setProductTypeDescriptionText("เบียร์");
+		goods1.setGoodsDescriptionText("สิงห์ OLD 0.630 4.9000");
 		goods1.setGoodsPrice(0D);
-		goods1.setGoodsSize("");
+		goods1.setGoodsSize("0.630");
 		goods1.setGoodsSizeUnitDescriptionText("");
 		goods1.setTaxRateByPriceAmount(0D);
 		goods1.setTaxRateByQuantityAmount(0D);
 		goods1.setFundSSSRateAmount(0D);
 		goods1.setFundSSTRateAmount(0D);
-		goods1.setDegree("");
-		goods1.setPriceFlag("");
+		goods1.setDegree("4.9000");
+		goods1.setPriceFlag("F");
 		goods1.setDeclarePrice(0D);
-		goods1.setUnitCode("");
+		goods1.setUnitCode("00");
 		goods1.setGoodsUnitsDescriptionText("");
-		goods1.setIncomeCode("");
-		goods1.setSeqNo("");
-		goods1.setBrandName("");
+		goods1.setIncomeCode("204020");
+		goods1.setSeqNo("1");
+		goods1.setBrandName("สิงห์ OLD");
+		goods1.setSubbrandName("");
+		goods1.setModelName("");
+		goods1.setInformDate("");
+		goods1.setProductNameEng("");
+		goods1.setRatePerLitre(0D);
+		goods1.setDegreeMin(0D);
+		goods1.setRateDegreeOver(0D);
+		goods1.setWholesaleMin(0D);
+		goods1.setRateWholesaleOver(0D);
+		goods1.setRatePerLitreMax(0D);
+		wsGoodsList.getGoods().add(goods1);
+		
+		Goods goods2 = new Goods();
+		goods2.setGoodsCode("70010101#004,00,000,011,99#2#0#07##-");
+		goods2.setProductTypeCode("70010101");
+		goods2.setProductTypeDescriptionText("เบียร์");
+		goods2.setGoodsDescriptionText("เบียร์ไฮเนเก้น(ขวด) 0.640 0.630 4.5000");
+		goods2.setGoodsPrice(0D);
+		goods2.setGoodsSize("0.630");
+		goods2.setGoodsSizeUnitDescriptionText("ขวด");
+		goods2.setTaxRateByPriceAmount(0D);
+		goods2.setTaxRateByQuantityAmount(0D);
+		goods2.setFundSSSRateAmount(0D);
+		goods2.setFundSSTRateAmount(0D);
+		goods2.setDegree("4.5000");
+		goods2.setPriceFlag("F");
+		goods2.setDeclarePrice(0D);
+		goods2.setUnitCode("07");
+		goods2.setGoodsUnitsDescriptionText("ขวด");
+		goods2.setIncomeCode("204020");
+		goods2.setSeqNo("2");
+		goods2.setBrandName("เบียร์ไฮเนเก้น(ขวด) 0.640");
+		goods2.setSubbrandName("");
+		goods2.setModelName("");
+		goods2.setInformDate("");
+		goods2.setProductNameEng("");
+		goods2.setRatePerLitre(0D);
+		goods2.setDegreeMin(0D);
+		goods2.setRateDegreeOver(0D);
+		goods2.setWholesaleMin(0D);
+		goods2.setRateWholesaleOver(0D);
+		goods2.setRatePerLitreMax(0D);
+		wsGoodsList.getGoods().add(goods2);
+		
+		Goods goods3 = new Goods();
+		goods3.setGoodsCode("70010101#011,00,000,010,BC#3#0#07##-");
+		goods3.setProductTypeCode("70010101");
+		goods3.setProductTypeDescriptionText("เบียร์");
+		goods3.setGoodsDescriptionText("อัมสเทล 0.625 4.3000");
+		goods3.setGoodsPrice(0D);
+		goods3.setGoodsSize("0.625");
+		goods3.setGoodsSizeUnitDescriptionText("ขวด");
+		goods3.setTaxRateByPriceAmount(0D);
+		goods3.setTaxRateByQuantityAmount(0D);
+		goods3.setFundSSSRateAmount(0D);
+		goods3.setFundSSTRateAmount(0D);
+		goods3.setDegree("4.3000");
+		goods3.setPriceFlag("F");
+		goods3.setDeclarePrice(0D);
+		goods3.setUnitCode("07");
+		goods3.setGoodsUnitsDescriptionText("ขวด");
+		goods3.setIncomeCode("204020");
+		goods3.setSeqNo("3");
+		goods3.setBrandName("อัมสเทล");
+		goods3.setSubbrandName("");
+		goods3.setModelName("");
+		goods3.setInformDate("");
+		goods3.setProductNameEng("");
+		goods3.setRatePerLitre(0D);
+		goods3.setDegreeMin(0D);
+		goods3.setRateDegreeOver(0D);
+		goods3.setWholesaleMin(0D);
+		goods3.setRateWholesaleOver(0D);
+		goods3.setRatePerLitreMax(0D);
+		wsGoodsList.getGoods().add(goods3);
+		
+		wsTaxpayerDetail.setGoodsList(wsGoodsList);
+		
+		return wsTaxpayerDetail;
+	}
+	
+	private TaxpayerDetail getFactory3() {
+		TaxpayerDetail wsTaxpayerDetail = new TaxpayerDetail();
+		wsTaxpayerDetail.setTaxpayerId("53B00128");
+		wsTaxpayerDetail.setTaxpayerName("ตะวันแดงสุรากลั่น 3");
+		
+		Address taxpayerAddress = new Address();
+		taxpayerAddress.setHouseIdNumber("");
+		taxpayerAddress.setBuildingName("");
+		taxpayerAddress.setRoomNumber("");
+		taxpayerAddress.setFloorNumber("");
+		taxpayerAddress.setVillageName("");
+		taxpayerAddress.setHouseNumber("");
+		taxpayerAddress.setMooNumber("89");
+		taxpayerAddress.setTrokSoiName("-");
+		taxpayerAddress.setStreetName("0026");
+		taxpayerAddress.setThambolCode("650801");
+		taxpayerAddress.setThambolName("");
+		taxpayerAddress.setAmphurCode("");
+		taxpayerAddress.setAmphurName("");
+		taxpayerAddress.setProvinceCode("");
+		taxpayerAddress.setProvinceName("");
+		taxpayerAddress.setPostcode("65130");
+		taxpayerAddress.setTelNumber("06-0215411");
+		taxpayerAddress.setEmailAddress("");
+		wsTaxpayerDetail.setTaxpayerAddress(taxpayerAddress);
+		
+		LicenseList wsLicenseList = new LicenseList();
+		LicenseInfo wsLicenseInfo = new LicenseInfo();
+		wsLicenseInfo.setLicenseNo("70605817409999");
+		wsLicenseInfo.setLicenseType("ส.1/72");
+		wsLicenseInfo.setLicenseCode("13");
+		wsLicenseInfo.setLicenseSeq("");
+		wsLicenseInfo.setLicenseName("สุรากลั่น (โรงใหญ่) จำลอง");
+		wsLicenseInfo.setLicenseCurrentPrice(0D);
+		wsLicenseInfo.setEffectiveDate("20150113");
+		wsLicenseInfo.setExpireDate("20151231");
+		wsLicenseInfo.setFirstDate("");
+		wsLicenseInfo.setOfficeCode("");
+		wsLicenseInfo.setLicBook("2558");
+		wsLicenseInfo.setLicDate("20150113");
+		wsLicenseInfo.setDocNo("255800000142");
+		wsLicenseInfo.setDocType("05");
+		wsLicenseInfo.setLineNo("4");
+		wsLicenseList.getLicenseInfo().add(wsLicenseInfo);
+		wsTaxpayerDetail.setLicenseList(wsLicenseList);
+		
+		GoodsList wsGoodsList = new GoodsList();
+		
+		Goods goods1 = new Goods();
+		goods1.setGoodsCode("70010101#073,00,000,040,AY#4#0#08##-");
+		goods1.setProductTypeCode("70010101");
+		goods1.setProductTypeDescriptionText("เบียร์");
+		goods1.setGoodsDescriptionText("ดอยหลวง 0.072 3.8000");
+		goods1.setGoodsPrice(0D);
+		goods1.setGoodsSize("0.072");
+		goods1.setGoodsSizeUnitDescriptionText("กระป๋อง");
+		goods1.setTaxRateByPriceAmount(0D);
+		goods1.setTaxRateByQuantityAmount(0D);
+		goods1.setFundSSSRateAmount(0D);
+		goods1.setFundSSTRateAmount(0D);
+		goods1.setDegree("3.8000");
+		goods1.setPriceFlag("F");
+		goods1.setDeclarePrice(0D);
+		goods1.setUnitCode("08");
+		goods1.setGoodsUnitsDescriptionText("กระป๋อง");
+		goods1.setIncomeCode("204020");
+		goods1.setSeqNo("1");
+		goods1.setBrandName("ดอยหลวง");
 		goods1.setSubbrandName("");
 		goods1.setModelName("");
 		goods1.setInformDate("");
@@ -295,5 +480,6 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		
 		return wsTaxpayerDetail;
 	}
+	
 
 }

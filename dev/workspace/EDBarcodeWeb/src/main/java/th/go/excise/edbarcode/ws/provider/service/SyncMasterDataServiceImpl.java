@@ -1,5 +1,6 @@
 package th.go.excise.edbarcode.ws.provider.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
@@ -164,7 +165,7 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 				licenseInfo.setLicenseCode(wsLicenseInfo.getLicenseCode());
 				licenseInfo.setLicenseSeq(wsLicenseInfo.getLicenseSeq());
 				licenseInfo.setLicenseName(wsLicenseInfo.getLicenseName());
-				licenseInfo.setLicenseCurrentPrice(wsLicenseInfo.getLicenseCurrentPrice());
+				licenseInfo.setLicenseCurrentPrice(new BigDecimal(wsLicenseInfo.getLicenseCurrentPrice()));
 				licenseInfo.setEffectiveDate(wsLicenseInfo.getEffectiveDate());
 				licenseInfo.setExpireDate(wsLicenseInfo.getEffectiveDate());
 				licenseInfo.setFirstDate(wsLicenseInfo.getFirstDate());
@@ -185,16 +186,16 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 				goods.setProductTypeCode(wsGoods.getProductTypeCode());
 				goods.setProductTypeDescriptionText(wsGoods.getProductTypeDescriptionText());
 				goods.setGoodsDescriptionText(wsGoods.getGoodsDescriptionText());
-				goods.setGoodsPrice(wsGoods.getGoodsPrice());
+				goods.setGoodsPrice(new BigDecimal(wsGoods.getGoodsPrice()));
 				goods.setGoodsSize(wsGoods.getGoodsSize());
 				goods.setGoodsSizeUnitDescriptionText(wsGoods.getGoodsSizeUnitDescriptionText());
-				goods.setTaxRateByPriceAmount(wsGoods.getTaxRateByPriceAmount());
-				goods.setTaxRateByQuantityAmount(wsGoods.getTaxRateByQuantityAmount());
-				goods.setFundSSSRateAmount(wsGoods.getFundSSSRateAmount());
-				goods.setFundSSTRateAmount(wsGoods.getFundSSTRateAmount());
+				goods.setTaxRateByPriceAmount(new BigDecimal(wsGoods.getTaxRateByPriceAmount()));
+				goods.setTaxRateByQuantityAmount(new BigDecimal(wsGoods.getTaxRateByQuantityAmount()));
+				goods.setFundSSSRateAmount(new BigDecimal(wsGoods.getFundSSSRateAmount()));
+				goods.setFundSSTRateAmount(new BigDecimal(wsGoods.getFundSSTRateAmount()));
 				goods.setDegree(wsGoods.getDegree());
 				goods.setPriceFlag(wsGoods.getPriceFlag());
-				goods.setDeclarePrice(wsGoods.getDeclarePrice());
+				goods.setDeclarePrice(new BigDecimal(wsGoods.getDeclarePrice()));
 				goods.setUnitCode(wsGoods.getUnitCode());
 				goods.setGoodsUnitsDescriptionText(wsGoods.getGoodsUnitsDescriptionText());
 				goods.setIncomeCode(wsGoods.getIncomeCode());
@@ -204,12 +205,12 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 				goods.setModelName(wsGoods.getModelName());
 				goods.setInformDate(wsGoods.getInformDate());
 				goods.setProductNameEng(wsGoods.getProductNameEng());
-				goods.setRatePerLitre(wsGoods.getRatePerLitre());
-				goods.setDegreeMin(wsGoods.getDegreeMin());
-				goods.setRateDegreeOver(wsGoods.getRateDegreeOver());
-				goods.setWholesaleMin(wsGoods.getWholesaleMin());
-				goods.setRateWholesaleOver(wsGoods.getRateWholesaleOver());
-				goods.setRatePerLitreMax(wsGoods.getRatePerLitreMax());
+				goods.setRatePerLitre(new BigDecimal(wsGoods.getRatePerLitre()));
+				goods.setDegreeMin(new BigDecimal(wsGoods.getDegreeMin()));
+				goods.setRateDegreeOver(new BigDecimal(wsGoods.getRateDegreeOver()));
+				goods.setWholesaleMin(new BigDecimal(wsGoods.getWholesaleMin()));
+				goods.setRateWholesaleOver(new BigDecimal(wsGoods.getRateWholesaleOver()));
+				goods.setRatePerLitreMax(new BigDecimal(wsGoods.getRatePerLitreMax()));
 				goodsList.getGoods().add(goods);
 			}
 			taxpayerDetail.setGoodsList(goodsList);
