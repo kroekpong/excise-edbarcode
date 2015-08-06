@@ -1,7 +1,7 @@
 package th.go.excise.edbarcode.demo.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import th.go.excise.edbarcode.demo.bean.EntrepreneurDemo;
@@ -11,7 +11,7 @@ import th.go.excise.edbarcode.demo.bean.ProductDemo;
 @Service("exciseDemoService")
 public class ExciseDemoServiceImpl implements ExciseDemoService {
 	
-	private static final Logger logger = LogManager.getLogger();
+	private static final Log logger = LogFactory.getLog(ExciseDemoServiceImpl.class);
 	
 //	@Autowired
 //	private ExciseDemoDao exciseDemoDao;

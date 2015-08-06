@@ -2,8 +2,8 @@ package th.go.excise.edbarcode.ws.pccws.endpoint;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -18,7 +18,7 @@ import th.go.excise.edbarcode.ws.provider.service.SubmitOnlineService;
 @Endpoint
 public class PCCSummitOnlineWSEndPoint {
 	
-	private static final Logger logger = LogManager.getLogger();
+	private static final Log logger = LogFactory.getLog(PCCSummitOnlineWSEndPoint.class);
 	
 	@Autowired
 	private SubmitOnlineService submitOnlineService;

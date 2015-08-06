@@ -1,7 +1,7 @@
 package th.go.excise.edbarcode.ws.client.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
@@ -21,7 +21,7 @@ import th.go.excise.edbarcode.ws.client.oxm.TaxpayerList;
 @Service("getLicenseNGoodsInfoService")
 public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoService {
 	
-	private static final Logger logger = LogManager.getLogger();
+	private static final Log logger = LogFactory.getLog(GetLicenseNGoodsInfoServiceImpl.class);
 	
 //	@Autowired
 //	private WebServiceTemplate webServiceTemplate;
