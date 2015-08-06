@@ -2,8 +2,8 @@ package th.go.excise.edbarcode.ws.provider.endpoint;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -19,7 +19,7 @@ import th.go.excise.edbarcode.ws.provider.oxm.PDFDocument;
 @Endpoint
 public class GetSR12011ReportEndpoint {
 	
-	private static final Log logger = LogFactory.getLog(GetSR12011ReportEndpoint.class);
+	private static final Logger logger = LogManager.getLogger(GetSR12011ReportEndpoint.class);
 	
 	private EDBarcodeReportService barcodeReportService = new EDBarcodeReportServiceImpl();
 	

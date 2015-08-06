@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO">
+
+	<Properties>
+		<Property name="log-path">/tmp/project/EDBarcodeBack/logs</Property>
+	</Properties>
+
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
-			<!-- <PatternLayout pattern="%d{DEFAULT} %-5level %logger{1}.%method():%line - %msg%n%throwable" /> -->
-			<PatternLayout pattern="%d{DEFAULT} %-5level %logger{1} - %msg%n%throwable" />
+			<PatternLayout pattern="%d{DEFAULT} %-5level %logger:%line - %msg%n%throwable" />
 		</Console>
-<!-- 		<File name="MyFile" fileName="all.log" immediateFlush="false" append="false"> -->
-<!-- 			<PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" /> -->
-<!-- 		</File> -->
+		<RollingFile name="RollingFile" fileName="${log-path}/barcode-web.log" filePattern="${log-path}/barcode-web-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout pattern="%d{DEFAULT} %-5level %logger:%line - %msg%n%throwable" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
 	</Appenders>
+
 	<Loggers>
 		<Root level="INFO">
 			<AppenderRef ref="Console" />
-<!-- 			<AppenderRef ref="MyFile" /> -->
+			<AppenderRef ref="RollingFile" />
 		</Root>
 		<Logger name="th.go.excise.edbarcode" level="debug" additivity="false">
 			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+		<!-- Logging WS Request and Response -->
+		<Logger name="org.springframework.ws.server.endpoint" level="debug" additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
 		</Logger>
 	</Loggers>
+
 </Configuration>
