@@ -12,8 +12,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import th.go.excise.edbarcode.report.common.bean.SR12011FormReport;
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
@@ -21,7 +21,7 @@ import th.go.excise.edbarcode.report.common.exception.EDBarcodeReportException;
 
 public class EDBarcodeReportUtil {
 	
-	private static final Log logger = LogFactory.getLog(EDBarcodeReportUtil.class);
+	private static final Logger logger = LogManager.getLogger(EDBarcodeReportUtil.class);
 	
 	public static SR12011FormReport prepareDataWithXmlString(String xml) throws EDBarcodeReportException {
 		logger.info("Inside prepareData() - Start");

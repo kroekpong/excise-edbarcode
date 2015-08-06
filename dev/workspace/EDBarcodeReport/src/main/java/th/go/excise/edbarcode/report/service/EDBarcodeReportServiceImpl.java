@@ -21,8 +21,8 @@ import net.sf.jasperreports.export.SimpleExporterInputItem;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import th.go.excise.edbarcode.report.common.bean.GoodsEntryReport;
 import th.go.excise.edbarcode.report.common.bean.SR12011FormReport;
@@ -35,7 +35,7 @@ import th.go.excise.edbarcode.report.common.util.ReportUtil;
 
 public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	
-	private static final Log logger = LogFactory.getLog(EDBarcodeReportServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(EDBarcodeReportServiceImpl.class);
 	
 	@Override
 	public byte[] generateReport(String xml, String referenceNumber) throws EDBarcodeReportException {

@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -12,10 +15,6 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRAbstractBeanDataSource;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 
 /**
@@ -24,11 +23,18 @@ import th.go.excise.edbarcode.report.common.constant.ReportConstant;
  */
 public class ReportUtil {
 	
-	private static final Log logger = LogFactory.getLog(ReportUtil.class);
+	private static final Logger logger = LogManager.getLogger(ReportUtil.class);
 	
 	public static InputStream getReportFile(String fileName) {
+		logger.debug("Inside - getReportFile()");
 		String inputPath = ReportConstant.rbMyReport.getString("path.input.jrxml");
+		logger.debug("inputPath: " + inputPath);
+		// App Path
 		InputStream jrxmlFile = ReportUtil.class.getResourceAsStream(inputPath + fileName);
+		if (jrxmlFile == null) {
+			// Web Path
+			jrxmlFile = Thread.currentThread().getContextClassLoader().getResourceAsStream(inputPath + fileName);
+		}
 		logger.debug("jrxmlFile: " + jrxmlFile);
 		return jrxmlFile;
 	}
@@ -46,8 +52,15 @@ public class ReportUtil {
 	}
 	
 	public static InputStream getImageFile(String imageName) {
+		logger.debug("Inside - getImageFile()");
 		String inputPath = ReportConstant.rbMyReport.getString("path.input.image");
+		logger.debug("inputPath: " + inputPath);
+		// App Path
 		InputStream imageFile = ReportUtil.class.getResourceAsStream(inputPath + imageName + "." + ReportConstant.FILE.PNG);
+		if (imageFile == null) {
+			// Web Path
+			imageFile = Thread.currentThread().getContextClassLoader().getResourceAsStream(inputPath + imageName + "." + ReportConstant.FILE.PNG);
+		}
 		logger.debug("imageFile: " + imageFile);
 		return imageFile;
 	}
