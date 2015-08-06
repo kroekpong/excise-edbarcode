@@ -3,6 +3,7 @@
 	<name>EDBarcodeBack</name>
 	<comment></comment>
 	<projects>
+		<project>EDBarcodeReport</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
