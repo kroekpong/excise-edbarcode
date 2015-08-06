@@ -29,7 +29,7 @@ public class GetSR12011ReportEndpoint {
 		logger.info(" In doEndpoint GetSR12011ReportRequest");
 		
 		EbarcodeGetSR12011ReportResponse response = null;
-
+		
 		try {
 			String referenceNumber = request.getReferenceNumber();
 			String xmlData = request.getSR12011ReportData();
@@ -41,11 +41,13 @@ public class GetSR12011ReportEndpoint {
 			document.setContent(content);
 			
 			response = new EbarcodeGetSR12011ReportResponse();
+			response.setStatusCode("OK");
 			response.setPDFDocument(document);
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			response = new EbarcodeGetSR12011ReportResponse();
+			response.setStatusCode("ERROR");
 		}
 		
 		return response;
