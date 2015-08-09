@@ -31,6 +31,7 @@ import th.go.excise.edbarcode.report.common.bean.TaxpayerInfoReport;
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 import th.go.excise.edbarcode.report.common.exception.EDBarcodeReportException;
 import th.go.excise.edbarcode.report.common.util.EDBarcodeReportUtil;
+import th.go.excise.edbarcode.report.common.util.ThaiNumberUtils;
 import th.go.excise.edbarcode.report.common.util.ReportUtil;
 
 public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
@@ -274,7 +275,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 				paramMap.put("paymentExciseAndMunicipalTaxAmount", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAndMunicipalTaxAmount())));
 				paramMap.put("paymentOtherAmount", decimalFormatTwoDigit.format(new BigDecimal(EDBarcodeReportUtil.blankToZero(form.getSummaryReport().getPaymentOtherAmount()))));
 				paramMap.put("paymentNetTaxAmount", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getPaymentNetTaxAmount())));
-				paramMap.put("paymentNetTaxAmountString", "");
+				paramMap.put("paymentNetTaxAmountString", ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentNetTaxAmount()));
 				
 				// Set summary data in barcode
 				if (!isRefNumFlag) {
@@ -315,7 +316,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		String paymentExciseAmountStang = form.getSummaryReport().getPaymentExciseAmount().split("\\.")[1];
 		String paymentFundHealthAmountBaht = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundHealthAmount().split("\\.")[0]));
 		String paymentFundHealthAmountStang = form.getSummaryReport().getPaymentFundHealthAmount().split("\\.")[1];
-		String paymentFundHealthAmountString = "";
+		String paymentFundHealthAmountString = ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentFundHealthAmount());
 		
 		paramMap.put("paymentExciseAmountBaht", paymentExciseAmountBaht);
 		paramMap.put("paymentExciseAmountStang", paymentExciseAmountStang);
@@ -342,7 +343,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		String paymentExciseAmountStang = form.getSummaryReport().getPaymentExciseAmount().split("\\.")[1];
 		String paymentFundTVAmountBaht = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundTVAmount().split("\\.")[0]));
 		String paymentFundTVAmountStang = form.getSummaryReport().getPaymentFundTVAmount().split("\\.")[1];
-		String paymentFundTVAmountString = "";
+		String paymentFundTVAmountString = ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentFundTVAmount());
 		
 		paramMap.put("paymentExciseAmountBaht", paymentExciseAmountBaht);
 		paramMap.put("paymentExciseAmountStang", paymentExciseAmountStang);
@@ -369,7 +370,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		String paymentExciseAmountStang = form.getSummaryReport().getPaymentExciseAmount().split("\\.")[1];
 		String paymentFundSportAmountBaht = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundSportAmount().split("\\.")[0]));
 		String paymentFundSportAmountStang = form.getSummaryReport().getPaymentFundSportAmount().split("\\.")[1];
-		String paymentFundSportAmountString = "";
+		String paymentFundSportAmountString = ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentFundSportAmount());
 		
 		paramMap.put("paymentExciseAmountBaht", paymentExciseAmountBaht);
 		paramMap.put("paymentExciseAmountStang", paymentExciseAmountStang);
@@ -433,25 +434,25 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			builder.append(ReportConstant.SEPERATE_STRING);
 			builder.append(goodsEntry.getProductTypeCode());
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getGoodsPiece());
+			builder.append(goodsEntry.getGoodsPiece().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getGoodsQuantity());
+			builder.append(goodsEntry.getGoodsQuantity().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getUnitPrice());
+			builder.append(goodsEntry.getUnitPrice().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getDeclarePrice());
+			builder.append(goodsEntry.getDeclarePrice().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getTaxByValue());
+			builder.append(goodsEntry.getTaxByValue().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getTaxByQuantity());
+			builder.append(goodsEntry.getTaxByQuantity().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getTaxByQuantityOver());
+			builder.append(goodsEntry.getTaxByQuantityOver().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getTaxByQuantityWithOver());
+			builder.append(goodsEntry.getTaxByQuantityWithOver().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getNetTaxByValue());
+			builder.append(goodsEntry.getNetTaxByValue().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getNetTaxByQuantity());
+			builder.append(goodsEntry.getNetTaxByQuantity().replaceAll(",", ""));
 		}
 		
 		if (deleteSeperateLineFlag) {
@@ -464,37 +465,37 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		builder.append(ReportConstant.SEPERATE_LINE);
 		builder.append(ReportConstant.EVENT_CODE.SUMMARY);
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getSumAllTaxByValue());
+		builder.append(summary.getSumAllTaxByValue().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getSumAllTaxByQuantity());
+		builder.append(summary.getSumAllTaxByQuantity().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getSumAllTax());
+		builder.append(summary.getSumAllTax().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(summary.getTaxLessFrom());
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getTaxLessAmount());
+		builder.append(summary.getTaxLessAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(summary.getTaxDeductionOnBookNo());
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getTaxDeductionOnBookAmount());
+		builder.append(summary.getTaxDeductionOnBookAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentExciseAmount());
+		builder.append(summary.getPaymentExciseAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(summary.getPaymentMunicipalPercent());
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentMunicipalAmount());
+		builder.append(summary.getPaymentMunicipalAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentExciseAndMunicipalTaxAmount());
+		builder.append(summary.getPaymentExciseAndMunicipalTaxAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentOtherAmount());
+		builder.append(summary.getPaymentOtherAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentNetTaxAmount());
+		builder.append(summary.getPaymentNetTaxAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentFundHealthAmount());
+		builder.append(summary.getPaymentFundHealthAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentFundTVAmount());
+		builder.append(summary.getPaymentFundTVAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentFundSportAmount());
+		builder.append(summary.getPaymentFundSportAmount().replaceAll(",", ""));
 	}
 	
 	private void generateBarcodeReferenceData(StringBuilder builder, String referenceNumber) {
