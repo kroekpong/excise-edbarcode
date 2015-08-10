@@ -6,9 +6,19 @@
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan base-package="th.go.excise.edbarcode.ws">
-		 <context:include-filter type="regex" expression=".*.endpoint" />
+		<context:include-filter type="regex" expression=".*.endpoint" />
 	</context:component-scan>
-
+	
+	<!-- Properties File -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:application.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Logging Request and Response -->
 	<bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
 		<property name="interceptors">
 			<list>
@@ -16,8 +26,8 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Service -->
+
+	<!-- Provider Service -->
 	<bean id="EDBarcodeService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
 		<property name="schema" ref="barcodeSchema" />
 		<property name="portTypeName" value="EDBarcodeService" />
@@ -26,22 +36,9 @@
 		</property>
 		<property name="targetNamespace" value="http://www.excise.go.th/xsd/barcode" />
 	</bean>
-	
-		<bean id="PCCSubmitOnlineService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
-		<property name="schema" ref="pccSchema" />
-		<property name="portTypeName" value="PCCSubmitOnlineService" />
-		<property name="locationUri">
-			<value>${PCCSubmitOnlineService.service}</value>
-		</property>
-		<property name="targetNamespace" value="http://www.excise.go.th/xsd/barcode" />
-	</bean>
 
-	<bean id="barcodeSchema" class="org.springframework.xml.xsd.SimpleXsdSchema">	
+	<bean id="barcodeSchema" class="org.springframework.xml.xsd.SimpleXsdSchema">
 		<property name="xsd" value="/WEB-INF/classes/th/go/excise/edbarcode/ws/provider/xsd/edbarcode.xsd" />
-	</bean>
-	
-	<bean id="pccSchema" class="org.springframework.xml.xsd.SimpleXsdSchema">	
-		<property name="xsd" value="/WEB-INF/classes/th/go/excise/edbarcode/ws/pccws/xsd/pccservice.xsd" />
 	</bean>
 
 	<bean class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
@@ -52,20 +49,8 @@
 		<property name="packagesToScan">
 			<list>
 				<value>th.go.excise.edbarcode.ws.provider.oxm</value>
-				<value>th.go.excise.edbarcode.ws.pccws.oxm</value>
 			</list>
 		</property>
 	</bean>
-
-	<bean id="loggingInterceptor" class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor" />
-	
-	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:application.properties</value>
-			</list>
-		</property>
-	</bean>
-	
 
 </beans>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.example.org/StaBacSchema" 
+	xmlns:tns="http://www.example.org/StaBacSchema">
+ 
+    <element name="StaBacRequest">         
+    	<complexType>             
+    		<sequence>                 
+			    <element name="Header"					type="tns:HeaderRequest"/>
+			    <element name="Body"					type="tns:Body" />
+     		</sequence>         
+    	</complexType>     
+    </element> 	
+	<element name="StaBacResponse">
+    	<complexType>             
+    		<sequence>                 
+		    	<element name="Header"					type="tns:HeaderResponse"/>
+		    	<element name="Body"					type="tns:Body" />
+     		</sequence>         
+    	</complexType>     
+	</element>  
+
+	<complexType name="HeaderRequest">
+		<sequence>
+			<element name="SourceSystem"				type="string"				minOccurs="1" />
+			<element name="DestinationSystem"			type="string"				minOccurs="1" />
+			<element name="TransactionCode"				type="string"				minOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="HeaderResponse">
+		<sequence>
+			<element name="SourceSystem"				type="string"				minOccurs="1" />
+			<element name="DestinationSystem"			type="string"				minOccurs="1" />
+			<element name="ResultCode"					type="string"				minOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="Body">
+		<all>
+			<element name="Error"						type="tns:Error"			minOccurs="0" />
+			<element name="DataInformation"				type="tns:DataInformation"	minOccurs="0" />
+			<element name="BinaryInformation"			type="tns:BinaryInformation" minOccurs="0" />
+			<element name="ReferenceId"					type="string"				minOccurs="0" />
+		</all>
+ 	</complexType>
+
+	<!-- ***********************   Business Data Tags   ************************ --> 	
+ 	
+ 	<complexType name="Error">
+		<sequence>
+			<element name="Code"						type="string"		minOccurs="0" />
+			<element name="Description"					type="string"		minOccurs="0" />
+			<element name="Action"						type="string"		minOccurs="0" />
+			<element name="ReferenceId"					type="string"		minOccurs="0" />
+		</sequence>
+	</complexType>
+
+	<complexType name="DataInformation">
+		<sequence>
+			<element name="CusId"						type="string"		minOccurs="1" />
+			<element name="CompanyId"					type="string"		minOccurs="1" />
+			<element name="CompanyName"					type="string"		minOccurs="1" />
+			<element name="TaxpayerId"					type="string"		minOccurs="1" />
+			<element name="TaxpayerName"				type="string"		minOccurs="1" />
+			<element name="ExciseOfficeId"				type="string"		minOccurs="1" />
+			<element name="FormPeriodBeginDate"			type="string"		minOccurs="1" />
+			<element name="FormPeriodEndDate"			type="string"		minOccurs="1" />
+			<element name="FormPeriodResubmissionCode" 	type="string"		minOccurs="1" />
+			<element name="PaymentExciseAmount"			type="string"		minOccurs="1" />
+			<element name="PaymentMunicipalAmount"		type="string"		minOccurs="1" />
+			<element name="PaymentFundHealthAmount"		type="string"		minOccurs="1" />
+			<element name="PaymentFundTVAmount"			type="string"		minOccurs="1" />
+			<element name="PaymentFundSportAmount"		type="string"		minOccurs="1" />
+			<element name="InternetUniqueId"			type="string"		minOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="BinaryInformation">
+		<sequence>
+			<element name="FormDataBinary"				type="string"		minOccurs="1" />
+		</sequence>
+	</complexType>
+</schema>	

@@ -9,7 +9,7 @@
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{DEFAULT} %-5level %logger:%line - %msg%n%throwable" />
 		</Console>
-		<RollingFile name="RollingFile" fileName="${log-path}/barcode-web.log" filePattern="${log-path}/barcode-web-%d{yyyy-MM-dd}-%i.log">
+		<RollingFile name="RollingFile" fileName="${log-path}/barcode-back.log" filePattern="${log-path}/barcode-back-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="%d{DEFAULT} %-5level %logger:%line - %msg%n%throwable" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />

@@ -16,14 +16,28 @@
 	<element name="EbarcodeSubmitOnlineResponse">
 		<complexType>
 			<sequence>
-				<element name="status"					type="string"	minOccurs="1" />
-				<element name="description"				type="string"	minOccurs="1" />
-				<element name="referenceCode"			type="string"	minOccurs="1" />
+				<element name="SubmitOnlineStatus"		type="string"	minOccurs="1" />
+				<element name="SubmitOnlineDesc"		type="string"	minOccurs="1" />
+				<element name="ReferenceNumber"			type="string"	minOccurs="1" />
 			</sequence>
 		</complexType>
 	</element>
 	
-	<!-- Service2: Get SR12011 Report -->
+	<!-- Service2: Send To Backend -->
+	<element name="EbarcodeSendToBackendRequest">
+		<complexType>
+			<sequence>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="EbarcodeSendToBackendResponse">
+		<complexType>
+			<sequence>
+			</sequence>
+		</complexType>
+	</element>
+	
+	<!-- Service3: Get SR12011 Report -->
 	<element name="EbarcodeGetSR12011ReportRequest">
 		<complexType>
 			<sequence>
@@ -35,7 +49,8 @@
 	<element name="EbarcodeGetSR12011ReportResponse">
 		<complexType>
 			<sequence>
-				<element name="StatusCode"				type="string"			minOccurs="1" />
+				<element name="GetSR12011ReportStatus"	type="string"			minOccurs="1" />
+				<element name="GetSR12011ReportDesc"	type="string"			minOccurs="1" />
 				<element name="PDFDocument"				type="tns:PDFDocument"	minOccurs="1" />
 			</sequence>
 		</complexType>
@@ -49,6 +64,8 @@
 			<element name="RegistratronId"				type="string"		minOccurs="1" />
 			<element name="CusId"						type="string"		minOccurs="1" />
 			<element name="CompanyId"					type="string"		minOccurs="1" />
+			<element name="CompanyUserId"				type="string"		minOccurs="1" />
+			<element name="CompanyUserPwd"				type="string"		minOccurs="1" />
 			<element name="TaxpayerId"					type="string"		minOccurs="1" />
 			<element name="ExciseOfficeId"				type="string"		minOccurs="1" />
 			<element name="InternetUniqueId"			type="string"		minOccurs="1" />
@@ -73,7 +90,7 @@
 			<element name="EffectiveDate"				type="string"					minOccurs="1" />
 			<element name="ExpireDate"					type="string"					minOccurs="1" />
 			<element name="TaxpayerName"				type="string"					minOccurs="1" />
-			<element name="TaxpayerAddressInfo"			type="tns:TaxpayerAddressInfo"	minOccurs="0"	maxOccurs="unbounded" />
+			<element name="TaxpayerAddressInfo"			type="tns:TaxpayerAddressInfo"	minOccurs="1" />
 		</sequence>
 	</complexType>
 	
@@ -166,8 +183,8 @@
 	<!-- Service2: Get SR12011 Report -->
 	<xs:complexType name="PDFDocument">
 		<xs:sequence>
-			<xs:element name="mimetype"					type="xs:string"		minOccurs="1" />
-			<xs:element name="content"					type="xs:base64Binary"	minOccurs="1" />
+			<xs:element name="MimeType"					type="xs:string"		minOccurs="1" />
+			<xs:element name="Content"					type="xs:base64Binary"	minOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	
