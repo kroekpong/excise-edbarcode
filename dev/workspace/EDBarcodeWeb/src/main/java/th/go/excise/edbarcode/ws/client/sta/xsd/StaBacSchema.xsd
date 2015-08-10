@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/StaBacSchema"
+	xmlns:tns="http://www.example.org/StaBacSchema">
+
+    <element name="StaBacRequest">
+    	<complexType>
+    		<sequence>
+			    <element name="Header"					type="tns:HeaderRequest"/>
+			    <element name="Body"					type="tns:Body" />
+     		</sequence>
+    	</complexType>
+    </element>
+	<element name="StaBacResponse">
+    	<complexType>
+    		<sequence>
+		    	<element name="Header"					type="tns:HeaderResponse"/>
+		    	<element name="Body"					type="tns:Body" />
+     		</sequence>
+    	</complexType>
+	</element>
+
+	<complexType name="HeaderRequest">
+		<sequence>
+			<element name="SourceSystem"				type="string"				minOccurs="1" />
+			<element name="DestinationSystem"			type="string"				minOccurs="1" />
+			<element name="TransactionCode"				type="string"				minOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="HeaderResponse">
+		<sequence>
+			<element name="SourceSystem"				type="string"				minOccurs="1" />
+			<element name="DestinationSystem"			type="string"				minOccurs="1" />
+			<element name="ResultCode"					type="string"				minOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Body">
+		<all>
+			<element name="Error"						type="tns:Error"			minOccurs="0" />
+			<element name="InternetUser"				type="tns:InternetUser"		minOccurs="0" />
+			<element name="Company"						type="tns:Company"			minOccurs="0" />
+		</all>
+ 	</complexType>
+
+	<!-- ***********************   Business Data Tags   ************************ -->
+
+ 	<complexType name="Error">
+		<sequence>
+			<element name="Code"						type="string"			minOccurs="0" />
+			<element name="Description"					type="string"			minOccurs="0" />
+			<element name="Action"						type="string"			minOccurs="0" />
+			<element name="ReferenceId"					type="string"			minOccurs="0" />
+		</sequence>
+	</complexType>
+
+	<complexType name="InternetUser">
+		<sequence>
+			<element name="CompanyId"					type="string"			minOccurs="1" />
+			<element name="CompanyUserId"				type="string"			minOccurs="1" />
+			<element name="CompanyUserPwd"				type="string"			minOccurs="1" />
+			<element name="BeginDate"					type="string"			minOccurs="1" />
+			<element name="EndDate"						type="string"			minOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Company">
+		<all>
+			<element name="InternetUniqueId"			type="string"			minOccurs="1" />
+			<element name="CusId"						type="string"			minOccurs="1" />
+			<element name="CompanyId"					type="string"			minOccurs="1" />
+			<element name="CompanyUserId"				type="string"			minOccurs="1" />
+			<element name="CompanyTitleCode"			type="string"			minOccurs="1" />
+			<element name="CompanyTitleName"			type="string"			minOccurs="1" />
+			<element name="CompanyName"					type="string"			minOccurs="1" />
+			<element name="CompanyBranchCode"			type="string"			minOccurs="1" />
+			<element name="ExciseOfficeId"				type="string"			minOccurs="1" />
+			<element name="CompanyUserPwd"				type="string"			minOccurs="1" />
+			<element name="CompanyAddress"				type="tns:Address"		minOccurs="1" />
+			<element name="TaxpayerList"				type="tns:TaxpayerList" minOccurs="0" />
+		</all>
+	</complexType>
+
+	<complexType name="Address">
+		<all>
+			<element name="HouseIdNumber"				type="string"			minOccurs="0" />
+			<element name="BuildingName"				type="string"			minOccurs="0" />
+			<element name="RoomNumber"					type="string"			minOccurs="0" />
+			<element name="FloorNumber"					type="string"			minOccurs="0" />
+			<element name="VillageName"					type="string"			minOccurs="0" />
+			<element name="HouseNumber"					type="string"			minOccurs="0" />
+			<element name="MooNumber"					type="string"			minOccurs="0" />
+			<element name="TrokSoiName"					type="string"			minOccurs="0" />
+			<element name="StreetName"					type="string"			minOccurs="0" />
+			<element name="ThambolCode"					type="string"			minOccurs="1" />
+			<element name="ThambolName"					type="string"			minOccurs="1" />
+			<element name="AmphurCode"					type="string"			minOccurs="1" />
+			<element name="AmphurName"					type="string"			minOccurs="1" />
+			<element name="ProvinceCode"				type="string"			minOccurs="1" />
+			<element name="ProvinceName"				type="string"			minOccurs="1" />
+			<element name="Postcode"					type="string"			minOccurs="0" />
+			<element name="TelNumber"					type="string"			minOccurs="0" />
+			<element name="EmailAddress"				type="string"			minOccurs="0" />
+		</all>
+	</complexType>
+
+	<complexType name="TaxpayerList">
+		<sequence>
+			<element name="TaxpayerDetail"				type="tns:TaxpayerDetail" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	<complexType name="TaxpayerDetail">
+		<all>
+			<element name="TaxpayerId"					type="string"			minOccurs="1" />
+			<element name="TaxpayerName"				type="string"			minOccurs="1" />
+			<element name="TaxpayerAddress"				type="tns:Address"		minOccurs="1" />
+			<element name="LicenseList"					type="tns:LicenseList"  minOccurs="0" />
+			<element name="GoodsList"					type="tns:GoodsList"	minOccurs="0" />
+		</all>
+	</complexType>
+
+	<complexType name="LicenseList">
+		<sequence>
+			<element name="LicenseInfo"					type="tns:LicenseInfo"	minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	<complexType name="LicenseInfo">
+		<all>
+			<element name="LicenseNo"					type="string"			minOccurs="1" />
+			<element name="LicenseType"					type="string"			minOccurs="1" />
+			<element name="LicenseCode"					type="string"			minOccurs="1" />
+			<element name="LicenseSeq"					type="string"			minOccurs="1" />
+			<element name="LicenseName"					type="string"			minOccurs="1" />
+			<element name="LicenseCurrentPrice"			type="double"			minOccurs="0" />
+			<element name="EffectiveDate"				type="string"			minOccurs="1" />
+			<element name="ExpireDate"					type="string"			minOccurs="1" />
+			<element name="FirstDate"					type="string"			minOccurs="0" />
+			<element name="OfficeCode"					type="string"			minOccurs="1" />
+			<element name="LicBook"						type="string"			minOccurs="1" />
+			<element name="LicDate"						type="string"			minOccurs="1" />
+			<element name="DocNo"						type="string"			minOccurs="1" />
+			<element name="DocType"						type="string"			minOccurs="1" />
+			<element name="LineNo"						type="string"			minOccurs="1" />
+		</all>
+	</complexType>
+
+	<complexType name="GoodsList">
+		<sequence>
+			<element name="Goods"						type="tns:Goods"		minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	<complexType name="Goods">
+		<all>
+			<element name="GoodsCode"					type="string"		minOccurs="1" />
+			<element name="GoodsDescriptionText"		type="string"		minOccurs="1" />
+			<element name="ProductTypeCode"				type="string"		minOccurs="1" />
+			<element name="ProductTypeDescriptionText"	type="string"		minOccurs="1" />
+			<element name="GoodsSize"					type="string"		minOccurs="0" />
+			<element name="GoodsSizeUnitDescriptionText" type="string"		minOccurs="0" />
+			<element name="GoodsPrice"					type="double"		minOccurs="1" />
+			<element name="TaxRateByPriceAmount"		type="double"		minOccurs="1" />
+			<element name="TaxRateByQuantityAmount"		type="double"		minOccurs="1" />
+			<element name="FundSSSRateAmount"			type="double"		minOccurs="1" />
+			<element name="FundSSTRateAmount"			type="double"		minOccurs="1" />
+			<element name="Degree"						type="string"		minOccurs="0" />
+			<element name="PriceFlag"					type="string"		minOccurs="1" />
+			<element name="DeclarePrice"				type="double"		minOccurs="0" />
+			<element name="UnitCode"					type="string"		minOccurs="1" />
+			<element name="GoodsUnitsDescriptionText"	type="string"		minOccurs="1" />
+			<element name="IncomeCode"					type="string"		minOccurs="1" />
+			<element name="SeqNo"						type="string"		minOccurs="1" />
+			<element name="BrandName"					type="string"		minOccurs="0" />
+			<element name="SubbrandName"				type="string"		minOccurs="0" />
+			<element name="ModelName"					type="string"		minOccurs="0" />
+			<element name="InformDate"					type="string"		minOccurs="0" />
+			<element name="ProductNameEng"				type="string"		minOccurs="0" />
+			<element name="RatePerLitre"				type="double"		minOccurs="1" />
+			<element name="DegreeMin"					type="double"		minOccurs="1" />
+			<element name="RateDegreeOver"				type="double"		minOccurs="1" />
+			<element name="WholesaleMin"				type="double"		minOccurs="1" />
+			<element name="RateWholesaleOver"			type="double"		minOccurs="1" />
+			<element name="RatePerLitreMax"				type="double"		minOccurs="1" />
+		</all>
+	</complexType>
+	
+</schema>

@@ -10,6 +10,7 @@
         <ul class="drop-content">      
           <li><a href="<%=request.getContextPath()%>/newDownloadPage.htm">ดาวน์โหลด</a></li>
           <li><a href="<%=request.getContextPath()%>/newDemoForm.htm">รายการใหม่</a></li>
+          <li><a href="<%=request.getContextPath()%>/ws/EDBarcodeService.wsdl">WSDL</a></li>
           <li><a href="#">Logging</a></li>
         </ul>
       </div>

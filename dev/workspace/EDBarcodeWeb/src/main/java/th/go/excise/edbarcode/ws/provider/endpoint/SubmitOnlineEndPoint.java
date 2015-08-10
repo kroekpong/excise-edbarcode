@@ -13,7 +13,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
-import th.go.excise.edbarcode.ws.provider.service.SubmitOnlineService;
+import th.go.excise.edbarcode.ws.provider.service.SubmitOnlineWebService;
 
 @Endpoint
 public class SubmitOnlineEndPoint {
@@ -21,7 +21,7 @@ public class SubmitOnlineEndPoint {
 	private static final Logger logger = LogManager.getLogger();
 	
 	@Autowired
-	private SubmitOnlineService submitOnlineService;
+	private SubmitOnlineWebService submitOnlineWebService;
 	
 	@PayloadRoot(localPart = "EbarcodeSubmitOnlineRequest", namespace = WebServiceConstant.NAMESPACE_URI)
 	@ResponsePayload
@@ -31,7 +31,7 @@ public class SubmitOnlineEndPoint {
 		EbarcodeSubmitOnlineResponse response = null;
 
 		try {
-			response = submitOnlineService.getResponse(request);
+			response = submitOnlineWebService.getResponse(request);
 			// Status Code & Description
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);

@@ -18,7 +18,7 @@ import th.go.excise.edbarcode.ws.provider.service.SyncMasterDataService;
 @Endpoint
 public class SyncMasterDataEndpoint {
 	
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LogManager.getLogger(SyncMasterDataEndpoint.class);
 	
 	@Autowired
 	private SyncMasterDataService syncMasterDataService;

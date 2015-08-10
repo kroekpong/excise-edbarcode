@@ -3,6 +3,8 @@ package th.go.excise.edbarcode.ws.provider.service;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import local.scc.dev.sta.bac.utils.PasswordEncryptDecrypt;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +12,7 @@ import org.springframework.stereotype.Service;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.common.util.DateUtils;
-import th.go.excise.edbarcode.ws.client.oxm.Body;
-import th.go.excise.edbarcode.ws.client.oxm.HeaderRequest;
-import th.go.excise.edbarcode.ws.client.oxm.InternetUser;
-import th.go.excise.edbarcode.ws.client.oxm.StaBacRequest;
-import th.go.excise.edbarcode.ws.client.oxm.StaBacResponse;
-import th.go.excise.edbarcode.ws.client.service.GetLicenseNGoodsInfoService;
+import th.go.excise.edbarcode.ws.client.sta.service.GetLicenseNGoodsInfoService;
 import th.go.excise.edbarcode.ws.provider.oxm.Address;
 import th.go.excise.edbarcode.ws.provider.oxm.Company;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSyncMasterDataRequest;
@@ -30,7 +27,7 @@ import th.go.excise.edbarcode.ws.provider.oxm.TaxpayerList;
 @Service("syncMasterDataService")
 public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 	
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LogManager.getLogger(SyncMasterDataServiceImpl.class);
 	
 	@Autowired
 	private GetLicenseNGoodsInfoService getLicenseNGoodsInfoService;
@@ -38,63 +35,68 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 	@Override
 	public EbarcodeSyncMasterDataResponse getResponse(EbarcodeSyncMasterDataRequest request) {
 		
-		StaBacRequest wsRequest = prepareWsRequest(request);
+		th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest wsRequest = prepareWsRequest(request);
 		
 		// Call Service
 		EbarcodeSyncMasterDataResponse response = null;
 		try {
-			StaBacResponse wsResponse = getLicenseNGoodsInfoService.doService(wsRequest);
+			th.go.excise.edbarcode.ws.client.sta.oxm.StaBacResponse wsResponse = getLicenseNGoodsInfoService.doService(wsRequest);
 			
 			if (WebServiceConstant.STA_HEADER.RESULT_CODE_OK.equalsIgnoreCase(wsResponse.getHeader().getResultCode())) {
-				response = prepareResponse(wsResponse);
-				
+				// success
+				response = prepareWsResponse(wsResponse);
 			} else {
 				// error
 				response = new EbarcodeSyncMasterDataResponse();
+				// TODO
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 			response = new EbarcodeSyncMasterDataResponse();
+			// TODO
 		}
 		
 		return response;
 	}
 	
-	private StaBacRequest prepareWsRequest(EbarcodeSyncMasterDataRequest request) {
+	private th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest prepareWsRequest(EbarcodeSyncMasterDataRequest request) {
 		// Prepare Request Header
-		HeaderRequest wsHeader = new HeaderRequest();
-		wsHeader.setSourceSystem(WebServiceConstant.STA_HEADER.SOURCE_SYSTEM);
-		wsHeader.setDestinationSystem(WebServiceConstant.STA_HEADER.DESTINATION_SYSTEM);
-		wsHeader.setTransactionCode("");
+		th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest wsHeader = new th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest();
+		wsHeader.setSourceSystem(WebServiceConstant.STA_HEADER.SYSTEM_BARCODE);
+		wsHeader.setDestinationSystem(WebServiceConstant.STA_HEADER.SYSTEM_STA_BACK);
+		wsHeader.setTransactionCode(WebServiceConstant.STA_HEADER.TRAN_CODE_GET_LICENSE_AND_GOODS_INFO);
 		
 		// Prepare Request Body
+		PasswordEncryptDecrypt staPasswordUitl = new PasswordEncryptDecrypt();
+		
 		Date currentDate = new Date();
-		InternetUser wsInternetUser = new InternetUser();
+		th.go.excise.edbarcode.ws.client.sta.oxm.InternetUser wsInternetUser = new th.go.excise.edbarcode.ws.client.sta.oxm.InternetUser();
 		wsInternetUser.setCompanyId(request.getInternetUser().getCompanyId());
 		wsInternetUser.setCompanyUserId(request.getInternetUser().getCompanyUserId());
-		wsInternetUser.setCompanyUserPwd(request.getInternetUser().getCompanyUserPwd());
+		wsInternetUser.setCompanyUserPwd(staPasswordUitl.encrypt(request.getInternetUser().getCompanyUserId(), request.getInternetUser().getCompanyUserPwd()));
 		wsInternetUser.setBeginDate(DateUtils.wsDateFormat.format(currentDate));
 		wsInternetUser.setEndDate(DateUtils.wsDateFormat.format(currentDate));
 		
-		Body wsBody = new Body();
+		th.go.excise.edbarcode.ws.client.sta.oxm.Body wsBody = new th.go.excise.edbarcode.ws.client.sta.oxm.Body();
 		wsBody.setInternetUser(wsInternetUser);
 		
-		StaBacRequest wsRequest = new StaBacRequest();
+		th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest wsRequest = new th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest();
 		wsRequest.setHeader(wsHeader);
 		wsRequest.setBody(wsBody);
 		
 		return wsRequest;
 	}
 	
-	private EbarcodeSyncMasterDataResponse prepareResponse(StaBacResponse wsResponse) {
+	private EbarcodeSyncMasterDataResponse prepareWsResponse(th.go.excise.edbarcode.ws.client.sta.oxm.StaBacResponse wsResponse) {
 		
-		th.go.excise.edbarcode.ws.client.oxm.Company wsCompany = wsResponse.getBody().getCompany();
+		th.go.excise.edbarcode.ws.client.sta.oxm.Company wsCompany = wsResponse.getBody().getCompany();
 		
 		// Common data for Company
 		Company company = new Company();
 		company.setInternetUniqueId(wsCompany.getInternetUniqueId());
 		company.setCusId(wsCompany.getCusId());
 		company.setCompanyId(wsCompany.getCompanyId());
+		// companyUserId
 		company.setCompanyTitleCode(wsCompany.getCompanyTitleCode());
 		company.setCompanyTitleName(wsCompany.getCompanyTitleName());
 		company.setCompanyName(wsCompany.getCompanyName());
@@ -130,7 +132,7 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 		LicenseInfo licenseInfo = null;
 		GoodsList goodsList = null;
 		Goods goods = null;
-		for (th.go.excise.edbarcode.ws.client.oxm.TaxpayerDetail wsTaxpayerDetail : wsCompany.getTaxpayerList().getTaxpayerDetail()) {
+		for (th.go.excise.edbarcode.ws.client.sta.oxm.TaxpayerDetail wsTaxpayerDetail : wsCompany.getTaxpayerList().getTaxpayerDetail()) {
 			
 			taxpayerDetail = new TaxpayerDetail();
 			taxpayerDetail.setTaxpayerId(wsTaxpayerDetail.getTaxpayerId());
@@ -158,14 +160,14 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 			taxpayerDetail.setTaxpayerAddress(taxpayerAddress);
 			
 			licenseList = new LicenseList();
-			for (th.go.excise.edbarcode.ws.client.oxm.LicenseInfo wsLicenseInfo : wsTaxpayerDetail.getLicenseList().getLicenseInfo()) {
+			for (th.go.excise.edbarcode.ws.client.sta.oxm.LicenseInfo wsLicenseInfo : wsTaxpayerDetail.getLicenseList().getLicenseInfo()) {
 				licenseInfo = new LicenseInfo();
 				licenseInfo.setLicenseNo(wsLicenseInfo.getLicenseNo());
 				licenseInfo.setLicenseType(wsLicenseInfo.getLicenseType());
 				licenseInfo.setLicenseCode(wsLicenseInfo.getLicenseCode());
 				licenseInfo.setLicenseSeq(wsLicenseInfo.getLicenseSeq());
 				licenseInfo.setLicenseName(wsLicenseInfo.getLicenseName());
-				licenseInfo.setLicenseCurrentPrice(new BigDecimal(wsLicenseInfo.getLicenseCurrentPrice()));
+				//licenseInfo.setLicenseCurrentPrice(new BigDecimal(wsLicenseInfo.getLicenseCurrentPrice()));
 				licenseInfo.setEffectiveDate(wsLicenseInfo.getEffectiveDate());
 				licenseInfo.setExpireDate(wsLicenseInfo.getEffectiveDate());
 				licenseInfo.setFirstDate(wsLicenseInfo.getFirstDate());
@@ -180,7 +182,7 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 			taxpayerDetail.setLicenseList(licenseList);
 			
 			goodsList = new GoodsList();
-			for (th.go.excise.edbarcode.ws.client.oxm.Goods wsGoods : wsTaxpayerDetail.getGoodsList().getGoods()) {
+			for (th.go.excise.edbarcode.ws.client.sta.oxm.Goods wsGoods : wsTaxpayerDetail.getGoodsList().getGoods()) {
 				goods = new Goods();
 				goods.setGoodsCode(wsGoods.getGoodsCode());
 				goods.setProductTypeCode(wsGoods.getProductTypeCode());
