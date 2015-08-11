@@ -303,6 +303,23 @@
 		</dependency>
 		
 		
+		<!-- STA Dependency -->
+		<dependency>
+			<groupId>PasswordUtils</groupId>
+			<artifactId>PasswordUtils</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/PasswordUtils.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>STAAppGate</groupId>
+			<artifactId>STAAppGate</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/STAAppGate.jar</systemPath>
+		</dependency>
+		
+		
 		<!-- ED Barcode Report -->
 		<dependency>
 			<groupId>th.go.excise.edbarcode</groupId>
