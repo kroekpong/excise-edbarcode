@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html ng-app="indexApp">
+<head>
+<meta charset="utf-8">
+<title>ED Barcode เมนูหลัก (หน้าแรก)</title>
+<!-- Angular Material CSS now available via Google CDN; version 0.10 used here -->
+<link
+	rel="stylesheet"
+	href="libs/angular-material.min.css">
+<!-- Angular Material Dependencies -->
+<script src="libs/angular.min.js"></script>
+<script src="libs/angular-animate.min.js"></script>
+<script src="libs/angular-aria.min.js"></script>
+<!-- Angular Material Javascript now available via Google CDN; version 0.10 used here -->
+<script src="libs/angular-material.min.js"></script>
+<!-- UI router -->
+<script src="libs/angular-ui-router.js"></script>
+<!-- controller -->
+<script src="app-js/controller-js/index-controller-js.js"></script>
+<!-- template -->
+<script src="template/controller/profile-view-controller.js"></script>
+<script src="template/controller/order-view-controller.js"></script>
+<!-- font icon -->
+<link
+	href="libs/google-icon.css"
+	rel="stylesheet">
+</head>
+<body ng-controller="AppCtrl">
+
+	<!-- toolbar -->
+	<md-content> <md-toolbar>
+	<div class="md-toolbar-tools">
+		<md-button
+			ng-click="toggleLeft()"
+			class="md-icon-button"
+			aria-label="Settings"> <md-icon class="material-icons">menu</md-icon>
+		</md-button>
+		<h2>
+			<span>{{toolbarTitle}}</span>
+		</h2>
+		<span flex></span>
+	</div>
+	</md-toolbar> </md-content>
+	<!-- end toolbar -->
+	<!-- 	menu -->
+
+
+	<div
+		layout="column"
+		style="height: 620px;">
+		<section
+			layout="row"
+			flex>
+			<md-sidenav
+				class="md-sidenav-left md-whiteframe-z2"
+				md-component-id="left"> <md-toolbar
+				class="md-theme-indigo">
+			<h1 class="md-toolbar-tools">Menu</h1>
+			</md-toolbar> <md-content layout-padding> <md-list> <md-subheader
+				class="md-no-sticky">เมนูหลัก </md-subheader> <md-list-item
+				ng-repeat="setting in settings"
+				ng-click="navigateTo(setting, $event)"> <md-icon
+				class="material-icons">{{setting.iconName}}</md-icon>
+			<p>{{setting.label}}</p>
+			<md-switch
+				class="md-secondary"
+				ng-model="setting.enabled"
+				ng-show="false"></md-switch> </md-list-item> </md-list> </md-content> </md-sidenav>
+
+			<md-content
+				flex
+				layout-padding>
+
+			<div
+				layout="column"
+				layout-fill
+				layout-align="top center" ui-view>
+				<p> body content</p>
+			</div>
+
+			<div flex></div>
+			</md-content>
+		</section>
+	</div>
+	<!-- 	end menu -->
+</body>
+</html>
