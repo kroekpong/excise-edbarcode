@@ -132,7 +132,7 @@
 			<element name="LicenseCode"					type="string"			minOccurs="1" />
 			<element name="LicenseSeq"					type="string"			minOccurs="1" />
 			<element name="LicenseName"					type="string"			minOccurs="1" />
-			<element name="LicenseCurrentPrice"			type="double"			minOccurs="0" />
+			<element name="LicenseCurrentPrice"			type="decimal"			minOccurs="0" />
 			<element name="EffectiveDate"				type="string"			minOccurs="1" />
 			<element name="ExpireDate"					type="string"			minOccurs="1" />
 			<element name="FirstDate"					type="string"			minOccurs="0" />
@@ -158,14 +158,14 @@
 			<element name="ProductTypeDescriptionText"	type="string"		minOccurs="1" />
 			<element name="GoodsSize"					type="string"		minOccurs="0" />
 			<element name="GoodsSizeUnitDescriptionText" type="string"		minOccurs="0" />
-			<element name="GoodsPrice"					type="double"		minOccurs="1" />
-			<element name="TaxRateByPriceAmount"		type="double"		minOccurs="1" />
-			<element name="TaxRateByQuantityAmount"		type="double"		minOccurs="1" />
-			<element name="FundSSSRateAmount"			type="double"		minOccurs="1" />
-			<element name="FundSSTRateAmount"			type="double"		minOccurs="1" />
+			<element name="GoodsPrice"					type="decimal"		minOccurs="1" />
+			<element name="TaxRateByPriceAmount"		type="decimal"		minOccurs="1" />
+			<element name="TaxRateByQuantityAmount"		type="decimal"		minOccurs="1" />
+			<element name="FundSSSRateAmount"			type="decimal"		minOccurs="1" />
+			<element name="FundSSTRateAmount"			type="decimal"		minOccurs="1" />
 			<element name="Degree"						type="string"		minOccurs="0" />
 			<element name="PriceFlag"					type="string"		minOccurs="1" />
-			<element name="DeclarePrice"				type="double"		minOccurs="0" />
+			<element name="DeclarePrice"				type="decimal"		minOccurs="0" />
 			<element name="UnitCode"					type="string"		minOccurs="1" />
 			<element name="GoodsUnitsDescriptionText"	type="string"		minOccurs="1" />
 			<element name="IncomeCode"					type="string"		minOccurs="1" />
@@ -175,12 +175,12 @@
 			<element name="ModelName"					type="string"		minOccurs="0" />
 			<element name="InformDate"					type="string"		minOccurs="0" />
 			<element name="ProductNameEng"				type="string"		minOccurs="0" />
-			<element name="RatePerLitre"				type="double"		minOccurs="1" />
-			<element name="DegreeMin"					type="double"		minOccurs="1" />
-			<element name="RateDegreeOver"				type="double"		minOccurs="1" />
-			<element name="WholesaleMin"				type="double"		minOccurs="1" />
-			<element name="RateWholesaleOver"			type="double"		minOccurs="1" />
-			<element name="RatePerLitreMax"				type="double"		minOccurs="1" />
+			<element name="RatePerLitre"				type="decimal"		minOccurs="1" />
+			<element name="DegreeMin"					type="decimal"		minOccurs="1" />
+			<element name="RateDegreeOver"				type="decimal"		minOccurs="1" />
+			<element name="WholesaleMin"				type="decimal"		minOccurs="1" />
+			<element name="RateWholesaleOver"			type="decimal"		minOccurs="1" />
+			<element name="RatePerLitreMax"				type="decimal"		minOccurs="1" />
 		</all>
 	</complexType>
 	

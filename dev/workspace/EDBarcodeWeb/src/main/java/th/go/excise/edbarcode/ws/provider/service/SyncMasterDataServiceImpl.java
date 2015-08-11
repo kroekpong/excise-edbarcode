@@ -1,6 +1,5 @@
 package th.go.excise.edbarcode.ws.provider.service;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import local.scc.dev.sta.bac.utils.PasswordEncryptDecrypt;
@@ -9,6 +8,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.baiwa.framework.common.util.NumberUtils;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.common.util.DateUtils;
@@ -167,7 +168,7 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 				licenseInfo.setLicenseCode(wsLicenseInfo.getLicenseCode());
 				licenseInfo.setLicenseSeq(wsLicenseInfo.getLicenseSeq());
 				licenseInfo.setLicenseName(wsLicenseInfo.getLicenseName());
-				//licenseInfo.setLicenseCurrentPrice(new BigDecimal(wsLicenseInfo.getLicenseCurrentPrice()));
+				licenseInfo.setLicenseCurrentPrice(NumberUtils.nullToZero(wsLicenseInfo.getLicenseCurrentPrice()));
 				licenseInfo.setEffectiveDate(wsLicenseInfo.getEffectiveDate());
 				licenseInfo.setExpireDate(wsLicenseInfo.getEffectiveDate());
 				licenseInfo.setFirstDate(wsLicenseInfo.getFirstDate());
@@ -188,16 +189,16 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 				goods.setProductTypeCode(wsGoods.getProductTypeCode());
 				goods.setProductTypeDescriptionText(wsGoods.getProductTypeDescriptionText());
 				goods.setGoodsDescriptionText(wsGoods.getGoodsDescriptionText());
-				goods.setGoodsPrice(new BigDecimal(wsGoods.getGoodsPrice()));
+				goods.setGoodsPrice(NumberUtils.nullToZero(wsGoods.getGoodsPrice()));
 				goods.setGoodsSize(wsGoods.getGoodsSize());
 				goods.setGoodsSizeUnitDescriptionText(wsGoods.getGoodsSizeUnitDescriptionText());
-				goods.setTaxRateByPriceAmount(new BigDecimal(wsGoods.getTaxRateByPriceAmount()));
-				goods.setTaxRateByQuantityAmount(new BigDecimal(wsGoods.getTaxRateByQuantityAmount()));
-				goods.setFundSSSRateAmount(new BigDecimal(wsGoods.getFundSSSRateAmount()));
-				goods.setFundSSTRateAmount(new BigDecimal(wsGoods.getFundSSTRateAmount()));
+				goods.setTaxRateByPriceAmount(NumberUtils.nullToZero(wsGoods.getTaxRateByPriceAmount()));
+				goods.setTaxRateByQuantityAmount(NumberUtils.nullToZero(wsGoods.getTaxRateByQuantityAmount()));
+				goods.setFundSSSRateAmount(NumberUtils.nullToZero(wsGoods.getFundSSSRateAmount()));
+				goods.setFundSSTRateAmount(NumberUtils.nullToZero(wsGoods.getFundSSTRateAmount()));
 				goods.setDegree(wsGoods.getDegree());
 				goods.setPriceFlag(wsGoods.getPriceFlag());
-				goods.setDeclarePrice(new BigDecimal(wsGoods.getDeclarePrice()));
+				goods.setDeclarePrice(NumberUtils.nullToZero(wsGoods.getDeclarePrice()));
 				goods.setUnitCode(wsGoods.getUnitCode());
 				goods.setGoodsUnitsDescriptionText(wsGoods.getGoodsUnitsDescriptionText());
 				goods.setIncomeCode(wsGoods.getIncomeCode());
@@ -207,12 +208,12 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 				goods.setModelName(wsGoods.getModelName());
 				goods.setInformDate(wsGoods.getInformDate());
 				goods.setProductNameEng(wsGoods.getProductNameEng());
-				goods.setRatePerLitre(new BigDecimal(wsGoods.getRatePerLitre()));
-				goods.setDegreeMin(new BigDecimal(wsGoods.getDegreeMin()));
-				goods.setRateDegreeOver(new BigDecimal(wsGoods.getRateDegreeOver()));
-				goods.setWholesaleMin(new BigDecimal(wsGoods.getWholesaleMin()));
-				goods.setRateWholesaleOver(new BigDecimal(wsGoods.getRateWholesaleOver()));
-				goods.setRatePerLitreMax(new BigDecimal(wsGoods.getRatePerLitreMax()));
+				goods.setRatePerLitre(NumberUtils.nullToZero(wsGoods.getRatePerLitre()));
+				goods.setDegreeMin(NumberUtils.nullToZero(wsGoods.getDegreeMin()));
+				goods.setRateDegreeOver(NumberUtils.nullToZero(wsGoods.getRateDegreeOver()));
+				goods.setWholesaleMin(NumberUtils.nullToZero(wsGoods.getWholesaleMin()));
+				goods.setRateWholesaleOver(NumberUtils.nullToZero(wsGoods.getRateWholesaleOver()));
+				goods.setRatePerLitreMax(NumberUtils.nullToZero(wsGoods.getRatePerLitreMax()));
 				goodsList.getGoods().add(goods);
 			}
 			taxpayerDetail.setGoodsList(goodsList);
