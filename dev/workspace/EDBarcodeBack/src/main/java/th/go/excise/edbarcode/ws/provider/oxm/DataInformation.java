@@ -15,17 +15,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for PDFDocument complex type.
+ * <p>Java class for DataInformation complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PDFDocument">
+ * &lt;complexType name="DataInformation">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="MimeType" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Content" type="{http://www.w3.org/2001/XMLSchema}base64Binary"/>
+ *         &lt;element name="ReferenceNumber" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,61 +34,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PDFDocument", propOrder = {
-    "mimeType",
-    "content"
+@XmlType(name = "DataInformation", propOrder = {
+    "referenceNumber"
 })
-public class PDFDocument {
+public class DataInformation {
 
-    @XmlElement(name = "MimeType", required = true)
-    protected String mimeType;
-    @XmlElement(name = "Content", required = true)
-    protected byte[] content;
+    @XmlElement(name = "ReferenceNumber", required = true)
+    protected String referenceNumber;
 
     /**
-     * Gets the value of the mimeType property.
+     * Gets the value of the referenceNumber property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getMimeType() {
-        return mimeType;
+    public String getReferenceNumber() {
+        return referenceNumber;
     }
 
     /**
-     * Sets the value of the mimeType property.
+     * Sets the value of the referenceNumber property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setMimeType(String value) {
-        this.mimeType = value;
-    }
-
-    /**
-     * Gets the value of the content property.
-     * 
-     * @return
-     *     possible object is
-     *     byte[]
-     */
-    public byte[] getContent() {
-        return content;
-    }
-
-    /**
-     * Sets the value of the content property.
-     * 
-     * @param value
-     *     allowed object is
-     *     byte[]
-     */
-    public void setContent(byte[] value) {
-        this.content = ((byte[]) value);
+    public void setReferenceNumber(String value) {
+        this.referenceNumber = value;
     }
 
 }

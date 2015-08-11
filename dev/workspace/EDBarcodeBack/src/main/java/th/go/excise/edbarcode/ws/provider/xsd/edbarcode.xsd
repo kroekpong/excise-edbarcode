@@ -16,9 +16,9 @@
 	<element name="EbarcodeSubmitOnlineResponse">
 		<complexType>
 			<sequence>
-				<element name="SubmitOnlineStatus"		type="string"	minOccurs="1" />
-				<element name="SubmitOnlineDesc"		type="string"	minOccurs="1" />
-				<element name="ReferenceNumber"			type="string"	minOccurs="1" />
+				<element name="SubmitOnlineStatus"		type="string"		minOccurs="1" />
+				<element name="SubmitOnlineDesc"		type="string"		minOccurs="1" />
+				<element name="ReferenceNumber"			type="string"		minOccurs="1" />
 			</sequence>
 		</complexType>
 	</element>
@@ -27,12 +27,16 @@
 	<element name="EbarcodeSendToBackendRequest">
 		<complexType>
 			<sequence>
+				<element name="DataInformation"			type="tns:DataInformation"		minOccurs="1" />
+				<element name="BinaryInformation"		type="tns:BinaryInformation"	minOccurs="1" />
 			</sequence>
 		</complexType>
 	</element>
 	<element name="EbarcodeSendToBackendResponse">
 		<complexType>
 			<sequence>
+				<element name="SendTobackendStatus"		type="string"		minOccurs="1" />
+				<element name="SendTobackendDesc"		type="string"		minOccurs="1" />
 			</sequence>
 		</complexType>
 	</element>
@@ -41,8 +45,8 @@
 	<element name="EbarcodeGetSR12011ReportRequest">
 		<complexType>
 			<sequence>
-				<element name="SR12011ReportData"		type="string"	minOccurs="1" />
-				<element name="ReferenceNumber"			type="string"	minOccurs="1" />
+				<element name="DataInformation"			type="tns:DataInformation"		minOccurs="1" />
+				<element name="BinaryInformation"		type="tns:BinaryInformation"	minOccurs="1" />
 			</sequence>
 		</complexType>
 	</element>
@@ -180,7 +184,20 @@
 		</sequence>
 	</complexType>
 	
-	<!-- Service2: Get SR12011 Report -->
+	<!-- Service2: Send To Backend -->
+	<xs:complexType name="DataInformation">
+		<xs:sequence>
+			<xs:element name="ReferenceNumber"			type="xs:string"		minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="BinaryInformation">
+		<xs:sequence>
+			<xs:element name="XmlDataBinary"			type="xs:string"		minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Service3: Get SR12011 Report -->
 	<xs:complexType name="PDFDocument">
 		<xs:sequence>
 			<xs:element name="MimeType"					type="xs:string"		minOccurs="1" />

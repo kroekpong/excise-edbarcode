@@ -31,23 +31,25 @@ public class GetSR12011ReportEndpoint {
 		EbarcodeGetSR12011ReportResponse response = null;
 		
 		try {
-			String referenceNumber = request.getReferenceNumber();
-			String xmlData = request.getSR12011ReportData();
+			String referenceNumber = request.getDataInformation().getReferenceNumber();
+			String xmlData = request.getBinaryInformation().getXmlDataBinary();
 			
-			byte[] content = barcodeReportService.generateReport(xmlData, referenceNumber);
+			byte[] content = barcodeReportService.generateReport(xmlData, referenceNumber);// FIXME
 			
 			PDFDocument document = new PDFDocument();
-			document.setMimetype("application/pdf");
+			document.setMimeType("application/pdf");
 			document.setContent(content);
 			
 			response = new EbarcodeGetSR12011ReportResponse();
-			response.setStatusCode("OK");
+			response.setGetSR12011ReportStatus("OK");
+			response.setGetSR12011ReportDesc("Generate PDF Success");
 			response.setPDFDocument(document);
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			response = new EbarcodeGetSR12011ReportResponse();
-			response.setStatusCode("ERROR");
+			response.setGetSR12011ReportStatus("ERROR");
+			response.setGetSR12011ReportDesc(e.getMessage());
 		}
 		
 		return response;

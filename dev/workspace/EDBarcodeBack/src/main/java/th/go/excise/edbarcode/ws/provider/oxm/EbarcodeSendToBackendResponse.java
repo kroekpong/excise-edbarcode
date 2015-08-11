@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="DataInformation" type="{http://www.excise.go.th/xsd/barcode}DataInformation"/>
- *         &lt;element name="BinaryInformation" type="{http://www.excise.go.th/xsd/barcode}BinaryInformation"/>
+ *         &lt;element name="SendTobackendStatus" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="SendTobackendDesc" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,63 +37,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "dataInformation",
-    "binaryInformation"
+    "sendTobackendStatus",
+    "sendTobackendDesc"
 })
-@XmlRootElement(name = "EbarcodeGetSR12011ReportRequest")
-public class EbarcodeGetSR12011ReportRequest {
+@XmlRootElement(name = "EbarcodeSendToBackendResponse")
+public class EbarcodeSendToBackendResponse {
 
-    @XmlElement(name = "DataInformation", required = true)
-    protected DataInformation dataInformation;
-    @XmlElement(name = "BinaryInformation", required = true)
-    protected BinaryInformation binaryInformation;
+    @XmlElement(name = "SendTobackendStatus", required = true)
+    protected String sendTobackendStatus;
+    @XmlElement(name = "SendTobackendDesc", required = true)
+    protected String sendTobackendDesc;
 
     /**
-     * Gets the value of the dataInformation property.
+     * Gets the value of the sendTobackendStatus property.
      * 
      * @return
      *     possible object is
-     *     {@link DataInformation }
+     *     {@link String }
      *     
      */
-    public DataInformation getDataInformation() {
-        return dataInformation;
+    public String getSendTobackendStatus() {
+        return sendTobackendStatus;
     }
 
     /**
-     * Sets the value of the dataInformation property.
+     * Sets the value of the sendTobackendStatus property.
      * 
      * @param value
      *     allowed object is
-     *     {@link DataInformation }
+     *     {@link String }
      *     
      */
-    public void setDataInformation(DataInformation value) {
-        this.dataInformation = value;
+    public void setSendTobackendStatus(String value) {
+        this.sendTobackendStatus = value;
     }
 
     /**
-     * Gets the value of the binaryInformation property.
+     * Gets the value of the sendTobackendDesc property.
      * 
      * @return
      *     possible object is
-     *     {@link BinaryInformation }
+     *     {@link String }
      *     
      */
-    public BinaryInformation getBinaryInformation() {
-        return binaryInformation;
+    public String getSendTobackendDesc() {
+        return sendTobackendDesc;
     }
 
     /**
-     * Sets the value of the binaryInformation property.
+     * Sets the value of the sendTobackendDesc property.
      * 
      * @param value
      *     allowed object is
-     *     {@link BinaryInformation }
+     *     {@link String }
      *     
      */
-    public void setBinaryInformation(BinaryInformation value) {
-        this.binaryInformation = value;
+    public void setSendTobackendDesc(String value) {
+        this.sendTobackendDesc = value;
     }
 
 }

@@ -40,8 +40,8 @@ import javax.xml.bind.annotation.XmlType;
     "dataInformation",
     "binaryInformation"
 })
-@XmlRootElement(name = "EbarcodeGetSR12011ReportRequest")
-public class EbarcodeGetSR12011ReportRequest {
+@XmlRootElement(name = "EbarcodeSendToBackendRequest")
+public class EbarcodeSendToBackendRequest {
 
     @XmlElement(name = "DataInformation", required = true)
     protected DataInformation dataInformation;
