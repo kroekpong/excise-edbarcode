@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
+	
+	<!-- Web Service Endpoint -->
+	<bean id="clientMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="packagesToScan">
+			<list>
+				<value>th.go.excise.edbarcode.ws.client.barcode.oxm</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Barcode Endpoint -->
+	<bean id="submitOnlineWsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="marshaller" ref="clientMarshaller"></property>
+		<property name="unmarshaller" ref="clientMarshaller"></property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
+		</property>
+		<property name="defaultUri">
+			<value>${edBarcodeService.endpoint}</value>
+		</property>
+	</bean>
+	
+</beans>

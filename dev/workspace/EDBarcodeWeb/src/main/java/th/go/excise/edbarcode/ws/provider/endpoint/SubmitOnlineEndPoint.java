@@ -18,7 +18,7 @@ import th.go.excise.edbarcode.ws.provider.service.SubmitOnlineWebService;
 @Endpoint
 public class SubmitOnlineEndPoint {
 	
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LogManager.getLogger(SubmitOnlineEndPoint.class);
 	
 	@Autowired
 	private SubmitOnlineWebService submitOnlineWebService;
@@ -28,16 +28,7 @@ public class SubmitOnlineEndPoint {
 	public EbarcodeSubmitOnlineResponse doEnpoint(@RequestPayload EbarcodeSubmitOnlineRequest request) throws DatatypeConfigurationException {
 		logger.info(" In doEndpoint submitOnlineRequest");
 		
-		EbarcodeSubmitOnlineResponse response = null;
-
-		try {
-			response = submitOnlineWebService.getResponse(request);
-			// Status Code & Description
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			response = new EbarcodeSubmitOnlineResponse();
-			// Status Code & Description
-		}
+		EbarcodeSubmitOnlineResponse response = submitOnlineWebService.getResponse(request);
 		
 		return response;
 	}

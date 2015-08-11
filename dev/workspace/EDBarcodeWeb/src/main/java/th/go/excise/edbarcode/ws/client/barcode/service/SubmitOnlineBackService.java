@@ -5,6 +5,6 @@ import th.go.excise.edbarcode.ws.client.barcode.oxm.EbarcodeSubmitOnlineResponse
 
 public interface SubmitOnlineBackService {
 	
-	public EbarcodeSubmitOnlineRequest doService(EbarcodeSubmitOnlineResponse request);
+	public EbarcodeSubmitOnlineResponse doService(EbarcodeSubmitOnlineRequest request);
 	
 }
