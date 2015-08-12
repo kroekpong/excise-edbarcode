@@ -1,7 +1,5 @@
 package th.go.excise.edbarcode.ws.provider.endpoint;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +23,10 @@ public class SyncMasterDataEndpoint {
 	
 	@PayloadRoot(localPart = "EbarcodeSyncMasterDataRequest", namespace = WebServiceConstant.NAMESPACE_URI)
 	@ResponsePayload
-	public EbarcodeSyncMasterDataResponse doEndpoint(@RequestPayload EbarcodeSyncMasterDataRequest request) throws DatatypeConfigurationException {
-		logger.info(" In doEndpoint syncMasterDataRequest");
+	public EbarcodeSyncMasterDataResponse doEndpoint(@RequestPayload EbarcodeSyncMasterDataRequest request) {
+		logger.info(" In doEndpoint SyncMasterDataRequest");
 		
-		EbarcodeSyncMasterDataResponse response = null;
-
-		try {
-			response = syncMasterDataService.getResponse(request);
-			// Status Code & Description
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			response = new EbarcodeSyncMasterDataResponse();
-			// Status Code & Description
-		}
+		EbarcodeSyncMasterDataResponse response = syncMasterDataService.getResponse(request);
 		
 		return response;
 	}

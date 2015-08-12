@@ -21,6 +21,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import th.go.excise.edbarcode.common.constant.WebServiceConstant;
+import th.go.excise.edbarcode.ws.client.sta.oxm.Body;
+import th.go.excise.edbarcode.ws.client.sta.oxm.Error;
 import th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest;
 import th.go.excise.edbarcode.ws.client.sta.oxm.StaBacResponse;
 
@@ -34,9 +37,9 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 	
 	@Override
 	public StaBacResponse doService(StaBacRequest request) {
-		StaBacResponse response = null;
-		
 		logger.info(" ##################################### Step 1 In GetLicenseNGoodsInfoService.doService");
+		
+		StaBacResponse response = null;
 		
 		try {
 			Marshaller jaxbMarshaller = JAXBContext.newInstance(StaBacRequest.class).createMarshaller();
@@ -59,45 +62,57 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 			reader.close();
 			
 		} catch (PropertyException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			response = new StaBacResponse();
+			setError(response, e.getMessage());
 		} catch (JAXBException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			response = new StaBacResponse();
+			setError(response, e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			response = new StaBacResponse();
+			setError(response, e.getMessage());
 		}
 		
-		
-		logger.info(" ##################################### After Call GetLicenseNGoodsInfoService.doService response:  "+response);
+		logger.info(" ##################################### After Call GetLicenseNGoodsInfoService.doService response:  " + response);
 		
 		return response;
 	}
 	
 	private String sendBacRequest(String xmlData) {
-		String xmlResult;
-		SccAppServer_Stub sccAppServer;
-		//String rmiUrl = "rmi://172.17.2.22:21104/SccAppServer";
-		//String rmiUrl = "rmi://192.168.42.4:1104/SccAppServer";
+		String xmlResult = null;
 
 		try {
 			long startTime = System.currentTimeMillis();
-			sccAppServer = (SccAppServer_Stub) Naming.lookup(rmiUrl);
-			System.out.println(" #### Lookup Result :" + Naming.lookup(rmiUrl));
+			SccAppServer_Stub sccAppServer = (SccAppServer_Stub) Naming.lookup(rmiUrl);
+			logger.debug("#### Lookup Result: " + Naming.lookup(rmiUrl));
 
 			xmlResult = sccAppServer.process(xmlData);
 
 			long finishTime = System.currentTimeMillis();
-			System.out.println("TIME : " + (finishTime - startTime) + "mesc");
-			return xmlResult;
+			logger.debug("TIME: " + (finishTime - startTime) + "msec");
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return null;
+			logger.error(e.getMessage(), e);
 		} catch (RemoteException e) {
-			e.printStackTrace();
-			return null;
+			logger.error(e.getMessage(), e);
 		} catch (NotBoundException e) {
-			e.printStackTrace();
-			return null;
+			logger.error(e.getMessage(), e);
 		}
+		
+		return xmlResult;
+	}
+	
+	private void setError(StaBacResponse response, String message) {
+		Error error = new Error();
+		error.setCode(WebServiceConstant.STATUS_CODE.ERROR);
+		error.setDescription(message);
+		error.setAction(WebServiceConstant.STA_HEADER.TRAN_CODE_GET_LICENSE_AND_GOODS_INFO);
+		
+		Body body = new Body();
+		body.setError(error);
+		
+		response.setBody(body);
 	}
 
 }

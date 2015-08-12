@@ -9,8 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baiwa.framework.common.util.NumberUtils;
-
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.common.util.DateUtils;
 import th.go.excise.edbarcode.ws.client.sta.service.GetLicenseNGoodsInfoService;
@@ -25,6 +23,8 @@ import th.go.excise.edbarcode.ws.provider.oxm.LicenseList;
 import th.go.excise.edbarcode.ws.provider.oxm.TaxpayerDetail;
 import th.go.excise.edbarcode.ws.provider.oxm.TaxpayerList;
 
+import com.baiwa.framework.common.util.NumberUtils;
+
 @Service("syncMasterDataService")
 public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 	
@@ -35,26 +35,34 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 
 	@Override
 	public EbarcodeSyncMasterDataResponse getResponse(EbarcodeSyncMasterDataRequest request) {
+		logger.info("getResponse method");
 		
-		th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest wsRequest = prepareWsRequest(request);
-		
-		// Call Service
 		EbarcodeSyncMasterDataResponse response = null;
+		
 		try {
+			// Create WebService Request
+			th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest wsRequest = prepareWsRequest(request);
+			
+			// Call Service
 			th.go.excise.edbarcode.ws.client.sta.oxm.StaBacResponse wsResponse = getLicenseNGoodsInfoService.doService(wsRequest);
 			
-			if (WebServiceConstant.STA_HEADER.RESULT_CODE_OK.equalsIgnoreCase(wsResponse.getHeader().getResultCode())) {
+			if (WebServiceConstant.STATUS_CODE.OK.equalsIgnoreCase(wsResponse.getHeader().getResultCode())) {
 				// success
 				response = prepareWsResponse(wsResponse);
+				response.setSyncMasterDataStatus(WebServiceConstant.STATUS_CODE.OK);
+				response.setSyncMasterDataDesc(WebServiceConstant.STATUS_DESC.SUCCESS);
 			} else {
 				// error
 				response = new EbarcodeSyncMasterDataResponse();
-				// TODO
+				response.setSyncMasterDataStatus(wsResponse.getBody().getError().getCode());
+				response.setSyncMasterDataDesc(wsResponse.getBody().getError().getDescription());
+				logger.error("Call SyncMasterDataService Failed: {}: {}", response.getSyncMasterDataStatus(), response.getSyncMasterDataDesc());
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			response = new EbarcodeSyncMasterDataResponse();
-			// TODO
+			response.setSyncMasterDataStatus(WebServiceConstant.STATUS_CODE.ERROR);
+			response.setSyncMasterDataDesc(e.getMessage());
 		}
 		
 		return response;
@@ -97,7 +105,8 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 		company.setInternetUniqueId(wsCompany.getInternetUniqueId());
 		company.setCusId(wsCompany.getCusId());
 		company.setCompanyId(wsCompany.getCompanyId());
-		// companyUserId
+		company.setCompanyUserId(wsCompany.getCompanyUserId());
+		company.setCompanyUserPwd(wsCompany.getCompanyUserPwd());
 		company.setCompanyTitleCode(wsCompany.getCompanyTitleCode());
 		company.setCompanyTitleName(wsCompany.getCompanyTitleName());
 		company.setCompanyName(wsCompany.getCompanyName());

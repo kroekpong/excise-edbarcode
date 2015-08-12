@@ -1,7 +1,5 @@
 package th.go.excise.edbarcode.ws.provider.endpoint;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +23,8 @@ public class SubmitOnlineEndPoint {
 	
 	@PayloadRoot(localPart = "EbarcodeSubmitOnlineRequest", namespace = WebServiceConstant.NAMESPACE_URI)
 	@ResponsePayload
-	public EbarcodeSubmitOnlineResponse doEnpoint(@RequestPayload EbarcodeSubmitOnlineRequest request) throws DatatypeConfigurationException {
-		logger.info(" In doEndpoint submitOnlineRequest");
+	public EbarcodeSubmitOnlineResponse doEnpoint(@RequestPayload EbarcodeSubmitOnlineRequest request) {
+		logger.info(" In doEndpoint SubmitOnlineRequest");
 		
 		EbarcodeSubmitOnlineResponse response = submitOnlineWebService.getResponse(request);
 		
