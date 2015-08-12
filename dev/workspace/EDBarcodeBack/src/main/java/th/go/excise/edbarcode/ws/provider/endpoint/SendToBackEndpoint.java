@@ -28,16 +28,7 @@ public class SendToBackEndpoint {
 	public EbarcodeSendToBackendResponse doEnpoint(@RequestPayload EbarcodeSendToBackendRequest request) throws DatatypeConfigurationException {
 		logger.info(" In doEndpoint SendToBackendRequest");
 		
-		EbarcodeSendToBackendResponse response = null;
-
-		try {
-			response = sendToBackendService.getResponse(request);
-			// Status Code & Description
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			response = new EbarcodeSendToBackendResponse();
-			// Status Code & Description
-		}
+		EbarcodeSendToBackendResponse response = sendToBackendService.getResponse(request);
 		
 		return response;
 	}

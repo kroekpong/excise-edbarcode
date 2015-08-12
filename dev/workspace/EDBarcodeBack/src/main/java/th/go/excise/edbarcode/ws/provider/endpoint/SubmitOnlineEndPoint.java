@@ -26,18 +26,9 @@ public class SubmitOnlineEndPoint {
 	@PayloadRoot(localPart = "EbarcodeSubmitOnlineRequest", namespace = WebServiceConstant.NAMESPACE_URI)
 	@ResponsePayload
 	public EbarcodeSubmitOnlineResponse doEnpoint(@RequestPayload EbarcodeSubmitOnlineRequest request) throws DatatypeConfigurationException {
-		logger.info(" In doEndpoint submitOnlineRequest");
+		logger.info(" In doEndpoint SubmitOnlineRequest");
 		
-		EbarcodeSubmitOnlineResponse response = null;
-
-		try {
-			response = submitOnlineBackService.getResponse(request);
-			// Status Code & Description
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			response = new EbarcodeSubmitOnlineResponse();
-			// Status Code & Description
-		}
+		EbarcodeSubmitOnlineResponse response = submitOnlineBackService.getResponse(request);
 		
 		return response;
 	}

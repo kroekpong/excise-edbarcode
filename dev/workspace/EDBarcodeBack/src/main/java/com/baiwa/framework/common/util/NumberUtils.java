@@ -14,4 +14,8 @@ public class NumberUtils {
 		}
 	}
 	
+	public static BigDecimal nullToZero(BigDecimal val){
+		return (val != null) ? val : BigDecimal.ZERO;
+	}
+	
 }
