@@ -38,7 +38,7 @@ public class ReportConstant {
 		public static final String REFERENCE = "R";
 	}
 	
-	public static final int GOODS_PER_PAGE = 4;
+	public static final int GOODS_PER_PAGE = 6;
 	public static final String FORMAT_FUND_AMT = "#,##0";
 	public static final String SEPERATE_STRING = "|";
 	public static final String SEPERATE_LINE = "}|}";

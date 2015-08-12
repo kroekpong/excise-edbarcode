@@ -1,4 +1,4 @@
-package th.go.excise.edbarcode.report.common.bean;
+package th.go.excise.edbarcode.report.bean;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -109,7 +109,7 @@ public class SummaryReport {
 		this.paymentExciseAmount = paymentExciseAmount;
 	}
 
-	@XmlElement(name = "PaymentMunicipalPercent")
+	@XmlElement(name = "MoiRate")
 	public String getPaymentMunicipalPercent() {
 		return paymentMunicipalPercent;
 	}

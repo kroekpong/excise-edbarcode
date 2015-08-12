@@ -1,4 +1,4 @@
-package th.go.excise.edbarcode.report.common.bean;
+package th.go.excise.edbarcode.report.bean;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -35,7 +35,7 @@ public class GoodsEntryReport {
 		this.seqNo = seqNo;
 	}
 
-	@XmlElement(name = "ProductTypeCode")
+	@XmlElement(name = "ProductCode")
 	public String getProductTypeCode() {
 		return ProductTypeCode;
 	}

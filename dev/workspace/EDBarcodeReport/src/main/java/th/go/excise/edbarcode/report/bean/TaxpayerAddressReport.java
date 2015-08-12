@@ -1,4 +1,4 @@
-package th.go.excise.edbarcode.report.common.bean;
+package th.go.excise.edbarcode.report.bean;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class TaxpayerAddressReport {
 
-	private String houseIdNumber;
 	private String buildingName;
 	private String roomNumber;
 	private String floorNumber;
@@ -23,15 +22,6 @@ public class TaxpayerAddressReport {
 	private String telNumber;
 	
 	
-	@XmlElement(name = "HouseIdNumber")
-	public String getHouseIdNumber() {
-		return houseIdNumber;
-	}
-
-	public void setHouseIdNumber(String houseIdNumber) {
-		this.houseIdNumber = houseIdNumber;
-	}
-
 	@XmlElement(name = "BuildingName")
 	public String getBuildingName() {
 		return buildingName;

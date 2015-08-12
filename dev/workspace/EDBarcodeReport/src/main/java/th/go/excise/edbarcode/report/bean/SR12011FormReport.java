@@ -1,4 +1,4 @@
-package th.go.excise.edbarcode.report.common.bean;
+package th.go.excise.edbarcode.report.bean;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-@XmlRootElement(name = "SR12011FormReport")
+@XmlRootElement(name = "SR12011Info")
 public class SR12011FormReport {
 	
 	private TaxpayerInfoReport taxpayerInfoReport;
@@ -17,7 +17,7 @@ public class SR12011FormReport {
 	private SummaryReport summaryReport;
 	
 	
-	@XmlElement(name = "TaxpayerInfoReport")
+	@XmlElement(name = "TaxpayerInfo")
 	public TaxpayerInfoReport getTaxpayerInfoReport() {
 		return taxpayerInfoReport;
 	}
@@ -26,8 +26,8 @@ public class SR12011FormReport {
 		this.taxpayerInfoReport = taxpayerInfoReport;
 	}
 	
-	@XmlElementWrapper(name = "GoodsListReport")
-	@XmlElement(name = "GoodsEntryReport")
+	@XmlElementWrapper(name = "GoodsListInfo")
+	@XmlElement(name = "GoodsEntryInfo")
 	public List<GoodsEntryReport> getGoodsListReport() {
 		return goodsListReport;
 	}
@@ -36,7 +36,7 @@ public class SR12011FormReport {
 		this.goodsListReport = goodsListReport;
 	}
 	
-	@XmlElement(name = "SummaryReport")
+	@XmlElement(name = "SummaryInfo")
 	public SummaryReport getSummaryReport() {
 		return summaryReport;
 	}

@@ -24,31 +24,28 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import th.go.excise.edbarcode.report.common.bean.GoodsEntryReport;
-import th.go.excise.edbarcode.report.common.bean.SR12011FormReport;
-import th.go.excise.edbarcode.report.common.bean.SummaryReport;
-import th.go.excise.edbarcode.report.common.bean.TaxpayerInfoReport;
+import th.go.excise.edbarcode.report.bean.GoodsEntryReport;
+import th.go.excise.edbarcode.report.bean.SR12011FormReport;
+import th.go.excise.edbarcode.report.bean.SummaryReport;
+import th.go.excise.edbarcode.report.bean.TaxpayerInfoReport;
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 import th.go.excise.edbarcode.report.common.exception.EDBarcodeReportException;
 import th.go.excise.edbarcode.report.common.util.EDBarcodeReportUtil;
-import th.go.excise.edbarcode.report.common.util.ThaiNumberUtils;
 import th.go.excise.edbarcode.report.common.util.ReportUtil;
+import th.go.excise.edbarcode.report.common.util.ThaiNumberUtils;
 
 public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	
 	private static final Logger logger = LogManager.getLogger(EDBarcodeReportServiceImpl.class);
 	
 	@Override
-	public byte[] generateReport(String xml, String referenceNumber) throws EDBarcodeReportException {
+	public byte[] generateReport(SR12011FormReport form) throws EDBarcodeReportException {
 		logger.info("Generate Report - Start");
 		long start = System.currentTimeMillis();
 		ByteArrayOutputStream outputStream = null;
 		byte[] content = null;
 		
 		try {
-			SR12011FormReport form = EDBarcodeReportUtil.prepareDataWithXmlString(xml);
-			form.getSummaryReport().setReferenceNumber(referenceNumber);
-			
 			List<ExporterInputItem> items = new ArrayList<ExporterInputItem>();
 			items.addAll(getSR12011ExportInputItemList(form));
 			items.addAll(getFundExportInputItemList(form));
@@ -197,7 +194,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("taxDeductionOnBookNo", "");
 		paramMap.put("taxDeductionOnBookAmount", "");
 		paramMap.put("paymentExciseAmount", "");
-		paramMap.put("paymentMunicipalPercent", form.getSummaryReport().getPaymentMunicipalPercent());
+		paramMap.put("paymentMunicipalPercent", "");
 		paramMap.put("paymentMunicipalAmount", "");
 		paramMap.put("paymentExciseAndMunicipalTaxAmount", "");
 		paramMap.put("paymentOtherAmount", "");
@@ -271,6 +268,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 				paramMap.put("taxDeductionOnBookNo", form.getSummaryReport().getTaxDeductionOnBookNo());
 				paramMap.put("taxDeductionOnBookAmount", decimalFormatTwoDigit.format(new BigDecimal(EDBarcodeReportUtil.blankToZero(form.getSummaryReport().getTaxDeductionOnBookAmount()))));
 				paramMap.put("paymentExciseAmount", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount())));
+				paramMap.put("paymentMunicipalPercent", form.getSummaryReport().getPaymentMunicipalPercent());
 				paramMap.put("paymentMunicipalAmount", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getPaymentMunicipalAmount())));
 				paramMap.put("paymentExciseAndMunicipalTaxAmount", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAndMunicipalTaxAmount())));
 				paramMap.put("paymentOtherAmount", decimalFormatTwoDigit.format(new BigDecimal(EDBarcodeReportUtil.blankToZero(form.getSummaryReport().getPaymentOtherAmount()))));

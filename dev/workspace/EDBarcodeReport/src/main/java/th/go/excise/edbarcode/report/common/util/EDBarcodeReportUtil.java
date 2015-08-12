@@ -15,7 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import th.go.excise.edbarcode.report.common.bean.SR12011FormReport;
+import th.go.excise.edbarcode.report.bean.SR12011FormReport;
+import th.go.excise.edbarcode.report.bean.XmlData;
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 import th.go.excise.edbarcode.report.common.exception.EDBarcodeReportException;
 
@@ -52,15 +53,20 @@ public class EDBarcodeReportUtil {
 		
 		logger.debug("XML File: " + xmlFile);
 		
+		XmlData xmlData = null;
 		SR12011FormReport form = null;
+		
 		try {
-			Unmarshaller jaxbUnmarshaller = JAXBContext.newInstance(SR12011FormReport.class).createUnmarshaller();
+			Unmarshaller jaxbUnmarshaller = JAXBContext.newInstance(XmlData.class).createUnmarshaller();
 			
 			File file = new File(xmlFile);
 			logger.debug("file.isFile(): " + file.isFile());
 			logger.debug("file.canRead(): " + file.canRead());
 			
-			form = (SR12011FormReport) jaxbUnmarshaller.unmarshal(file);
+			xmlData = (XmlData) jaxbUnmarshaller.unmarshal(file);
+			form = xmlData.getSr12011FormReport();
+			form.getTaxpayerInfoReport().setCusId(xmlData.getSubmitOnlineHeader().getCusId());
+			form.getTaxpayerInfoReport().setTaxpayerId(xmlData.getSubmitOnlineHeader().getTaxpayerId());
 			
 			logger.debug("Object: " + form.toString());
 			

@@ -1,4 +1,4 @@
-package th.go.excise.edbarcode.report.common.bean;
+package th.go.excise.edbarcode.report.bean;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -17,8 +17,6 @@ public class TaxpayerInfoReport {
 	private String taxpayerName;
 	private TaxpayerAddressReport taxpayerAddressReport;
 	
-	
-	@XmlElement(name = "CusId")
 	public String getCusId() {
 		return cusId;
 	}
@@ -27,7 +25,6 @@ public class TaxpayerInfoReport {
 		this.cusId = cusId;
 	}
 
-	@XmlElement(name = "TaxpayerId")
 	public String getTaxpayerId() {
 		return taxpayerId;
 	}
@@ -35,7 +32,6 @@ public class TaxpayerInfoReport {
 	public void setTaxpayerId(String taxpayerId) {
 		this.taxpayerId = taxpayerId;
 	}
-
 	@XmlElement(name = "Tin")
 	public String getTin() {
 		return tin;
@@ -90,7 +86,7 @@ public class TaxpayerInfoReport {
 		this.taxpayerName = taxpayerName;
 	}
 	
-	@XmlElement(name = "TaxpayerAddressReport")
+	@XmlElement(name = "TaxpayerAddressInfo")
 	public TaxpayerAddressReport getTaxpayerAddressReport() {
 		return taxpayerAddressReport;
 	}

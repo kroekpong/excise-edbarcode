@@ -22,11 +22,11 @@ public class TestSR12011Report {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testWithXmlFile() {
-		String xmlFile = "C:\\Users\\SU\\Desktop\\example_SR12011.txt";
+		String xmlFile = "C:\\Users\\SU\\Desktop\\xmlData.txt";
 		String outputPath = "C:\\iReport\\TEST\\";
-		String mode = "A";
+		String mode = "S";
 		
 		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
 		try {
