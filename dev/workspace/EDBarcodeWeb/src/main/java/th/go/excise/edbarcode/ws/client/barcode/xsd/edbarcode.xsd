@@ -63,7 +63,6 @@
 	
 	<complexType name="TaxpayerAddressInfo">
 		<sequence>
-			<element name="HouseIdNumber"				type="string"		minOccurs="0" />
 			<element name="BuildingName"				type="string"		minOccurs="0" />
 			<element name="RoomNumber"					type="string"		minOccurs="0" />
 			<element name="FloorNumber"					type="string"		minOccurs="0" />
