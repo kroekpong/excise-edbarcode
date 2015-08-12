@@ -7,7 +7,6 @@
 	
 	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
 	
-	<!-- Web Service Endpoint -->
 	<bean id="clientMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="packagesToScan">
 			<list>
@@ -16,7 +15,7 @@
 		</property>
 	</bean>
 	
-	<!-- Barcode Endpoint -->
+	<!-- SubmitOnlineWebService -->
 	<bean id="submitOnlineWsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
 		<constructor-arg ref="messageFactory" />
 		<property name="marshaller" ref="clientMarshaller"></property>
