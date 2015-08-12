@@ -14,7 +14,7 @@
 		<complexType>
 			<sequence>
 				<element name="Header"					type="tns:ResponseHeader" />
-				<element name="Body"					type="tns:ReponseBody" />
+				<element name="Body"					type="tns:ResponseBody" />
 			</sequence>
 		</complexType>
 	</element>
@@ -47,7 +47,7 @@
 		</sequence>
 	</complexType>
 
-	<complexType name="ReponseBody">
+	<complexType name="ResponseBody">
 		<sequence>
 			<element name="returnCode"					type="string"				minOccurs="1" />
 			<element name="returnDesc"					type="string"				minOccurs="1" />
@@ -92,11 +92,11 @@
 
 	<complexType name="FormData">
 		<sequence>
-			<element name="PS0112Form"					type="tns:PS0112Form"		minOccurs="0" />
+			<element name="SR0112Form"					type="tns:SR0112Form"		minOccurs="0" />
 		</sequence>
 	</complexType>
 
-	<complexType name="PS0112Form">
+	<complexType name="SR0112Form">
 		<sequence>
 			<element name="PaymentReferenceId"			type="integer"				minOccurs="1" />
 			<element name="BankReferenceId"				type="string"				minOccurs="1" />
