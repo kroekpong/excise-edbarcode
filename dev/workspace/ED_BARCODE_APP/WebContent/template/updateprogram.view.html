@@ -1,0 +1,27 @@
+<md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" style="min-height:580px;">
+
+<div  layout="column" >
+	<div layout="column" style="width: 600px;margin-top: 10px;">
+	
+		<md-input-container class="md-icon-float">
+	        <label>อัพเดตโปรแกรมล่าสุด</label>
+	        <md-icon class="material-icons">check_circle</md-icon>
+		<input type="text" ng-model="updateDate" readonly> </md-input-container>
+		<md-input-container class="md-icon-float">
+	        <label>โปรแกรมเวอร์ชั่น</label>
+	        <md-icon class="material-icons">info_outline</md-icon>
+		<input type="text" ng-model="version" readonly> </md-input-container>
+		
+	</div>
+	
+	<div layout="column" style="width: 600px;">
+	
+		 <md-button class="md-raised" style="width:150px;  margin-left: 226px;" ng-click="btnUpdate()" ng-disabled="showProgess" >อัพเดตโปรแกรม</md-button>
+	     
+	     <md-progress-linear md-mode="indeterminate" ng-show="showProgess"></md-progress-linear>  
+	      
+	</div>
+        
+</div>
+
+</md-whiteframe>

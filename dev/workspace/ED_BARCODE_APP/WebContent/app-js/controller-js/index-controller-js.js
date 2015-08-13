@@ -1,8 +1,15 @@
 /**
  * 
  */
-var module = angular.module('indexApp', [ 'ngMaterial', "ui.router" ,"profile.view","order.view" ]);
+var module = angular.module('indexApp', [ 'ngMaterial', "ui.router" ,"profile.view","order.view" ,"updateprogram.view"]);
 
+module.config(function($mdThemingProvider) {
+	  $mdThemingProvider.theme('default')
+	    .primaryPalette('blue' , {
+	    	 'default': '700'
+	    })
+	    .accentPalette('orange');
+});
 
 module.config(function($stateProvider, $urlRouterProvider) {
 	//
@@ -21,6 +28,12 @@ module.config(function($stateProvider, $urlRouterProvider) {
 		url : "/view/assignment",
 		templateUrl : "template/order.view.html",
 		controller : "order.view.controller"
+	});
+	// update
+	$stateProvider.state('update', {
+		url : "/view/inbox",
+		templateUrl : "template/updateprogram.view.html",
+		controller : "updateprogram.view.controller"
 	});
 });
 
