@@ -1,7 +1,7 @@
 <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
 
 <!-- add item -->
-<div layout="column" style="width: 100%">
+<div layout="column" style="width: 100%" ng-show="step[0]">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <h2 class="md-flex"> รายการสุรา </h2>
@@ -10,7 +10,6 @@
   <md-content layout-padding>
     
     
-	    <div>
 		  <md-content class="md-padding">
 		    <md-tabs md-dynamic-height md-border-bottom>
 		      <md-tab label="รายการสุรา แนะนำ">
@@ -134,14 +133,16 @@
             
             	<md-button class="md-raised md-primary" ng-show="showDataSearch">เพิ่ม</md-button>
             
-            
 				
 					
 				  </md-content>
 		      </md-tab>
 		    </md-tabs>
+		    
+		        <md-button class="md-raised" ng-click="navigaTor(1)">ย้อนกลับ</md-button>
+		        
+		        
 		  </md-content>
-</div>
 
 
   </md-content>
@@ -149,8 +150,332 @@
 
 <!-- add item -->
 
+<!-- Grid -->
+<div ng-show="step[1]">
+<div layout="column">
+ 
+ <div layout="row">
+ 
+	 <md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(0)">เพิ่มรายการสุรา</md-button>
+	 <md-button class="md-raised md-warn" style="width:150px;"> ลบรายการที่เลือก </md-button>
+	 
+</div>
+
+<div class="CSSProduct"  ng-show="showDataSearch">
+       <table >
+       									<tr >
+											<td rowspan="3">ที่</td>
+											<td rowspan="3">(๓) ชนิดสุรา</td>
+											<td colspan="7">(๔) <br> รายการสุรา
+											</td>
+											<td colspan="4">(๕) <br>ภาษีสุราต่อภาชนะ
+											</td>
+											<td colspan="2">(๖) <br>รวมภาษีสุรา
+											</td>
+											<td rowspan="3">ลบ</td>
+
+										</tr>
+										<tr class="header-td">
+											<td rowspan="2">(๔.๑) ชื่อสุรา</td>
+											<td rowspan="2">(๔.๒) ดีกรี</td>
+											<td rowspan="2">(๔.๓) ขนาดบรรจุ (ลิตร)</td>
+											<td rowspan="2">(๔.๔) จำนวนภาชนะ</td>
+											<td rowspan="2">(๔.๕) ปริมาณสุราที่เสียภาษี (ลิตร)</td>
+											<td colspan="2">(๔.๖) <br>รายการขายส่งช่วงสุดท้ายของสุรา
+												(บาท/ภาชนะ) ไม่รวมภาษีมูลค่าเพิ่ม
+											</td>
+											<td rowspan="2">(๕.๑) ภาษีตามมูลค่า (บาท/ภาชนะ)</td>
+											<td rowspan="2">(๕.๒) ภาษีตามปริมาณ (บาท/ภาชนะ)</td>
+											<td rowspan="2">(๕.๓) <br>ภาษีตามปริมาณ
+												กรณีภาษีดีกรีเกิน (บาท/ภาชนะ)
+											</td>
+											<td rowspan="2">(๕.๔) <br> รวมภาษีสุรา ตามปริมาณ
+												(บาท/ภาชนะ) (๕.๒+๕.๓)
+											</td>
+											<td rowspan="2">(๖.๑) <br> ตามมูลค่า (๔.๔ * ๕.๑)
+											</td>
+											<td rowspan="2">(๖.๒) <br> ตามปริมาณ (๔.๔ * ๕.๔)
+											</td>
+										</tr>
+										<tr  class="header-td">
+											<td>ตามแจ้ง</td>
+											<td>ตามประกาศ</td>
+										</tr>
+       	
+       		<tr ng-repeat="item in gridList track by $index">
+       			<td>{{$index+1}}</td>
+       			<td>{{item.Goods.ProductTypeDescriptionText}}</td>
+       			<td>{{item.Goods.GoodsDescriptionText}}</td>
+       			<td>{{item.Goods.Degree}}</td>
+       			<td>{{item.Goods.GoodsSize}}</td>
+       			<td> 
+       				<md-input-container md-no-float style="padding:0;" >
+			        	<input type="number" ng-model="item.GoodsCount" placeholder="ขนาดบรรจุ (ลิตร)">
+			      	</md-input-container>
+			    </td>
+			    
+       			<td>{{toStringDec(item.Goods.GoodsSize*item.GoodsCount)}}</td>
+       			
+       			<td>
+       			
+					<md-input-container md-no-float style="padding:0;" >
+			        	<input type="number" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง">
+			      	</md-input-container>
+
+				</td>
+       			
+       			<td>{{item.Goods.DeclarePrice}}</td>
+       			<td>1</td>
+       			<td>1</td>
+       			<td>1</td>
+       			<td>1</td>
+       			<td>1</td>
+       			<td>1</td>
+       			<td>
+					<md-checkbox ng-model="item.checkbox" aria-label="item.checkbox">
+					</md-checkbox>
+				</td>
+
+       		</tr>
+       	
+       	
+      </table>
+</div>
+		
+		<div layout="row">
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(2)">ทำรายการถัดไป</md-button>   
+		</div>
+		                
+</div>		                
+		                
+</div>	                
+<!-- end Grid		                 -->
 
 
+<!-- tax calc -->
+<div layout="column" style="width: 100%" ng-show="step[2]">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">รวมภาษีสุรา</h2>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+    
+    
+    <div class="CSSTableGenerator"  ng-show="showDataSearch">
+		                <table >
+		                    <tr ng-show="false">
+		                        <td>
+		                            Name
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            Number	
+		                        </td>
+		                        <td >
+		                            bath	
+		                        </td>
+		                    </tr>
+							
+<!-- 						List	 -->
+		                    <tr>
+		                        <td>
+		                            (๖.๑) รวมภาษีสุราตามมูลค่า
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+		               
+		                    <tr>
+		                        <td>
+		                            (๖.๒) รวมภาษีสุราตามปริมาณ
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+
+		                    <tr>
+		                        <td>
+		                            (๗) รวมภาษีสุรา (๖.๑)+(๖.๒)
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+
+		                    <tr>
+		                        <td>
+		                            (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+
+		                    <tr>
+		                        <td>
+		                            (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่	
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+		                    
+		                    <tr>
+		                        <td>
+		                            (๑๐) คงเหลือภาษีสุรา	
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+		                    
+		                    
+		                    <tr>
+		                        <td>
+		                            
+									(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทยร้อยละ	
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+		                    
+		                    <tr>
+		                        <td>
+		                            
+									(๑๒) รวมภาษีที่ต้องชำระทั้งสิ้น (๑๐) + (๑๑)
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+		                    
+		                    <tr>
+		                        <td>
+		                            
+									(๑๓) อื่นๆ
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+		                    
+		                    <tr>
+		                        <td>
+		                            
+									(๑๔) รวม (๑๒) + (๑๓)
+		                        </td>
+		                        <td style="text-align: right;" >
+		                            10000	
+		                        </td>
+		                         <td>
+		                            b	
+		                        </td>
+		                    </tr>
+		                    
+		                   
+		                    
+		                </table>
+           		 </div>
+
+
+  </md-content>
+  
+  		<div layout="row">
+	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>             
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)">ทำรายการถัดไป</md-button>   
+		</div>
+  
+  </div>
+
+<!-- end tax calc -->
+
+<!-- summit type -->
+<div layout="column" style="width: 100%" ng-show="step[3]">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">ประเภท ED Barcode</h2>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+    
+       <md-radio-group ng-model="submitType">
+		      <md-radio-button value="offline"> แบบออฟไลน์ ไม่ใช้ อินเตอร์เน็ต </md-radio-button>
+		      <md-radio-button value="online">  แบบออนไลน์ ใช้ อินเตอร์เน็ต </md-radio-button>
+   	  </md-radio-group>
+
+
+  </md-content>
+  
+ 		<div layout="row">
+	     	<md-button class="md-raised" style="width:150px;" ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>             
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(4)">ทำรายการถัดไป</md-button>   
+		</div>  
+  
+  </div>
+
+<!-- summit type -->
+
+<!-- summit type -->
+<div layout="column" style="width: 100%" ng-show="step[4]">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">พิมพ์เอกสาร</h2>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+    
+    <h3 class="md-subhead">กดปุ่มเพื่อแสดงตัวอย่างเอกสาร</h3>
+
+	<div layout="row">
+			 <md-button class="md-raised">แบบ สร.๑๒๐-๑๑</md-button>
+			  <md-button class="md-raised">แบบ สสส.๑/๐๑</md-button>
+			   <md-button class="md-raised">แบบ สสท.๑/๐๑</md-button>
+			    <md-button class="md-raised">แบบ กกท.๑/๐๑</md-button>
+	</div>
+
+  </md-content>
+  
+  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="navigaTor(1)">เสร็จสิ้น</md-button>    
+  
+  </div>
+
+<!-- summit type -->
+
+
+
+	                
+		                
+		                
 
 
 

@@ -59,16 +59,18 @@ module.service('$productService', function(){
 		g.GoodsSize =  parseFloat("0.330");
 		g.Degree = parseFloat("4.9000");
 		g.DeclarePrice = parseFloat("49.000");
+		g.ProductTypeDescriptionText = "เบียร์";
 		
 		GoodsList.push(g);
 		
 		var g2 = new Goods();
 		
-		g2.GoodsDescriptionText = "สิงห์ OLD   0.330 4.9000";
+		g2.GoodsDescriptionText = "สิงห์ NEW   0.330 4.9000";
 		g2.BrandName = "สิงห์ OLD2";
 		g2.GoodsSize =  parseFloat("0.330");
 		g2.Degree = parseFloat("4.9000");
 		g2.DeclarePrice = parseFloat("49.000");
+		g2.ProductTypeDescriptionText = "เบียร์";
 		
 		GoodsList.push(g2);
 		
