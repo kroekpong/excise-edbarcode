@@ -1,5 +1,6 @@
 <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
 
+<!-- add item -->
 <div layout="column" style="width: 100%">
   <md-toolbar>
     <div class="md-toolbar-tools">
@@ -62,28 +63,78 @@
 		      <md-tab label="ค้นหา">
 		        <md-content  class="md-padding">
 					
-				<div layout="row">
+				<div layout="column">
 				 	
-				 	 <h3 class="md-headline" flax>ชื่อสุรา</h3>
-					 <md-input-container flax>
-				        <md-select ng-model="search.GoodsDescriptionText" aria-label="name">
+				 	<div layout="row">
+				 	<div class="div-padding-select">
+				 	 	<h3 class="md-subhead" flax>ชื่อสุรา</h3>
+				 	</div>
+					 <md-input-container>
+				        <md-select ng-model="search.GoodsDescriptionText" aria-label="name" style="padding:0;" >
 				          <md-option ng-repeat="v in search.GoodsDescriptionTextList" value="{{v.svalue}}">{{v.slabel}}</md-option>
 				        </md-select>
 				      </md-input-container>
+				      </div>
 				      
-				     <h3 class="md-headline" flax>ดีกรี</h3>
-					 <md-input-container flax>
-				        <md-select ng-model="search.GoodsSize" aria-label="size">
+				      <div layout="row">
+				     <div  class="div-padding-select">
+				     	<h3 class="md-subhead" flax>ดีกรี</h3>
+				     </div>
+					 <md-input-container style="padding:0;" flax>
+				        <md-select ng-model="search.GoodsSize" aria-label="size"  style="padding:0;" >
 				          <md-option ng-repeat="v in search.GoodsSizeList" value="{{v.svalue}}">{{v.slabel}}</md-option>
 				        </md-select>
 				      </md-input-container>
+				      </div>
 				      
 				      
-				      <md-button class="md-raised md-primary" flax>ค้นหา</md-button>
+				 <md-button class="md-raised md-primary" style="width:100px;">ค้นหา</md-button>
 					
 				</div>	
 				
 				
+					<div class="CSSTableGenerator"  ng-show="showDataSearch">
+		                <table >
+		                    <tr>
+		                        <td>
+		                            
+		                        </td>
+		                        <td >
+		                            	ชื่อสุรา
+		                        </td>
+		                        <td>
+		                            	เครืองหมายการค้าหลัก
+		                        </td>
+		                        <td>
+		                            	ขนาด
+		                        </td>
+		                        <td>
+		                            	ดีกรี
+		                        </td>
+		                        <td>
+		                            	ราคาตามประกาศ
+		                        </td>
+		                    </tr>
+		                    
+		                    <tr ng-repeat="product in searchProduct track by $index">
+		                    	<td> 
+			                    	<md-checkbox ng-model="product.checkbox" aria-label="product.checkbox">
+							        </md-checkbox>
+						        </td>
+					       		<td>{{product.GoodsDescriptionText}}</td>
+						        <td>{{product.BrandName}}</td>
+						        <td>{{product.GoodsSize}}</td>
+						        <td>{{product.Degree}}</td>
+						        <td>{{product.DeclarePrice}}</td>
+						       
+		                    </tr>
+		                    
+		                </table>
+           		 </div>
+            
+            	<md-button class="md-raised md-primary" ng-show="showDataSearch">เพิ่ม</md-button>
+            
+            
 				
 					
 				  </md-content>
@@ -95,5 +146,12 @@
 
   </md-content>
 </div>
+
+<!-- add item -->
+
+
+
+
+
 
 </md-whiteframe>

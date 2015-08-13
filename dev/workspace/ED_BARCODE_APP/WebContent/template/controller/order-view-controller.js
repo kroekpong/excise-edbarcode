@@ -7,7 +7,10 @@ module.controller('order.view.controller', function($scope,$rootScope , $locatio
 	console.info("order.view.controller")
 	
 	$scope.topProduct = $productService.getTopProduct();
+	$scope.searchProduct =  $productService.getTopProduct();
 	$scope.search = {};
+	$scope.showDataSearch = $scope.searchProduct.length > 0;
+	
 	$scope.search.GoodsDescriptionTextList = [{
 		svalue : "002",
 		slabel : "สิงห์ OLD 0.630 4.9000"
