@@ -1,5 +1,99 @@
 <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
 
-order
+<div layout="column" style="width: 100%">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex"> รายการสุรา </h2>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+    
+    
+	    <div>
+		  <md-content class="md-padding">
+		    <md-tabs md-dynamic-height md-border-bottom>
+		      <md-tab label="รายการสุรา แนะนำ">
+		        <md-content class="md-padding">
+					
+					<div class="CSSTableGenerator" >
+		                <table >
+		                    <tr>
+		                        <td>
+		                            
+		                        </td>
+		                        <td >
+		                            	ชื่อสุรา
+		                        </td>
+		                        <td>
+		                            	เครืองหมายการค้าหลัก
+		                        </td>
+		                        <td>
+		                            	ขนาด
+		                        </td>
+		                        <td>
+		                            	ดีกรี
+		                        </td>
+		                        <td>
+		                            	ราคาตามประกาศ
+		                        </td>
+		                    </tr>
+		                    
+		                    <tr ng-repeat="product in topProduct track by $index">
+		                    	<td> 
+			                    	<md-checkbox ng-model="product.checkbox" aria-label="product.checkbox">
+							        </md-checkbox>
+						        </td>
+					       		<td>{{product.GoodsDescriptionText}}</td>
+						        <td>{{product.BrandName}}</td>
+						        <td>{{product.GoodsSize}}</td>
+						        <td>{{product.Degree}}</td>
+						        <td>{{product.DeclarePrice}}</td>
+						       
+		                    </tr>
+		                    
+		                </table>
+           		 </div>
+            
+            
+             	<md-button class="md-raised md-primary">เพิ่ม</md-button>
+             
+		        </md-content>
+		      </md-tab>
+		      <md-tab label="ค้นหา">
+		        <md-content  class="md-padding">
+					
+				<div layout="row">
+				 	
+				 	 <h3 class="md-headline" flax>ชื่อสุรา</h3>
+					 <md-input-container flax>
+				        <md-select ng-model="search.GoodsDescriptionText" aria-label="name">
+				          <md-option ng-repeat="v in search.GoodsDescriptionTextList" value="{{v.svalue}}">{{v.slabel}}</md-option>
+				        </md-select>
+				      </md-input-container>
+				      
+				     <h3 class="md-headline" flax>ดีกรี</h3>
+					 <md-input-container flax>
+				        <md-select ng-model="search.GoodsSize" aria-label="size">
+				          <md-option ng-repeat="v in search.GoodsSizeList" value="{{v.svalue}}">{{v.slabel}}</md-option>
+				        </md-select>
+				      </md-input-container>
+				      
+				      
+				      <md-button class="md-raised md-primary" flax>ค้นหา</md-button>
+					
+				</div>	
+				
+				
+				
+					
+				  </md-content>
+		      </md-tab>
+		    </md-tabs>
+		  </md-content>
+</div>
+
+
+  </md-content>
+</div>
 
 </md-whiteframe>
