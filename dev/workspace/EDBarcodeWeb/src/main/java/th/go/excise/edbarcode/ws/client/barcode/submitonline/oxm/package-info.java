@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.excise.go.th/xsd/barcode")
-package th.go.excise.edbarcode.ws.client.barcode.oxm;
+package th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm;

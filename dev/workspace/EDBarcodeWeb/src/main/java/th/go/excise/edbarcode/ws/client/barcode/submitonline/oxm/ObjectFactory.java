@@ -6,7 +6,7 @@
 //
 
 
-package th.go.excise.edbarcode.ws.client.barcode.oxm;
+package th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

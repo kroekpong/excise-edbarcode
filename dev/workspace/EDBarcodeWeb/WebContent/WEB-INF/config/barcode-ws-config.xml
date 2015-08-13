@@ -32,7 +32,7 @@
 		<property name="schema" ref="barcodeSchema" />
 		<property name="portTypeName" value="EDBarcodeService" />
 		<property name="locationUri">
-			<value>${edBarcodeService.service}</value>
+			<value>${edBarcodeService.provider.service}</value>
 		</property>
 		<property name="targetNamespace" value="http://www.excise.go.th/xsd/barcode" />
 	</bean>

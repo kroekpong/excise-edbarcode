@@ -1,4 +1,4 @@
-package th.go.excise.edbarcode.ws.client.barcode.service;
+package th.go.excise.edbarcode.ws.client.barcode.submitonline.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
-import th.go.excise.edbarcode.ws.client.barcode.oxm.EbarcodeSubmitOnlineRequest;
-import th.go.excise.edbarcode.ws.client.barcode.oxm.EbarcodeSubmitOnlineResponse;
+import th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest;
+import th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineResponse;
 
 @Service("submitOnlineBackService")
 public class SubmitOnlineBackServiceImpl implements SubmitOnlineBackService {

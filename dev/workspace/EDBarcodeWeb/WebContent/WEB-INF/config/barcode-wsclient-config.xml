@@ -10,7 +10,7 @@
 	<bean id="clientMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="packagesToScan">
 			<list>
-				<value>th.go.excise.edbarcode.ws.client.barcode.oxm</value>
+				<value>th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm</value>
 			</list>
 		</property>
 	</bean>
@@ -24,7 +24,7 @@
 			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
 		</property>
 		<property name="defaultUri">
-			<value>${edBarcodeService.endpoint}</value>
+			<value>${edBarcodeService.client.service}</value>
 		</property>
 	</bean>
 	

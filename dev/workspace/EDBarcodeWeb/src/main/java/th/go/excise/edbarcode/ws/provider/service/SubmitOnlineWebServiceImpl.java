@@ -7,13 +7,13 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baiwa.framework.common.util.NumberUtils;
-
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
-import th.go.excise.edbarcode.ws.client.barcode.service.SubmitOnlineBackService;
+import th.go.excise.edbarcode.ws.client.barcode.submitonline.service.SubmitOnlineBackService;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
 import th.go.excise.edbarcode.ws.provider.oxm.GoodsEntryInfo;
+
+import com.baiwa.framework.common.util.NumberUtils;
 
 @Service("submitOnlineWebService")
 public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
@@ -31,10 +31,10 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		
 		try {
 			// Create WebService Request
-			th.go.excise.edbarcode.ws.client.barcode.oxm.EbarcodeSubmitOnlineRequest wsRequest = prepareWsRequest(request);
+			th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest wsRequest = prepareWsRequest(request);
 			
 			// Call Service
-			th.go.excise.edbarcode.ws.client.barcode.oxm.EbarcodeSubmitOnlineResponse wsResponse = submitOnlineBackService.doService(wsRequest);
+			th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineResponse wsResponse = submitOnlineBackService.doService(wsRequest);
 			
 			if (WebServiceConstant.STATUS_CODE.OK.equalsIgnoreCase(wsResponse.getSubmitOnlineStatus())) {
 				// success
@@ -64,10 +64,10 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
 	 */
-	private th.go.excise.edbarcode.ws.client.barcode.oxm.EbarcodeSubmitOnlineRequest prepareWsRequest(EbarcodeSubmitOnlineRequest request) throws IllegalAccessException, InvocationTargetException {
+	private th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest prepareWsRequest(EbarcodeSubmitOnlineRequest request) throws IllegalAccessException, InvocationTargetException {
 		
 		// SubmitOnlineHeader
-		th.go.excise.edbarcode.ws.client.barcode.oxm.SubmitOnlineHeader wsSummitOnlineHeader = new th.go.excise.edbarcode.ws.client.barcode.oxm.SubmitOnlineHeader();
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SubmitOnlineHeader wsSummitOnlineHeader = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SubmitOnlineHeader();
 		wsSummitOnlineHeader.setCompanyId(request.getSubmitOnlineHeader().getCompanyId());
 		wsSummitOnlineHeader.setCompanyUserId(request.getSubmitOnlineHeader().getCompanyUserId());
 		wsSummitOnlineHeader.setCompanyUserPwd(request.getSubmitOnlineHeader().getCompanyUserPwd());
@@ -81,7 +81,7 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		
 		// SR12011Info
 		// TaxpayerInfo
-		th.go.excise.edbarcode.ws.client.barcode.oxm.TaxpayerInfo wsTaxpayerInfo = new th.go.excise.edbarcode.ws.client.barcode.oxm.TaxpayerInfo();
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.TaxpayerInfo wsTaxpayerInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.TaxpayerInfo();
 		wsTaxpayerInfo.setCompanyName(request.getSR12011Info().getTaxpayerInfo().getCompanyName());
 		wsTaxpayerInfo.setEffectiveDate(request.getSR12011Info().getTaxpayerInfo().getEffectiveDate());
 		wsTaxpayerInfo.setExpireDate(request.getSR12011Info().getTaxpayerInfo().getExpireDate());
@@ -90,7 +90,7 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		wsTaxpayerInfo.setTin(request.getSR12011Info().getTaxpayerInfo().getTin());
 		
 		// TaxpayerAddressInfo
-		th.go.excise.edbarcode.ws.client.barcode.oxm.TaxpayerAddressInfo wsTaxpayerAddressInfo = new th.go.excise.edbarcode.ws.client.barcode.oxm.TaxpayerAddressInfo();
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.TaxpayerAddressInfo wsTaxpayerAddressInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.TaxpayerAddressInfo();
 		wsTaxpayerAddressInfo.setBuildingName(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getBuildingName());
 		wsTaxpayerAddressInfo.setRoomNumber(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getRoomNumber());
 		wsTaxpayerAddressInfo.setFloorNumber(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getFloorNumber());
@@ -106,10 +106,10 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		wsTaxpayerAddressInfo.setTelNumber(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getTelNumber());
 		wsTaxpayerInfo.setTaxpayerAddressInfo(wsTaxpayerAddressInfo);
 		
-		th.go.excise.edbarcode.ws.client.barcode.oxm.GoodsListInfo wsGoodsListInfo = new th.go.excise.edbarcode.ws.client.barcode.oxm.GoodsListInfo();
-		th.go.excise.edbarcode.ws.client.barcode.oxm.GoodsEntryInfo wsGoodsEntryInfo = null;
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.GoodsListInfo wsGoodsListInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.GoodsListInfo();
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.GoodsEntryInfo wsGoodsEntryInfo = null;
 		for(GoodsEntryInfo goodsEntryInfo : request.getSR12011Info().getGoodsListInfo().getGoodsEntryInfo() ) {
-			wsGoodsEntryInfo = new th.go.excise.edbarcode.ws.client.barcode.oxm.GoodsEntryInfo();
+			wsGoodsEntryInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.GoodsEntryInfo();
 			wsGoodsEntryInfo.setCategoryCode1(goodsEntryInfo.getCategoryCode1());
 			wsGoodsEntryInfo.setCategoryCode2(goodsEntryInfo.getCategoryCode2());
 			wsGoodsEntryInfo.setCategoryCode3(goodsEntryInfo.getCategoryCode3());
@@ -145,7 +145,7 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 			wsGoodsListInfo.getGoodsEntryInfo().add(wsGoodsEntryInfo);
 		}
 		
-		th.go.excise.edbarcode.ws.client.barcode.oxm.SummaryInfo wsSummaryInfo = new th.go.excise.edbarcode.ws.client.barcode.oxm.SummaryInfo();
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SummaryInfo wsSummaryInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SummaryInfo();
 		wsSummaryInfo.setMoiRate(request.getSR12011Info().getSummaryInfo().getMoiRate());
 		wsSummaryInfo.setPaymentExciseAmount(NumberUtils.nullToZero(request.getSR12011Info().getSummaryInfo().getPaymentExciseAmount()));
 		wsSummaryInfo.setPaymentExciseAndMunicipalTaxAmount(NumberUtils.nullToZero(request.getSR12011Info().getSummaryInfo().getPaymentExciseAndMunicipalTaxAmount()));
@@ -166,19 +166,19 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		wsSummaryInfo.setTaxLessFrom(request.getSR12011Info().getSummaryInfo().getTaxLessType());
 		wsSummaryInfo.setTaxLessType(request.getSR12011Info().getSummaryInfo().getTaxLessType());
 		
-		th.go.excise.edbarcode.ws.client.barcode.oxm.SR12011Info wsSR12011Info = new th.go.excise.edbarcode.ws.client.barcode.oxm.SR12011Info();
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SR12011Info wsSR12011Info = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SR12011Info();
 		wsSR12011Info.setTaxpayerInfo(wsTaxpayerInfo);
 		wsSR12011Info.setGoodsListInfo(wsGoodsListInfo);
 		wsSR12011Info.setSummaryInfo(wsSummaryInfo);
 		
-		th.go.excise.edbarcode.ws.client.barcode.oxm.EbarcodeSubmitOnlineRequest wsRequest = new th.go.excise.edbarcode.ws.client.barcode.oxm.EbarcodeSubmitOnlineRequest();
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest wsRequest = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest();
 		wsRequest.setSubmitOnlineHeader(wsSummitOnlineHeader);
 		wsRequest.setSR12011Info(wsSR12011Info);
 		
 		return wsRequest;
 	}
 	
-	private EbarcodeSubmitOnlineResponse prepareWsResponse(th.go.excise.edbarcode.ws.client.barcode.oxm.EbarcodeSubmitOnlineResponse wsResponse) throws IllegalAccessException, InvocationTargetException {
+	private EbarcodeSubmitOnlineResponse prepareWsResponse(th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineResponse wsResponse) throws IllegalAccessException, InvocationTargetException {
 		
 		EbarcodeSubmitOnlineResponse response = new EbarcodeSubmitOnlineResponse();
 		response.setReferenceNumber(wsResponse.getReferenceNumber());

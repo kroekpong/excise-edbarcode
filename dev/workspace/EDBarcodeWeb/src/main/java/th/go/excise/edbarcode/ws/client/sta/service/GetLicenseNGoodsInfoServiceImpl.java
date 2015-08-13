@@ -32,7 +32,7 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 	
 	private static final Logger logger = LogManager.getLogger(GetLicenseNGoodsInfoServiceImpl.class);
 	
-	@Value("${summitService.rmi}")
+	@Value("${summitService.client.rmi}")
 	private String rmiUrl;
 	
 	@Override
