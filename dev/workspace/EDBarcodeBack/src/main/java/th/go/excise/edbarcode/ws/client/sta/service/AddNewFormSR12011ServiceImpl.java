@@ -32,7 +32,7 @@ public class AddNewFormSR12011ServiceImpl implements AddNewFormSR12011Service {
 	
 	private static final Logger logger = LogManager.getLogger(AddNewFormSR12011ServiceImpl.class);
 	
-	@Value("${summitService.rmi}")
+	@Value("${summitService.client.rmi}")
 	private String rmiUrl;
 	
 	@Override
