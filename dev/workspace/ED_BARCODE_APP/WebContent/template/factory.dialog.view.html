@@ -20,24 +20,23 @@
 		                            
 		                        </td>
 		                        <td >
-		                            	TaxpayerName
+		                            	ชื่อโรงงานสุรา
 		                        </td>
 		                        <td>
-		                            	LicenseName
+		                            	ชื่อประเภทใบอนุญาต
 		                        </td>
 		                        <td>
-		                            	LicenseNo
+		                            	เลขที่ใบอนุญาต
 		                        </td>
 		                        <td>
-		                            	EffectiveDate-ExpireDate
+		                            	วันที่
 		                        </td>
 		                    </tr>
 		                    
 		                    <tr ng-repeat="fac in factoryList track by $index">
 		                    	<td> 
 		                    	
-		                    		 <md-checkbox ng-model="fac.checkbox" aria-label="Checkbox 1">
-							          Checkbox 1: {{ data.cb1 }}
+		                    		 <md-checkbox  ng-checked="getCheck(fac.factorys.LicenseNo)" ng-click="checkoneonly(fac.factorys.LicenseNo)" aria-label="Checkbox 1">
 							        </md-checkbox>
 
 

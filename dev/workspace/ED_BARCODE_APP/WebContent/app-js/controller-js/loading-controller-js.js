@@ -18,5 +18,10 @@ module.controller('loadingAppCtrl', function($scope, $location , $fileUtils , $c
 
 	var xml = $fileUtils.readCurrentProfile();
 	$convertDataXml.convertXMLtoLocalStorage(xml);
+	
+//	goto loading
+	setTimeout(function() {
+		window.location="index.html";
+	}, 2000);
 
 });
