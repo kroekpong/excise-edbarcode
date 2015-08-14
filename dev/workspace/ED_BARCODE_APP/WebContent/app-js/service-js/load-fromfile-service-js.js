@@ -42,6 +42,12 @@ var Goods = function() {
 	this.WholesaleMin = 0;
 	this.RateWholesaleOver = 0;
 	this.RatePerLitreMax = 0;
+//	this.GoodId = Date.now();
+	
+	this.genId = function(){
+		this.GoodId = Math.floor(Math.random()*10000000000000);
+//		console.log("this.GoodId" , this.GoodId );
+	}
 	
 	this.setString = function(_prop , _value){
 		if(_value == "" || _value === undefined) return;
@@ -56,34 +62,50 @@ var Goods = function() {
 
 module.service('$productService', function() {
 	console.info("load.from.file", "$productService");
-
+	var GoodsList = JSON.parse(localStorage["GoodsList"]);
+	var list = GoodsList.slice(0).slice(0, 10);
+	allproduct =GoodsList.slice(0);
+	
 	this.getTopProduct = function() {
 		console.info("getTopProduct");
-		var GoodsList = [];
-
-		var g = new Goods();
-
-		g.GoodsDescriptionText = "สิงห์ OLD   0.330 4.9000";
-		g.BrandName = "สิงห์ OLD";
-		g.GoodsSize = parseFloat("0.330");
-		g.Degree = parseFloat("4.9000");
-		g.DeclarePrice = parseFloat("49.000");
-		g.ProductTypeDescriptionText = "เบียร์";
-
-		GoodsList.push(g);
-
-		var g2 = new Goods();
-
-		g2.GoodsDescriptionText = "สิงห์ NEW   0.330 4.9000";
-		g2.BrandName = "สิงห์ OLD2";
-		g2.GoodsSize = parseFloat("0.330");
-		g2.Degree = parseFloat("4.9000");
-		g2.DeclarePrice = parseFloat("49.000");
-		g2.ProductTypeDescriptionText = "เบียร์";
-
-		GoodsList.push(g2);
-
-		return GoodsList;
+		return list;
+	};
+	
+	this.getAllProduct = function(){
+		return allproduct; 
+	}
+	
+	this.getSearchCriteria = function (){
+		var GoodsDescriptionTextList = new Set();
+		var Degree = new Set();
+		for(var _i in allproduct){
+			var p = allproduct[_i];
+			GoodsDescriptionTextList.add(p.GoodsDescriptionText);
+			Degree.add(p.Degree);
+		}
+		
+		console.log("GoodsDescriptionTextList",GoodsDescriptionTextList.size);
+		console.log("Degree",Degree.size);
+		
+		var set1 = [];
+		GoodsDescriptionTextList.forEach(function( _value){
+			set1.push({
+				"display" : _value,
+				"value" : _value
+			});
+		});
+		var set2 = [];
+		Degree.forEach(function( _value){
+			set2.push({
+				"display" : _value,
+				"value" : _value
+			});
+		});
+		
+		return {
+			"GoodsDescriptionTextList" : set1,
+			"Degree" : set2
+		};
 	};
 
 });
@@ -164,7 +186,7 @@ module.service('$convertDataXml', function() {
 			"Address" : getXMLtoAddr(pxml),
 		};
 
-		 console.log(profile);
+//		 console.log(profile);
 		localStorage["profile"] = JSON.stringify(profile);
 		
 		console.info("GoodsList ...");
@@ -238,7 +260,7 @@ module.service('$convertDataXml', function() {
 			 g.setNumber("WholesaleMin", _ParserXml.getByTagName("WholesaleMin",_i));
 			 g.setNumber("RateWholesaleOver", _ParserXml.getByTagName("RateWholesaleOver",_i));
 			 g.setNumber("RatePerLitreMax", _ParserXml.getByTagName("RatePerLitreMax",_i));
-			 
+			 g.genId();
 //			 console.log(g);
 			 
 			 GoodsList.push(g);

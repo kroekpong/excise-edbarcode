@@ -9,8 +9,13 @@
   </md-toolbar>
   <md-content layout-padding>
     
-    
+            	
 		  <md-content class="md-padding">
+		  
+    
+         	<md-button class="md-raised md-primary" ng-show="showDataSearch" ng-click="onAdd()">เพิ่ม</md-button>
+           	<md-button class="md-raised md-warn" style="width:150px;" ng-click="resetProductChecked()"> รีเซตที่แลือกไว้ </md-button>
+		  
 		    <md-tabs md-dynamic-height md-border-bottom>
 		      <md-tab label="รายการสุรา แนะนำ">
 		        <md-content class="md-padding">
@@ -40,7 +45,7 @@
 		                    
 		                    <tr ng-repeat="product in topProduct track by $index">
 		                    	<td> 
-			                    	<md-checkbox ng-model="product.checkbox" aria-label="product.checkbox">
+			                    	<md-checkbox aria-label="product.checkbox" ng-checked="getProductChecked(product.GoodId)" ng-click="productCheckedClick(product.GoodId,product)" >
 							        </md-checkbox>
 						        </td>
 					       		<td>{{product.GoodsDescriptionText}}</td>
@@ -55,41 +60,60 @@
            		 </div>
             
             
-             	<md-button class="md-raised md-primary">เพิ่ม</md-button>
-             
 		        </md-content>
 		      </md-tab>
 		      <md-tab label="ค้นหา">
 		        <md-content  class="md-padding">
 					
-				<div layout="column">
-				 	
-				 	<div layout="row">
-				 	<div class="div-padding-select">
-				 	 	<h3 class="md-subhead" flax>ชื่อสุรา</h3>
-				 	</div>
-					 <md-input-container>
-				        <md-select ng-model="search.GoodsDescriptionText" aria-label="name" style="padding:0;" >
-				          <md-option ng-repeat="v in search.GoodsDescriptionTextList" value="{{v.svalue}}">{{v.slabel}}</md-option>
-				        </md-select>
-				      </md-input-container>
-				      </div>
-				      
-				      <div layout="row">
-				     <div  class="div-padding-select">
-				     	<h3 class="md-subhead" flax>ดีกรี</h3>
-				     </div>
-					 <md-input-container style="padding:0;" flax>
-				        <md-select ng-model="search.GoodsSize" aria-label="size"  style="padding:0;" >
-				          <md-option ng-repeat="v in search.GoodsSizeList" value="{{v.svalue}}">{{v.slabel}}</md-option>
-				        </md-select>
-				      </md-input-container>
-				      </div>
-				      
-				      
-				 <md-button class="md-raised md-primary" style="width:100px;">ค้นหา</md-button>
-					
-				</div>	
+					  <md-whiteframe class="md-whiteframe-z3" layout layout-align="left center"  style="margin-bottom:10px;">
+						 <div layout="column" style="width: 100%;margin: 10px;">
+								 
+								  <div layout="row" layout-align="left center">
+								  	 <h3 style="margin-right: 77px;">ชื่อสุรา</h3>
+									 <md-autocomplete style="margin-bottom:10px;width:500px;"
+							          ng-disabled="false"
+							          md-selected-item="selectedItem1"
+							          md-search-text="userSearch.GoodsDescriptionText"
+							          md-items="item in querySearch(userSearch.GoodsDescriptionText,'GoodsDescriptionText')"
+							          md-item-text="item.GoodsDescriptionText"
+							          md-min-length="3"
+							          placeholder="ชื่อสุรา">
+								        <md-item-template>
+											  <span md-highlight-text="ausearchText" md-highlight-flags="^i">{{item.GoodsDescriptionText}}</span>
+											  <span md-highlight-text="ausearchText" >(ขนาด {{item.GoodsSize}} )</span>
+											  <span md-highlight-text="ausearchText" >(ดีกรี {{item.Degree}} )</span>
+								        </md-item-template>
+								        <md-not-found>
+								          No matches found for "{{userSearch.GoodsDescriptionText}}".
+								        </md-not-found>
+								      </md-autocomplete>
+								  </div>	
+							      
+							      
+						        <div layout="row" layout-align="left center">
+							  	 <h3 style="margin-right: 100px;">ดีกรี</h3>
+								 <md-autocomplete style="width:500px;"
+						          ng-disabled="false"
+						          md-selected-item="selectedItem2"
+						          md-search-text="userSearch.Degree"
+						          md-items="item in querySearch(userSearch.Degree,'Degree')"
+						          md-item-text="item.Degree"
+						          md-min-length="1"
+						          placeholder="ดีกรี">
+							        <md-item-template>
+										 <span md-highlight-text="ausearchText" >{{item.GoodsDescriptionText}}</span>
+										  <span md-highlight-text="ausearchText">(ขนาด {{item.GoodsSize}} )</span>
+										  <span md-highlight-text="ausearchText" md-highlight-flags="^i">(ดีกรี {{item.Degree}} )</span>
+							        </md-item-template>
+							        <md-not-found>
+							          No matches found for "{{userSearch.Degree}}".
+							        </md-not-found>
+							      </md-autocomplete>
+						        </div>
+						        
+								</div>	
+								
+						</md-whiteframe>
 				
 				
 					<div class="CSSTableGenerator"  ng-show="showDataSearch">
@@ -115,9 +139,9 @@
 		                        </td>
 		                    </tr>
 		                    
-		                    <tr ng-repeat="product in searchProduct track by $index">
+		                    <tr ng-repeat="product in searchProduct | filter:userSearch">
 		                    	<td> 
-			                    	<md-checkbox ng-model="product.checkbox" aria-label="product.checkbox">
+			                    	<md-checkbox aria-label="product.checkbox" ng-checked="getProductChecked(product.GoodId)" ng-click="productCheckedClick(product.GoodId,product)" >
 							        </md-checkbox>
 						        </td>
 					       		<td>{{product.GoodsDescriptionText}}</td>
@@ -131,7 +155,6 @@
 		                </table>
            		 </div>
             
-            	<md-button class="md-raised md-primary" ng-show="showDataSearch">เพิ่ม</md-button>
             
 				
 					
@@ -139,7 +162,10 @@
 		      </md-tab>
 		    </md-tabs>
 		    
+			<div layout="row">
 		        <md-button class="md-raised" ng-click="navigaTor(1)">ย้อนกลับ</md-button>
+            	
+			</div>
 		        
 		        
 		  </md-content>
@@ -157,7 +183,7 @@
  <div layout="row">
  
 	 <md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(0)">เพิ่มรายการสุรา</md-button>
-	 <md-button class="md-raised md-warn" style="width:150px;"> ลบรายการที่เลือก </md-button>
+	 <md-button class="md-raised md-warn" style="width:150px;" ng-click="onDelete()"> ลบรายการที่เลือก </md-button>
 	 
 </div>
 
@@ -456,7 +482,7 @@
     
     <h3 class="md-subhead">กดปุ่มเพื่อแสดงตัวอย่างเอกสาร</h3>
 
-	<div layout="row">
+	<div layout="row"  layout-align="center center" style="width: 100%;">
 			 <md-button class="md-raised">แบบ สร.๑๒๐-๑๑</md-button>
 			  <md-button class="md-raised">แบบ สสส.๑/๐๑</md-button>
 			   <md-button class="md-raised">แบบ สสท.๑/๐๑</md-button>
