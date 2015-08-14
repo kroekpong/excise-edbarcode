@@ -1,0 +1,69 @@
+<md-dialog aria-label="Mango (Fruit)">
+<form>
+	<md-toolbar>
+	<div class="md-toolbar-tools">
+		<h2>โรงงานสุรา</h2>
+		<span flex></span>
+		<md-button
+			class="md-icon-button"
+			ng-click="answer('CanCel')"> <md-icon
+			class="material-icons">close</md-icon> </md-button>
+	</div>
+	</md-toolbar>
+	<md-dialog-content style="min-width:400px;max-height:810px; ">
+	<div>
+	
+		<div class="CSSTableGenerator" >
+		                <table >
+		                    <tr>
+		                        <td>
+		                            
+		                        </td>
+		                        <td >
+		                            	TaxpayerName
+		                        </td>
+		                        <td>
+		                            	LicenseName
+		                        </td>
+		                        <td>
+		                            	LicenseNo
+		                        </td>
+		                        <td>
+		                            	EffectiveDate-ExpireDate
+		                        </td>
+		                    </tr>
+		                    
+		                    <tr ng-repeat="fac in factoryList track by $index">
+		                    	<td> 
+		                    	
+		                    		 <md-checkbox ng-model="fac.checkbox" aria-label="Checkbox 1">
+							          Checkbox 1: {{ data.cb1 }}
+							        </md-checkbox>
+
+
+						        </td>
+					       		<td>{{fac.factorys.TaxpayerName}}</td>
+						        <td>{{fac.factorys.LicenseName}}</td>
+						        <td>{{fac.factorys.LicenseNo}}</td>
+						        <td>{{fac.factorys.EffectiveDate + "-" + fac.factorys.ExpireDate}}</td>
+						       
+		                    </tr>
+		                    
+		                </table>
+           		 </div>
+	
+	
+	
+	
+	</div>
+	</md-dialog-content>
+	<div
+		class="md-actions"
+		layout="row">
+		<span flex></span>
+		<md-button
+			class="md-raised md-primary"
+			ng-click="answer('OK')"> ตกลง </md-button>
+	</div>
+</form>
+</md-dialog>

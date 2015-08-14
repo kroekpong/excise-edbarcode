@@ -8,10 +8,16 @@
         <md-icon class="material-icons">account_circle</md-icon>
 	<input type="text" ng-model="profile.CompanyName" readonly> </md-input-container>
 
-    <md-input-container class="md-icon-float">
-        <label>ชื่อโรงงานสุรา</label>
-        <md-icon class="material-icons">account_balance</md-icon>
-    <input type="text"  ng-model="profile.TaxpayerName" readonly> </md-input-container>
+	<div  layout="row" layout-align="left center">
+	    <md-input-container class="md-icon-float" style="width:450px;">
+	        <label>ชื่อโรงงานสุรา</label>
+	        <md-icon class="material-icons">account_balance</md-icon>
+	    <input type="text"  ng-model="profile.TaxpayerName" readonly> </md-input-container>
+	    
+	    <md-button class="md-raised md-primary" style="height:40px;" ng-click="showAdvanced($event)" ng-show="factoryList.length > 1">เลือกโรงานสุรา</md-button>
+	    
+	</div>
+
 
 	<div  layout="row" layout-wrap>
 	

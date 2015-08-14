@@ -91,16 +91,25 @@ module.service('$productService', function() {
 module.service('$profileService', function() {
 	console.info("load.from.file", "$profileService");
 
-	var profile = JSON.parse(localStorage["profile"]);
+	var profiles = JSON.parse(localStorage["profile"]);
+	var LicenseNo = localStorage["LicenseNo"];
+	var index = 0;
+	for(var _i in profiles.factorys){
+		if( profiles.factorys[_i]["LicenseNo"] == LicenseNo){
+			index = _i;
+			console.info("profile",LicenseNo);
+			break;
+		}
+	}
 
 	this.getProfile = function() {
 		var profileUser = {
-			"CompanyName" : profile.CompanyName,
-			"TaxpayerName" : profile.factorys[0].TaxpayerName  + " [" + profile.factorys[0].LicenseName + "]",
-			"LicenseNo" : profile.factorys[0].LicenseNo,
-			"LicenseDate" : profile.factorys[0].EffectiveDate + "-" + profile.factorys[0].ExpireDate,
-			"CompanyId" : profile.CompanyId,
-			"Address" : profile.Address,
+			"CompanyName" : profiles.CompanyName,
+			"TaxpayerName" : profiles.factorys[index].TaxpayerName  + " [" + profiles.factorys[index].LicenseName + "]",
+			"LicenseNo" : profiles.factorys[index].LicenseNo,
+			"LicenseDate" : profiles.factorys[index].EffectiveDate + "-" + profiles.factorys[index].ExpireDate,
+			"CompanyId" : profiles.CompanyId,
+			"Address" : profiles.Address,
 		};
 
 //		console.log(profileUser);
@@ -166,6 +175,7 @@ module.service('$convertDataXml', function() {
 			GoodsListbyFactorySize.push({
 				"factoryIndex" : _i,
 				"LicenseNo" : factorys[_i].LicenseNo,
+				"factorys" : factorys[_i],
 				"start" : last,
 				"end" : last+GoodsL
 			});
