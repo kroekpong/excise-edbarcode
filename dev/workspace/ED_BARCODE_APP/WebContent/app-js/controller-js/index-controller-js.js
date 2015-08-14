@@ -1,7 +1,7 @@
 /**
  * 
  */
-var module = angular.module('indexApp', [ 'ngMaterial', "ui.router" ,"profile.view","order.view" ,"updateprogram.view"]);
+var module = angular.module('indexApp', [ 'ngMaterial', "ui.router" ,"profile.view","order.view" ,"updateprogram.view","history.view"]);
 
 module.config(function($mdThemingProvider) {
 	  $mdThemingProvider.theme('default')
@@ -14,8 +14,8 @@ module.config(function($mdThemingProvider) {
 module.config(function($stateProvider, $urlRouterProvider) {
 	//
 	// For any unmatched url, redirect to /state1
-//	$urlRouterProvider.otherwise("/view/assignment_ind");
-	//
+	$urlRouterProvider.otherwise("/view/assignment_ind");
+	
 	// profile
 	$stateProvider.state('profile', {
 		url : "/view/assignment_ind",
@@ -34,6 +34,12 @@ module.config(function($stateProvider, $urlRouterProvider) {
 		url : "/view/inbox",
 		templateUrl : "template/updateprogram.view.html",
 		controller : "updateprogram.view.controller"
+	});
+	// history
+	$stateProvider.state('history', {
+		url : "/view/history",
+		templateUrl : "template/history.view.html",
+		controller : "history.view.controller"
 	});
 });
 

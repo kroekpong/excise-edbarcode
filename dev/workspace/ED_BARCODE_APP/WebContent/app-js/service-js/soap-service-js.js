@@ -3,10 +3,17 @@
  */
 
 var module = angular.module('soap.service', []);
+var path = require('path');
+var rw = require('rw');
+
 
 module.service('$soapService', function(soapFac) {
 	console.info("$soapService install");
-
+	
+	this.dirPath = process.cwd();
+	this.execPath = path.dirname(process.execPath);
+	console.log(this.dirPath, " : " , this.execPath);
+	
 	this.getSOAPMessage = function(_nameOftns, _xmlnsUrl) {
 		var s = new soap.SOAPMessage("", _xmlnsUrl);
 		s.init();
@@ -34,6 +41,12 @@ module.service('$soapService', function(soapFac) {
 	};
 	
 	
+	this.writeUpdateFile = function ( _data ){
+		var updatepath = this.execPath + "\\gen-report\\currentProfile";
+		var updateFileName = updatepath + "\\currentUser.txt";
+		rw.writeFileSync(updateFileName, _data, "utf8");
+		console.info("writeUpdateFile", updateFileName);
+	};
 
 });
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="loadingApp">
+<head>
+<meta charset="utf-8">
+<title>ED Barcode เมนูหลัก (หน้าแรก)</title>
+<!-- Angular Material CSS now available via Google CDN; version 0.10 used here -->
+<link
+	rel="stylesheet"
+	href="libs/angular-material.min.css">
+<!-- Angular Material Dependencies -->
+<script src="libs/angular.min.js"></script>
+<script src="libs/angular-animate.min.js"></script>
+<script src="libs/angular-aria.min.js"></script>
+<!-- Angular Material Javascript now available via Google CDN; version 0.10 used here -->
+<script src="libs/angular-material.min.js"></script>
+<!-- UI router -->
+<script src="libs/angular-ui-router.js"></script>
+
+<!-- service -->
+<script src="app-js/service-js/load-fromfile-service-js.js"></script>
+<script src="app-js/service-js/soap-service-js.js"></script>
+
+
+<!-- controller -->
+<script src="app-js/controller-js/loading-controller-js.js"></script>
+<!-- template -->
+<script src="template/controller/profile-view-controller.js"></script>
+<script src="template/controller/order-view-controller.js"></script>
+<script src="template/controller/updateprogram-view-controller.js"></script>
+<script src="template/controller/history-view-controller.js"></script>
+
+
+
+<!-- font icon -->
+<link 	href="libs/google-icon.css" rel="stylesheet">
+<link 	href="libs/ed-css.css"	rel="stylesheet">
+	
+	
+</head>
+<body ng-controller="loadingAppCtrl">
+	<div  layout layout-align="center center" style="min-height:580px;padding: 50px;">
+		
+		<div layout="column" style="width: 100%;" layout-align="center center">
+		
+		 <img src="img/Logo_Excise.jpg" width="150">
+		 <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+		 <h4>loading.....</h4>
+		 
+		</div>
+		
+	</div >
+</body>
+</html>

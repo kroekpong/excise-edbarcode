@@ -4,7 +4,7 @@
 var module = angular.module('updateprogram.view', [ "soap.service" ]);
 
 module.controller('updateprogram.view.controller', function($scope, $rootScope, $soapService, $mdToast, $animate) {
-	console.info("updateprogram.view.controller")
+	console.info("updateprogram.view.controller");
 	$scope.toastPosition = {
 		bottom : false,
 		top : true,
@@ -35,6 +35,9 @@ module.controller('updateprogram.view.controller', function($scope, $rootScope, 
 		$soapService.post(EbarcodeSyncMasterDataRequest, "http://124.109.26.20:7001/EDBarcodeWeb/ws/EDBarcodeService", function(status, xmlDoc, data) {
 			$scope.showProgess = false;
 			$mdToast.show($mdToast.simple().content('สำเร็จ').position($scope.getToastPosition()).hideDelay(3000));
+			if(status == 200){
+				$soapService.writeUpdateFile(data);
+			}
 		});
 
 	};
