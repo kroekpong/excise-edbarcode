@@ -431,6 +431,18 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			builder.append(goodsEntry.getSeqNo());
 			builder.append(ReportConstant.SEPERATE_STRING);
 			builder.append(goodsEntry.getProductTypeCode());
+			builder.append("#");
+			builder.append(goodsEntry.getCategoryCode1());
+			builder.append("#");
+			builder.append(goodsEntry.getCategoryCode2());
+			builder.append("#");
+			builder.append(goodsEntry.getCategoryCode3());
+			builder.append("#");
+			builder.append(goodsEntry.getCategoryCode4());
+			builder.append("#");
+			builder.append(goodsEntry.getCategoryCode5());
+			builder.append("#");
+			builder.append(goodsEntry.getUnitCode());			
 			builder.append(ReportConstant.SEPERATE_STRING);
 			builder.append(goodsEntry.getGoodsPiece().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);

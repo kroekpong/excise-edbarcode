@@ -9,6 +9,12 @@ public class GoodsEntryReport {
 
 	private String seqNo;
 	private String ProductTypeCode;
+	private String categoryCode1;
+	private String categoryCode2;
+	private String categoryCode3;
+	private String categoryCode4;
+	private String categoryCode5;
+	private String unitCode;
 	private String productTypeDesc;
 	private String goodsDesc;
 	private String degree;
@@ -42,6 +48,60 @@ public class GoodsEntryReport {
 
 	public void setProductTypeCode(String productTypeCode) {
 		ProductTypeCode = productTypeCode;
+	}
+
+	@XmlElement(name = "CategoryCode1")
+	public String getCategoryCode1() {
+		return categoryCode1;
+	}
+
+	public void setCategoryCode1(String categoryCode1) {
+		this.categoryCode1 = categoryCode1;
+	}
+
+	@XmlElement(name = "CategoryCode2")
+	public String getCategoryCode2() {
+		return categoryCode2;
+	}
+
+	public void setCategoryCode2(String categoryCode2) {
+		this.categoryCode2 = categoryCode2;
+	}
+
+	@XmlElement(name = "CategoryCode3")
+	public String getCategoryCode3() {
+		return categoryCode3;
+	}
+
+	public void setCategoryCode3(String categoryCode3) {
+		this.categoryCode3 = categoryCode3;
+	}
+
+	@XmlElement(name = "CategoryCode4")
+	public String getCategoryCode4() {
+		return categoryCode4;
+	}
+
+	public void setCategoryCode4(String categoryCode4) {
+		this.categoryCode4 = categoryCode4;
+	}
+
+	@XmlElement(name = "CategoryCode5")
+	public String getCategoryCode5() {
+		return categoryCode5;
+	}
+
+	public void setCategoryCode5(String categoryCode5) {
+		this.categoryCode5 = categoryCode5;
+	}
+
+	@XmlElement(name = "UnitCode")
+	public String getUnitCode() {
+		return unitCode;
+	}
+
+	public void setUnitCode(String unitCode) {
+		this.unitCode = unitCode;
 	}
 
 	@XmlElement(name = "ProductTypeDesc")
