@@ -7,10 +7,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class TaxpayerAddressReport {
 
-	private String buildingName;
-	private String roomNumber;
-	private String floorNumber;
-	private String villageName;
 	private String houseNumber;
 	private String mooNumber;
 	private String trokSoiName;
@@ -22,42 +18,6 @@ public class TaxpayerAddressReport {
 	private String telNumber;
 	
 	
-	@XmlElement(name = "BuildingName")
-	public String getBuildingName() {
-		return buildingName;
-	}
-
-	public void setBuildingName(String buildingName) {
-		this.buildingName = buildingName;
-	}
-
-	@XmlElement(name = "RoomNumber")
-	public String getRoomNumber() {
-		return roomNumber;
-	}
-
-	public void setRoomNumber(String roomNumber) {
-		this.roomNumber = roomNumber;
-	}
-
-	@XmlElement(name = "FloorNumber")
-	public String getFloorNumber() {
-		return floorNumber;
-	}
-
-	public void setFloorNumber(String floorNumber) {
-		this.floorNumber = floorNumber;
-	}
-
-	@XmlElement(name = "VillageName")
-	public String getVillageName() {
-		return villageName;
-	}
-
-	public void setVillageName(String villageName) {
-		this.villageName = villageName;
-	}
-
 	@XmlElement(name = "HouseNumber")
 	public String getHouseNumber() {
 		return houseNumber;

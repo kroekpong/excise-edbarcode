@@ -100,10 +100,6 @@
 	
 	<complexType name="TaxpayerAddressInfo">
 		<sequence>
-			<element name="BuildingName"				type="string"		minOccurs="0" />
-			<element name="RoomNumber"					type="string"		minOccurs="0" />
-			<element name="FloorNumber"					type="string"		minOccurs="0" />
-			<element name="VillageName"					type="string"		minOccurs="0" />
 			<element name="HouseNumber"					type="string"		minOccurs="0" />
 			<element name="MooNumber"					type="string"		minOccurs="0" />
 			<element name="TrokSoiName"					type="string"		minOccurs="0" />
