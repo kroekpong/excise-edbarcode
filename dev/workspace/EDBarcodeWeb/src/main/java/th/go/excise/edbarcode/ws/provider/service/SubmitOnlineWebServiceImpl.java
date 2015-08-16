@@ -91,10 +91,6 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		
 		// TaxpayerAddressInfo
 		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.TaxpayerAddressInfo wsTaxpayerAddressInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.TaxpayerAddressInfo();
-		wsTaxpayerAddressInfo.setBuildingName(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getBuildingName());
-		wsTaxpayerAddressInfo.setRoomNumber(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getRoomNumber());
-		wsTaxpayerAddressInfo.setFloorNumber(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getFloorNumber());
-		wsTaxpayerAddressInfo.setVillageName(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getVillageName());
 		wsTaxpayerAddressInfo.setHouseNumber(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getHouseNumber());
 		wsTaxpayerAddressInfo.setMooNumber(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getMooNumber());
 		wsTaxpayerAddressInfo.setTrokSoiName(request.getSR12011Info().getTaxpayerInfo().getTaxpayerAddressInfo().getTrokSoiName());

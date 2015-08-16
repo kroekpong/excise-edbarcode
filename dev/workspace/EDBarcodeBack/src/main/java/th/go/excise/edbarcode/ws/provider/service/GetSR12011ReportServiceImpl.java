@@ -93,10 +93,6 @@ public class GetSR12011ReportServiceImpl implements GetSR12011ReportService {
 		
 		// Taxpayer
 		TaxpayerAddressReport taxpayerAddress = new TaxpayerAddressReport();
-		taxpayerAddress.setBuildingName(sr12011Info.getTaxpayerInfo().getTaxpayerAddressInfo().getBuildingName());
-		taxpayerAddress.setRoomNumber(sr12011Info.getTaxpayerInfo().getTaxpayerAddressInfo().getRoomNumber());
-		taxpayerAddress.setFloorNumber(sr12011Info.getTaxpayerInfo().getTaxpayerAddressInfo().getFloorNumber());
-		taxpayerAddress.setVillageName(sr12011Info.getTaxpayerInfo().getTaxpayerAddressInfo().getVillageName());
 		taxpayerAddress.setHouseNumber(sr12011Info.getTaxpayerInfo().getTaxpayerAddressInfo().getHouseNumber());
 		taxpayerAddress.setMooNumber(sr12011Info.getTaxpayerInfo().getTaxpayerAddressInfo().getMooNumber());
 		taxpayerAddress.setTrokSoiName(sr12011Info.getTaxpayerInfo().getTaxpayerAddressInfo().getTrokSoiName());
