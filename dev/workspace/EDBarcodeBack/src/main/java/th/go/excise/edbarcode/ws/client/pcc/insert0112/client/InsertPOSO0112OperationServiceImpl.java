@@ -8,7 +8,6 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.InsertPOSO0112Operation;
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.InsertPOSO0112OperationResponse;
-import th.go.excise.edbarcode.ws.client.sta.service.AddNewFormSR12011ServiceImpl;
 
 @Service("insertPOSO0112OperationService")
 public class InsertPOSO0112OperationServiceImpl implements InsertPOSO0112OperationService {
