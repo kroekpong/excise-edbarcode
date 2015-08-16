@@ -5,6 +5,8 @@
 var module = angular.module('load.from.file', []);
 var path = require('path');
 var rw = require('rw');
+var exec = require('child_process').exec;
+var gui = require('nw.gui');
 
 var Goods = function() {
 
@@ -145,16 +147,35 @@ module.service('$fileUtils', function() {
 	this.dirPath = process.cwd();
 	this.execPath = path.dirname(process.execPath);
 	console.info("$fileUtils install..", this.dirPath, " : ", this.execPath);
-
+	var updatepath = this.execPath + "\\gen-report\\currentProfile";
+	var updateFileName = updatepath + "\\currentUser.txt";
+	var reportPath = this.execPath + "\\gen-report";
+	this.pdfItem = [
+	       		reportPath + "\\pdf\\SR120-11.pdf",
+	       		reportPath + "\\pdf\\SSS1_01.pdf",
+	       		reportPath + "\\pdf\\SST1_01.pdf",
+	       		reportPath + "\\pdf\\KKT1_01.pdf"
+	       	];
+	
 	this.readCurrentProfile = function() {
-		var updatepath = this.execPath + "\\gen-report\\currentProfile";
-		var updateFileName = updatepath + "\\currentUser.txt";
 
 		var contents = rw.readFileSync(updateFileName, "utf8");
-
 		console.log("readCurrentProfile : length", contents.length);
-
 		return contents;
+	};
+	
+	this.runGenReport = function ( _fnCallback ){
+		execute(reportPath + "\\run_report.bat \"" + reportPath + "\"" ,_fnCallback);
+	};
+	
+	function execute(command, callback){
+		console.info("command",command);
+	    exec(command, function(error, stdout, stderr){ callback(error, stdout); });
+	};
+	
+	this.open = function ( _url ){
+		console.info("open", _url);
+		gui.Shell.openItem(_url);
 	};
 
 });

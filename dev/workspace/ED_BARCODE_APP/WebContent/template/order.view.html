@@ -462,10 +462,15 @@
 
   </md-content>
   
- 		<div layout="row">
-	     	<md-button class="md-raised" style="width:150px;" ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>             
-			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(4)">ทำรายการถัดไป</md-button>   
-		</div>  
+  	<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
+  		<h3>loading...</h3>
+  		<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"></md-progress-linear>
+  	</div>
+  
+	<div layout="row">
+     	<md-button class="md-raised" style="width:150px;" ng-click="navigaTor(stepCount-1)" ng-disabled="showReportProgess">ย้อนกลับ</md-button>             
+		<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()" ng-disabled="showReportProgess">ทำรายการถัดไป</md-button>   
+	</div>  
   
   </div>
 
@@ -483,11 +488,12 @@
     <h3 class="md-subhead">กดปุ่มเพื่อแสดงตัวอย่างเอกสาร</h3>
 
 	<div layout="row"  layout-align="center center" style="width: 100%;">
-			 <md-button class="md-raised">แบบ สร.๑๒๐-๑๑</md-button>
-			  <md-button class="md-raised">แบบ สสส.๑/๐๑</md-button>
-			   <md-button class="md-raised">แบบ สสท.๑/๐๑</md-button>
-			    <md-button class="md-raised">แบบ กกท.๑/๐๑</md-button>
+			 <md-button class="md-raised" ng-click="open(0)" >แบบ สร.๑๒๐-๑๑</md-button>
+			  <md-button class="md-raised"  ng-click="open(1)">แบบ สสส.๑/๐๑</md-button>
+			   <md-button class="md-raised"  ng-click="open(2)">แบบ สสท.๑/๐๑</md-button>
+			    <md-button class="md-raised"  ng-click="open(3)">แบบ กกท.๑/๐๑</md-button>
 	</div>
+	
 
   </md-content>
   

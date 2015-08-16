@@ -10,7 +10,7 @@ var GridItem = function() {
 
 };
 
-module.controller('order.view.controller', function($scope, $rootScope, $location, $productService,$mdDialog) {
+module.controller('order.view.controller', function($scope, $rootScope, $location, $productService, $mdDialog, $fileUtils, $timeout, $mdToast) {
 	console.info("order.view.controller")
 
 	$scope.topProduct = $productService.getTopProduct();
@@ -24,6 +24,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.step = [ false, true, false, false, false, false, ];
 	$scope.stepCount = 1;
 
+	// report
+	$scope.showReportProgess = false;
+
 	// getsearch
 	$scope.toStringDec = function(_number) {
 		return _number.toFixed(4);
@@ -36,7 +39,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		console.info("navigaTor", _index);
 
 		if (_index == 0) {
-			productCheck = [];
+			$scope.resetProductChecked();
 		}
 	};
 
@@ -66,8 +69,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		return productCheck.indexOf(_goodId) > -1;
 	};
 
-	$scope.resetProductChecked = function(_goodId) {
-		tempSelect = productCheck = [];
+	$scope.resetProductChecked = function() {
+		tempSelect = [];
+		productCheck = [];
 	};
 
 	$scope.productCheckedClick = function(_goodId, product) {
@@ -90,45 +94,84 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			gl.Goods = tempSelect[_i];
 			$scope.gridList.push(gl);
 		}
-		
+
 		$scope.navigaTor(1);
 		console.info("onAdd");
-		
+
 	};
-	
-	$scope.onDelete = function (ev){
-		$scope.showConfirm(ev,"ยืนยันการทำรายการ ?",function(){
+
+	$scope.onDelete = function(ev) {
+		$scope.showConfirm(ev, "ยืนยันการทำรายการ ?", function() {
 			var del = [];
-			for(var _i in $scope.gridList ){
-				var item = $scope.gridList [_i];
-				if(item.checkbox){
+			for ( var _i in $scope.gridList) {
+				var item = $scope.gridList[_i];
+				if (item.checkbox) {
 					del.push(item);
 				}
 			}
-			
-			for(var _i in del){
-				var findex= $scope.gridList.indexOf(del[_i]);
+
+			for ( var _i in del) {
+				var findex = $scope.gridList.indexOf(del[_i]);
 				$scope.gridList.splice(findex, 1);
 			}
-			
+
 		});
 	};
-	
-	$scope.showConfirm = function(ev,_title,_fn) {
-		    // Appending dialog to document.body to cover sidenav in docs app
-		    var confirm = $mdDialog.confirm()
-		          .title('แจ้งเตือน')
-		          .content(_title)
-		          .ariaLabel('confirm Delete')
-		          .ok('ตกลง')
-		          .cancel('ยกเลิก')
-		          .targetEvent(ev);
-		    $mdDialog.show(confirm).then(function() {
-//		      console.log(confirm);
-		      _fn();
-		    }, function() {
-		    	console.log("cancle");
-		    });
-		  };
+
+	$scope.showConfirm = function(ev, _title, _fn) {
+		// Appending dialog to document.body to cover sidenav in docs app
+		var confirm = $mdDialog.confirm().title('แจ้งเตือน').content(_title).ariaLabel('confirm Delete').ok('ตกลง').cancel('ยกเลิก').targetEvent(ev);
+		$mdDialog.show(confirm).then(function() {
+			// console.log(confirm);
+			_fn();
+		}, function() {
+			console.log("cancle");
+		});
+	};
+
+	// report
+	$scope.toastPosition = {
+		bottom : false,
+		top : true,
+		left : false,
+		right : true
+	};
+	$scope.getToastPosition = function() {
+		return Object.keys($scope.toastPosition).filter(function(pos) {
+			return $scope.toastPosition[pos];
+		}).join(' ');
+	};
+
+	$scope.$on("gotoStep", function(event, args) {
+		console.info("gotoStep", args);
+		$timeout(function() {
+			$scope.navigaTor(args);
+		}, 100);
+	});
+
+	$scope.nextAndGenReport = function() {
+		$scope.showReportProgess = true;
+
+		$fileUtils.runGenReport(function(error) {
+			if (error == null) {
+				$rootScope.$broadcast("gotoStep", 4);
+			} else {
+				console.log(error);
+				$scope.showSimpleToast(error.message);
+			}
+
+			$scope.showReportProgess = false;
+
+		});
+	};
+
+	$scope.open = function(_index) {
+		var item = $fileUtils.pdfItem[_index];
+		$fileUtils.open(item);
+	};
+
+	$scope.showSimpleToast = function(_msg) {
+		$mdToast.show($mdToast.simple().content(_msg).position($scope.getToastPosition()).hideDelay(6000));
+	};
 
 });
