@@ -6,5 +6,5 @@
     "toolbar": true,
     "title": "ED Barcode App"
   },
-  "main": "index.html"
+  "main": "loading.html"
 }
