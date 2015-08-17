@@ -7,6 +7,27 @@
 	
 	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
 	
+	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="packagesToScan">
+			<list>
+				<value>th.go.excise.edbarcode.ws.provider.oxm</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- SubmitOnlineWebService -->
+	<bean id="submitOnlineWsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="marshaller" ref="marshaller"></property>
+		<property name="unmarshaller" ref="marshaller"></property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
+		</property>
+		<property name="defaultUri">
+			<value>${edBarcodeService.c.service}</value>
+		</property>
+	</bean>
+	
 	<bean id="clientMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="packagesToScan">
 			<list>
