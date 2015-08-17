@@ -232,10 +232,10 @@
        			<td>{{$index+1}}</td>
        			<td>{{item.Goods.ProductTypeDescriptionText}}</td>
        			<td>{{item.Goods.GoodsDescriptionText}}</td>
-       			<td>{{item.Goods.Degree}}</td>
-       			<td>{{item.Goods.GoodsSize}}</td>
+       			<td>{{toStringDec(item.Goods.Degree,2)}}</td>
+       			<td>{{toStringDec(item.Goods.GoodsSize)}}</td>
        			<td> 
-       				<md-input-container md-no-float style="padding:0;" >
+       				<md-input-container md-no-float style="padding:0;width:90px;" >
 			        	<input type="number" ng-model="item.GoodsCount" placeholder="ขนาดบรรจุ (ลิตร)">
 			      	</md-input-container>
 			    </td>
@@ -244,24 +244,31 @@
        			
        			<td>
        			
-					<md-input-container md-no-float style="padding:0;" >
+					<md-input-container md-no-float style="padding:0;width:100px;" >
 			        	<input type="number" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง">
 			      	</md-input-container>
 
 				</td>
        			
-       			<td>{{item.Goods.DeclarePrice}}</td>
-       			<td>1</td>
-       			<td>1</td>
-       			<td>1</td>
-       			<td>1</td>
-       			<td>1</td>
-       			<td>1</td>
+       			<td style="text-align: right;">{{item.Goods.DeclarePrice}}</td>
+       			<td style="text-align: right;">{{toStringDec(calcPriceAmount(item))}}</td>
+       			<td style="text-align: right;">{{toStringDec(calcQuantityAmount(item))}}</td>
+       			<td style="text-align: right;">{{toStringDec(calcDegreeOver(item))}}</td>
+       			<td style="text-align: right;">{{toStringDec(item.PriceAmountTax+item.QuantityAmountTax)}}</td>
+       			<td style="text-align: right;">{{toStringDec(item.PriceAmountTax)}}</td>
+       			<td style="text-align: right;">{{toStringDec(item.QuantityAmountTax)}}</td>
        			<td>
 					<md-checkbox ng-model="item.checkbox" aria-label="item.checkbox">
 					</md-checkbox>
 				</td>
 
+       		</tr>
+       		<tr>
+       			<td colspan="13" style="text-align: right;"> รวม </td>
+       			<td></td>
+       			<td></td>
+       			<td></td>
+       			
        		</tr>
        	
        	

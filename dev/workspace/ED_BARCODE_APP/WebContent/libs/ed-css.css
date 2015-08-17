@@ -169,7 +169,7 @@
 }.CSSProduct tr:last-child td:last-child{
 	border-width:0px 0px 0px 0px;
 }
-.CSSProduct tr:first-child td ,.header-td > td{
+.CSSProduct tr:first-child td{
 		background:-o-linear-gradient(bottom, #44a1ff 5%, #44a1ff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #44a1ff), color-stop(1, #44a1ff) );
 	background:-moz-linear-gradient( center top, #44a1ff 5%, #44a1ff 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#44a1ff", endColorstr="#44a1ff");	background: -o-linear-gradient(top,#44a1ff,44a1ff);
@@ -178,6 +178,14 @@
 	border:0px solid #000000;
 	text-align:center;
 	border-width:0px 0px 1px 1px;
+	font-size:14px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#ffffff;
+}
+.header-td > td{
+	background-color:#44a1ff;
+	text-align:center;
 	font-size:14px;
 	font-family:Arial;
 	font-weight:bold;

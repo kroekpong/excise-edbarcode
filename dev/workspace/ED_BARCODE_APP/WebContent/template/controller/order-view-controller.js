@@ -7,6 +7,9 @@ var GridItem = function() {
 	this.Goods = {};
 	this.checkbox = false;
 	this.GoodsCount = 1;
+	this.PriceAmountTax = 0;
+	this.QuantityAmountTax = 0;
+	this.DegreeOverTax = 0;
 
 };
 
@@ -28,7 +31,10 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.showReportProgess = false;
 
 	// getsearch
-	$scope.toStringDec = function(_number) {
+	$scope.toStringDec = function(_number, _decemal) {
+		if (_decemal !== undefined) {
+			return _number.toFixed(_decemal);
+		}
 		return _number.toFixed(4);
 	}
 
@@ -173,5 +179,43 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.showSimpleToast = function(_msg) {
 		$mdToast.show($mdToast.simple().content(_msg).position($scope.getToastPosition()).hideDelay(6000));
 	};
+
+	// calc Tax
+	$scope.calcPriceAmount = function(_GridItem) {
+		// F
+		var price = _GridItem.Goods.GoodsPrice;
+		if (_GridItem.Goods.PriceFlag == "P") {
+			price = _GridItem.Goods.DeclarePrice;
+		}
+		return _GridItem.PriceAmountTax = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.TaxRateByPriceAmount * price / 100;
+	};
+
+	$scope.calcQuantityAmount = function(_GridItem) {
+		/** "ภาษีปริมาณ(บาท/ลิตร/100)(2.1)" */
+		var tax1 = 0;
+		if (_GridItem.Goods.Degree <= _GridItem.Goods.DegreeMin) {
+			tax1 = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.Degree * _GridItem.Goods.TaxRateByQuantityAmount / 100;
+			
+		} else {
+			// OVER LOAD
+			tax1 = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.DegreeMin * _GridItem.Goods.TaxRateByQuantityAmount / 100;
+		}
+
+		/** "ภาษีปริมาณ(บาทต่อลิตร)(2.2)" */
+		var tax2 = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.RatePerLitre;
+		return _GridItem.QuantityAmountTax = Math.max(tax1,tax2);
+
+	};
+	
+	$scope.calcDegreeOver = function(_GridItem) {
+		if (_GridItem.Goods.Degree > _GridItem.Goods.DegreeMin) {
+			var diff = _GridItem.Goods.Degree - _GridItem.Goods.DegreeMin;
+			return _GridItem.DegreeOverTax = diff * _GridItem.Goods.RateDegreeOver *  (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount);
+		}
+		
+		return 0;
+	};
+	
+	
 
 });
