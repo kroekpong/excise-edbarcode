@@ -1,4 +1,4 @@
-<md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
+<md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" style="width:100%">
 
 <!-- add item -->
 <div layout="column" style="width: 100%" ng-show="step[0]">
@@ -240,7 +240,7 @@
 			      	</md-input-container>
 			    </td>
 			    
-       			<td>{{toStringDec(item.Goods.GoodsSize*item.GoodsCount)}}</td>
+       			<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize*item.GoodsCount)}}</td>
        			
        			<td>
        			
@@ -265,8 +265,8 @@
        		</tr>
        		<tr>
        			<td colspan="13" style="text-align: right;"> รวม </td>
-       			<td></td>
-       			<td></td>
+       			<td>{{toStringDec(sumCalcPriceAmount())}}</td>
+       			<td>{{toStringDec(sumCalcQuantityAmount())}}</td>
        			<td></td>
        			
        		</tr>
@@ -315,10 +315,10 @@
 		                            (๖.๑) รวมภาษีสุราตามมูลค่า
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                            {{toStringDec(sumCalcPriceAmountValue)}}	
 		                        </td>
 		                         <td>
-		                            b	
+		                         
 		                        </td>
 		                    </tr>
 		               
@@ -327,10 +327,10 @@
 		                            (๖.๒) รวมภาษีสุราตามปริมาณ
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                             {{toStringDec(sumCalcQuantityAmountValue)}}	
 		                        </td>
 		                         <td>
-		                            b	
+
 		                        </td>
 		                    </tr>
 
@@ -339,10 +339,10 @@
 		                            (๗) รวมภาษีสุรา (๖.๑)+(๖.๒)
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                            {{toStringDec(totalTax=sumCalcPriceAmountValue+sumCalcQuantityAmountValue)}}	
 		                        </td>
 		                         <td>
-		                            b	
+
 		                        </td>
 		                    </tr>
 
@@ -351,10 +351,10 @@
 		                            (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                            {{toStringDec(totalTax)}}	
 		                        </td>
 		                         <td>
-		                            b	
+		                            	
 		                        </td>
 		                    </tr>
 
@@ -363,10 +363,10 @@
 		                            (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่	
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                            {{toStringDec(0)}}	
 		                        </td>
 		                         <td>
-		                            b	
+
 		                        </td>
 		                    </tr>
 		                    
@@ -375,10 +375,10 @@
 		                            (๑๐) คงเหลือภาษีสุรา	
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                            {{toStringDec(totalTax)}}		
 		                        </td>
 		                         <td>
-		                            b	
+		                            	
 		                        </td>
 		                    </tr>
 		                    
@@ -386,13 +386,13 @@
 		                    <tr>
 		                        <td>
 		                            
-									(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทยร้อยละ	
+									(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทยร้อยละ	{{royalTaxRate=10}}%
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                            {{toStringDec(royalTotal=totalTax * royalTaxRate/100 )}}		
 		                        </td>
 		                         <td>
-		                            b	
+		                            	
 		                        </td>
 		                    </tr>
 		                    
@@ -402,10 +402,10 @@
 									(๑๒) รวมภาษีที่ต้องชำระทั้งสิ้น (๑๐) + (๑๑)
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                            {{toStringDec(totalTax+royalTotal)}}	
 		                        </td>
 		                         <td>
-		                            b	
+		                            
 		                        </td>
 		                    </tr>
 		                    
@@ -415,10 +415,10 @@
 									(๑๓) อื่นๆ
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                             {{toStringDec(totalTax+royalTotal)}}			
 		                        </td>
 		                         <td>
-		                            b	
+		                            	
 		                        </td>
 		                    </tr>
 		                    
@@ -428,10 +428,10 @@
 									(๑๔) รวม (๑๒) + (๑๓)
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            10000	
+		                             {{toStringDec(totalTax+royalTotal)}}		
 		                        </td>
 		                         <td>
-		                            b	
+		                            	
 		                        </td>
 		                    </tr>
 		                    
@@ -481,13 +481,12 @@
   
   </div>
 
-<!-- summit type -->
 
 <!-- summit type -->
 <div layout="column" style="width: 100%" ng-show="step[4]">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2 class="md-flex">พิมพ์เอกสาร</h2>
+      <h2 class="md-flex">แสดงตัวอย่างก่อนพิมพ์เอกสาร</h2>
     </div>
   </md-toolbar>
   <md-content layout-padding>
@@ -504,11 +503,40 @@
 
   </md-content>
   
-  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="navigaTor(1)">เสร็จสิ้น</md-button>    
-  
+  <div  layout="row"  layout-align="left center" >
+	  <md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>  
+	  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="navigaTor(5)">เสร็จสิ้น</md-button>    
+  </div>
+
+
   </div>
 
 <!-- summit type -->
+
+<!-- finish type -->
+<div layout="column" style="width: 100%" ng-show="step[5]">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">พิมพ์เอกสาร</h2>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+    
+	    <h3 class="md-subhead">กดปุ่ม เพื่อพิมพ์เอกสาร</h3>
+      <div  layout="column"  layout-align="center center" >
+		<md-button class="md-raised" style="width:150px;" > พิมพ์เอกสารทั้งหมด </md-button>  
+	 </div>
+
+  </md-content>
+  
+  <div  layout="row"  layout-align="left center" >
+	  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="doAgain()"> ทำรายการใหม่ </md-button>    
+  </div>
+
+
+  </div>
+
+<!-- finish type -->
 
 
 

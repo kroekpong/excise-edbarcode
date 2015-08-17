@@ -24,7 +24,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	var tempSelect = [];
 
 	$scope.submitType = "offline";
-	$scope.step = [ false, true, false, false, false, false, ];
+	$scope.step = [ false, true, false, false, false, false, false];
 	$scope.stepCount = 1;
 
 	// report
@@ -215,6 +215,35 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		
 		return 0;
 	};
+	
+	$scope.sumCalcPriceAmount = function (){
+		var sum = 0;
+		for(var _i in $scope.gridList){
+			var item = $scope.gridList[_i];
+			sum += item.PriceAmountTax;
+		}
+		$scope.sumCalcPriceAmountValue = sum;
+		return sum;
+	};
+	
+	$scope.sumCalcQuantityAmount = function (){
+		var sum = 0;
+		for(var _i in $scope.gridList){
+			var item = $scope.gridList[_i];
+			sum += item.QuantityAmountTax;
+		}
+		
+		$scope.sumCalcQuantityAmountValue = sum;
+		return sum;
+	};
+	
+	
+	//last step
+	$scope.doAgain = function(){
+		console.info("doAgain ...");
+		$scope.gridList = [];
+		$scope.navigaTor(1);
+	} 
 	
 	
 
