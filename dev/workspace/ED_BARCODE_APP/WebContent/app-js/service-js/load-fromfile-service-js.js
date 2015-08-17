@@ -165,7 +165,7 @@ module.service('$fileUtils', function() {
 	};
 	
 	this.runGenReport = function ( _fnCallback ){
-		execute(reportPath + "\\run_report.bat \"" + reportPath + "\"" ,_fnCallback);
+		execute("\"" + reportPath + "\\run_report.bat\" \"" + reportPath + "\"" ,_fnCallback);
 	};
 	
 	function execute(command, callback){
