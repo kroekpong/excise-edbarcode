@@ -32,6 +32,7 @@
 		<property name="packagesToScan">
 			<list>
 				<value>th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm</value>
+				<value>th.go.excise.edbarcode.ws.provider.oxm</value>
 			</list>
 		</property>
 	</bean>
@@ -48,5 +49,16 @@
 			<value>${pccService.client.service}</value>
 		</property>
 	</bean>
-	
+	<!-- SubmitOnlineWebService2 -->
+	<bean id="wsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="marshaller" ref="clientMarshaller"></property>
+		<property name="unmarshaller" ref="clientMarshaller"></property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
+		</property>
+		<property name="defaultUri">
+			<value>${edBarcodeService.client.service.test}</value>
+		</property>
+	</bean>
 </beans>
