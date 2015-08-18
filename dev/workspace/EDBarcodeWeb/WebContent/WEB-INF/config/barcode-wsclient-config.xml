@@ -28,4 +28,26 @@
 		</property>
 	</bean>
 	
+	<!-- testSyncMasterDataWsTemplate -->
+	<bean id="clientMarshaller2" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="packagesToScan">
+			<list>
+				<value>th.go.excise.edbarcode.ws.provider.oxm</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="testSyncMasterDataWsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="marshaller" ref="clientMarshaller2"></property>
+		<property name="unmarshaller" ref="clientMarshaller2"></property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
+		</property>
+		<property name="defaultUri">
+			<value>${edBarcodeService.client.testservice}</value>
+		</property>
+	</bean>
+	
 </beans>
