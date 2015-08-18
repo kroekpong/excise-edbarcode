@@ -12,6 +12,8 @@
 	        <md-icon class="material-icons">info_outline</md-icon>
 		<input type="text" ng-model="version" readonly> </md-input-container>
 		
+		<h3 ng-show="!isCurrentVersion" style="color: red;">*{{WarningText}}</h3>
+		
 	</div>
 	
 	<div layout="column" style="width: 600px;">

@@ -505,7 +505,7 @@
   
   <div  layout="row"  layout-align="left center" >
 	  <md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>  
-	  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="navigaTor(5)">เสร็จสิ้น</md-button>    
+	  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="saveHistory()">เสร็จสิ้น</md-button>    
   </div>
 
 
@@ -524,7 +524,7 @@
     
 	    <h3 class="md-subhead">กดปุ่ม เพื่อพิมพ์เอกสาร</h3>
       <div  layout="column"  layout-align="center center" >
-		<md-button class="md-raised" style="width:150px;" > พิมพ์เอกสารทั้งหมด </md-button>  
+		<md-button class="md-raised" style="width:150px;" ng-click="open(4)"> พิมพ์เอกสารทั้งหมด </md-button>  
 	 </div>
 
   </md-content>

@@ -1,7 +1,7 @@
 /**
  * 
  */
-var module = angular.module('order.view', [ 'load.from.file' ]);
+var module = angular.module('order.view', [ 'load.from.file','history.service']);
 
 var GridItem = function() {
 	this.Goods = {};
@@ -13,7 +13,8 @@ var GridItem = function() {
 
 };
 
-module.controller('order.view.controller', function($scope, $rootScope, $location, $productService, $mdDialog, $fileUtils, $timeout, $mdToast) {
+module.controller('order.view.controller', function($scope, $rootScope, $location, $productService,
+					$mdDialog, $fileUtils, $timeout, $mdToast,$historyService,$profileService) {
 	console.info("order.view.controller")
 
 	$scope.topProduct = $productService.getTopProduct();
@@ -245,6 +246,11 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		$scope.navigaTor(1);
 	} 
 	
+	//history
+	$scope.saveHistory = function (){
+		$historyService.save($profileService.getProfile(),$scope.gridList,$scope.submitType);
+		$scope.navigaTor(5);
+	};
 	
 
 });

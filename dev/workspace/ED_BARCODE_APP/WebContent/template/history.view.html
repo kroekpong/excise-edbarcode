@@ -16,23 +16,37 @@
 		                            	วันที่ทำรายการ
 		                        </td>
 		                        <td>
+		                            	ประเภท
+		                        </td>
+		                        <td>
 		                            	ดูรายละเอียด
 		                        </td>
-		                    </tr>
-		                    <tr>
 		                        <td>
-		                            	1
+		                            	พิมพ์ (PDF)
+		                        </td>
+		                    </tr>
+		                    <tr ng-repeat="item in hisList track by $index">
+		                        <td>
+		                            	{{$index+1}}
 		                        </td>
 		                        <td>
-		                            	ชื่อโรงงานสุรา
+		                            	{{item.taxpayerName}}
 		                        </td>
 		                        <td >
-		                            	ใบอนุญาตเลขที่
+		                            	{{item.licenseNo}}
+		                        </td>
+		                        <td >
+		                            	{{item["submitType"]}}
 		                        </td>
 		                        <td>
-		                            	วันที่ทำรายการ
+		                            	{{toStringDate(item.submitDate)}}
 		                        </td>
-		                        <td>
+		                        <td style="text-align: center;">
+		                            	  <md-button class="md-icon-button" aria-label="More">
+									         	<md-icon class="material-icons">open_in_new</md-icon>
+									      </md-button>
+		                        </td>
+		                        <td style="text-align: center;">
 		                            	  <md-button class="md-icon-button" aria-label="More">
 									         	<md-icon class="material-icons">open_in_new</md-icon>
 									      </md-button>

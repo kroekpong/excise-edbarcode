@@ -134,6 +134,7 @@ module.service('$profileService', function() {
 			"LicenseDate" : profiles.factorys[index].EffectiveDate + "-" + profiles.factorys[index].ExpireDate,
 			"CompanyId" : profiles.CompanyId,
 			"Address" : profiles.Address,
+			"CompanyUserPwd" : profiles.CompanyUserPwd,
 		};
 
 //		console.log(profileUser);
@@ -154,7 +155,8 @@ module.service('$fileUtils', function() {
 	       		reportPath + "\\pdf\\SR120-11.pdf",
 	       		reportPath + "\\pdf\\SSS1_01.pdf",
 	       		reportPath + "\\pdf\\SST1_01.pdf",
-	       		reportPath + "\\pdf\\KKT1_01.pdf"
+	       		reportPath + "\\pdf\\KKT1_01.pdf",
+	       		reportPath + "\\pdf\\ALL_EXCISE.pdf"
 	       	];
 	
 	this.readCurrentProfile = function() {
@@ -205,6 +207,7 @@ module.service('$convertDataXml', function() {
 			"factorys" : factorys,
 			"CompanyId" : pxml.getByTagName("CompanyId"),
 			"Address" : getXMLtoAddr(pxml),
+			"CompanyUserPwd" : pxml.getByTagName("CompanyUserPwd")
 		};
 
 //		 console.log(profile);
