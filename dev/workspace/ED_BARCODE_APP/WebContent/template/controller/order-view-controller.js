@@ -1,7 +1,7 @@
 /**
  * 
  */
-var module = angular.module('order.view', [ 'load.from.file','history.service']);
+var module = angular.module('order.view', [ 'load.from.file', 'history.service' ]);
 
 var GridItem = function() {
 	this.Goods = {};
@@ -13,8 +13,8 @@ var GridItem = function() {
 
 };
 
-module.controller('order.view.controller', function($scope, $rootScope, $location, $productService,
-					$mdDialog, $fileUtils, $timeout, $mdToast,$historyService,$profileService) {
+module.controller('order.view.controller', function($scope, $rootScope, $location, $productService, $mdDialog, $fileUtils, $timeout,
+		$mdToast, $historyService, $profileService, $soapService) {
 	console.info("order.view.controller")
 
 	$scope.topProduct = $productService.getTopProduct();
@@ -25,7 +25,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	var tempSelect = [];
 
 	$scope.submitType = "offline";
-	$scope.step = [ false, true, false, false, false, false, false];
+	$scope.step = [ false, true, false, false, false, false, false ];
 	$scope.stepCount = 1;
 
 	// report
@@ -196,7 +196,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var tax1 = 0;
 		if (_GridItem.Goods.Degree <= _GridItem.Goods.DegreeMin) {
 			tax1 = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.Degree * _GridItem.Goods.TaxRateByQuantityAmount / 100;
-			
+
 		} else {
 			// OVER LOAD
 			tax1 = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.DegreeMin * _GridItem.Goods.TaxRateByQuantityAmount / 100;
@@ -204,53 +204,100 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 		/** "ภาษีปริมาณ(บาทต่อลิตร)(2.2)" */
 		var tax2 = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.RatePerLitre;
-		return _GridItem.QuantityAmountTax = Math.max(tax1,tax2);
+		return _GridItem.QuantityAmountTax = Math.max(tax1, tax2);
 
 	};
-	
+
 	$scope.calcDegreeOver = function(_GridItem) {
 		if (_GridItem.Goods.Degree > _GridItem.Goods.DegreeMin) {
 			var diff = _GridItem.Goods.Degree - _GridItem.Goods.DegreeMin;
-			return _GridItem.DegreeOverTax = diff * _GridItem.Goods.RateDegreeOver *  (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount);
+			return _GridItem.DegreeOverTax = diff * _GridItem.Goods.RateDegreeOver * (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount);
 		}
-		
+
 		return 0;
 	};
-	
-	$scope.sumCalcPriceAmount = function (){
+
+	$scope.sumCalcPriceAmount = function() {
 		var sum = 0;
-		for(var _i in $scope.gridList){
+		for ( var _i in $scope.gridList) {
 			var item = $scope.gridList[_i];
 			sum += item.PriceAmountTax;
 		}
 		$scope.sumCalcPriceAmountValue = sum;
 		return sum;
 	};
-	
-	$scope.sumCalcQuantityAmount = function (){
+
+	$scope.sumCalcQuantityAmount = function() {
 		var sum = 0;
-		for(var _i in $scope.gridList){
+		for ( var _i in $scope.gridList) {
 			var item = $scope.gridList[_i];
 			sum += item.QuantityAmountTax;
 		}
-		
+
 		$scope.sumCalcQuantityAmountValue = sum;
 		return sum;
 	};
-	
-	
-	//last step
-	$scope.doAgain = function(){
+
+	// last step
+	$scope.doAgain = function() {
 		console.info("doAgain ...");
 		$scope.gridList = [];
 		$scope.navigaTor(1);
-	} 
-	
-	//history
-	$scope.saveHistory = function (){
-		$historyService.save($profileService.getProfile(),$scope.gridList,$scope.submitType);
-		$scope.navigaTor(5);
+	}
+
+	// history
+	$scope.saveHistory = function() {
+//		$historyService.save($profileService.getProfile(), $scope.gridList, $scope.submitType);
+//		$scope.navigaTor(5);
+		$scope.submitOnlineRequest();
 	};
+
+	/**
+	 * submitOnline * gen report
+	 * 
+	 */
 	
+	$scope.submitOnlineRequest = function() {
+		var EbarcodeSubmitOnlineRequest = $soapService.getObject("EbarcodeSubmitOnlineRequest");
+			var SubmitOnlineHeader = $soapService.getObject("SubmitOnlineHeader");
+				SubmitOnlineHeader.push($soapService.getObjectItem("RegistrationId","RegistrationId"));
+				SubmitOnlineHeader.push($soapService.getObjectItem("CusId","CusId"));
+				SubmitOnlineHeader.push($soapService.getObjectItem("CompanyId","CompanyId"));
+				SubmitOnlineHeader.push($soapService.getObjectItem("CompanyUserId","CompanyUserId"));
+				SubmitOnlineHeader.push($soapService.getObjectItem("CompanyUserPwd","CompanyUserPwd"));
+				SubmitOnlineHeader.push($soapService.getObjectItem("TaxpayerId","TaxpayerId"));
+				SubmitOnlineHeader.push($soapService.getObjectItem("ExciseOfficeId","ExciseOfficeId"));
+				SubmitOnlineHeader.push($soapService.getObjectItem("InternetUniqueId","InternetUniqueId"));
+				SubmitOnlineHeader.push($soapService.getObjectItem("IpAddress","IpAddress"));
+				SubmitOnlineHeader.push($soapService.getObjectItem("SubmissionEmail","SubmissionEmail"));
+				EbarcodeSubmitOnlineRequest.push(SubmitOnlineHeader);
+				
+		var SR12011Info = $soapService.getObject("SR12011Info");
+			EbarcodeSubmitOnlineRequest.push(SR12011Info);
+			var TaxpayerInfo = $soapService.getObject("TaxpayerInfo");
+			SR12011Info.push(TaxpayerInfo);
+			TaxpayerInfo.push($soapService.getObjectItem("CompanyName","CompanyName"));
+			TaxpayerInfo.push($soapService.getObjectItem("Tin","Tin"));
+			TaxpayerInfo.push($soapService.getObjectItem("LicenseNo","LicenseNo"));
+			TaxpayerInfo.push($soapService.getObjectItem("EffectiveDate","EffectiveDate"));
+			TaxpayerInfo.push($soapService.getObjectItem("ExpireDate","ExpireDate"));
+			TaxpayerInfo.push($soapService.getObjectItem("TaxpayerName","TaxpayerName"));
+			var TaxpayerAddressInfo = $soapService.getObject("TaxpayerAddressInfo");
+				TaxpayerInfo.push(TaxpayerAddressInfo);
+				TaxpayerAddressInfo.push($soapService.getObjectItem("HouseNumber","HouseNumber"));
+				TaxpayerAddressInfo.push($soapService.getObjectItem("MooNumber","MooNumber"));
+				TaxpayerAddressInfo.push($soapService.getObjectItem("TrokSoiName","TrokSoiName"));
+				TaxpayerAddressInfo.push($soapService.getObjectItem("StreetName","StreetName"));
+				TaxpayerAddressInfo.push($soapService.getObjectItem("ThambolName","ThambolName"));
+				TaxpayerAddressInfo.push($soapService.getObjectItem("AmphurName","AmphurName"));
+				TaxpayerAddressInfo.push($soapService.getObjectItem("ProvinceName","ProvinceName"));
+				TaxpayerAddressInfo.push($soapService.getObjectItem("Postcode","Postcode"));
+				TaxpayerAddressInfo.push($soapService.getObjectItem("TelNumber","TelNumber"));
+
+		
+			var str =	EbarcodeSubmitOnlineRequest.getString();
+			console.log(str);
+		
+	};
 
 });

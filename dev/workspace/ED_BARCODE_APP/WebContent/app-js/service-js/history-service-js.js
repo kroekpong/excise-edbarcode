@@ -4,6 +4,7 @@
 var module = angular.module('history.service', []);
 var rw = require("rw");
 var path = require('path');
+var gui = require('nw.gui');
 
 var HistoryUser = function (){
 	this.userHistoryId = "";
@@ -92,6 +93,11 @@ module.service('$historyService', function() {
 		var his = this.findHistoryByHisId(_Profile.CompanyUserPwd);
 		if(his == null) return [];
 		return his.historyIdList.slice(0).reverse();
+	};
+	
+	this.openHisPdfFile = function(_pdfName) {
+		console.info(_pdfName);
+		gui.Shell.openItem( hisPath + "\\" + _pdfName );
 	};
 	
 });
