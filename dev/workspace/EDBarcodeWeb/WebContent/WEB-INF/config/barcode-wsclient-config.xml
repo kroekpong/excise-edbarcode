@@ -28,7 +28,7 @@
 		</property>
 	</bean>
 	<!-- SubmitOnlineWebService2 -->
-	<bean id="submitOnlineWsTemplate2" class="org.springframework.ws.client.core.WebServiceTemplate">
+	<bean id="submitOnlineWsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
 		<constructor-arg ref="messageFactory" />
 		<property name="marshaller" ref="clientMarshaller"></property>
 		<property name="unmarshaller" ref="clientMarshaller"></property>
@@ -36,7 +36,7 @@
 			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
 		</property>
 		<property name="defaultUri">
-			<value>${edBarcodeService.client.service2}</value>
+			<value>${edBarcodeService.client.service.test}</value>
 		</property>
 	</bean>
 	<!-- testSyncMasterDataWsTemplate -->
