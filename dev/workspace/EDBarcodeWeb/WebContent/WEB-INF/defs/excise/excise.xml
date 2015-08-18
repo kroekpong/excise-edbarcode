@@ -27,7 +27,8 @@
 		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs.jsp" />
 	</definition>
 
-	<definition name="testWS" extends="exciseBaseLayout">
-		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWS.jsp" />
+	<definition name="SubmitTestWS" extends="exciseBaseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/SubmitTestWS.jsp" />
 	</definition>
+	
 </tiles-definitions>
