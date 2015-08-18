@@ -23,4 +23,7 @@
 		<put-attribute name="main" value="/WEB-INF/jsp/excise/newDownloadPage.jsp" />
 	</definition>
 	
+	<definition name="testws" extends="exciseBaseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs.jsp" />
+	</definition>
 </tiles-definitions>
