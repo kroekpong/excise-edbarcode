@@ -250,8 +250,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 	// history
 	$scope.saveHistory = function() {
-//		$historyService.save($profileService.getProfile(), $scope.gridList, $scope.submitType);
-//		$scope.navigaTor(5);
+		$historyService.save($profileService.getProfile(), $scope.gridList, $scope.submitType);
+		$scope.navigaTor(5);
 	};
 
 	/**

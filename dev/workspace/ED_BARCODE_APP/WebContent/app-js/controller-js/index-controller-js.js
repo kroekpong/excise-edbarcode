@@ -69,13 +69,15 @@ module.controller('AppCtrl', function($scope, $mdSidenav, $mdUtil, $location) {
 	}, {
 		"iconName" : "inbox",
 		"label" : "อัพเดทโปรแกรม"
-	}, {
-		"iconName" : "settings",
-		"label" : "ตั้งค่า"
-	}, {
-		"iconName" : "notifications",
-		"label" : "เกียวกับโปรแกรม"
-	} ];
+	}
+//	,{
+//		"iconName" : "settings",
+//		"label" : "ตั้งค่า"
+//	}, {
+//		"iconName" : "notifications",
+//		"label" : "เกียวกับโปรแกรม"
+//	} 
+	];
 
 	$scope.toolbarTitle = "หน้าแรก ED Barcode";
 
