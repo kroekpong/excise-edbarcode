@@ -44,6 +44,8 @@ var Goods = function() {
 	this.WholesaleMin = 0;
 	this.RateWholesaleOver = 0;
 	this.RatePerLitreMax = 0;
+	
+	this.MunicipalRateAmount = 0;
 //	this.GoodId = Date.now();
 	
 	this.genId = function(){
@@ -129,12 +131,16 @@ module.service('$profileService', function() {
 	this.getProfile = function() {
 		var profileUser = {
 			"CompanyName" : profiles.CompanyName,
-			"TaxpayerName" : profiles.factorys[index].TaxpayerName  + " [" + profiles.factorys[index].LicenseName + "]",
+			"TaxpayerName" : profiles.factorys[index].TaxpayerName ,
+			"TaxpayerNameDes" : profiles.factorys[index].TaxpayerName  + " [" + profiles.factorys[index].LicenseName + "]",
 			"LicenseNo" : profiles.factorys[index].LicenseNo,
 			"LicenseDate" : profiles.factorys[index].EffectiveDate + "-" + profiles.factorys[index].ExpireDate,
 			"CompanyId" : profiles.CompanyId,
 			"Address" : profiles.Address,
 			"CompanyUserPwd" : profiles.CompanyUserPwd,
+			"CusId" : profiles.CusId,
+			"AddrBean" : profiles.AddrBean,
+			"factorys" : profiles.factorys[index]
 		};
 
 //		console.log(profileUser);
@@ -195,19 +201,35 @@ module.service('$convertDataXml', function() {
 		for (var _i = 0; _i < factoryLength; _i++) {
 			factorys.push({
 				"TaxpayerName" : pxml.getByTagName("TaxpayerName",_i),
+				"TaxpayerId" : pxml.getByTagName("TaxpayerId",_i),
 				"LicenseNo" : pxml.getByTagName("LicenseNo",_i),
 				"LicenseName" : pxml.getByTagName("LicenseName",_i),
 				"EffectiveDate" : pxml.getByTagName("EffectiveDate",_i),
-				"ExpireDate" : pxml.getByTagName("ExpireDate",_i)
+				"ExpireDate" : pxml.getByTagName("ExpireDate",_i),
+				"ExciseOfficeId" : pxml.getByTagName("ExciseOfficeId",_i),
+				"EmailAddress" : pxml.getByTagName("EmailAddress",_i)
 			});
 		}
-
+		
+		var addrBean = {
+				"HouseNumber" : pxml.getByTagName("HouseIdNumber"),
+				"MooNumber" : pxml.getByTagName("MooNumber"),
+				"TrokSoiName" : pxml.getByTagName("TrokSoiName"),
+				"StreetName" : pxml.getByTagName("StreetName"),
+				"ThambolName" : pxml.getByTagName("ThambolName"),
+				"AmphurName" : pxml.getByTagName("AmphurName"),
+				"ProvinceName" : pxml.getByTagName("ProvinceName"),
+				"Postcode" : pxml.getByTagName("Postcode"),
+				"TelNumber" : pxml.getByTagName("TelNumber")
+		};
 		var profile = {
 			"CompanyName" : pxml.getByTagName("CompanyName"),
 			"factorys" : factorys,
 			"CompanyId" : pxml.getByTagName("CompanyId"),
 			"Address" : getXMLtoAddr(pxml),
-			"CompanyUserPwd" : pxml.getByTagName("CompanyUserPwd")
+			"AddrBean" : addrBean,
+			"CompanyUserPwd" : pxml.getByTagName("CompanyUserPwd"),
+			"CusId" : pxml.getByTagName("CusId")
 		};
 
 //		 console.log(profile);
@@ -284,6 +306,7 @@ module.service('$convertDataXml', function() {
 			 g.setNumber("WholesaleMin", _ParserXml.getByTagName("WholesaleMin",_i));
 			 g.setNumber("RateWholesaleOver", _ParserXml.getByTagName("RateWholesaleOver",_i));
 			 g.setNumber("RatePerLitreMax", _ParserXml.getByTagName("RatePerLitreMax",_i));
+			 g.setNumber("MunicipalRateAmount", _ParserXml.getByTagName("MunicipalRateAmount",_i));
 			 g.genId();
 //			 console.log(g);
 			 
