@@ -30,7 +30,7 @@ public class TestSyncMasterDataServiceImpl implements TestSyncMasterDataService 
 
 		
 	@Autowired
-	private WebServiceTemplate testSyncMasterDataWsTemplate;
+	private WebServiceTemplate syncMasterDataWsTemplateTest;
 
 	@Override
 	public String xmlcallws(String xmlDataString) {
@@ -58,7 +58,7 @@ public class TestSyncMasterDataServiceImpl implements TestSyncMasterDataService 
 		}
 		
 		
-		EbarcodeSyncMasterDataResponse ebarcodeSyncMasterDataResponse= (EbarcodeSyncMasterDataResponse)testSyncMasterDataWsTemplate.marshalSendAndReceive(request);
+		EbarcodeSyncMasterDataResponse ebarcodeSyncMasterDataResponse= (EbarcodeSyncMasterDataResponse)syncMasterDataWsTemplateTest.marshalSendAndReceive(request);
 		StringWriter sw = new StringWriter();
 		
 	

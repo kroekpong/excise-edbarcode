@@ -7,19 +7,18 @@
 	
 	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
 	
-	<bean id="clientMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+	<!-- SubmitOnlineWebService -->
+	<bean id="submitOnlineMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="packagesToScan">
 			<list>
 				<value>th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm</value>
 			</list>
 		</property>
 	</bean>
-	
-	<!-- SubmitOnlineWebService -->
 	<bean id="submitOnlineWsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
 		<constructor-arg ref="messageFactory" />
-		<property name="marshaller" ref="clientMarshaller"></property>
-		<property name="unmarshaller" ref="clientMarshaller"></property>
+		<property name="marshaller" ref="submitOnlineMarshaller" />
+		<property name="unmarshaller" ref="submitOnlineMarshaller" />
 		<property name="messageSender">
 			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
 		</property>
@@ -27,20 +26,14 @@
 			<value>${edBarcodeService.client.service}</value>
 		</property>
 	</bean>
-	<!-- SubmitOnlineWebService2 -->
-	<bean id="submitOnlineWsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
-		<constructor-arg ref="messageFactory" />
-		<property name="marshaller" ref="clientMarshaller"></property>
-		<property name="unmarshaller" ref="clientMarshaller"></property>
-		<property name="messageSender">
-			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
-		</property>
-		<property name="defaultUri">
-			<value>${edBarcodeService.client.service.test}</value>
-		</property>
-	</bean>
-	<!-- testSyncMasterDataWsTemplate -->
-	<bean id="clientMarshaller2" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+	
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - -->
+	
+	<!-- Web Service Client for Test -->
+	
+	<!-- clientTestMarshaller -->
+	<bean id="clientTestMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="packagesToScan">
 			<list>
 				<value>th.go.excise.edbarcode.ws.provider.oxm</value>
@@ -48,16 +41,29 @@
 		</property>
 	</bean>
 	
-	
-	<bean id="testSyncMasterDataWsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+	<!-- SubmitOnlineWebServiceTest -->
+	<bean id="submitOnlineWsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
 		<constructor-arg ref="messageFactory" />
-		<property name="marshaller" ref="clientMarshaller2"></property>
-		<property name="unmarshaller" ref="clientMarshaller2"></property>
+		<property name="marshaller" ref="clientTestMarshaller"></property>
+		<property name="unmarshaller" ref="clientTestMarshaller"></property>
 		<property name="messageSender">
 			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
 		</property>
 		<property name="defaultUri">
-			<value>${edBarcodeService.client.testservice}</value>
+			<value>${edBarcodeServiceTest.client.service}</value>
+		</property>
+	</bean>
+	
+	<!-- SyncMasterDataWsTemplateTest -->
+	<bean id="syncMasterDataWsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="marshaller" ref="clientTestMarshaller"></property>
+		<property name="unmarshaller" ref="clientTestMarshaller"></property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
+		</property>
+		<property name="defaultUri">
+			<value>${edBarcodeServiceTest.client.service}</value>
 		</property>
 	</bean>
 	
