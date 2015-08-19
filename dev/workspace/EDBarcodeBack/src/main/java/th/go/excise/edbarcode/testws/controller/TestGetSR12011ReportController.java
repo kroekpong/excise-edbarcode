@@ -20,7 +20,7 @@ public class TestGetSR12011ReportController {
 	@RequestMapping(value = "/testgetsr12011report.htm", method = RequestMethod.GET)
 	public ModelAndView welcome(HttpServletRequest httpRequest) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("testws");
+		mav.setViewName("tesGetSrReportws");
 //		mav.addObject("strxml", "Stringngngngngngngngngngngn/n/nStringngngngngngngn/nasdasd");
 		mav.addObject("strurl",testGetSRReportService.getwsuri() );
 		System.out.println(" ####### testgetsr12011report ####");
@@ -32,7 +32,7 @@ public class TestGetSR12011ReportController {
 	public ModelAndView submit(@RequestParam("strxml") String strxml,@RequestParam("strurl") String strurl) {
 		System.out.println(strxml);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("testws");
+		mav.setViewName("tesGetSrReportws");
 		mav.addObject("strxml", strxml);
 		mav.addObject("strurl", strurl );
 		mav.addObject("strxmlrt", testGetSRReportService.xmlcallws(strxml,strurl));
