@@ -159,6 +159,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.nextAndGenReport = function() {
 		$scope.showReportProgess = true;
 
+		//Gen XML
+		$scope.submitOnlineRequest();
+		
 		$fileUtils.runGenReport(function(error) {
 			if (error == null) {
 				$rootScope.$broadcast("gotoStep", 4);
@@ -249,7 +252,6 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.saveHistory = function() {
 //		$historyService.save($profileService.getProfile(), $scope.gridList, $scope.submitType);
 //		$scope.navigaTor(5);
-		$scope.submitOnlineRequest();
 	};
 
 	/**
@@ -274,7 +276,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 				SubmitOnlineHeader.push($soapService.getObjectItem("CompanyUserPwd",pws));
 				SubmitOnlineHeader.push($soapService.getObjectItem("TaxpayerId",profile.factorys.TaxpayerId));
 				SubmitOnlineHeader.push($soapService.getObjectItem("ExciseOfficeId",profile.factorys.ExciseOfficeId));
-				SubmitOnlineHeader.push($soapService.getObjectItem("InternetUniqueId",profile.CompanyUserPwd));
+				SubmitOnlineHeader.push($soapService.getObjectItem("InternetUniqueId",profile.InternetUniqueId));
 				SubmitOnlineHeader.push($soapService.getObjectItem("IpAddress",IpAddress));
 				SubmitOnlineHeader.push($soapService.getObjectItem("SubmissionEmail",profile.factorys.EmailAddress));
 				EbarcodeSubmitOnlineRequest.push(SubmitOnlineHeader);
@@ -364,7 +366,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			var PaymentFundHealthAmount = $scope.totalTax * 0.02;
 			var PaymentFundTVAmount = $scope.totalTax * 0.015;
 			var PaymentFundSportAmount =  $scope.totalTax * 0.02;
-			var Amount = $scope.totalTax+$scope.royalTotal;
+			var Amount = ($scope.totalTax+$scope.royalTotal).toFixed(2);
 			
 			var SummaryInfo = $soapService.getObject("SummaryInfo");
 			SR12011Info.push(SummaryInfo);
@@ -378,9 +380,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount",TaxDeductionOnBookAmount));
 			SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount",$scope.totalTax));
 			SummaryInfo.push($soapService.getObjectItem("PaymentMunicipalAmount",$scope.royalTotal));
-			SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount",PaymentFundHealthAmount.toFixed(4)));
-			SummaryInfo.push($soapService.getObjectItem("PaymentFundTVAmount",PaymentFundTVAmount.toFixed(4)));
-			SummaryInfo.push($soapService.getObjectItem("PaymentFundSportAmount",PaymentFundSportAmount.toFixed(4)));
+			SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount",PaymentFundHealthAmount.toFixed(2)));
+			SummaryInfo.push($soapService.getObjectItem("PaymentFundTVAmount",PaymentFundTVAmount.toFixed(2)));
+			SummaryInfo.push($soapService.getObjectItem("PaymentFundSportAmount",PaymentFundSportAmount.toFixed(2)));
 			SummaryInfo.push($soapService.getObjectItem("MoiRate",MoiRate));
 			SummaryInfo.push($soapService.getObjectItem("PrintType",stempType));
 			SummaryInfo.push($soapService.getObjectItem("PaymentExciseAndMunicipalTaxAmount",Amount));
@@ -393,7 +395,13 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			
 		
 			var str =	EbarcodeSubmitOnlineRequest.getString();
-			console.log(str);
+			//writeFile
+			var data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + str;
+			data = data.replace("EbarcodeSubmitOnlineRequest", "XmlData").replace("/EbarcodeSubmitOnlineRequest", "/XmlData");
+			$fileUtils.writeFileGenReport(data);
+			console.log(data);
+			
+			return str;
 		
 	};
 

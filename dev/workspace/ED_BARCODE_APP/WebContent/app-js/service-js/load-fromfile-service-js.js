@@ -140,6 +140,7 @@ module.service('$profileService', function() {
 			"CompanyUserPwd" : profiles.CompanyUserPwd,
 			"CusId" : profiles.CusId,
 			"AddrBean" : profiles.AddrBean,
+			"InternetUniqueId" : profiles.InternetUniqueId,
 			"factorys" : profiles.factorys[index]
 		};
 
@@ -174,6 +175,10 @@ module.service('$fileUtils', function() {
 	
 	this.runGenReport = function ( _fnCallback ){
 		execute("\"" + reportPath + "\\run_report.bat\" \"" + reportPath + "\"" ,_fnCallback);
+	};
+	
+	this.writeFileGenReport = function (_data){
+		rw.writeFileSync(reportPath + "\\genReportPdf.xml",_data,"utf8" );
 	};
 	
 	function execute(command, callback){
@@ -229,6 +234,7 @@ module.service('$convertDataXml', function() {
 			"Address" : getXMLtoAddr(pxml),
 			"AddrBean" : addrBean,
 			"CompanyUserPwd" : pxml.getByTagName("CompanyUserPwd"),
+			"InternetUniqueId" : pxml.getByTagName("InternetUniqueId"),
 			"CusId" : pxml.getByTagName("CusId")
 		};
 
