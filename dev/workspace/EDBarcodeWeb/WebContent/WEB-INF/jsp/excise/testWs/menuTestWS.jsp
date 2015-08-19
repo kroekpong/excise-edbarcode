@@ -5,6 +5,10 @@
 <div class="fadeIn active">
 	<h4>Menu TestWS</h4>
 	<div>
-		<a href="/EDBarcodeWeb/showTestSubmitWeb.htm">SubmitOnline Web</a>
+		<a href="/EDBarcodeWeb/showTestSubmitWeb.htm">SubmitOnline EbarcodeWeb</a>
+		<br>
+		<a href="/EDBarcodeBack/showTestSubmitBack.htm">SubmitOnline EbarcodeBack</a>
+		<br>
+		<a href="/EDBarcodeBack/showTestSendBack.htm">SendToBackend EbarcodeBack</a>
 	</div>
 </div>
