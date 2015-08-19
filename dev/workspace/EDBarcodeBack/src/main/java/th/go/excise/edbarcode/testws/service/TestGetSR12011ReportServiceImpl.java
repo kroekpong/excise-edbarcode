@@ -29,7 +29,7 @@ public class TestGetSR12011ReportServiceImpl implements TestGetSR12011ReportServ
 	private static final Logger logger = LogManager.getLogger();
 	
 	@Autowired
-	private WebServiceTemplate submitOnlineWsTemplate;
+	private WebServiceTemplate getSR12011ReportWsTemplateTest;
 
 	@Override
 	public String xmlcallws(String xmlDataString,String uri) {
@@ -55,8 +55,8 @@ public class TestGetSR12011ReportServiceImpl implements TestGetSR12011ReportServ
 			e.printStackTrace();
 		}
 		
-		submitOnlineWsTemplate.setDefaultUri(uri);
-		EbarcodeGetSR12011ReportResponse ebarcodeGetSR12011ReportResponse = (EbarcodeGetSR12011ReportResponse) submitOnlineWsTemplate.marshalSendAndReceive(request);
+		getSR12011ReportWsTemplateTest.setDefaultUri(uri);
+		EbarcodeGetSR12011ReportResponse ebarcodeGetSR12011ReportResponse = (EbarcodeGetSR12011ReportResponse) getSR12011ReportWsTemplateTest.marshalSendAndReceive(request);
 		
 		StringWriter sw = new StringWriter();
 		try {
@@ -89,7 +89,7 @@ public class TestGetSR12011ReportServiceImpl implements TestGetSR12011ReportServ
 	@Override
 	public String getwsuri() {
 
-		return submitOnlineWsTemplate.getDefaultUri();
+		return getSR12011ReportWsTemplateTest.getDefaultUri();
 	}
 	
 

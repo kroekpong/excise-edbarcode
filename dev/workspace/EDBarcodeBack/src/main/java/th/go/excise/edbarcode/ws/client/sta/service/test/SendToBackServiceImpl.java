@@ -29,7 +29,7 @@ public class SendToBackServiceImpl implements SendToBackService {
 private static final Logger logger = LogManager.getLogger(SendToBackendServiceImpl.class);
 	
 	@Autowired
-	private WebServiceTemplate wsTemplateTest;
+	private WebServiceTemplate sendToBackendWsTemplateTest;
 	
 	@Override
 	public String doService(String xmlString) {
@@ -62,7 +62,7 @@ private static final Logger logger = LogManager.getLogger(SendToBackendServiceIm
 		
 		logger.info(" ########################### After Call  submitOnlineWsTemplate");
 		
-		response = (EbarcodeSendToBackendResponse)wsTemplateTest.marshalSendAndReceive(request);
+		response = (EbarcodeSendToBackendResponse)sendToBackendWsTemplateTest.marshalSendAndReceive(request);
 		System.out.println(response);
 		StringWriter sw = new StringWriter();
 		  try {

@@ -7,41 +7,20 @@
 	
 	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
 	
-	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-		<property name="packagesToScan">
-			<list>
-				<value>th.go.excise.edbarcode.ws.provider.oxm</value>
-			</list>
-		</property>
-	</bean>
-	
-	<!-- SubmitOnlineWebService -->
-	<bean id="submitOnlineWsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
-		<constructor-arg ref="messageFactory" />
-		<property name="marshaller" ref="marshaller"></property>
-		<property name="unmarshaller" ref="marshaller"></property>
-		<property name="messageSender">
-			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
-		</property>
-		<property name="defaultUri">
-			<value>${edBarcodeService.c.service}</value>
-		</property>
-	</bean>
-	
+	<!-- Marshall and Unmarshall -->
 	<bean id="clientMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="packagesToScan">
 			<list>
 				<value>th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm</value>
-				<value>th.go.excise.edbarcode.ws.provider.oxm</value>
 			</list>
 		</property>
 	</bean>
 	
-	<!-- InsertPOSO0112OperationService -->
+	<!-- InsertPOSO0112OperationWebService -->
 	<bean id="insertPOSO0112OperationWsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
 		<constructor-arg ref="messageFactory" />
-		<property name="marshaller" ref="clientMarshaller"></property>
-		<property name="unmarshaller" ref="clientMarshaller"></property>
+		<property name="marshaller" ref="clientMarshaller" />
+		<property name="unmarshaller" ref="clientMarshaller" />
 		<property name="messageSender">
 			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
 		</property>
@@ -49,16 +28,58 @@
 			<value>${pccService.client.service}</value>
 		</property>
 	</bean>
-	<!-- SubmitOnlineWebService2 -->
-	<bean id="wsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
+	
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - -->
+	
+	<!-- Web Service Client for Test -->
+	
+	<!-- Marshall and Unmarshall -->
+	<bean id="clientMarshallerTest" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="packagesToScan">
+			<list>
+				<value>th.go.excise.edbarcode.ws.provider.oxm</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- SubmitOnlineWebServiceTest -->
+	<bean id="submitOnlineWsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
 		<constructor-arg ref="messageFactory" />
-		<property name="marshaller" ref="clientMarshaller"></property>
-		<property name="unmarshaller" ref="clientMarshaller"></property>
+		<property name="marshaller" ref="clientMarshallerTest" />
+		<property name="unmarshaller" ref="clientMarshallerTest" />
 		<property name="messageSender">
 			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
 		</property>
 		<property name="defaultUri">
-			<value>${edBarcodeService.client.service.test}</value>
+			<value>${edBarcodeServiceTest.client.service}</value>
 		</property>
 	</bean>
+	
+	<!-- GetSR12011ReportWebServiceTest -->
+	<bean id="getSR12011ReportWsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="marshaller" ref="clientMarshallerTest" />
+		<property name="unmarshaller" ref="clientMarshallerTest" />
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
+		</property>
+		<property name="defaultUri">
+			<value>${edBarcodeServiceTest.client.service}</value>
+		</property>
+	</bean>
+	
+	<!-- SendToBackendWebServiceTest -->
+	<bean id="sendToBacendkWsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="marshaller" ref="clientMarshallerTest" />
+		<property name="unmarshaller" ref="clientMarshallerTest" />
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
+		</property>
+		<property name="defaultUri">
+			<value>${edBarcodeServiceTest.client.service}</value>
+		</property>
+	</bean>
+	
 </beans>

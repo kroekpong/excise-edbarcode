@@ -29,7 +29,7 @@ public class SubmitOnlineServiceImpl implements SubmitOnlineService {
 	private static final Logger logger = LogManager.getLogger(SubmitOnlineBackServiceImpl.class);
 	
 	@Autowired
-	private WebServiceTemplate wsTemplateTest;
+	private WebServiceTemplate submitOnlineWsTemplateTest;
 	
 	@Override
 	public String doService(String xmlString) {
@@ -62,7 +62,7 @@ public class SubmitOnlineServiceImpl implements SubmitOnlineService {
 		
 		logger.info(" ########################### After Call  submitOnlineWsTemplate");
 		
-		response = (EbarcodeSubmitOnlineResponse)wsTemplateTest.marshalSendAndReceive(request);
+		response = (EbarcodeSubmitOnlineResponse)submitOnlineWsTemplateTest.marshalSendAndReceive(request);
 		System.out.println(response);
 		StringWriter sw = new StringWriter();
 		  try {
