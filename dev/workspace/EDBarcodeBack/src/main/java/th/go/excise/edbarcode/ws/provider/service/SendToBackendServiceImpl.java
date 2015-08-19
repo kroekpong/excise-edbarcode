@@ -2,6 +2,8 @@ package th.go.excise.edbarcode.ws.provider.service;
 
 import java.io.StringReader;
 import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
+import th.go.excise.edbarcode.common.util.DateUtils;
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.client.InsertPOSO0112OperationService;
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.Body;
@@ -32,7 +35,7 @@ import th.go.excise.edbarcode.ws.provider.oxm.SubmitOnlineHeader;
 @Service("sendToBackendService")
 public class SendToBackendServiceImpl implements SendToBackendService {
 	
-	private static final Logger logger = LogManager.getLogger(SendToBackendServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger();
 	
 	@Autowired
 	private InsertPOSO0112OperationService insertPOSO0112OperationService;
@@ -74,6 +77,8 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 
 	private InsertPOSO0112Operation prepareWsRequest(EbarcodeSendToBackendRequest request) throws JAXBException {
 		
+		Calendar calendar = Calendar.getInstance(Locale.US);
+		
 		DecimalFormat decimalFormatZeroDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.ZERO_DIGIT);
 		DecimalFormat decimalFormatTwoDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
 		DecimalFormat decimalFormatFourDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.FOUR_DIGIT);
@@ -100,7 +105,7 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 		wsHeader.setIPAddress(submitOnlineHeader.getIpAddress());
 		
 		// Body
-		POSO0112FormInfo wsPoso0112FormInfo = new POSO0112FormInfo(); 
+		POSO0112FormInfo wsPoso0112FormInfo = new POSO0112FormInfo();
 		wsPoso0112FormInfo.setRegId(submitOnlineHeader.getRegistratronId());
 		wsPoso0112FormInfo.setCustomerId(submitOnlineHeader.getCusId());
 		wsPoso0112FormInfo.setTin(sr12011Info.getTaxpayerInfo().getTin());
@@ -108,13 +113,13 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 		wsPoso0112FormInfo.setSubbmissionEmail(submitOnlineHeader.getSubmissionEmail());
 		wsPoso0112FormInfo.setFormType("");// Wait PCC
 		wsPoso0112FormInfo.setFormCode("");// Wait PCC
-		wsPoso0112FormInfo.setFormEffectiveDate("");// Current Date
+		wsPoso0112FormInfo.setFormEffectiveDate(DateUtils.wsDateFormat.format(calendar));// Current Date, yyyyMMdd
 		wsPoso0112FormInfo.setFormReferenceNumber(request.getDataInformation().getReferenceNumber());
 		wsPoso0112FormInfo.setPaymentReferenceId(0);// No Data, Input??
 		wsPoso0112FormInfo.setBankReferenceId("");// No Data, Can input empty String??
 		wsPoso0112FormInfo.setPayType12("");// No Data, Can input empty String??
-		wsPoso0112FormInfo.setTaxMonth(1);// Current Month, 1-12
-		wsPoso0112FormInfo.setTaxYear(2015);// Current Year, YYYY -> 2015
+		wsPoso0112FormInfo.setTaxMonth(calendar.get(Calendar.MONTH) + 1);// Current Month, 1-12
+		wsPoso0112FormInfo.setTaxYear(calendar.get(Calendar.YEAR));// Current Year, YYYY -> 2015
 		wsPoso0112FormInfo.setIncCode("");// No Data, Can input empty String??
 		wsPoso0112FormInfo.setFactoryDateBegin("");// No Data, Can input empty String??
 		wsPoso0112FormInfo.setFactoryDateEnd("");// No Data, Can input empty String??
@@ -129,7 +134,7 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 		wsPoso0112FormInfo.setNetExciseTax(sr12011Info.getSummaryInfo().getPaymentExciseAmount().doubleValue());
 		wsPoso0112FormInfo.setNetMoiTax(sr12011Info.getSummaryInfo().getPaymentMunicipalAmount().doubleValue());// FIXME check
 		wsPoso0112FormInfo.setPrnType(sr12011Info.getSummaryInfo().getPrintType());
-		wsPoso0112FormInfo.setRecType(sr12011Info.getSummaryInfo().getRecType());
+		wsPoso0112FormInfo.setRecType("");//FIXME
 		
 		PSO112Goods wsPso112Goods = null;
 		for (GoodsEntryInfo goodsEntryInfo : sr12011Info.getGoodsListInfo().getGoodsEntryInfo()) {
