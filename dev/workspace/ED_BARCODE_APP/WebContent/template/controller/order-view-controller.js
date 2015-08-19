@@ -16,7 +16,10 @@ var GridItem = function() {
 module.controller('order.view.controller', function($scope, $rootScope, $location, $productService, $mdDialog, $fileUtils, $timeout, $mdToast, $historyService, $profileService, $soapService) {
 	console.info("order.view.controller")
 	$scope.historyMode = (localStorage["historyMod"] == "ON") ? true : false;
+	$scope.haveSaveDraff = (localStorage["saveDraffItems"] == undefined || localStorage["saveDraffItems"] == "") ? false : true;
+	
 	console.info("historyMode ", $scope.historyMode);
+	console.info("haveSaveDraff ", $scope.haveSaveDraff);
 
 	if ($scope.historyMode === true) {
 		$scope.gridList = JSON.parse(localStorage["historyItems"]);
@@ -412,5 +415,30 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.openHistory = function(){
 		$rootScope.$broadcast("gotoMenuIndex",2);
 	}
+	
+	// save draff
+	
+	$scope.$on("checkSaveDraff",function(event,args){
+		console.info("checkSaveDraff");
+		if($scope.gridList.length > 0){
+			localStorage["saveDraffItems"] = JSON.stringify($scope.gridList);
+		}
+	});
+	
+	$scope.clickLoadDraff = function (){
+		if(localStorage["saveDraffItems"] == "undefined" || localStorage["saveDraffItems"] == ""){
+			return ;
+		}
+		
+		console.info("clickLoadDraff");
+		$scope.gridList = JSON.parse(localStorage["saveDraffItems"]);
+		localStorage["saveDraffItems"] = "";
+		$scope.haveSaveDraff = false;
+	};
+	
+	
+	
+	
+	
 
 });

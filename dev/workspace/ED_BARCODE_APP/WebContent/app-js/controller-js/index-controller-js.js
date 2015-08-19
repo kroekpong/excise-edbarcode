@@ -43,7 +43,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
 	});
 });
 
-module.controller('AppCtrl', function($scope, $mdSidenav, $mdUtil, $location) {
+module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $location) {
 
 	console.log('AppCtrl');
 
@@ -82,6 +82,7 @@ module.controller('AppCtrl', function($scope, $mdSidenav, $mdUtil, $location) {
 	$scope.toolbarTitle = "หน้าแรก ED Barcode";
 
 	$scope.navigateTo = function(_iconName, _event) {
+		$rootScope.$broadcast("checkSaveDraff");
 		$scope.toolbarTitle = _iconName.label;
 //		console.info(_iconName);
 		$location.path("/view/" + _iconName.iconName);
