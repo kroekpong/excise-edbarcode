@@ -294,9 +294,75 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 				TaxpayerAddressInfo.push($soapService.getObjectItem("Postcode","Postcode"));
 				TaxpayerAddressInfo.push($soapService.getObjectItem("TelNumber","TelNumber"));
 
+			
+				//loop
+			var GoodsListInfo = $soapService.getObject("GoodsListInfo");
+			SR12011Info.push(GoodsListInfo);
+			var GoodsEntryInfo = $soapService.getObject("GoodsEntryInfo");
+				GoodsListInfo.push(GoodsEntryInfo);
+				GoodsEntryInfo.push($soapService.getObjectItem("ProductCode","ProductCode"));
+				GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode1","CategoryCode1"));
+				GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode2","CategoryCode2"));
+				GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode3","CategoryCode3"));
+				GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode4","CategoryCode4"));
+				GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode5","CategoryCode5"));
+				GoodsEntryInfo.push($soapService.getObjectItem("UnitCode","UnitCode"));
+				GoodsEntryInfo.push($soapService.getObjectItem("RateFlag","RateFlag"));
+				GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantity","TaxQuantity"));
+				GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantityNumber","TaxQuantityNumber"));
+				GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantityPerUnit","TaxQuantityPerUnit"));
+				GoodsEntryInfo.push($soapService.getObjectItem("TaxValue","TaxValue"));
+				GoodsEntryInfo.push($soapService.getObjectItem("PriceFlag","PriceFlag"));
+				GoodsEntryInfo.push($soapService.getObjectItem("InformPrice","InformPrice"));
+				GoodsEntryInfo.push($soapService.getObjectItem("DeclarePrice","DeclarePrice"));
+				GoodsEntryInfo.push($soapService.getObjectItem("UnitPrice","UnitPrice"));
+				GoodsEntryInfo.push($soapService.getObjectItem("GoodsNum","GoodsNum"));
+				GoodsEntryInfo.push($soapService.getObjectItem("GoodsValue","GoodsValue"));
+				GoodsEntryInfo.push($soapService.getObjectItem("TaxAmount","TaxAmount"));
+				GoodsEntryInfo.push($soapService.getObjectItem("SeqNo","SeqNo"));
+				GoodsEntryInfo.push($soapService.getObjectItem("ProductTypeDesc","ProductTypeDesc"));
+				GoodsEntryInfo.push($soapService.getObjectItem("GoodsDesc","GoodsDesc"));
+				GoodsEntryInfo.push($soapService.getObjectItem("Degree","Degree"));
+				GoodsEntryInfo.push($soapService.getObjectItem("GoodsSize","GoodsSize"));
+				GoodsEntryInfo.push($soapService.getObjectItem("GoodsPiece","GoodsPiece"));
+				GoodsEntryInfo.push($soapService.getObjectItem("GoodsQuantity","GoodsQuantity"));
+				GoodsEntryInfo.push($soapService.getObjectItem("TaxByValue","TaxByValue"));
+				GoodsEntryInfo.push($soapService.getObjectItem("TaxByQuantity","TaxByQuantity"));
+				GoodsEntryInfo.push($soapService.getObjectItem("TaxByQuantityOver","TaxByQuantityOver"));
+				GoodsEntryInfo.push($soapService.getObjectItem("TaxByQuantityWithOver","TaxByQuantityWithOver"));
+				GoodsEntryInfo.push($soapService.getObjectItem("NetTaxByValue","NetTaxByValue"));
+				GoodsEntryInfo.push($soapService.getObjectItem("NetTaxByQuantity","NetTaxByQuantity"));
+
+				
+				//sum
+			var SummaryInfo = $soapService.getObject("SummaryInfo");
+			SR12011Info.push(SummaryInfo);
+			SummaryInfo.push($soapService.getObjectItem("SumAllTaxByValue","SumAllTaxByValue"));
+			SummaryInfo.push($soapService.getObjectItem("SumAllTaxByQuantity","SumAllTaxByQuantity"));
+			SummaryInfo.push($soapService.getObjectItem("SumAllTax","SumAllTax"));
+			SummaryInfo.push($soapService.getObjectItem("TaxLessType","TaxLessType"));
+			SummaryInfo.push($soapService.getObjectItem("TaxLessFrom","TaxLessFrom"));
+			SummaryInfo.push($soapService.getObjectItem("TaxLessAmount","TaxLessAmount"));
+			SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo","TaxDeductionOnBookNo"));
+			SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount","TaxDeductionOnBookAmount"));
+			SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount","PaymentExciseAmount"));
+			SummaryInfo.push($soapService.getObjectItem("PaymentMunicipalAmount","PaymentMunicipalAmount"));
+			SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount","PaymentFundHealthAmount"));
+			SummaryInfo.push($soapService.getObjectItem("PaymentFundTVAmount","PaymentFundTVAmount"));
+			SummaryInfo.push($soapService.getObjectItem("PaymentFundSportAmount","PaymentFundSportAmount"));
+			SummaryInfo.push($soapService.getObjectItem("MoiRate","MoiRate"));
+			SummaryInfo.push($soapService.getObjectItem("PrintType","PrintType"));
+			SummaryInfo.push($soapService.getObjectItem("PaymentExciseAndMunicipalTaxAmount","PaymentExciseAndMunicipalTaxAmount"));
+			SummaryInfo.push($soapService.getObjectItem("PaymentOtherAmount","PaymentOtherAmount"));
+			SummaryInfo.push($soapService.getObjectItem("PaymentNetTaxAmount","PaymentNetTaxAmount"));
+			
+			
+			
+				
+			
 		
 			var str =	EbarcodeSubmitOnlineRequest.getString();
-			console.log(str);
+//			console.log(str);
 		
 	};
 
