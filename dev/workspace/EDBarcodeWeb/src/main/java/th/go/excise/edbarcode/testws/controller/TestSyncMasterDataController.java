@@ -20,7 +20,7 @@ public class TestSyncMasterDataController {
 	@RequestMapping(value = "/testsyncmasterdata.htm", method = RequestMethod.GET)
 	public ModelAndView welcome(HttpServletRequest httpRequest) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("testws");
+		mav.setViewName("testSyncMasterDataWs");
 //		mav.addObject("strxml", "Stringngngngngngngngngngngn/n/nStringngngngngngngn/nasdasd");
 		
 		System.out.println(" ####### syncmasterdata ####");
@@ -32,7 +32,7 @@ public class TestSyncMasterDataController {
 	public ModelAndView submit(@RequestParam("strxml") String strxml) {
 		System.out.println(strxml);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("testws");
+		mav.setViewName("testSyncMasterDataWs");
 		mav.addObject("strxml", strxml);
 		mav.addObject("strxmlrt", testSyncMasterDataService.xmlcallws(strxml));
 		System.out.println(" ####### syncmasterdatasubmit ####");
