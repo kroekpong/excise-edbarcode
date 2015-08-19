@@ -16,5 +16,10 @@ module.controller('history.view.controller', function($scope, $rootScope, $soapS
 	$scope.openPdf = function(_pdfName) {
 		$historyService.openHisPdfFile(_pdfName);
 	};
+	
+	$scope.openHistory = function(_fileName){
+		$historyService.openHistoryText(_fileName);
+		$rootScope.$broadcast("gotoMenuIndex",1);
+	}
 
 });

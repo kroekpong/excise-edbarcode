@@ -88,6 +88,12 @@ module.controller('AppCtrl', function($scope, $mdSidenav, $mdUtil, $location) {
 		$mdSidenav('left').close();
 	};
 
+	
+	$scope.$on("gotoMenuIndex", function(event, args) {
+		$scope.toolbarTitle = $scope.settings[args].label;
+		$location.path("/view/" + $scope.settings[args].iconName);
+	});
+	
 	$scope.$on("updateTitle", function(event, args) {
 		$scope.toolbarTitle = $scope.settings[args].label;
 	});

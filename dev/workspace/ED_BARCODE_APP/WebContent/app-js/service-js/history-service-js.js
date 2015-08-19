@@ -100,4 +100,19 @@ module.service('$historyService', function() {
 		gui.Shell.openItem( hisPath + "\\" + _pdfName );
 	};
 	
+	
+	this.openHistoryText = function (_fileName){
+		console.info("openHistoryText",_fileName);
+		var text = rw.readFileSync(hisPath + "\\" + _fileName , "utf8");
+		localStorage["historyItems"]  = text;
+		localStorage["historyMod"] = "ON"
+	};
+	
+	
+	
+	
+	
+	
+	
+	
 });

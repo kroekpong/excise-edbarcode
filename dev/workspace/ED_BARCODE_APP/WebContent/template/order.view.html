@@ -182,8 +182,8 @@
  
  <div layout="row">
  
-	 <md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(0)">เพิ่มรายการสุรา</md-button>
-	 <md-button class="md-raised md-warn" style="width:150px;" ng-click="onDelete()"> ลบรายการที่เลือก </md-button>
+	 <md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(0)"  ng-hide="historyMode" >เพิ่มรายการสุรา</md-button>
+	 <md-button class="md-raised md-warn" style="width:150px;" ng-click="onDelete()"  ng-hide="historyMode" > ลบรายการที่เลือก </md-button>
 	 
 </div>
 
@@ -235,8 +235,8 @@
        			<td>{{toStringDec(item.Goods.Degree,2)}}</td>
        			<td>{{toStringDec(item.Goods.GoodsSize)}}</td>
        			<td> 
-       				<md-input-container md-no-float style="padding:0;width:90px;" >
-			        	<input type="number" ng-model="item.GoodsCount" placeholder="ขนาดบรรจุ (ลิตร)">
+       				<md-input-container md-no-float style="padding:0;width:90px;">
+			        	<input type="number" ng-model="item.GoodsCount" placeholder="ขนาดบรรจุ (ลิตร)"  ng-disabled="historyMode">
 			      	</md-input-container>
 			    </td>
 			    
@@ -245,7 +245,7 @@
        			<td>
        			
 					<md-input-container md-no-float style="padding:0;width:100px;" >
-			        	<input type="number" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง">
+			        	<input type="number" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
 			      	</md-input-container>
 
 				</td>
@@ -277,6 +277,7 @@
 		
 		<div layout="row">
 			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(2)">ทำรายการถัดไป</md-button>   
+			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัดติการทำรายการ</md-button>   
 		</div>
 		                
 </div>		                
@@ -445,7 +446,7 @@
   
   		<div layout="row">
 	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>             
-			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)">ทำรายการถัดไป</md-button>   
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)"  ng-hide="historyMode" >ทำรายการถัดไป</md-button>   
 		</div>
   
   </div>
