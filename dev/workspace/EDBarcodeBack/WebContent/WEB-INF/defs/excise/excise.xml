@@ -27,11 +27,11 @@
 		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/testgetSrReportWs.jsp" />
 	</definition>
 	
-	<definition name="SubmitTestWS" extends="exciseBaseLayout">
-		<put-attribute name="main" value="/WEB-INF/jsp/excise/SubmitTestWS.jsp" />
+	<definition name="submitOnlineTestWS" extends="exciseBaseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/submitOnlineTestWS.jsp" />
 	</definition>
 	
-	<definition name="SendTestWS" extends="exciseBaseLayout">
-		<put-attribute name="main" value="/WEB-INF/jsp/excise/SendTestWS.jsp" />
+	<definition name="sendToBackendTestWS" extends="exciseBaseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/sendToBackendTestWS.jsp" />
 	</definition>
 </tiles-definitions>
