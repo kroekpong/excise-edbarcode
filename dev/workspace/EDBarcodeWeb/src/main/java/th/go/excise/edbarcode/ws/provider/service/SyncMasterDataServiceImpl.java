@@ -1,5 +1,6 @@
 package th.go.excise.edbarcode.ws.provider.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import local.scc.dev.sta.bac.utils.PasswordEncryptDecrypt;
@@ -203,8 +204,12 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 				goods.setGoodsSizeUnitDescriptionText(wsGoods.getGoodsSizeUnitDescriptionText());
 				goods.setTaxRateByPriceAmount(NumberUtils.nullToZero(wsGoods.getTaxRateByPriceAmount()));
 				goods.setTaxRateByQuantityAmount(NumberUtils.nullToZero(wsGoods.getTaxRateByQuantityAmount()));
+				//goods.setMunicipalRateAmount(NumberUtils.nullToZero(wsGoods.getMunicipalRateAmount()));
+				goods.setMunicipalRateAmount(NumberUtils.nullToZero(new BigDecimal("10")));// FIXME
 				goods.setFundSSSRateAmount(NumberUtils.nullToZero(wsGoods.getFundSSSRateAmount()));
 				goods.setFundSSTRateAmount(NumberUtils.nullToZero(wsGoods.getFundSSTRateAmount()));
+				//goods.setFundKKTRateAmount(NumberUtils.nullToZero(wsGoods.getFundKKTRateAmount()));
+				goods.setFundKKTRateAmount(NumberUtils.nullToZero(new BigDecimal("2")));// FIXME
 				goods.setDegree(wsGoods.getDegree());
 				goods.setPriceFlag(wsGoods.getPriceFlag());
 				goods.setDeclarePrice(NumberUtils.nullToZero(wsGoods.getDeclarePrice()));

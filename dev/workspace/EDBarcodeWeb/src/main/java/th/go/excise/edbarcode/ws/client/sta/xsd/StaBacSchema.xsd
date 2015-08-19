@@ -161,8 +161,10 @@
 			<element name="GoodsPrice"					type="decimal"		minOccurs="1" />
 			<element name="TaxRateByPriceAmount"		type="decimal"		minOccurs="1" />
 			<element name="TaxRateByQuantityAmount"		type="decimal"		minOccurs="1" />
+			<element name="MunicipalRateAmount"			type="decimal"		minOccurs="1" />
 			<element name="FundSSSRateAmount"			type="decimal"		minOccurs="1" />
 			<element name="FundSSTRateAmount"			type="decimal"		minOccurs="1" />
+			<element name="FundKKTRateAmount"			type="decimal"		minOccurs="1" />
 			<element name="Degree"						type="string"		minOccurs="0" />
 			<element name="PriceFlag"					type="string"		minOccurs="1" />
 			<element name="DeclarePrice"				type="decimal"		minOccurs="0" />

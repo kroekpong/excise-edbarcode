@@ -152,7 +152,6 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		wsSummaryInfo.setPaymentNetTaxAmount(NumberUtils.nullToZero(request.getSR12011Info().getSummaryInfo().getPaymentNetTaxAmount()));
 		wsSummaryInfo.setPaymentOtherAmount(NumberUtils.nullToZero(request.getSR12011Info().getSummaryInfo().getPaymentOtherAmount()));
 		wsSummaryInfo.setPrintType(request.getSR12011Info().getSummaryInfo().getPrintType());
-		wsSummaryInfo.setRecType(request.getSR12011Info().getSummaryInfo().getRecType());
 		wsSummaryInfo.setSumAllTax(NumberUtils.nullToZero(request.getSR12011Info().getSummaryInfo().getSumAllTax()));
 		wsSummaryInfo.setSumAllTaxByQuantity(NumberUtils.nullToZero(request.getSR12011Info().getSummaryInfo().getSumAllTaxByQuantity()));
 		wsSummaryInfo.setSumAllTaxByValue(NumberUtils.nullToZero(request.getSR12011Info().getSummaryInfo().getSumAllTaxByValue()));

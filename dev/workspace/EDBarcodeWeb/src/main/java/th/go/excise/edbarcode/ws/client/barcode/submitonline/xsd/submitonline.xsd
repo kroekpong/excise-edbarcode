@@ -28,7 +28,7 @@
 	<!-- Service1: Submit Online -->
 	<complexType name="SubmitOnlineHeader">
 		<sequence>
-			<element name="RegistratronId"				type="string"		minOccurs="1" />
+			<element name="RegistratronId"				type="string"		minOccurs="0" />
 			<element name="CusId"						type="string"		minOccurs="1" />
 			<element name="CompanyId"					type="string"		minOccurs="1" />
 			<element name="CompanyUserId"				type="string"		minOccurs="1" />
@@ -90,7 +90,7 @@
 			<element name="CategoryCode4"				type="string"		minOccurs="1" />
 			<element name="CategoryCode5"				type="string"		minOccurs="1" />
 			<element name="UnitCode"					type="string"		minOccurs="1" />
-			<element name="RateFlag"					type="string"		minOccurs="1" />
+			<element name="RateFlag"					type="string"		minOccurs="0" />
 			<element name="TaxQuantity"					type="decimal"		minOccurs="1" />
 			<element name="TaxQuantityNumber"			type="decimal"		minOccurs="1" />
 			<element name="TaxQuantityPerUnit"			type="decimal"		minOccurs="1" />
@@ -135,7 +135,6 @@
 			<element name="PaymentFundSportAmount"				type="decimal"		minOccurs="1" />
 			<element name="MoiRate"								type="decimal"		minOccurs="1" />
 			<element name="PrintType"							type="string"		minOccurs="1" />
-			<element name="RecType"								type="string"		minOccurs="1" />
 			<element name="PaymentExciseAndMunicipalTaxAmount"	type="decimal"		minOccurs="1" />
 			<element name="PaymentOtherAmount"					type="decimal"		minOccurs="0" />
 			<element name="PaymentNetTaxAmount"					type="decimal"		minOccurs="1" />
