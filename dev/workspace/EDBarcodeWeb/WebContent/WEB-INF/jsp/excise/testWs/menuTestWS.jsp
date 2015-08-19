@@ -10,5 +10,9 @@
 		<a href="/EDBarcodeBack/showTestSubmitBack.htm">SubmitOnline EbarcodeBack</a>
 		<br>
 		<a href="/EDBarcodeBack/showTestSendBack.htm">SendToBackend EbarcodeBack</a>
+		<br><br><br>
+		<a href="/EDBarcodeBack/testgetsr12011report.htm">testgetsr12011report EbarcodeBack</a>
+		<br>
+		<a href="/EDBarcodeWeb/testsyncmasterdata.htm">testsyncmasterdata EbarcodeWeb</a>
 	</div>
 </div>
