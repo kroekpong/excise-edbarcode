@@ -184,7 +184,7 @@
  
 	 <md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(0)"  ng-hide="historyMode" >เพิ่มรายการสุรา</md-button>
 	 <md-button class="md-raised md-warn" style="width:150px;" ng-click="onDelete()"  ng-hide="historyMode" > ลบรายการที่เลือก </md-button>
-	 <md-button class="md-raised " style="width:200px;" ng-click="clickLoadDraff()" ng-show="haveSaveDraff" ng-hide="historyMode"> โหลดรายการทำค้างใว้ล่าสุด </md-button>
+	 <md-button class="md-raised " style="width:200px;" ng-click="clickLoadDraff()" ng-show="haveSaveDraff&&!historyMode"> โหลดรายการทำค้างใว้ล่าสุด </md-button>
 	 
 </div>
 
