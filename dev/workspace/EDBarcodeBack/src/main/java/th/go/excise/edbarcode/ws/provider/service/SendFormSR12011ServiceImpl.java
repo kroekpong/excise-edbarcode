@@ -26,14 +26,14 @@ import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.InsertPOSO0112Operati
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.POSO0112FormInfo;
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.PSO112Goods;
 import th.go.excise.edbarcode.ws.provider.bean.XmlData;
-import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendToBackendRequest;
-import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendToBackendResponse;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Request;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Response;
 import th.go.excise.edbarcode.ws.provider.oxm.GoodsEntryInfo;
 import th.go.excise.edbarcode.ws.provider.oxm.SR12011Info;
 import th.go.excise.edbarcode.ws.provider.oxm.SubmitOnlineHeader;
 
 @Service("sendToBackendService")
-public class SendToBackendServiceImpl implements SendToBackendService {
+public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 	
 	private static final Logger logger = LogManager.getLogger();
 	
@@ -41,10 +41,10 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 	private InsertPOSO0112OperationService insertPOSO0112OperationService;
 	
 	@Override
-	public EbarcodeSendToBackendResponse getResponse(EbarcodeSendToBackendRequest request) {
+	public EbarcodeSendFormSR12011Response getResponse(EbarcodeSendFormSR12011Request request) {
 		logger.info("getResponse method");
 		
-		EbarcodeSendToBackendResponse response = null;
+		EbarcodeSendFormSR12011Response response = null;
 		
 		try {
 			// Create WebService Request
@@ -55,19 +55,19 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 			
 			if (WebServiceConstant.STATUS_CODE.OK.equalsIgnoreCase(wsResponse.getReturn().getReturnCode())) {
 				// success
-				response = new EbarcodeSendToBackendResponse();
+				response = new EbarcodeSendFormSR12011Response();
 				response.setSendTobackendStatus(wsResponse.getReturn().getReturnCode());
 				response.setSendTobackendDesc(wsResponse.getReturn().getReturnDesc());
 			} else {
 				// error
-				response = new EbarcodeSendToBackendResponse();
+				response = new EbarcodeSendFormSR12011Response();
 				response.setSendTobackendStatus(wsResponse.getReturn().getReturnCode());
 				response.setSendTobackendDesc(wsResponse.getReturn().getReturnDesc());
 				logger.error("Call SendToBackendService Failed: {}: {}", response.getSendTobackendStatus(), response.getSendTobackendDesc());
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			response = new EbarcodeSendToBackendResponse();
+			response = new EbarcodeSendFormSR12011Response();
 			response.setSendTobackendStatus(WebServiceConstant.STATUS_CODE.ERROR);
 			response.setSendTobackendDesc(e.getMessage());
 		}
@@ -75,7 +75,7 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 		return response;
 	}
 
-	private InsertPOSO0112Operation prepareWsRequest(EbarcodeSendToBackendRequest request) throws JAXBException {
+	private InsertPOSO0112Operation prepareWsRequest(EbarcodeSendFormSR12011Request request) throws JAXBException {
 		
 		Calendar calendar = Calendar.getInstance(Locale.US);
 		
@@ -98,8 +98,8 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 		
 		// Header
 		Header wsHeader = new Header();
-		wsHeader.setServiceID("007BAR0001");
-		wsHeader.setSystemID("007");
+		wsHeader.setSystemID(WebServiceConstant.PCC.SYSTEM_ID);
+		wsHeader.setServiceID(WebServiceConstant.PCC.SERVICE_ID);
 		wsHeader.setUserId("BARCODE");
 		wsHeader.setPassword("11111111");
 		wsHeader.setIPAddress(submitOnlineHeader.getIpAddress());
@@ -111,18 +111,18 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 		wsPoso0112FormInfo.setTin(sr12011Info.getTaxpayerInfo().getTin());
 		wsPoso0112FormInfo.setPinNitId(sr12011Info.getTaxpayerInfo().getTin());
 		wsPoso0112FormInfo.setSubbmissionEmail(submitOnlineHeader.getSubmissionEmail());
-		wsPoso0112FormInfo.setFormType("");// Wait PCC
-		wsPoso0112FormInfo.setFormCode("");// Wait PCC
+		wsPoso0112FormInfo.setFormCode(WebServiceConstant.PCC.FORM_CODE);
+		wsPoso0112FormInfo.setFormType("");// No Data, Can input empty String??
 		wsPoso0112FormInfo.setFormEffectiveDate(DateUtils.wsDateFormat.format(calendar));// Current Date, yyyyMMdd
 		wsPoso0112FormInfo.setFormReferenceNumber(request.getDataInformation().getReferenceNumber());
-		wsPoso0112FormInfo.setPaymentReferenceId(0);// No Data, Input??
+		wsPoso0112FormInfo.setPaymentReferenceId(0);// FIXME No Data, Input??
 		wsPoso0112FormInfo.setBankReferenceId("");// No Data, Can input empty String??
-		wsPoso0112FormInfo.setPayType12("");// No Data, Can input empty String??
+		wsPoso0112FormInfo.setPayType12(WebServiceConstant.PCC.PAY_TYPE);
 		wsPoso0112FormInfo.setTaxMonth(calendar.get(Calendar.MONTH) + 1);// Current Month, 1-12
 		wsPoso0112FormInfo.setTaxYear(calendar.get(Calendar.YEAR));// Current Year, YYYY -> 2015
-		wsPoso0112FormInfo.setIncCode("");// No Data, Can input empty String??
-		wsPoso0112FormInfo.setFactoryDateBegin("");// No Data, Can input empty String??
-		wsPoso0112FormInfo.setFactoryDateEnd("");// No Data, Can input empty String??
+		wsPoso0112FormInfo.setIncCode("0");// FIXME No Data, Can input empty String??
+		wsPoso0112FormInfo.setFactoryDateBegin(DateUtils.wsDateFormat.format(calendar));// Current Date, yyyyMMdd
+		wsPoso0112FormInfo.setFactoryDateEnd(DateUtils.wsDateFormat.format(calendar));// Current Date, yyyyMMdd
 		wsPoso0112FormInfo.setExciseTax(sr12011Info.getSummaryInfo().getSumAllTax().doubleValue());
 		wsPoso0112FormInfo.setReduceAmt(sr12011Info.getSummaryInfo().getTaxLessAmount().doubleValue());
 		wsPoso0112FormInfo.setPenaltyAmt(0.0);// No Data, Can default to zero
@@ -132,9 +132,9 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 		wsPoso0112FormInfo.setSumCreditExciseTax(0);// FIXME
 		wsPoso0112FormInfo.setSumCreditMoiTax(0);// FIXME
 		wsPoso0112FormInfo.setNetExciseTax(sr12011Info.getSummaryInfo().getPaymentExciseAmount().doubleValue());
-		wsPoso0112FormInfo.setNetMoiTax(sr12011Info.getSummaryInfo().getPaymentMunicipalAmount().doubleValue());// FIXME check
+		wsPoso0112FormInfo.setNetMoiTax(sr12011Info.getSummaryInfo().getPaymentMunicipalAmount().doubleValue());
 		wsPoso0112FormInfo.setPrnType(sr12011Info.getSummaryInfo().getPrintType());
-		wsPoso0112FormInfo.setRecType("");//FIXME
+		wsPoso0112FormInfo.setRecType(WebServiceConstant.PCC.RECORD_TYPE);
 		
 		PSO112Goods wsPso112Goods = null;
 		for (GoodsEntryInfo goodsEntryInfo : sr12011Info.getGoodsListInfo().getGoodsEntryInfo()) {
@@ -152,17 +152,17 @@ public class SendToBackendServiceImpl implements SendToBackendService {
 			wsPso112Goods.setCategoryName5("");
 			wsPso112Goods.setUnitCode(goodsEntryInfo.getUnitCode());
 			wsPso112Goods.setRateFlag(goodsEntryInfo.getRateFlag());
-			wsPso112Goods.setTaxQuantity(goodsEntryInfo.getTaxQuantity().toString());
-			wsPso112Goods.setTaxQuantityNumber("");
-			wsPso112Goods.setTaxQuantityPerUnit("");
-			wsPso112Goods.setTaxValue("");
+			wsPso112Goods.setTaxQuantity(decimalFormatFourDigit.format(goodsEntryInfo.getTaxQuantity()));
+			wsPso112Goods.setTaxQuantityNumber(decimalFormatFourDigit.format(goodsEntryInfo.getTaxQuantityNumber()));
+			wsPso112Goods.setTaxQuantityPerUnit(decimalFormatFourDigit.format(goodsEntryInfo.getTaxQuantityPerUnit()));
+			wsPso112Goods.setTaxValue(decimalFormatFourDigit.format(goodsEntryInfo.getTaxValue()));
 			wsPso112Goods.setPriceFlag(goodsEntryInfo.getPriceFlag());
 			wsPso112Goods.setInformPrice(decimalFormatFourDigit.format(goodsEntryInfo.getInformPrice()));
 			wsPso112Goods.setDeclarePrice(decimalFormatFourDigit.format(goodsEntryInfo.getDeclarePrice()));
 			wsPso112Goods.setUnitPirce(decimalFormatFourDigit.format(goodsEntryInfo.getUnitPrice()));
 			wsPso112Goods.setGoodsNum(decimalFormatFourDigit.format(goodsEntryInfo.getGoodsNum()));
 			wsPso112Goods.setGoodsValue(decimalFormatFourDigit.format(goodsEntryInfo.getGoodsValue()));
-			wsPso112Goods.setTaxAmount(decimalFormatFourDigit.format(goodsEntryInfo.getTaxAmount()));
+			wsPso112Goods.setTaxAmount(decimalFormatTwoDigit.format(goodsEntryInfo.getTaxAmount()));
 			wsPoso0112FormInfo.getPso112Goods().add(wsPso112Goods);
 		}
 		

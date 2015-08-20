@@ -23,8 +23,8 @@
 		</complexType>
 	</element>
 	
-	<!-- Service2: Send To Backend -->
-	<element name="EbarcodeSendToBackendRequest">
+	<!-- Service2: Send Form SR12011 -->
+	<element name="EbarcodeSendFormSR12011Request">
 		<complexType>
 			<sequence>
 				<element name="DataInformation"			type="tns:DataInformation"		minOccurs="1" />
@@ -32,7 +32,7 @@
 			</sequence>
 		</complexType>
 	</element>
-	<element name="EbarcodeSendToBackendResponse">
+	<element name="EbarcodeSendFormSR12011Response">
 		<complexType>
 			<sequence>
 				<element name="SendTobackendStatus"		type="string"		minOccurs="1" />
@@ -178,7 +178,7 @@
 		</sequence>
 	</complexType>
 	
-	<!-- Service2: Send To Backend -->
+	<!-- Service2: Send Form SR12011 -->
 	<xs:complexType name="DataInformation">
 		<xs:sequence>
 			<xs:element name="ReferenceNumber"			type="xs:string"		minOccurs="1" />

@@ -19,8 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
-import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendToBackendRequest;
-import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendToBackendResponse;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Request;
+import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Response;
 
 @Service("sendToBackService")
 public class SendToBackServiceImpl implements SendToBackService {
@@ -35,8 +35,8 @@ private static final Logger logger = LogManager.getLogger(SendToBackServiceImpl.
 		
 		logger.info(" ########################### Bessfore Call sendToBacendkWsTemplateTest");
 		
-		EbarcodeSendToBackendResponse response = null;
-		EbarcodeSendToBackendRequest request = null;
+		EbarcodeSendFormSR12011Response response = null;
+		EbarcodeSendFormSR12011Request request = null;
 		
 		try {
 			InputStream xmlInputStream = new ByteArrayInputStream(xmlString.getBytes("UTF-8"));
@@ -46,9 +46,9 @@ private static final Logger logger = LogManager.getLogger(SendToBackServiceImpl.
 			SOAPMessage soapMessage = messageFactory.createMessage(new MimeHeaders(), xmlInputStream);
 			xmlInputStream.close();
 			
-			Unmarshaller unmarshaller = JAXBContext.newInstance(EbarcodeSendToBackendRequest.class).createUnmarshaller();
+			Unmarshaller unmarshaller = JAXBContext.newInstance(EbarcodeSendFormSR12011Request.class).createUnmarshaller();
 			
-			request = (EbarcodeSendToBackendRequest) unmarshaller.unmarshal(soapMessage.getSOAPBody().extractContentAsDocument());
+			request = (EbarcodeSendFormSR12011Request) unmarshaller.unmarshal(soapMessage.getSOAPBody().extractContentAsDocument());
 			
 
 			
@@ -61,12 +61,12 @@ private static final Logger logger = LogManager.getLogger(SendToBackServiceImpl.
 		
 		logger.info(" ########################### After Call  sendToBacendkWsTemplateTest");
 		
-		response = (EbarcodeSendToBackendResponse)sendToBacendkWsTemplateTest.marshalSendAndReceive(request);
+		response = (EbarcodeSendFormSR12011Response)sendToBacendkWsTemplateTest.marshalSendAndReceive(request);
 		System.out.println(response);
 		StringWriter sw = new StringWriter();
 		  try {
 		   
-		   JAXBContext jaxbContext = JAXBContext.newInstance(EbarcodeSendToBackendResponse.class);   
+		   JAXBContext jaxbContext = JAXBContext.newInstance(EbarcodeSendFormSR12011Response.class);   
 		   Marshaller marshaller = jaxbContext.createMarshaller();
 		      marshaller.marshal(response, sw);
 		      sw.close();
