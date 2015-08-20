@@ -5,13 +5,13 @@ import java.text.DecimalFormat;
 
 public class ThaiNumberUtils {
 	
-	private static final String DECIMAL_PATTERN = "#.00";
+	private static final String DECIMAL_PATTERN = "0.00";
 	
 	private static final String[] DIGIT_TH = { "", "หนึ่ง", "สอง", "สาม", "สี่", "ห้า", "หก", "เจ็ด", "แปด", "เก้า", "สิบ" };
 
 	private static final String[] SCALE_TH = { "", "", "สิบ", "ร้อย", "พัน", "หมื่น", "แสน", "ล้าน" };
 	
-	private static final String[] SYMBOLS_TH = { "ลบ", "บาท", "ถ้วน", "สตางค์" ,"เอ็ด", "ยี่" };
+	private static final String[] SYMBOLS_TH = { "ลบ", "บาท", "ถ้วน", "สตางค์" ,"เอ็ด", "ยี่","ศูนย์" };
 
 	private static String getWord(String input) {
 
@@ -40,10 +40,22 @@ public class ThaiNumberUtils {
 			}
 			word.append(SYMBOLS_TH[1]);
 		}
-		if (stang.length() > 0 && stang.compareTo("00") != 0) {
+		else if(fristBaht == '0' && stang.equals("00")){
+			word.append(SYMBOLS_TH[6]);
+			word.append(SYMBOLS_TH[1]);
+		}
+		
+		
+		if ( stang.equals("01")) {
+			word.append(DIGIT_TH[1]);
+			word.append(SYMBOLS_TH[3]);
+		}
+		else if (!stang.equals("00")) {
 			word = addBaht(stang, word);
 			word.append(SYMBOLS_TH[3]);
-		} else {
+		}
+		
+		else {
 			//word.append("ถ้วน");
 		}
 
@@ -93,6 +105,10 @@ public class ThaiNumberUtils {
 	public static String toThaiBaht(String input) {
 		DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
 		return getWord(decimalFormat.format(new BigDecimal(input)));
+	}
+	public static void main(String[] args) {
+		
+		System.err.println(toThaiBaht("0.1"));
 	}
 
 }
