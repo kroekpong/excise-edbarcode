@@ -23,15 +23,19 @@ public class SubmitOnlineBackServiceImpl implements SubmitOnlineBackService {
 		logger.info(" ########################### Before Call submitOnlineWsTemplate");
 		
 		// Call Web Service
-		//EbarcodeSubmitOnlineResponse response = (EbarcodeSubmitOnlineResponse) submitOnlineWsTemplate.marshalSendAndReceive(request);
+		//EbarcodeSubmitOnlineResponse response = getDummyResponse();
+		EbarcodeSubmitOnlineResponse response = (EbarcodeSubmitOnlineResponse) submitOnlineWsTemplate.marshalSendAndReceive(request);
 		
+		logger.info(" ########################### After Call  submitOnlineWsTemplate");
+		
+		return response;
+	}
+	
+	private EbarcodeSubmitOnlineResponse getDummyResponse() {
 		EbarcodeSubmitOnlineResponse response = new EbarcodeSubmitOnlineResponse();
 		response.setSubmitOnlineStatus("OK");
 		response.setSubmitOnlineDesc("Success");
 		response.setReferenceNumber("1120989880_TEST");
-		
-		logger.info(" ########################### After Call  submitOnlineWsTemplate");
-		
 		return response;
 	}
 
