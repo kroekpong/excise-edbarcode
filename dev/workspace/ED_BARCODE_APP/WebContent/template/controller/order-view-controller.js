@@ -262,7 +262,31 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	// history
 	$scope.saveHistory = function() {
 		$historyService.save($profileService.getProfile(), $scope.gridList, $scope.submitType);
-		$scope.navigaTor(5);
+		
+		
+		if($scope.submitType === "online"){
+			
+			var xmlRequest = $scope.submitOnlineRequest();
+			var _endpoint = "http://124.109.26.20:7001/EDBarcodeWeb/ws/EDBarcodeService/";
+			var msg = $soapService.getSOAPMessage("EbarcodeSubmitOnlineRequest","http://www.excise.go.th/xsd/barcode");
+			msg.push(xmlRequest);
+			console.log(msg.getSOAP());
+			$soapService.post(msg,_endpoint,function (status,xmlDoc, data){
+				var resStatus = xmlDoc.getVal("SubmitOnlineStatus");
+				console.log(status,resStatus);
+				if(status == 200 && resStatus == "OK"){
+					var referenceNumber  = xmlDoc.getVal("ReferenceNumber");
+					console.log("referenceNumber",referenceNumber);
+					$scope.navigaTor(5);
+				}else{
+					$scope.showSimpleToast(resStatus);
+				}
+			})
+		}else{
+			//OFF line
+			$scope.navigaTor(5);
+		}
+		
 	};
 
 	/**
@@ -404,9 +428,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + str;
 		data = data.replace("EbarcodeSubmitOnlineRequest", "XmlData").replace("/EbarcodeSubmitOnlineRequest", "/XmlData");
 		$fileUtils.writeFileGenReport(data);
-		console.log(data);
+//		console.log(data);
 
-		return str;
+		return EbarcodeSubmitOnlineRequest;
 
 	};
 	
