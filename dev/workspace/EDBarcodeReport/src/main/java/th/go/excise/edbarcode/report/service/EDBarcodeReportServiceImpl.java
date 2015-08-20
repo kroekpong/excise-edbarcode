@@ -78,9 +78,15 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	}
 	
 	@Override
-	public int generateReport(String xmlFile, String outputPath, String referenceNumber, String mode) throws EDBarcodeReportException {
+	public int generateReport(String xmlFile, String outputPath, String mode) throws EDBarcodeReportException {
+		return generateReport(xmlFile, outputPath, mode, null);
+	}
+	
+	@Override
+	public int generateReport(String xmlFile, String outputPath, String mode, String referenceNumber) throws EDBarcodeReportException {
 		logger.info("Generate Report - Start");
 		long start = System.currentTimeMillis();
+		int result = 0;
 		
 		logger.info("Output Path: " + outputPath);
 		
@@ -115,18 +121,20 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 				items.addAll(getFundExportInputItemList(form));
 				
 				exporter.setExporterInput(new SimpleExporterInput(items));
-				exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputPath + "ALL_EXCISE.pdf"));
+				exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputPath + ReportConstant.REPORT.ALL + "." + ReportConstant.FILE.PDF));
 				exporter.exportReport();
 			} else{
 				logger.warn("Incorrect mode, Please enter 'S' or 'A'");
+				result = 1;
 			}
 		} catch (JRException e) {
 			logger.error(e.getMessage(), e);
-			new EDBarcodeReportException(e.getMessage(), e);
+			result = 1;
+			throw new EDBarcodeReportException(e.getMessage(), e);
 		}
 		logger.info("Generate Report - Finished");
 		logger.info("PDF creation time: " + (System.currentTimeMillis() - start) + " ms");
-		return 0;
+		return result;
 	}
 
 	private List<ExporterInputItem> getSR12011ExportInputItemList(SR12011FormReport form) throws EDBarcodeReportException {

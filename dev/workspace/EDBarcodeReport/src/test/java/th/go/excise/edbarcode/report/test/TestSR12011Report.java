@@ -27,12 +27,11 @@ public class TestSR12011Report {
 		//String xmlFile = "C:\\Users\\SU\\Desktop\\xmlData.txt";
 		String xmlFile = "C:\\Users\\SU\\Desktop\\example_SR12011.txt";
 		String outputPath = "C:\\iReport\\TEST\\";
-		String referenceNumber = "";
 		String mode = "S";
 		
 		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
 		try {
-			reportService.generateReport(xmlFile, outputPath, referenceNumber, mode);
+			reportService.generateReport(xmlFile, outputPath, mode);
 		} catch (EDBarcodeReportException e) {
 			fail(e.getMessage());
 			e.printStackTrace();
@@ -47,12 +46,11 @@ public class TestSR12011Report {
 		//String xmlFile = "C:\\Users\\SU\\Desktop\\xmlData.txt";
 		String xmlFile = "C:\\Users\\SU\\Desktop\\example_SR12011_1_Page_arm.txt";
 		String outputPath = "C:\\iReport\\TEST\\";
-		String referenceNumber = "";
 		String mode = "A";
 		
 		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
 		try {
-			reportService.generateReport(xmlFile, outputPath, referenceNumber, mode);
+			reportService.generateReport(xmlFile, outputPath, mode);
 		} catch (EDBarcodeReportException e) {
 			fail(e.getMessage());
 			e.printStackTrace();

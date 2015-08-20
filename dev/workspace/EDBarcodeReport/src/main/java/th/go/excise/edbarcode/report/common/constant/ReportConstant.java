@@ -19,6 +19,7 @@ public class ReportConstant {
 		public static final String SST1_01 = "SST1_01";
 		public static final String KKT1_01 = "KKT1_01";
 		public static final String[] NAME_LIST = {SR120_11, SSS1_01, SST1_01, KKT1_01};
+		public static final String ALL = "ALL_EXCISE";
 	}
 	
 	public static final class MODE {
@@ -38,7 +39,7 @@ public class ReportConstant {
 		public static final String REFERENCE = "R";
 	}
 	
-	public static final int GOODS_PER_PAGE = 7;
+	public static final int GOODS_PER_PAGE = 8;
 	public static final String SEPERATE_STRING = "|";
 	public static final String SEPERATE_LINE = "}|}";
 	
