@@ -78,7 +78,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	}
 	
 	@Override
-	public int generateReport(String xmlFile, String outputPath, String mode) throws EDBarcodeReportException {
+	public int generateReport(String xmlFile, String outputPath, String referenceNumber, String mode) throws EDBarcodeReportException {
 		logger.info("Generate Report - Start");
 		long start = System.currentTimeMillis();
 		
@@ -86,6 +86,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		
 		try {
 			SR12011FormReport form = EDBarcodeReportUtil.prepareDataWithXmlFile(xmlFile);
+			form.getSummaryReport().setReferenceNumber(referenceNumber);
 			
 			File outputDic = new File(outputPath);
 			if (outputDic.mkdirs()) {
@@ -309,11 +310,13 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.SSS1_01));
 		
 		// Fund
-		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.FORMAT_FUND_AMT);
-		String paymentExciseAmountBaht = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount().split("\\.")[0]));
-		String paymentExciseAmountStang = form.getSummaryReport().getPaymentExciseAmount().split("\\.")[1];
-		String paymentFundHealthAmountBaht = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundHealthAmount().split("\\.")[0]));
-		String paymentFundHealthAmountStang = form.getSummaryReport().getPaymentFundHealthAmount().split("\\.")[1];
+		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
+		String paymentExciseAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount()));
+		String paymentExciseAmountBaht = paymentExciseAmount.split("\\.")[0];
+		String paymentExciseAmountStang = paymentExciseAmount.split("\\.")[1];
+		String paymentFundHealthAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundHealthAmount()));
+		String paymentFundHealthAmountBaht = paymentFundHealthAmount.split("\\.")[0];
+		String paymentFundHealthAmountStang = paymentFundHealthAmount.split("\\.")[1];
 		String paymentFundHealthAmountString = ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentFundHealthAmount());
 		
 		paramMap.put("paymentExciseAmountBaht", paymentExciseAmountBaht);
@@ -336,11 +339,13 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.SST1_01));
 		
 		// Fund
-		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.FORMAT_FUND_AMT);
-		String paymentExciseAmountBaht = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount().split("\\.")[0]));
-		String paymentExciseAmountStang = form.getSummaryReport().getPaymentExciseAmount().split("\\.")[1];
-		String paymentFundTVAmountBaht = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundTVAmount().split("\\.")[0]));
-		String paymentFundTVAmountStang = form.getSummaryReport().getPaymentFundTVAmount().split("\\.")[1];
+		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
+		String paymentExciseAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount()));
+		String paymentExciseAmountBaht = paymentExciseAmount.split("\\.")[0];
+		String paymentExciseAmountStang = paymentExciseAmount.split("\\.")[1];
+		String paymentFundTVAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundTVAmount()));
+		String paymentFundTVAmountBaht = paymentFundTVAmount.split("\\.")[0];
+		String paymentFundTVAmountStang = paymentFundTVAmount.split("\\.")[1];
 		String paymentFundTVAmountString = ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentFundTVAmount());
 		
 		paramMap.put("paymentExciseAmountBaht", paymentExciseAmountBaht);
@@ -363,11 +368,13 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.KKT1_01));
 		
 		// Fund
-		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.FORMAT_FUND_AMT);
-		String paymentExciseAmountBaht = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount().split("\\.")[0]));
-		String paymentExciseAmountStang = form.getSummaryReport().getPaymentExciseAmount().split("\\.")[1];
-		String paymentFundSportAmountBaht = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundSportAmount().split("\\.")[0]));
-		String paymentFundSportAmountStang = form.getSummaryReport().getPaymentFundSportAmount().split("\\.")[1];
+		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
+		String paymentExciseAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount()));
+		String paymentExciseAmountBaht = paymentExciseAmount.split("\\.")[0];
+		String paymentExciseAmountStang = paymentExciseAmount.split("\\.")[1];
+		String paymentFundSportAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundSportAmount()));
+		String paymentFundSportAmountBaht = paymentFundSportAmount.split("\\.")[0];
+		String paymentFundSportAmountStang = paymentFundSportAmount.split("\\.")[1];
 		String paymentFundSportAmountString = ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentFundSportAmount());
 		
 		paramMap.put("paymentExciseAmountBaht", paymentExciseAmountBaht);

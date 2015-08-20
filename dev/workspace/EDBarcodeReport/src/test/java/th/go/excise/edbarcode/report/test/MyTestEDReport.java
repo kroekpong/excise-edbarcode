@@ -84,7 +84,7 @@ public class MyTestEDReport {
 		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
 		try {
 			String outputFile = "C://iReport//TEST//EXCISE.pdf";
-			reportService.generateReport(sb.toString(), outputFile, "A");
+			reportService.generateReport(sb.toString(), outputFile, "", "A");
 		} catch (EDBarcodeReportException e) {
 			e.printStackTrace();
 		}

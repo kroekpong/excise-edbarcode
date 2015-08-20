@@ -14,11 +14,13 @@ public class EDBarcodeReportApp {
 		try {
 //			String xmlFile = "C:\\Users\\SU\\Desktop\\New Text Document (2).txt";
 //			String outputPath = "C:\\iReport\\TEST\\";
+//			String referenceNumber = "";
 //			String mode = ReportConstant.MODE.ALL;
 			String xmlFile = args[0];
 			String outputPath = args[1];
-			String mode = args[2];
-			reportService.generateReport(xmlFile, outputPath, mode);
+			String referenceNumber = args[2];
+			String mode = args[3];
+			reportService.generateReport(xmlFile, outputPath, referenceNumber, mode);
 		} catch (EDBarcodeReportException e) {
 			e.printStackTrace();
 		}

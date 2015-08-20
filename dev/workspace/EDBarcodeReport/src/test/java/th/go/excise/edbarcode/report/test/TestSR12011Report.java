@@ -24,13 +24,15 @@ public class TestSR12011Report {
 	
 	//@Test
 	public void testWithXmlFile() {
-		String xmlFile = "C:\\Users\\SU\\Desktop\\xmlData.txt";
+		//String xmlFile = "C:\\Users\\SU\\Desktop\\xmlData.txt";
+		String xmlFile = "C:\\Users\\SU\\Desktop\\example_SR12011.txt";
 		String outputPath = "C:\\iReport\\TEST\\";
+		String referenceNumber = "";
 		String mode = "S";
 		
 		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
 		try {
-			reportService.generateReport(xmlFile, outputPath, mode);
+			reportService.generateReport(xmlFile, outputPath, referenceNumber, mode);
 		} catch (EDBarcodeReportException e) {
 			fail(e.getMessage());
 			e.printStackTrace();
@@ -38,6 +40,23 @@ public class TestSR12011Report {
 		
 //		System.out.println("45678.99".split("\\.")[0]);
 //		System.out.println(new DecimalFormat("#,##0").format(new BigDecimal("5679900")));
+	}
+	
+	@Test
+	public void testWithXmlFileOnePage() {
+		//String xmlFile = "C:\\Users\\SU\\Desktop\\xmlData.txt";
+		String xmlFile = "C:\\Users\\SU\\Desktop\\example_SR12011_1_Page_arm.txt";
+		String outputPath = "C:\\iReport\\TEST\\";
+		String referenceNumber = "";
+		String mode = "A";
+		
+		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
+		try {
+			reportService.generateReport(xmlFile, outputPath, referenceNumber, mode);
+		} catch (EDBarcodeReportException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 }

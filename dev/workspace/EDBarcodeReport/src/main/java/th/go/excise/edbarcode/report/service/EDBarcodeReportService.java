@@ -7,6 +7,6 @@ public interface EDBarcodeReportService {
 	
 	public byte[] generateReport(SR12011FormReport form) throws EDBarcodeReportException;
 	
-	public int generateReport(String xmlFile, String outputPath, String mode) throws EDBarcodeReportException;
+	public int generateReport(String xmlFile, String outputPath, String referenceNumber, String mode) throws EDBarcodeReportException;
 	
 }
