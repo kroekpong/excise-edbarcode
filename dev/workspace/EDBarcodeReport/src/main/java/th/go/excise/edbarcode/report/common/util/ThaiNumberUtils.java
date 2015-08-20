@@ -106,9 +106,4 @@ public class ThaiNumberUtils {
 		DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
 		return getWord(decimalFormat.format(new BigDecimal(input)));
 	}
-	public static void main(String[] args) {
-		
-		System.err.println(toThaiBaht("0.1"));
-	}
-
 }
