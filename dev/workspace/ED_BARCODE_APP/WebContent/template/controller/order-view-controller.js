@@ -268,10 +268,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			
 			var xmlRequest = $scope.submitOnlineRequest();
 			var _endpoint = "http://124.109.26.20:7001/EDBarcodeWeb/ws/EDBarcodeService/";
-			var msg = $soapService.getSOAPMessage("EbarcodeSubmitOnlineRequest","http://www.excise.go.th/xsd/barcode");
-			msg.push(xmlRequest);
-			console.log(msg.getSOAP());
-			$soapService.post(msg,_endpoint,function (status,xmlDoc, data){
+			
+			console.log(xmlRequest.getSOAP());
+			$soapService.post(xmlRequest,_endpoint,function (status,xmlDoc, data){
 				var resStatus = xmlDoc.getVal("SubmitOnlineStatus");
 				console.log(status,resStatus);
 				if(status == 200 && resStatus == "OK"){
@@ -302,7 +301,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var pws = "";
 		var IpAddress = "192.168.1.1";
 
-		var EbarcodeSubmitOnlineRequest = $soapService.getObject("EbarcodeSubmitOnlineRequest");
+		var EbarcodeSubmitOnlineRequestReQuest = $soapService.getSOAPMessage("EbarcodeSubmitOnlineRequest","http://www.excise.go.th/xsd/barcode");
+		var EbarcodeSubmitOnlineRequest = $soapService.getObject("XmlData");
+		
 		var SubmitOnlineHeader = $soapService.getObject("SubmitOnlineHeader");
 		SubmitOnlineHeader.push($soapService.getObjectItem("RegistrationId", ""));
 		SubmitOnlineHeader.push($soapService.getObjectItem("CusId", profile.CusId));
@@ -315,9 +316,12 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SubmitOnlineHeader.push($soapService.getObjectItem("IpAddress", IpAddress));
 		SubmitOnlineHeader.push($soapService.getObjectItem("SubmissionEmail", profile.factorys.EmailAddress));
 		EbarcodeSubmitOnlineRequest.push(SubmitOnlineHeader);
-
+		EbarcodeSubmitOnlineRequestReQuest.push(SubmitOnlineHeader);
+		
 		var SR12011Info = $soapService.getObject("SR12011Info");
 		EbarcodeSubmitOnlineRequest.push(SR12011Info);
+		EbarcodeSubmitOnlineRequestReQuest.push(SR12011Info);
+		
 		var TaxpayerInfo = $soapService.getObject("TaxpayerInfo");
 		SR12011Info.push(TaxpayerInfo);
 		TaxpayerInfo.push($soapService.getObjectItem("CompanyName", profile.CompanyName));
@@ -426,11 +430,11 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var str = EbarcodeSubmitOnlineRequest.getString();
 		// writeFile
 		var data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + str;
-		data = data.replace("EbarcodeSubmitOnlineRequest", "XmlData").replace("/EbarcodeSubmitOnlineRequest", "/XmlData");
+//		data = data.replace("EbarcodeSubmitOnlineRequest", "XmlData").replace("/EbarcodeSubmitOnlineRequest", "/XmlData");
 		$fileUtils.writeFileGenReport(data);
-//		console.log(data);
+		console.log(data);
 
-		return EbarcodeSubmitOnlineRequest;
+		return EbarcodeSubmitOnlineRequestReQuest;
 
 	};
 	
