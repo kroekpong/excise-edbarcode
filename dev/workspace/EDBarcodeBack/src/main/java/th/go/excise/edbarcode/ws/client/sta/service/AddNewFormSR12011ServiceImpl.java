@@ -107,7 +107,7 @@ public class AddNewFormSR12011ServiceImpl implements AddNewFormSR12011Service {
 		Error error = new Error();
 		error.setCode(WebServiceConstant.STATUS_CODE.ERROR);
 		error.setDescription(message);
-		error.setAction(WebServiceConstant.STA_HEADER.TRAN_CODE_ADD_NEW_FORM_SR12011);
+		error.setAction(WebServiceConstant.STA.TRAN_CODE_ADD_NEW_FORM_SR12011);
 		
 		Body body = new Body();
 		body.setError(error);

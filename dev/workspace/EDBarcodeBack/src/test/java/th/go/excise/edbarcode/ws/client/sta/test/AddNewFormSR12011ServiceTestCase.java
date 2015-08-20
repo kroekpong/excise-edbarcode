@@ -37,9 +37,9 @@ public class AddNewFormSR12011ServiceTestCase {
 	public StaBacRequest createRequestObject() {
 		// Prepare Request Header
 		th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest wsHeader = new th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest();
-		wsHeader.setSourceSystem(WebServiceConstant.STA_HEADER.SYSTEM_BARCODE);
-		wsHeader.setDestinationSystem(WebServiceConstant.STA_HEADER.SYSTEM_STA_BACK);
-		wsHeader.setTransactionCode(WebServiceConstant.STA_HEADER.TRAN_CODE_ADD_NEW_FORM_SR12011);
+		wsHeader.setSourceSystem(WebServiceConstant.STA.SYSTEM_BARCODE);
+		wsHeader.setDestinationSystem(WebServiceConstant.STA.SYSTEM_STA_BACK);
+		wsHeader.setTransactionCode(WebServiceConstant.STA.TRAN_CODE_ADD_NEW_FORM_SR12011);
 		
 		Date currentDate = new Date();
 		th.go.excise.edbarcode.ws.client.sta.oxm.DataInformation wsDataInformation = new th.go.excise.edbarcode.ws.client.sta.oxm.DataInformation();

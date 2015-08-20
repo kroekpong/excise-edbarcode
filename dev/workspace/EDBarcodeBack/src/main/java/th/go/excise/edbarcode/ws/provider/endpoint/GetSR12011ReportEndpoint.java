@@ -25,7 +25,7 @@ public class GetSR12011ReportEndpoint {
 	
 	@PayloadRoot(localPart = "EbarcodeGetSR12011ReportRequest", namespace = WebServiceConstant.NAMESPACE_URI)
 	@ResponsePayload
-	public EbarcodeGetSR12011ReportResponse doEndpoint(@RequestPayload EbarcodeGetSR12011ReportRequest request) throws DatatypeConfigurationException {
+	public EbarcodeGetSR12011ReportResponse doEndpoint(@RequestPayload EbarcodeGetSR12011ReportRequest request) {
 		logger.info(" In doEndpoint GetSR12011ReportRequest");
 		
 		EbarcodeGetSR12011ReportResponse response = getSR12011ReportService.getResponse(request);
