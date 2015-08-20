@@ -4,7 +4,7 @@ public class WebServiceConstant {
 	
 	public static final String NAMESPACE_URI = "http://www.excise.go.th/xsd/barcode";
 	
-	public static final class STA_HEADER {
+	public static final class STA {
 		// System
 		public static final String SYSTEM_STA_BACK = "STABAC";
 		public static final String SYSTEM_BARCODE = "BARCODE";

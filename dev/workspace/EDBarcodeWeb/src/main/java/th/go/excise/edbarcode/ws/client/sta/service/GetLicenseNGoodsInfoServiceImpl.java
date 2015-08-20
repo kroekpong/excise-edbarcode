@@ -107,7 +107,7 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		Error error = new Error();
 		error.setCode(WebServiceConstant.STATUS_CODE.ERROR);
 		error.setDescription(message);
-		error.setAction(WebServiceConstant.STA_HEADER.TRAN_CODE_GET_LICENSE_AND_GOODS_INFO);
+		error.setAction(WebServiceConstant.STA.TRAN_CODE_GET_LICENSE_AND_GOODS_INFO);
 		
 		Body body = new Body();
 		body.setError(error);

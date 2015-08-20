@@ -72,9 +72,9 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 	private th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest prepareWsRequest(EbarcodeSyncMasterDataRequest request) {
 		// Prepare Request Header
 		th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest wsHeader = new th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest();
-		wsHeader.setSourceSystem(WebServiceConstant.STA_HEADER.SYSTEM_BARCODE);
-		wsHeader.setDestinationSystem(WebServiceConstant.STA_HEADER.SYSTEM_STA_BACK);
-		wsHeader.setTransactionCode(WebServiceConstant.STA_HEADER.TRAN_CODE_GET_LICENSE_AND_GOODS_INFO);
+		wsHeader.setSourceSystem(WebServiceConstant.STA.SYSTEM_BARCODE);
+		wsHeader.setDestinationSystem(WebServiceConstant.STA.SYSTEM_STA_BACK);
+		wsHeader.setTransactionCode(WebServiceConstant.STA.TRAN_CODE_GET_LICENSE_AND_GOODS_INFO);
 		
 		// Prepare Request Body
 		PasswordEncryptDecrypt staPasswordUitl = new PasswordEncryptDecrypt();
