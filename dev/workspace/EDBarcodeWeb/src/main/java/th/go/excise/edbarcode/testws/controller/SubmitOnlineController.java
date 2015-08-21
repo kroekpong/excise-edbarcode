@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
-import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.testws.service.SubmitOnlineService;
 
 @Controller
@@ -50,14 +47,4 @@ public class SubmitOnlineController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/menuTestWS.htm", method = RequestMethod.GET)
-	public ModelAndView menuTestWS(){
-		logger.info("Inside menuTestWS()");
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("menuTestWS");
-		
-		return mav;
-	}
 }
