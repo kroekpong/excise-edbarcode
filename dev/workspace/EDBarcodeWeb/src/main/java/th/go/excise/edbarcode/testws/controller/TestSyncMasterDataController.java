@@ -22,7 +22,7 @@ public class TestSyncMasterDataController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("testSyncMasterDataWs");
 //		mav.addObject("strxml", "Stringngngngngngngngngngngn/n/nStringngngngngngngn/nasdasd");
-		
+		mav.addObject("strurl",testSyncMasterDataService.getwsuri());
 		System.out.println(" ####### syncmasterdata ####");
 		return mav;
 

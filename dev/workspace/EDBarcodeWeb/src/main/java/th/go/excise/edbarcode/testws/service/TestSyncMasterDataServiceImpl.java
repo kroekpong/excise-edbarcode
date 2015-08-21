@@ -79,7 +79,11 @@ public class TestSyncMasterDataServiceImpl implements TestSyncMasterDataService 
 	}
 	
 	
+	@Override
+	public String getwsuri() {
 
+		return syncMasterDataWsTemplateTest.getDefaultUri();
+	}
 	
 	
 	

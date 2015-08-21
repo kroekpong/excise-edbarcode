@@ -1437,8 +1437,8 @@ form {
     margin: 0;
     padding: 0;
     border: none; }
-  form label {
-    display: none; }
+/*   form label {
+    display: none; } */
   form input[type="text"], form input[type="password"], form input[type="email"], form input[type="search"],
   form textarea {
 /*     min-width: 17.74em; */
