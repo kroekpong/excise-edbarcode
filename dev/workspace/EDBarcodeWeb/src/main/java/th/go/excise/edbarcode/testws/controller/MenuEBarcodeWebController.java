@@ -12,13 +12,13 @@ public class MenuEBarcodeWebController {
 
 	private static final Logger logger = LogManager.getLogger(MenuEBarcodeWebController.class);
 	
-	@RequestMapping(value = "/menuEBarcodeWebTestWS.htm", method = RequestMethod.GET)
-	public ModelAndView menuEBarcodeWebTestWS(){
-		logger.info("Inside menuEBarcodeWebTestWS()");
+	@RequestMapping(value = "/menuTestWS.htm", method = RequestMethod.GET)
+	public ModelAndView menuTestWS(){
+		logger.info("Inside menuTestWS()");
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("menuEBarcodeWebTestWS");
+		mav.setViewName("menuTestWS");
 		
 		return mav;
 	}
