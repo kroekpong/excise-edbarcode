@@ -3,13 +3,30 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
 <div class="fadeIn active">
-	<h4>EDBarcodeBack SendToBackend</h4>
-	<form action="/EDBarcodeBack/doControllerSendBack.htm" method="post">
+	<h4>EDBarcodeBack SendFormSR12011</h4>
+	<form action="/EDBarcodeBack/doControllerSendFormSR12011.htm" method="post">
 		
 		<table style="height: 500px;">
-
+		
+			<tr>
+				<td><input style="width: 500px;" type="text" type="text" width="300px" value="http://localhost:8080/EDBarcodeBack/testWsSendFormSR12011.htm" /></td>
+			</tr>
+			
+			<tr>
+				<td><br></td>
+			</tr>
+			
 			<tr>
 				<td><input type="submit" /></td>
+			</tr>
+
+			<tr>
+				<td><br></td>
+			</tr>
+
+			<tr>
+				<td>Request</td>
+				<td>Response</td>
 			</tr>
 
 			<tr>
@@ -24,5 +41,8 @@
 
 		</table>
 
+	</form>
+	<form action="/EDBarcodeBack/menuEBarcodeBackTestWS.htm" method="GET">
+		<input type="submit" value="back" />
 	</form>
 </div>
