@@ -22,7 +22,7 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 import th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest;
 import th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineResponse;
 
-@Service("submitOnlineService")
+@Service("sendFormSR12011Service")
 public class SubmitOnlineServiceImpl implements SubmitOnlineService {
 	
 	private static final Logger logger = LogManager.getLogger(SubmitOnlineServiceImpl.class);
