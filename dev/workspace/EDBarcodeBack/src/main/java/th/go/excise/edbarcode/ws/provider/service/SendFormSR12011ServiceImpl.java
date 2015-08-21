@@ -35,7 +35,7 @@ import th.go.excise.edbarcode.ws.provider.oxm.SubmitOnlineHeader;
 @Service("sendToBackendService")
 public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 	
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LogManager.getLogger(SendFormSR12011ServiceImpl.class);
 	
 	@Autowired
 	private InsertPOSO0112OperationService insertPOSO0112OperationService;
@@ -56,20 +56,20 @@ public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 			if (WebServiceConstant.STATUS_CODE.OK.equalsIgnoreCase(wsResponse.getReturn().getReturnCode())) {
 				// success
 				response = new EbarcodeSendFormSR12011Response();
-				response.setSendTobackendStatus(wsResponse.getReturn().getReturnCode());
-				response.setSendTobackendDesc(wsResponse.getReturn().getReturnDesc());
+				response.setSendFormSR12011Status(wsResponse.getReturn().getReturnCode());
+				response.setSendFormSR12011Desc(wsResponse.getReturn().getReturnDesc());
 			} else {
 				// error
 				response = new EbarcodeSendFormSR12011Response();
-				response.setSendTobackendStatus(wsResponse.getReturn().getReturnCode());
-				response.setSendTobackendDesc(wsResponse.getReturn().getReturnDesc());
-				logger.error("Call SendToBackendService Failed: {}: {}", response.getSendTobackendStatus(), response.getSendTobackendDesc());
+				response.setSendFormSR12011Status(wsResponse.getReturn().getReturnCode());
+				response.setSendFormSR12011Desc(wsResponse.getReturn().getReturnDesc());
+				logger.error("Call SendToBackendService Failed: {}: {}", response.getSendFormSR12011Status(), response.getSendFormSR12011Desc());
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			response = new EbarcodeSendFormSR12011Response();
-			response.setSendTobackendStatus(WebServiceConstant.STATUS_CODE.ERROR);
-			response.setSendTobackendDesc(e.getMessage());
+			response.setSendFormSR12011Status(WebServiceConstant.STATUS_CODE.ERROR);
+			response.setSendFormSR12011Desc(e.getMessage());
 		}
 		
 		return response;

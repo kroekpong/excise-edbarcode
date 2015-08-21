@@ -35,8 +35,8 @@
 	<element name="EbarcodeSendFormSR12011Response">
 		<complexType>
 			<sequence>
-				<element name="SendTobackendStatus"		type="string"		minOccurs="1" />
-				<element name="SendTobackendDesc"		type="string"		minOccurs="1" />
+				<element name="SendFormSR12011Status"		type="string"		minOccurs="1" />
+				<element name="SendFormSR12011Desc"		type="string"		minOccurs="1" />
 			</sequence>
 		</complexType>
 	</element>
