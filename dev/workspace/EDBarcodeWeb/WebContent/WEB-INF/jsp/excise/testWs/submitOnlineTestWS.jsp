@@ -43,7 +43,7 @@
 		</table>
 
 	</form>
-	<form action="/EDBarcodeWeb/menuEBarcodeWebTestWS.htm" method="GET">
+	<form action="/EDBarcodeWeb/menuTestWS.htm" method="GET">
 		<input type="submit" value="back" />
 	</form>
 </div>

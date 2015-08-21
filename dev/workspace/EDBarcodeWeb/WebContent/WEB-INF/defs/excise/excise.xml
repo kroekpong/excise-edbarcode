@@ -31,8 +31,8 @@
 		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/submitOnlineTestWS.jsp" />
 	</definition>
 	
-	<definition name="menuEBarcodeWebTestWS" extends="exciseBaseLayout">
-		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/menuEBarcodeWebTestWS.jsp" />
+	<definition name="menuTestWS" extends="exciseBaseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/menuTestWS.jsp" />
 	</definition>
 	
 </tiles-definitions>
