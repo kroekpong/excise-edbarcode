@@ -1,6 +1,7 @@
 package th.go.excise.edbarcode.testws.service;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -9,6 +10,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPException;
@@ -19,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
+import org.w3c.dom.Document;
 
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeGetSR12011ReportRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeGetSR12011ReportResponse;
@@ -58,32 +62,34 @@ public class TestGetSR12011ReportServiceImpl implements TestGetSR12011ReportServ
 		getSR12011ReportWsTemplateTest.setDefaultUri(uri);
 		EbarcodeGetSR12011ReportResponse ebarcodeGetSR12011ReportResponse = (EbarcodeGetSR12011ReportResponse) getSR12011ReportWsTemplateTest.marshalSendAndReceive(request);
 		
-		StringWriter sw = new StringWriter();
-		try {
+		String output =null;
+		try{
+			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Marshaller marshaller = JAXBContext.newInstance(EbarcodeGetSR12011ReportResponse.class).createMarshaller();
+			marshaller.marshal(ebarcodeGetSR12011ReportResponse, document);
+
+			SOAPMessage soapMessage = MessageFactory.newInstance().createMessage();
+			soapMessage.getSOAPBody().addDocument(document);
+
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			soapMessage.writeTo(outputStream);
+			output = new String(outputStream.toByteArray());
 			
-			JAXBContext jaxbContext = JAXBContext.newInstance(EbarcodeGetSR12011ReportResponse.class);			
-			Marshaller marshaller = jaxbContext.createMarshaller();
-		    marshaller.marshal(ebarcodeGetSR12011ReportResponse, sw);
-		    sw.close();
-		    
-//		    SOAPMessage soapMessage =  MessageFactory.newInstance().createMessage(new MimeHeaders(),new ByteArrayInputStream(sw.toString().getBytes("UTF-8")));
-		    
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-//		catch (SOAPException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		catch (IOException e) {
+		} catch (SOAPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		return sw.toString();
+		return output;
+
 	}
 
 	@Override

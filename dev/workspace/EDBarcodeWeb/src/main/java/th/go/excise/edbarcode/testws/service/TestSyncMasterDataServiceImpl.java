@@ -1,14 +1,16 @@
 package th.go.excise.edbarcode.testws.service;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPException;
@@ -19,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
+import org.w3c.dom.Document;
 
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSyncMasterDataRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSyncMasterDataResponse;
@@ -59,23 +62,33 @@ public class TestSyncMasterDataServiceImpl implements TestSyncMasterDataService 
 		
 		
 		EbarcodeSyncMasterDataResponse ebarcodeSyncMasterDataResponse= (EbarcodeSyncMasterDataResponse)syncMasterDataWsTemplateTest.marshalSendAndReceive(request);
-		StringWriter sw = new StringWriter();
-		
-	
-		try {
+		String output =null;
+		try{
+			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Marshaller marshaller = JAXBContext.newInstance(EbarcodeSyncMasterDataResponse.class).createMarshaller();
+			marshaller.marshal(ebarcodeSyncMasterDataResponse, document);
+
+			SOAPMessage soapMessage = MessageFactory.newInstance().createMessage();
+			soapMessage.getSOAPBody().addDocument(document);
+
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			soapMessage.writeTo(outputStream);
+			output = new String(outputStream.toByteArray());
 			
-			JAXBContext jaxbContext = JAXBContext.newInstance(EbarcodeSyncMasterDataResponse.class);			
-			Marshaller marshaller = jaxbContext.createMarshaller();
-			
-		    marshaller.marshal(ebarcodeSyncMasterDataResponse, sw);
-		    
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (SOAPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		
-		return sw.toString();
+		return output;
 	}
 	
 	
