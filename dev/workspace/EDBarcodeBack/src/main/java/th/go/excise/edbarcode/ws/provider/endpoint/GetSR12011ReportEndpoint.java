@@ -1,7 +1,5 @@
 package th.go.excise.edbarcode.ws.provider.endpoint;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
