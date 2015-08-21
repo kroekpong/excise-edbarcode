@@ -31,7 +31,12 @@
 		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/submitOnlineTestWS.jsp" />
 	</definition>
 	
-	<definition name="sendToBackendTestWS" extends="exciseBaseLayout">
-		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/sendToBackendTestWS.jsp" />
+	<definition name="sendFormSR12011TestWS" extends="exciseBaseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/sendFormSR12011TestWS.jsp" />
 	</definition>
+	
+	<definition name="menuEBarcodeBackTestWS" extends="exciseBaseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/menuEBarcodeBackTestWS.jsp" />
+	</definition>
+	
 </tiles-definitions>

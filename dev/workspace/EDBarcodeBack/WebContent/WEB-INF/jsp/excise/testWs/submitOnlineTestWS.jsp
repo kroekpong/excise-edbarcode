@@ -4,12 +4,29 @@
 
 <div class="fadeIn active">
 	<h4>EDBarcodeBack SubmitOnline</h4>
-	<form action="/EDBarcodeBack/doControllerSubmitBack.htm" method="post">
+	<form action="/EDBarcodeBack/doControllerSubmitOnlineBack.htm" method="post">
 		
 		<table style="height: 500px;">
-
+		
+			<tr>
+				<td><input style="width: 500px;" type="text" width="300" value="http://localhost:8080/EDBarcodeBack/testWsSubmitOnlineBack.htm" /></td>
+			</tr>
+			
+			<tr>
+				<td><br></td>
+			</tr>
+			
 			<tr>
 				<td><input type="submit" /></td>
+			</tr>
+
+			<tr>
+				<td><br></td>
+			</tr>
+
+			<tr>
+				<td>Request</td>
+				<td>Response</td>
 			</tr>
 
 			<tr>
@@ -24,5 +41,8 @@
 
 		</table>
 
+	</form>
+	<form action="/EDBarcodeBack/menuEBarcodeBackTestWS.htm" method="GET">
+		<input type="submit" value="back" />
 	</form>
 </div>

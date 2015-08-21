@@ -70,7 +70,7 @@
 	</bean>
 	
 	<!-- SendToBackendWebServiceTest -->
-	<bean id="sendToBacendkWsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
+	<bean id="sendFormSR12011WsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
 		<constructor-arg ref="messageFactory" />
 		<property name="marshaller" ref="clientMarshallerTest" />
 		<property name="unmarshaller" ref="clientMarshallerTest" />
