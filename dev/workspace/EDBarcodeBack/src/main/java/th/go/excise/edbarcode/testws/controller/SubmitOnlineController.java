@@ -24,9 +24,9 @@ public class SubmitOnlineController {
 	@Autowired
 	private SubmitOnlineService submitOnlineService;
 	
-	@RequestMapping(value = "/showTestSubmitBack.htm", method = RequestMethod.GET)
-	public ModelAndView showTest(){
-		logger.info("Inside showTest()");
+	@RequestMapping(value = "/testWsSubmitOnlineBack.htm", method = RequestMethod.GET)
+	public ModelAndView testWsSubmitOnlineBack(){
+		logger.info("Inside testWsSubmitOnlineBack()");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -35,11 +35,11 @@ public class SubmitOnlineController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/doControllerSubmitBack.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/doControllerSubmitOnlineBack.htm", method = RequestMethod.POST)
 	@PayloadRoot(localPart = "EbarcodeSubmitOnlineRequest", namespace = WebServiceConstant.NAMESPACE_URI)
 	@ResponsePayload
-	public ModelAndView doController(@RequestParam("strInput") String request){
-		logger.info("Inside doController()");
+	public ModelAndView doControllerSubmitOnlineBack(@RequestParam("strInput") String request){
+		logger.info("Inside doControllerSubmitOnlineBack()");
 		
 		ModelAndView mav = new ModelAndView();
 		

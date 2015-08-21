@@ -22,18 +22,18 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Request;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Response;
 
-@Service("sendToBackService")
-public class SendToBackServiceImpl implements SendToBackService {
+@Service("sendFormSR12011Service")
+public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 
-private static final Logger logger = LogManager.getLogger(SendToBackServiceImpl.class);
+private static final Logger logger = LogManager.getLogger(SendFormSR12011ServiceImpl.class);
 	
 	@Autowired
-	private WebServiceTemplate sendToBacendkWsTemplateTest;
+	private WebServiceTemplate sendFormSR12011WsTemplateTest;
 	
 	@Override
 	public String doService(String xmlString) {
 		
-		logger.info(" ########################### Bessfore Call sendToBacendkWsTemplateTest");
+		logger.info(" ########################### Bessfore Call sendFormSR12011WsTemplateTest");
 		
 		EbarcodeSendFormSR12011Response response = null;
 		EbarcodeSendFormSR12011Request request = null;
@@ -59,9 +59,9 @@ private static final Logger logger = LogManager.getLogger(SendToBackServiceImpl.
 			
 		}
 		
-		logger.info(" ########################### After Call  sendToBacendkWsTemplateTest");
+		logger.info(" ########################### After Call  sendFormSR12011WsTemplateTest");
 		
-		response = (EbarcodeSendFormSR12011Response)sendToBacendkWsTemplateTest.marshalSendAndReceive(request);
+		response = (EbarcodeSendFormSR12011Response)sendFormSR12011WsTemplateTest.marshalSendAndReceive(request);
 		System.out.println(response);
 		StringWriter sw = new StringWriter();
 		  try {
