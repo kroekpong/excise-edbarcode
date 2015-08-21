@@ -34,6 +34,16 @@
 			<AppenderRef ref="Console" />
 			<AppenderRef ref="RollingFile" />
 		</Logger>
+		<!-- Logging Web Service Client Request -->
+		<Logger name="org.springframework.ws.client.MessageTracing.sent" level="trace" additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+		<!-- Logging Web Service Client Response -->
+		<Logger name="org.springframework.ws.client.MessageTracing.received" level="trace" additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Logger>
 	</Loggers>
 
 </Configuration>
