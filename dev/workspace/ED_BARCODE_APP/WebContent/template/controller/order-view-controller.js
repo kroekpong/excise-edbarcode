@@ -17,6 +17,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	console.info("order.view.controller")
 	$scope.historyMode = (localStorage["historyMod"] == "ON") ? true : false;
 	$scope.haveSaveDraff = (localStorage["saveDraffItems"] == undefined || localStorage["saveDraffItems"] == "") ? false : true;
+	$scope.profile = $profileService.getProfile();
 	
 	console.info("historyMode ", $scope.historyMode);
 	console.info("haveSaveDraff ", $scope.haveSaveDraff);
@@ -261,7 +262,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 	// history
 	$scope.saveHistory = function() {
-		$historyService.save($profileService.getProfile(), $scope.gridList, $scope.submitType);
+		$historyService.save($scope.profile, $scope.gridList, $scope.submitType);
 		
 		
 		if($scope.submitType === "online"){
@@ -278,7 +279,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 					console.log("referenceNumber",referenceNumber);
 					$scope.navigaTor(5);
 				}else{
-					$scope.showSimpleToast(resStatus);
+					$scope.showSimpleToast("error " + resStatus);
 				}
 			})
 		}else{
@@ -295,7 +296,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 	$scope.submitOnlineRequest = function() {
 
-		var profile = $profileService.getProfile();
+		var profile = $scope.profile;
 		var addr = profile.AddrBean;
 		var userId = "";
 		var pws = "";
@@ -432,7 +433,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + str;
 //		data = data.replace("EbarcodeSubmitOnlineRequest", "XmlData").replace("/EbarcodeSubmitOnlineRequest", "/XmlData");
 		$fileUtils.writeFileGenReport(data);
-		console.log(data);
+//		console.log(data);
 
 		return EbarcodeSubmitOnlineRequestReQuest;
 

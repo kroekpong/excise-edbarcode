@@ -44,15 +44,16 @@
 		                    </tr>
 		                    
 		                    <tr ng-repeat="product in topProduct track by $index">
-		                    	<td> 
-			                    	<md-checkbox aria-label="product.checkbox" ng-checked="getProductChecked(product.GoodId)" ng-click="productCheckedClick(product.GoodId,product)" >
-							        </md-checkbox>
+		                    	<td style="text-align: center;width: 1%"> 
+			                    	<md-checkbox aria-label="product.checkbox" ng-checked="getProductChecked(product.GoodId)" 
+			                    	style="width:20px"
+			                    	ng-click="productCheckedClick(product.GoodId,product)" />
 						        </td>
 					       		<td>{{product.GoodsDescriptionText}}</td>
 						        <td>{{product.BrandName}}</td>
-						        <td>{{product.GoodsSize}}</td>
-						        <td>{{product.Degree}}</td>
-						        <td>{{product.DeclarePrice}}</td>
+						        <td style="text-align: right;">{{toStringDec(product.GoodsSize)}}</td>
+						        <td style="text-align: right;">{{toStringDec(product.Degree,2)}}</td>
+						        <td style="text-align: right;">{{toStringDec(product.DeclarePrice)}}</td>
 						       
 		                    </tr>
 		                    
@@ -140,15 +141,15 @@
 		                    </tr>
 		                    
 		                    <tr ng-repeat="product in searchProduct | filter:userSearch">
-		                    	<td> 
-			                    	<md-checkbox aria-label="product.checkbox" ng-checked="getProductChecked(product.GoodId)" ng-click="productCheckedClick(product.GoodId,product)" >
-							        </md-checkbox>
+		                    	<td style="text-align: center;width: 1%"> 
+			                    	<md-checkbox aria-label="product.checkbox" style="width:20px"
+			                    	ng-checked="getProductChecked(product.GoodId)" ng-click="productCheckedClick(product.GoodId,product)" />
 						        </td>
 					       		<td>{{product.GoodsDescriptionText}}</td>
 						        <td>{{product.BrandName}}</td>
-						        <td>{{product.GoodsSize}}</td>
-						        <td>{{product.Degree}}</td>
-						        <td>{{product.DeclarePrice}}</td>
+						       	<td style="text-align: right;">{{toStringDec(product.GoodsSize)}}</td>
+						        <td style="text-align: right;">{{toStringDec(product.Degree,2)}}</td>
+						        <td style="text-align: right;">{{toStringDec(product.DeclarePrice)}}</td>
 						       
 		                    </tr>
 		                    
@@ -179,6 +180,19 @@
 <!-- Grid -->
 <div ng-show="step[1]">
 <div layout="column">
+ 
+ <div  layout="row" layout-align="left center" style="margin-top: 15px;">
+	    <md-input-container class="md-icon-float" style="width:450px;">
+	        <label class="input-has-value-label">ชื่อโรงงานสุรา</label>
+	        <md-icon class="material-icons">account_balance</md-icon>
+	    <input type="text"  ng-model="profile.TaxpayerNameDes" readonly> </md-input-container>
+	    
+	     <md-input-container class="md-icon-float" flax="50">
+	        <label class="input-has-value-label">ใบอนุญาตทำสุราเลขที่</label>
+	        <md-icon class="material-icons">assignment_turned_in</md-icon>
+	    <input type="text"   ng-model="profile.LicenseNo" readonly> </md-input-container>
+	    
+ </div>
  
  <div layout="row">
  
@@ -233,11 +247,11 @@
        			<td>{{$index+1}}</td>
        			<td>{{item.Goods.ProductTypeDescriptionText}}</td>
        			<td>{{item.Goods.GoodsDescriptionText}}</td>
-       			<td>{{toStringDec(item.Goods.Degree,2)}}</td>
-       			<td>{{toStringDec(item.Goods.GoodsSize)}}</td>
+       			<td style="text-align: right;">{{toStringDec(item.Goods.Degree,2)}}</td>
+       			<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize)}}</td>
        			<td> 
        				<md-input-container md-no-float style="padding:0;width:90px;">
-			        	<input type="number" ng-model="item.GoodsCount" placeholder="ขนาดบรรจุ (ลิตร)"  ng-disabled="historyMode">
+			        	<input type="number" style="text-align: right;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode">
 			      	</md-input-container>
 			    </td>
 			    
@@ -246,18 +260,18 @@
        			<td>
        			
 					<md-input-container md-no-float style="padding:0;width:100px;" >
-			        	<input type="number" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
+			        	<input type="number" style="text-align: right;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
 			      	</md-input-container>
 
 				</td>
        			
-       			<td style="text-align: right;">{{item.Goods.DeclarePrice}}</td>
+       			<td style="text-align: right;">{{toStringDec(item.Goods.DeclarePrice)}}</td>
        			<td style="text-align: right;">{{toStringDec(item.col51=calcPriceAmount(item))}}</td>
        			<td style="text-align: right;">{{toStringDec(item.col52=calcQuantityAmount(item))}}</td>
        			<td style="text-align: right;">{{toStringDec(item.col53=calcDegreeOver(item))}}</td>
        			<td style="text-align: right;">{{toStringDec(item.col54=item.PriceAmountTax+item.QuantityAmountTax)}}</td>
-       			<td style="text-align: right;">{{toStringDec(item.PriceAmountTax)}}</td>
-       			<td style="text-align: right;">{{toStringDec(item.QuantityAmountTax)}}</td>
+       			<td style="text-align: right;">{{toStringDec(item.PriceAmountTax,2)}}</td>
+       			<td style="text-align: right;">{{toStringDec(item.QuantityAmountTax,2)}}</td>
        			<td>
 					<md-checkbox ng-model="item.checkbox" aria-label="item.checkbox">
 					</md-checkbox>
@@ -266,8 +280,8 @@
        		</tr>
        		<tr>
        			<td colspan="13" style="text-align: right;"> รวม </td>
-       			<td>{{toStringDec(sumCalcPriceAmount())}}</td>
-       			<td>{{toStringDec(sumCalcQuantityAmount())}}</td>
+       			<td style="text-align: right;">{{toStringDec(sumCalcPriceAmount(),2)}}</td>
+       			<td style="text-align: right;">{{toStringDec(sumCalcQuantityAmount(),2)}}</td>
        			<td></td>
        			
        		</tr>
@@ -277,7 +291,7 @@
 </div>
 		
 		<div layout="row">
-			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(2)">ทำรายการถัดไป</md-button>   
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(2)">ต่อไป</md-button>   
 			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>   
 		</div>
 		                
@@ -297,19 +311,16 @@
   <md-content layout-padding>
     
     
-    <div class="CSSTableGenerator"  ng-show="showDataSearch">
+    <div class="datagrid"  ng-show="showDataSearch">
 		                <table >
-		                    <tr ng-show="false">
-		                        <td>
-		                            Name
-		                        </td>
-		                        <td style="text-align: right;" >
-		                            Number	
-		                        </td>
-		                        <td >
-		                            1	
-		                        </td>
-		                    </tr>
+<!-- 		                    <tr> -->
+<!-- 		                        <td> -->
+<!-- 		                            Name -->
+<!-- 		                        </td> -->
+<!-- 		                        <td style="text-align: right;" > -->
+<!-- 		                            Number	 -->
+<!-- 		                        </td> -->
+<!-- 		                    </tr> -->
 							
 <!-- 						List	 -->
 		                    <tr>
@@ -317,10 +328,7 @@
 		                            (๖.๑) รวมภาษีสุราตามมูลค่า
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            {{toStringDec(sumCalcPriceAmountValue)}}	
-		                        </td>
-		                         <td>
-		                         
+		                            {{toStringDec(sumCalcPriceAmountValue,2)}}	
 		                        </td>
 		                    </tr>
 		               
@@ -329,10 +337,7 @@
 		                            (๖.๒) รวมภาษีสุราตามปริมาณ
 		                        </td>
 		                        <td style="text-align: right;" >
-		                             {{toStringDec(sumCalcQuantityAmountValue)}}	
-		                        </td>
-		                         <td>
-
+		                             {{toStringDec(sumCalcQuantityAmountValue,2)}}	
 		                        </td>
 		                    </tr>
 
@@ -341,34 +346,35 @@
 		                            (๗) รวมภาษีสุรา (๖.๑)+(๖.๒)
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            {{toStringDec(totalTax=sumCalcPriceAmountValue+sumCalcQuantityAmountValue)}}	
-		                        </td>
-		                         <td>
-
+		                            {{toStringDec(totalTax=sumCalcPriceAmountValue+sumCalcQuantityAmountValue,2)}}	
 		                        </td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>
-		                            (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
+			                           (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
+			                            <md-input-container style="width:250px;padding:0;">
+								          <label>ค่าภาษีสุรา</label>
+								          <input ng-model="reFundMoney">
+								        </md-input-container>
+		                        	
+							        
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            {{toStringDec(totalTax)}}	
-		                        </td>
-		                         <td>
-		                            	
+		                            {{toStringDec(totalTax,2)}}	
 		                        </td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>
 		                            (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่	
+		                              <md-input-container   style="width:250px;padding:0;">
+								          <label>หนังสือกรมฯ ที่</label>
+								          <input ng-model="taxRefundId">
+							         </md-input-container>
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            {{toStringDec(0)}}	
-		                        </td>
-		                         <td>
-
+		                            {{toStringDec(0,2)}}	
 		                        </td>
 		                    </tr>
 		                    
@@ -377,10 +383,7 @@
 		                            (๑๐) คงเหลือภาษีสุรา	
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            {{toStringDec(totalTax)}}		
-		                        </td>
-		                         <td>
-		                            	
+		                            {{toStringDec(totalTax,2)}}		
 		                        </td>
 		                    </tr>
 		                    
@@ -388,13 +391,10 @@
 		                    <tr>
 		                        <td>
 		                            
-									(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทยร้อยละ	{{royalTaxRate=10}}%
+									(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทยร้อยละ	{{royalTaxRate=10}}
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            {{toStringDec(royalTotal=totalTax * royalTaxRate/100 )}}		
-		                        </td>
-		                         <td>
-		                            	
+		                            {{toStringDec(royalTotal=totalTax * royalTaxRate/100 ,2)}}		
 		                        </td>
 		                    </tr>
 		                    
@@ -404,10 +404,7 @@
 									(๑๒) รวมภาษีที่ต้องชำระทั้งสิ้น (๑๐) + (๑๑)
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            {{toStringDec(totalTax+royalTotal)}}	
-		                        </td>
-		                         <td>
-		                            
+		                            {{toStringDec(totalTax+royalTotal,2)}}	
 		                        </td>
 		                    </tr>
 		                    
@@ -417,10 +414,7 @@
 									(๑๓) อื่นๆ
 		                        </td>
 		                        <td style="text-align: right;" >
-		                             {{toStringDec(totalTax+royalTotal)}}			
-		                        </td>
-		                         <td>
-		                            	
+		                             {{toStringDec(totalTax+royalTotal,2)}}			
 		                        </td>
 		                    </tr>
 		                    
@@ -430,10 +424,7 @@
 									(๑๔) รวม (๑๒) + (๑๓)
 		                        </td>
 		                        <td style="text-align: right;" >
-		                             {{toStringDec(totalTax+royalTotal)}}		
-		                        </td>
-		                         <td>
-		                            	
+		                             {{toStringDec(totalTax+royalTotal,2)}}		
 		                        </td>
 		                    </tr>
 		                    
@@ -447,7 +438,7 @@
   
   		<div layout="row">
 	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>             
-			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)"  ng-hide="historyMode" >ทำรายการถัดไป</md-button>   
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)"  ng-hide="historyMode" >ต่อไป</md-button>   
 		</div>
   
   </div>
@@ -478,7 +469,7 @@
   
 	<div layout="row">
      	<md-button class="md-raised" style="width:150px;" ng-click="navigaTor(stepCount-1)" ng-disabled="showReportProgess">ย้อนกลับ</md-button>             
-		<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()" ng-disabled="showReportProgess">ทำรายการถัดไป</md-button>   
+		<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()" ng-disabled="showReportProgess">ต่อไป</md-button>   
 	</div>  
   
   </div>

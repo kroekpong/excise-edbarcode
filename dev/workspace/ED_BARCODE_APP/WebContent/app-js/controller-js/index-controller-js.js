@@ -5,8 +5,8 @@ var module = angular.module('indexApp', [ 'ngMaterial', "ui.router" ,"profile.vi
 
 module.config(function($mdThemingProvider) {
 	  $mdThemingProvider.theme('default')
-	    .primaryPalette('blue' , {
-	    	 'default': '700'
+	    .primaryPalette('light-blue' , {
+	    	 'default': '600'
 	    })
 	    .accentPalette('orange');
 });
@@ -59,7 +59,7 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 	$scope.toggleLeft = buildToggler('left');
 	$scope.settings = [ {
 		"iconName" : "assignment_ind",
-		"label" : "ข้อมูลโดยรวม"
+		"label" : "ข้อมูลผู้ประกอบการ"
 	}, {
 		"iconName" : "assignment",
 		"label" : "สร้าง สร. 120-11"

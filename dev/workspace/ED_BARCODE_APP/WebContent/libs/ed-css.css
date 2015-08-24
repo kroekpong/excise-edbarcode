@@ -1,3 +1,8 @@
+.input-has-value-label{
+	font-size: 20px;	
+}
+
+
 .CSSTableGenerator {
 	margin:0px;padding:0px;
 	width:100%;
@@ -45,7 +50,7 @@
 }.CSSTableGenerator tr:hover td{
 	
 }
-.CSSTableGenerator tr:nth-child(odd){ background-color:#aad4ff; }
+.CSSTableGenerator tr:nth-child(odd){ background-color:#FAFAFA; }
 .CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
 	vertical-align:middle;
 	
@@ -149,7 +154,7 @@
 }.CSSProduct tr:hover td{
 	
 }
-.CSSProduct tr:nth-child(odd){ background-color:#aad4ff; }
+.CSSProduct tr:nth-child(odd){ background-color:#FAFAFA; }
 .CSSProduct tr:nth-child(even)    { background-color:#ffffff; }.CSSProduct td{
 	vertical-align:middle;
 	
@@ -204,3 +209,6 @@
 .CSSProduct tr:first-child td:last-child{
 	border-width:0px 0px 1px 1px;
 }
+
+
+.datagrid table { border-collapse: collapse; text-align: left; width: 100%; } .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }.datagrid table td, .datagrid table th { padding: 5px 14px; }.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #FFFFFF), color-stop(1, #FFFFFF) );background:-moz-linear-gradient( center top, #FFFFFF 5%, #FFFFFF 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#FFFFFF');background-color:#FFFFFF; color:#000000; font-size: 18px; font-weight: bold; } .datagrid table thead th:first-child { border: none; }.datagrid table tbody td { color: #4D1A75; font-size: 14px;border-bottom: 1px solid #C6D1D6;font-weight: normal; }.datagrid table tbody td:first-child { border-left: none; }.datagrid table tbody tr:last-child td { border-bottom: none; }

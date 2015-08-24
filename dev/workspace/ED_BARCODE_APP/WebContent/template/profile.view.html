@@ -4,13 +4,13 @@
 <div layout="column" style="width: 600px;margin-top: 10px;">
 
 	<md-input-container class="md-icon-float">
-        <label>ชื่อผู้ได้รับอนุญาทำสุรา</label>
+        <label class="input-has-value-label">ชื่อผู้ได้รับอนุญาทำสุรา</label>
         <md-icon class="material-icons">account_circle</md-icon>
 	<input type="text" ng-model="profile.CompanyName" readonly> </md-input-container>
 
 	<div  layout="row" layout-align="left center">
 	    <md-input-container class="md-icon-float" style="width:450px;">
-	        <label>ชื่อโรงงานสุรา</label>
+	        <label class="input-has-value-label">ชื่อโรงงานสุรา</label>
 	        <md-icon class="material-icons">account_balance</md-icon>
 	    <input type="text"  ng-model="profile.TaxpayerNameDes" readonly> </md-input-container>
 	    
@@ -22,13 +22,13 @@
 	<div  layout="row" layout-wrap>
 	
 	    <md-input-container class="md-icon-float" flax="50">
-	        <label>ใบอนุญาตทำสุราเลขที่</label>
+	        <label class="input-has-value-label">ใบอนุญาตทำสุราเลขที่</label>
 	        <md-icon class="material-icons">assignment_turned_in</md-icon>
 	    <input type="text"   ng-model="profile.LicenseNo" readonly> </md-input-container>
 	
 	
 	    <md-input-container class="md-icon-float"  flax="50">
-	        <label>วันที่</label>
+	        <label class="input-has-value-label">วันที่</label>
 	        <md-icon class="material-icons">query_builder</md-icon>
 	    <input type="text"  ng-model="profile.LicenseDate" readonly> </md-input-container>
     
@@ -36,12 +36,12 @@
 
 
     <md-input-container class="md-icon-float">
-        <label>เลขที่ประจำตัว</label>
+        <label class="input-has-value-label">เลขที่ประจำตัว</label>
         <md-icon class="material-icons">assignment_ind</md-icon>
     <input type="text"    ng-model="profile.CompanyId" readonly> </md-input-container>
 
 	<md-input-container class="md-icon-float" >
-        <label>ที่อยู่</label>
+        <label class="input-has-value-label">ที่อยู่</label>
           <md-icon class="material-icons">home</md-icon>
          <input type="text" ng-model="profile.Address" readonly> </md-input-container>
     </md-input-container>
