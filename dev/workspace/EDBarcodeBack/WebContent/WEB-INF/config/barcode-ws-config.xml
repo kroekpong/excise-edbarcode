@@ -38,7 +38,7 @@
 	</bean>
 
 	<bean id="barcodeSchema" class="org.springframework.xml.xsd.SimpleXsdSchema">
-		<property name="xsd" value="/WEB-INF/classes/th/go/excise/edbarcode/ws/provider/xsd/edbarcode.xsd" />
+		<property name="xsd" value="classpath:th/go/excise/edbarcode/ws/provider/xsd/edbarcode.xsd" />
 	</bean>
 
 	<bean class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
