@@ -24,15 +24,28 @@ public class InsertPOSO0112OperationServiceImpl implements InsertPOSO0112Operati
 
 			logger.info(" #####################################  :" + insertPOSO0112OperationWsTemplate);
 
+			//response = getDummyResponse();
 			response = (InsertPOSO0112OperationResponse) insertPOSO0112OperationWsTemplate.marshalSendAndReceive(insertPOSO0112OperationRequest);
 
 			logger.info(" ##################################### After Call InsertPOSO0112OperationService response:  " + response);
 
 		} catch (Exception ex) {
-			logger.info(" ############## Error Call EAUTWSSupport :" + ex.getMessage());
+			logger.info(" ############## Error Call InsertPOSO0112OperationService :" + ex.getMessage());
 			ex.printStackTrace();
 		}
 
+		return response;
+	}
+	
+	private InsertPOSO0112OperationResponse getDummyResponse() {
+		InsertPOSO0112OperationResponse response = new InsertPOSO0112OperationResponse();
+		
+		th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.InquiryBcsResHeader resHeader = new th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.InquiryBcsResHeader();
+		resHeader.setReturnCode("OK");
+		resHeader.setReturnDesc("Success");
+		
+		response.setReturn(resHeader);
+		
 		return response;
 	}
 

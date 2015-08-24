@@ -142,21 +142,25 @@
 		</sequence>
 	</complexType>
 	
-	<element name="InsertPOSO0112Operation" type="tns:InsertPOSO0112Operation"/>
+	<!-- <element name="InsertPOSO0112Operation" type="tns:InsertPOSO0112Operation"/> -->
 	
-	<complexType name="InsertPOSO0112Operation">
-		<sequence>
-			<element name="arg0" nillable="true" type="tns:InquiryBcsReqHeader"/>
-		</sequence>
-	</complexType>
+	<element name="InsertPOSO0112Operation">
+		<complexType>
+			<sequence>
+				<element name="arg0" nillable="true" type="tns:InquiryBcsReqHeader"/>
+			</sequence>
+		</complexType>
+	</element>
 	
-	<element name="InsertPOSO0112OperationResponse" type="tns:InsertPOSO0112OperationResponse"/>
+	<!-- <element name="InsertPOSO0112OperationResponse" type="tns:InsertPOSO0112OperationResponse"/> -->
 	
-	<complexType name="InsertPOSO0112OperationResponse">
-		<sequence>
-			<element name="return" nillable="true" type="tns:InquiryBcsResHeader"/>
-		</sequence>
-	</complexType>
+	<element name="InsertPOSO0112OperationResponse">
+		<complexType>
+			<sequence>
+				<element name="return" nillable="true" type="tns:InquiryBcsResHeader"/>
+			</sequence>
+		</complexType>
+	</element>
 	
 	<complexType name="InquiryBcsResHeader">
 		<sequence>
