@@ -26,22 +26,22 @@ public class SendFormSR12011Controller {
 		logger.info("Inside testWsSendFormSR12011()");
 		
 		ModelAndView mav = new ModelAndView();
-		
+		mav.addObject("strurl", sendFormSR12011Service.getWsUri());
 		mav.setViewName("sendFormSR12011TestWS");
 		
 		return mav;
 	}
 	
 	@RequestMapping(value = "/doControllerSendFormSR12011.htm", method = RequestMethod.POST)
-	public ModelAndView doControllerSendFormSR12011(@RequestParam("strInput") String request){
+	public ModelAndView doControllerSendFormSR12011(@RequestParam("strInput") String request,@RequestParam("strurl") String strurl){
 		logger.info("Inside doControllerSendFormSR12011()");
 		
 		ModelAndView mav = new ModelAndView();
 		
-		String response = sendFormSR12011Service.doService(request);
+		String response = sendFormSR12011Service.doService(request, strurl);
 		logger.debug(ToStringBuilder.reflectionToString(response, ToStringStyle.MULTI_LINE_STYLE));
-		
 		mav.addObject("strXML", response);
+		mav.addObject("strurl", strurl);
 		mav.setViewName("sendFormSR12011TestWS");
 			
 		return mav;

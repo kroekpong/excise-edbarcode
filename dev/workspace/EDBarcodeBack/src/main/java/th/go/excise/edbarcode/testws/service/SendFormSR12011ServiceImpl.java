@@ -31,7 +31,7 @@ private static final Logger logger = LogManager.getLogger(SendFormSR12011Service
 	private WebServiceTemplate sendFormSR12011WsTemplateTest;
 	
 	@Override
-	public String doService(String xmlString) {
+	public String doService(String xmlString, String uri) {
 		
 		logger.info(" ########################### Bessfore Call sendFormSR12011WsTemplateTest");
 		
@@ -61,6 +61,7 @@ private static final Logger logger = LogManager.getLogger(SendFormSR12011Service
 		
 		logger.info(" ########################### After Call  sendFormSR12011WsTemplateTest");
 		
+		sendFormSR12011WsTemplateTest.setDefaultUri(uri);
 		response = (EbarcodeSendFormSR12011Response)sendFormSR12011WsTemplateTest.marshalSendAndReceive(request);
 		System.out.println(response);
 		StringWriter sw = new StringWriter();
@@ -80,6 +81,12 @@ private static final Logger logger = LogManager.getLogger(SendFormSR12011Service
 			  e.printStackTrace();
 		  }
 		  return sw.toString();
+	}
+
+	@Override
+	public String getWsUri() {
+		// TODO Auto-generated method stub
+		return sendFormSR12011WsTemplateTest.getDefaultUri();
 	}
 	
 }
