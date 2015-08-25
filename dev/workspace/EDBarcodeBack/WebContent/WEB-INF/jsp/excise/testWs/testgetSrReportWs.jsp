@@ -141,4 +141,4 @@ ${strxmlrt}
 
 </div>
 </form>
-<input type="button" value="Back" onclick="window.location.href='menuTestWS.htm'">
+<input type="button" value="Back" onclick="window.location.href='menuEBarcodeBackTestWS.htm'">

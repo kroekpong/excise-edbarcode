@@ -29,12 +29,13 @@ public class TestSyncMasterDataController {
 	}
 	
 	@RequestMapping(value = "/testsyncmasterdatasubmit.htm", method = RequestMethod.POST)
-	public ModelAndView submit(@RequestParam("strxml") String strxml) {
+	public ModelAndView submit(@RequestParam("strxml") String strxml,@RequestParam("strurl") String uri) {
 		System.out.println(strxml);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("testSyncMasterDataWs");
 		mav.addObject("strxml", strxml);
-		mav.addObject("strxmlrt", testSyncMasterDataService.xmlcallws(strxml));
+		mav.addObject("strurl",uri);
+		mav.addObject("strxmlrt", testSyncMasterDataService.xmlcallws(strxml,uri));
 		System.out.println(" ####### syncmasterdatasubmit ####");
 		return mav;
 

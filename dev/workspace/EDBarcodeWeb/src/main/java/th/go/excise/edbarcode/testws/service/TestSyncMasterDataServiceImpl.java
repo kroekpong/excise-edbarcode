@@ -36,7 +36,7 @@ public class TestSyncMasterDataServiceImpl implements TestSyncMasterDataService 
 	private WebServiceTemplate syncMasterDataWsTemplateTest;
 
 	@Override
-	public String xmlcallws(String xmlDataString) {
+	public String xmlcallws(String xmlDataString,String uri) {
 		
 		EbarcodeSyncMasterDataRequest request = null;
 		
