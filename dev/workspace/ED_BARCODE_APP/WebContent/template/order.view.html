@@ -178,6 +178,8 @@
 <!-- add item -->
 
 <!-- Grid -->
+<div layout="column">
+
 <div ng-show="step[1]">
 <div layout="column">
  
@@ -291,8 +293,8 @@
 </div>
 		
 		<div layout="row">
-			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(2)">ต่อไป</md-button>   
-			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>   
+<!-- 			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(2)">ต่อไป</md-button>    -->
+<!-- 			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>    -->
 		</div>
 		                
 </div>		                
@@ -302,7 +304,7 @@
 
 
 <!-- tax calc -->
-<div layout="column" style="width: 100%" ng-show="step[2]">
+<div layout="column" style="width: 100%;margin-top: 15px;" ng-show="step[1]">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <h2 class="md-flex">รวมภาษีสุรา</h2>
@@ -437,13 +439,16 @@
   </md-content>
   
   		<div layout="row">
-	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>             
-			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)"  ng-hide="historyMode" >ต่อไป</md-button>   
+<!-- 	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>              -->
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)"  ng-hide="historyMode" >ต่อไป</md-button>
+			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>   
+			   
 		</div>
   
   </div>
 
 <!-- end tax calc -->
+</div>
 
 <!-- summit type -->
 <div layout="column" style="width: 100%" ng-show="step[3]">
@@ -468,7 +473,7 @@
   	</div>
   
 	<div layout="row">
-     	<md-button class="md-raised" style="width:150px;" ng-click="navigaTor(stepCount-1)" ng-disabled="showReportProgess">ย้อนกลับ</md-button>             
+     	<md-button class="md-raised" style="width:150px;" ng-click="navigaTor(stepCount-2)" ng-disabled="showReportProgess">ย้อนกลับ</md-button>             
 		<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()" ng-disabled="showReportProgess">ต่อไป</md-button>   
 	</div>  
   

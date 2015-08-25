@@ -37,7 +37,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	var tempSelect = [];
 
 	$scope.submitType = "offline";
-	$scope.step = [ false, true, false, false, false, false, false ];
+	$scope.step = [ false, true, false, false, false, false ];
 	$scope.stepCount = 1;
 
 	// report
@@ -52,7 +52,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	}
 
 	$scope.navigaTor = function(_index) {
-		$scope.step = [ false, false, false, false, false, false, ];
+		$scope.step = [ false, false, false, false, false, false];
 		$scope.step[_index] = true;
 		$scope.stepCount = _index;
 		console.info("navigaTor", _index);
