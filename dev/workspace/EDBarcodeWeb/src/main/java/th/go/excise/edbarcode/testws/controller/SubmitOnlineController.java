@@ -26,22 +26,22 @@ public class SubmitOnlineController {
 		logger.info("Inside showTest()");
 		
 		ModelAndView mav = new ModelAndView();
-		
+		mav.addObject("strurl", submitOnlineService.getWsuri());
 		mav.setViewName("submitOnlineTestWS");
 		
 		return mav;
 	}
 	
 	@RequestMapping(value = "/doControllerSubmitWeb.htm", method = RequestMethod.POST)
-	public ModelAndView doController(@RequestParam("strInput") String request){
+	public ModelAndView doController(@RequestParam("strInput") String request, @RequestParam("strurl") String strurl){
 		logger.info("Inside doController()");
 		
 		ModelAndView mav = new ModelAndView();
 		
-		String response = submitOnlineService.doService(request);
+		String response = submitOnlineService.doService(request, strurl);
 		logger.debug(ToStringBuilder.reflectionToString(response, ToStringStyle.MULTI_LINE_STYLE));
-		
 		mav.addObject("strXML", response);
+		mav.addObject("strurl", strurl);
 		mav.setViewName("submitOnlineTestWS");
 			
 		return mav;
