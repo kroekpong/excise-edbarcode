@@ -79,7 +79,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	
 	@Override
 	public int generateReport(String xmlFile, String outputPath, String mode) throws EDBarcodeReportException {
-		return generateReport(xmlFile, outputPath, mode, null);
+		return generateReport(xmlFile, outputPath, mode, "");
 	}
 	
 	@Override
@@ -209,6 +209,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("paymentOtherAmount", "");
 		paramMap.put("paymentNetTaxAmount", "");
 		paramMap.put("paymentNetTaxAmountText", "");
+		paramMap.put("referenceNumber", form.getSummaryReport().getReferenceNumber());
 		
 		// Find totalPages
 		int totalPages = (int) Math.ceil((float) form.getGoodsListReport().size() / ReportConstant.GOODS_PER_PAGE);
