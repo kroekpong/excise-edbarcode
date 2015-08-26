@@ -4,7 +4,7 @@
 
 <div class="fadeIn active">
 	<h4>EDBarcodeBack SendFormSR12011</h4>
-	<form action="/EDBarcodeBack/doControllerSendFormSR12011.htm" method="post">
+	<form action="/EDBarcodeBack/testws/responseSendFormSR12011Ws.htm" method="post">
 		
 		<table style="height: 500px;">
 		
@@ -151,7 +151,7 @@
 		</table>
 
 	</form>
-	<form action="/EDBarcodeBack/menuEBarcodeBackTestWS.htm" method="GET">
+	<form action="/EDBarcodeBack/testws/main.htm" method="GET">
 		<input type="submit" value="back" />
 	</form>
 </div>
