@@ -3,10 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
 <div class="fadeIn active">
-	<h4>EDBarcodeWeb Menu TestWS</h4>
+	<h4>Test Web Service</h4>
 	<div>
-		<a href="/EDBarcodeWeb/showTestSubmitWeb.htm">SubmitOnline EbarcodeWeb</a>
+		<a href="/EDBarcodeWeb/testws/submitOnlineWs.htm">SubmitOnlineWs</a>
 		<br>
-		<a href="/EDBarcodeWeb/testsyncmasterdata.htm">testsyncmasterdata EbarcodeWeb</a>
+		<a href="/EDBarcodeWeb/testsyncmasterdata.htm">SyncMasterDataWs</a>
 	</div>
 </div>

@@ -4,7 +4,7 @@
 
 <div class="fadeIn active">
 	<h3>EDBarcodeWeb SubmitOnline</h3>
-	<form action="/EDBarcodeWeb/doControllerSubmitWeb.htm" method="post">
+	<form action="/EDBarcodeWeb/testws/responseSubmitOnlineWs.htm" method="post">
 
 		<table style="height: 500px;">
 		
@@ -157,7 +157,7 @@
 		</table>
 
 	</form>
-	<form action="/EDBarcodeWeb/menuTestWS.htm" method="GET">
+	<form action="/EDBarcodeWeb/testws/main.htm" method="GET">
 		<input type="submit" value="back" />
 	</form>
 </div>
