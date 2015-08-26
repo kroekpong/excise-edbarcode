@@ -21,9 +21,9 @@ public class SendFormSR12011Controller {
 	@Autowired
 	private SendFormSR12011Service sendFormSR12011Service;
 	
-	@RequestMapping(value = "/testWsSendFormSR12011.htm", method = RequestMethod.GET)
-	public ModelAndView testWsSendFormSR12011(){
-		logger.info("Inside testWsSendFormSR12011()");
+	@RequestMapping(value = "/testws/sendFormSR12011Ws.htm", method = RequestMethod.GET)
+	public ModelAndView sendFormSR12011Ws(){
+		logger.info("Inside sendFormSR12011Ws()");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("strurl", sendFormSR12011Service.getWsUri());
@@ -32,9 +32,9 @@ public class SendFormSR12011Controller {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/doControllerSendFormSR12011.htm", method = RequestMethod.POST)
-	public ModelAndView doControllerSendFormSR12011(@RequestParam("strInput") String request,@RequestParam("strurl") String strurl){
-		logger.info("Inside doControllerSendFormSR12011()");
+	@RequestMapping(value = "/testws/responseSendFormSR12011Ws.htm", method = RequestMethod.POST)
+	public ModelAndView responseSendFormSR12011Ws(@RequestParam("strInput") String request,@RequestParam("strurl") String strurl){
+		logger.info("Inside responseSendFormSR12011Ws()");
 		
 		ModelAndView mav = new ModelAndView();
 		

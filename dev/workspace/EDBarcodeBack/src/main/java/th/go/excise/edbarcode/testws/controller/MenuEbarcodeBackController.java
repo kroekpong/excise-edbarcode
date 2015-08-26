@@ -12,9 +12,9 @@ public class MenuEbarcodeBackController {
 
 	private static final Logger logger = LogManager.getLogger(MenuEbarcodeBackController.class);
 	
-	@RequestMapping(value = "/menuEBarcodeBackTestWS.htm", method = RequestMethod.GET)
-	public ModelAndView menuEBarcodeBackTestWS(){
-		logger.info("Inside menuEBarcodeBackTestWS()");
+	@RequestMapping(value = "/testws/main.htm", method = RequestMethod.GET)
+	public ModelAndView menuTestWS(){
+		logger.info("Inside menuTestWS()");
 		
 		ModelAndView mav = new ModelAndView();
 		

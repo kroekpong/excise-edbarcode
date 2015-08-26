@@ -21,9 +21,9 @@ public class SubmitOnlineController {
 	@Autowired
 	private SubmitOnlineService submitOnlineService;
 	
-	@RequestMapping(value = "/testWsSubmitOnlineBack.htm", method = RequestMethod.GET)
-	public ModelAndView testWsSubmitOnlineBack(){
-		logger.info("Inside testWsSubmitOnlineBack()");
+	@RequestMapping(value = "/testws/submitOnlineWs.htm", method = RequestMethod.GET)
+	public ModelAndView submitOnlineWs(){
+		logger.info("Inside submitOnlineWs()");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("strurl",submitOnlineService.getWsUri() );
@@ -32,9 +32,9 @@ public class SubmitOnlineController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/doControllerSubmitOnlineBack.htm", method = RequestMethod.POST)
-	public ModelAndView doControllerSubmitOnlineBack(@RequestParam("strInput") String request,@RequestParam("strurl") String strurl){
-		logger.info("Inside doControllerSubmitOnlineBack()");
+	@RequestMapping(value = "/testws/responseSubmitOnlineWs.htm", method = RequestMethod.POST)
+	public ModelAndView responseSubmitOnlineWs(@RequestParam("strInput") String request,@RequestParam("strurl") String strurl){
+		logger.info("Inside responseSubmitOnlineWs()");
 		
 		ModelAndView mav = new ModelAndView();
 		
