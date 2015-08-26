@@ -12,7 +12,7 @@ public class MenuEBarcodeWebController {
 
 	private static final Logger logger = LogManager.getLogger(MenuEBarcodeWebController.class);
 	
-	@RequestMapping(value = "/menuTestWS.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/testws/main.htm", method = RequestMethod.GET)
 	public ModelAndView menuTestWS(){
 		logger.info("Inside menuTestWS()");
 		
