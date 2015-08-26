@@ -75,9 +75,10 @@ module.controller('updateprogram.view.controller', function($scope, $rootScope, 
 		var EbarcodeSyncMasterDataRequest = $soapService.getSOAPMessage("EbarcodeSyncMasterDataRequest", "http://www.excise.go.th/xsd/barcode");
 
 		var InternetUser = $soapService.getObject("InternetUser");
-		InternetUser.push($soapService.getObjectItem("CompanyId", "0105529039293"));
-		InternetUser.push($soapService.getObjectItem("CompanyUserId", "tip1"));
-		InternetUser.push($soapService.getObjectItem("CompanyUserPwd", "tip1"));
+		InternetUser.push($soapService.getObjectItem("CompanyId", localStorage["CompanyId"]));
+		var pwd = localStorage["CompanyUserPwd"].split("#");
+		InternetUser.push($soapService.getObjectItem("CompanyUserId", pwd[0]));
+		InternetUser.push($soapService.getObjectItem("CompanyUserPwd", pwd[1]));
 
 		EbarcodeSyncMasterDataRequest.push(InternetUser);
 

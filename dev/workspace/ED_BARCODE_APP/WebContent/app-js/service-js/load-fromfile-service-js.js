@@ -21,6 +21,7 @@ var Goods = function() {
 	this.TaxRateByQuantityAmount = 0;
 	this.FundSSSRateAmount = 0;
 	this.FundSSTRateAmount = 0;
+	this.FundKKTRateAmount = 0;
 
 	this.Degree = 0;
 	this.PriceFlag = "";
@@ -177,6 +178,10 @@ module.service('$fileUtils', function() {
 		execute("\"" + reportPath + "\\run_report.bat\" \"" + reportPath + "\"" ,_fnCallback);
 	};
 	
+	this.runGenReportOnline = function ( _fnCallback , _reffNo ){
+		execute("\"" + reportPath + "\\run_report_online.bat\" \"" + reportPath + "\" " + _reffNo,_fnCallback);
+	};
+	
 	this.writeFileGenReport = function (_data){
 		rw.writeFileSync(reportPath + "\\genReportPdf.xml",_data,"utf8" );
 	};
@@ -240,6 +245,9 @@ module.service('$convertDataXml', function() {
 
 //		 console.log(profile);
 		localStorage["profile"] = JSON.stringify(profile);
+//		save to memory
+		localStorage["CompanyId"] = profile.CompanyId;
+		localStorage["CompanyUserPwd"] = atob(profile.CompanyUserPwd);
 		
 		console.info("GoodsList ...");
 		var GoodsListbyFactorySize = [];
@@ -313,6 +321,8 @@ module.service('$convertDataXml', function() {
 			 g.setNumber("RateWholesaleOver", _ParserXml.getByTagName("RateWholesaleOver",_i));
 			 g.setNumber("RatePerLitreMax", _ParserXml.getByTagName("RatePerLitreMax",_i));
 			 g.setNumber("MunicipalRateAmount", _ParserXml.getByTagName("MunicipalRateAmount",_i));
+			 g.setNumber("FundSSTRateAmount", _ParserXml.getByTagName("FundSSTRateAmount",_i));
+			 g.setNumber("FundKKTRateAmount", _ParserXml.getByTagName("FundKKTRateAmount",_i));
 			 g.genId();
 //			 console.log(g);
 			 

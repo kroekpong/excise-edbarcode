@@ -262,8 +262,6 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 	// history
 	$scope.saveHistory = function() {
-		$historyService.save($scope.profile, $scope.gridList, $scope.submitType);
-		
 		
 		if($scope.submitType === "online"){
 			
@@ -277,13 +275,24 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 				if(status == 200 && resStatus == "OK"){
 					var referenceNumber  = xmlDoc.getVal("ReferenceNumber");
 					console.log("referenceNumber",referenceNumber);
-					$scope.navigaTor(5);
+//					$scope.navigaTor(5);
+					$fileUtils.runGenReportOnline(function(error) {
+						if (error == null) {
+							$historyService.save($scope.profile, $scope.gridList, $scope.submitType);
+							$rootScope.$broadcast("gotoStep", 5);
+						} else {
+							console.log(error);
+							$scope.showSimpleToast(error.message);
+						}
+
+					},referenceNumber);
 				}else{
 					$scope.showSimpleToast("error " + resStatus);
 				}
 			})
 		}else{
 			//OFF line
+			$historyService.save($scope.profile, $scope.gridList, $scope.submitType);
 			$scope.navigaTor(5);
 		}
 		
@@ -347,7 +356,10 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var GoodsListInfo = $soapService.getObject("GoodsListInfo");
 		SR12011Info.push(GoodsListInfo);
 		var Griditems = $scope.gridList;
-
+		var FundSSSRateAmountRate  = 0;
+		var FundSSTRateAmountRate = 0;
+		var FundKKTRateAmountRate = 0;
+		
 		for ( var _i in Griditems) {
 
 			var item = Griditems[_i];
@@ -397,14 +409,28 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 			MoiRate = item.Goods.MunicipalRateAmount;
 			stempType = (item.Goods.ProductTypeDescriptionText.trim() == "เบียร์") ? 2 : 1;
+			
+//			<MunicipalRateAmount>10</MunicipalRateAmount>
+//            <FundSSSRateAmount>2.0</FundSSSRateAmount>
+//            <FundSSTRateAmount>1.5</FundSSTRateAmount>
+//            <FundKKTRateAmount>2.0</FundKKTRateAmount>
+			 if(FundSSSRateAmountRate == 0){
+				 FundSSSRateAmountRate = parseFloat(item.Goods.FundSSSRateAmount);
+			 }
+			 if(FundSSTRateAmountRate == 0){
+				 FundSSTRateAmountRate = parseFloat(item.Goods.FundSSTRateAmount);
+			 }
+			 if(FundKKTRateAmountRate == 0){
+				 FundKKTRateAmountRate = parseFloat(item.Goods.FundKKTRateAmount);
+			 }
 		}
 
 		// sum
 		var TaxDeductionOnBookAmount = "";
 		var TaxDeductionOnBookAmount = 0;
-		var PaymentFundHealthAmount = $scope.totalTax * 0.02;
-		var PaymentFundTVAmount = $scope.totalTax * 0.015;
-		var PaymentFundSportAmount = $scope.totalTax * 0.02;
+		var PaymentFundHealthAmount = $scope.totalTax * FundSSSRateAmountRate;
+		var PaymentFundTVAmount = $scope.totalTax * FundSSTRateAmountRate;
+		var PaymentFundSportAmount = $scope.totalTax * FundKKTRateAmountRate;
 		var Amount = ($scope.totalTax + $scope.royalTotal).toFixed(2);
 
 		var SummaryInfo = $soapService.getObject("SummaryInfo");
@@ -433,7 +459,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + str;
 //		data = data.replace("EbarcodeSubmitOnlineRequest", "XmlData").replace("/EbarcodeSubmitOnlineRequest", "/XmlData");
 		$fileUtils.writeFileGenReport(data);
-//		console.log(data);
+		console.log(data);
 
 		return EbarcodeSubmitOnlineRequestReQuest;
 
