@@ -84,7 +84,9 @@ module.controller('updateprogram.view.controller', function($scope, $rootScope, 
 
 		$soapService.post(EbarcodeSyncMasterDataRequest, "http://124.109.26.20:7001/EDBarcodeWeb/ws/EDBarcodeService", function(status, xmlDoc, data) {
 			$scope.showProgess = false;
-			if (status == 200) {
+			var resStatus = xmlDoc.getVal("SyncMasterDataStatus");
+			console.log(status,resStatus);
+			if (status == 200 && resStatus == "OK") {
 				$soapService.writeUpdateFile(data);
 				localStorage["CurrentVersionDate"] = Date.parse(new Date());
 				$mdToast.show($mdToast.simple().content('สำเร็จ').position($scope.getToastPosition()).hideDelay(3000));
