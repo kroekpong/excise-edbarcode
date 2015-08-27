@@ -26,16 +26,15 @@ import org.w3c.dom.Document;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSyncMasterDataRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSyncMasterDataResponse;
 
-@Service("testSyncMasterDataService")
-public class TestSyncMasterDataServiceImpl implements TestSyncMasterDataService {
+@Service("syncMasterDataServiceTest")
+public class SyncMasterDataServiceTest {
 	
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LogManager.getLogger(SyncMasterDataServiceTest.class);
 
 		
 	@Autowired
 	private WebServiceTemplate syncMasterDataWsTemplateTest;
 
-	@Override
 	public String xmlcallws(String xmlDataString,String uri) {
 		
 		EbarcodeSyncMasterDataRequest request = null;
@@ -50,19 +49,18 @@ public class TestSyncMasterDataServiceImpl implements TestSyncMasterDataService 
 			request = (EbarcodeSyncMasterDataRequest)unmarshaller.unmarshal(soapMessage.getSOAPBody().extractContentAsDocument());
 			
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (SOAPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		}
 		
 		
-		EbarcodeSyncMasterDataResponse ebarcodeSyncMasterDataResponse= (EbarcodeSyncMasterDataResponse)syncMasterDataWsTemplateTest.marshalSendAndReceive(request);
+		EbarcodeSyncMasterDataResponse ebarcodeSyncMasterDataResponse = callClientWs(request);
+		
 		String output =null;
+		
 		try{
 			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			Marshaller marshaller = JAXBContext.newInstance(EbarcodeSyncMasterDataResponse.class).createMarshaller();
@@ -76,28 +74,28 @@ public class TestSyncMasterDataServiceImpl implements TestSyncMasterDataService 
 			output = new String(outputStream.toByteArray());
 			
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (SOAPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		}
 		return output;
 	}
 	
+	private EbarcodeSyncMasterDataResponse callClientWs(EbarcodeSyncMasterDataRequest request){
+		
+		EbarcodeSyncMasterDataResponse ebarcodeSyncMasterDataResponse= (EbarcodeSyncMasterDataResponse)syncMasterDataWsTemplateTest.marshalSendAndReceive(request);
+		return ebarcodeSyncMasterDataResponse;
+		
+	}
 	
-	@Override
+	
 	public String getwsuri() {
 
 		return syncMasterDataWsTemplateTest.getDefaultUri();
 	}
-	
-	
-	
+
 }

@@ -29,6 +29,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.w3c.dom.Document;
@@ -37,15 +38,26 @@ import org.xml.sax.SAXException;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeGetSR12011ReportRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeGetSR12011ReportResponse;
 
-@Service("testGetSRReportService")
-public class TestGetSR12011ReportServiceImpl implements TestGetSR12011ReportService {
+@Service("getSRReportServiceTest")
+public class GetSR12011ReportServiceTest {
 	
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LogManager.getLogger(GetSR12011ReportServiceTest.class);
 	
 	@Autowired
 	private WebServiceTemplate getSR12011ReportWsTemplateTest;
+	
+	@Value("${edBarcodeServiceTest.client.service}")
+	private String uri;
+	
+	public String getUri() {
+		return uri;
+	}
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
 
-	@Override
+	
+
 	public String xmlcallws(String xmlDataString,String uri) {
 	
 	
@@ -59,18 +71,15 @@ public class TestGetSR12011ReportServiceImpl implements TestGetSR12011ReportServ
 			request = (EbarcodeGetSR12011ReportRequest)unmarshaller.unmarshal(soapMessage.getSOAPBody().extractContentAsDocument());
 			
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		}  catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (SOAPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		}
 		
 		getSR12011ReportWsTemplateTest.setDefaultUri(uri);
-		EbarcodeGetSR12011ReportResponse ebarcodeGetSR12011ReportResponse = (EbarcodeGetSR12011ReportResponse) getSR12011ReportWsTemplateTest.marshalSendAndReceive(request);
+		EbarcodeGetSR12011ReportResponse ebarcodeGetSR12011ReportResponse = callClientWs(request);
 		
 		String xmlString =null;
 		try{
@@ -97,33 +106,27 @@ public class TestGetSR12011ReportServiceImpl implements TestGetSR12011ReportServ
 			xmlString = result.getWriter().toString();
 
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (SOAPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		}
 		return xmlString;
 
 	}
-
-	@Override
-	public String getwsuri() {
-
-		return getSR12011ReportWsTemplateTest.getDefaultUri();
+	
+	private EbarcodeGetSR12011ReportResponse callClientWs(EbarcodeGetSR12011ReportRequest ebarcodeGetSR12011ReportRequest){
+		
+		EbarcodeGetSR12011ReportResponse ebarcodeGetSR12011ReportResponse = (EbarcodeGetSR12011ReportResponse) getSR12011ReportWsTemplateTest.marshalSendAndReceive(ebarcodeGetSR12011ReportRequest);
+		return ebarcodeGetSR12011ReportResponse;
+		
 	}
-	
 
-	
 	
 	
 }

@@ -4,7 +4,7 @@
 
 
 
-<form action="testgetsr12011reportsubmit.htm" method="post">
+<form action="#" method="post">
 <label >URI</label><input type="text"  id="strurl" name="strurl" value="${strurl}" style="width: 425px;" />
 <input type="submit" value=" Submit " >
 <div align="left" style="width:100% float: left" > 
@@ -141,4 +141,4 @@ ${strxmlrt}
 
 </div>
 </form>
-<input type="button" value="Back" onclick="window.location.href='menuEBarcodeBackTestWS.htm'">
+<input type="button" value="Back" onclick="window.location.href=''">

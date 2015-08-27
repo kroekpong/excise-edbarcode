@@ -2,6 +2,8 @@ package th.go.excise.edbarcode.testws.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,34 +11,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import th.go.excise.edbarcode.testws.service.TestGetSR12011ReportService;
+import th.go.excise.edbarcode.testws.service.GetSR12011ReportServiceTest;
 
 @Controller
-public class TestGetSR12011ReportController {
+@RequestMapping(value = "/testws/getsr12011report.htm")
+public class GetSR12011ReportControllerTest {
+	
+	private static final Logger logger = LogManager.getLogger(GetSR12011ReportControllerTest.class);
 	
 	@Autowired
-	TestGetSR12011ReportService testGetSRReportService;
+	GetSR12011ReportServiceTest getSRReportServiceTest;
 
-	@RequestMapping(value = "/testgetsr12011report.htm", method = RequestMethod.GET)
+	@RequestMapping( method = RequestMethod.GET)
 	public ModelAndView welcome(HttpServletRequest httpRequest) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tesGetSrReportws");
 //		mav.addObject("strxml", "Stringngngngngngngngngngngn/n/nStringngngngngngngn/nasdasd");
-		mav.addObject("strurl",testGetSRReportService.getwsuri() );
-		System.out.println(" ####### testgetsr12011report ####");
+		mav.addObject("strurl",getSRReportServiceTest.getUri() );
+		logger.info(" ####### testgetsr12011report ####");
 		return mav;
 
 	}
 	
-	@RequestMapping(value = "/testgetsr12011reportsubmit.htm", method = RequestMethod.POST)
+	@RequestMapping( method = RequestMethod.POST)
 	public ModelAndView submit(@RequestParam("strxml") String strxml,@RequestParam("strurl") String strurl) {
-		System.out.println(strxml);
+		
+		logger.info("---input---"+strxml);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tesGetSrReportws");
 		mav.addObject("strxml", strxml);
 		mav.addObject("strurl", strurl );
-		mav.addObject("strxmlrt", testGetSRReportService.xmlcallws(strxml,strurl));
-		System.out.println(" ####### testgetsr12011reportsubmit ####");
+		mav.addObject("strxmlrt", getSRReportServiceTest.xmlcallws(strxml,strurl));
+		logger.info(" ####### testgetsr12011reportsubmit ####");
 		return mav;
 
 	}
