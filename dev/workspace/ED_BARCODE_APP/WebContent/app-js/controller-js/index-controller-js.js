@@ -99,5 +99,9 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 	$scope.$on("updateTitle", function(event, args) {
 		$scope.toolbarTitle = $scope.settings[args].label;
 	});
+	
+	$scope.$on("updateTitleText", function(event, args) {
+		$scope.toolbarTitle = args;
+	});
 
 });

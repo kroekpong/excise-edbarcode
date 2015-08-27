@@ -2,11 +2,11 @@
 
 <!-- add item -->
 <div layout="column" style="width: 100%" ng-show="step[0]">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2 class="md-flex"> รายการสุรา </h2>
-    </div>
-  </md-toolbar>
+<!--   <md-toolbar> -->
+<!--     <div class="md-toolbar-tools"> -->
+<!--       <h2 class="md-flex"> รายการสุรา </h2> -->
+<!--     </div> -->
+<!--   </md-toolbar> -->
   <md-content layout-padding>
     
             	
@@ -201,7 +201,8 @@
  <div layout="row">
  
 	 <md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(0)"  ng-hide="historyMode" >เพิ่มรายการสุรา</md-button>
-	 <md-button class="md-raised md-warn" style="width:150px;" ng-click="onDelete()"  ng-hide="historyMode" > ลบรายการที่เลือก </md-button>
+	 <md-button class="md-raised md-warn" style="width:150px;"
+	 		 ng-click="onDelete()"  ng-hide="historyMode"  ng-disabled="gridList.length==0" > ลบรายการที่เลือก </md-button>
 	 <md-button class="md-raised " style="width:200px;" ng-click="clickLoadDraff()" ng-show="haveSaveDraff&&!historyMode"> โหลดรายการทำค้างใว้ล่าสุด </md-button>
 	 
 </div>
@@ -440,9 +441,10 @@
 
   </md-content>
   
-  		<div layout="row">
+  		<div layout="row"  layout-align="center center" >
 <!-- 	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>              -->
-			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)"  ng-hide="historyMode" >ต่อไป</md-button>
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)"
+				  ng-hide="historyMode" ng-disabled="gridList.length==0" >ต่อไป</md-button>
 			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>   
 			   
 		</div>
@@ -474,7 +476,7 @@
   		<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"></md-progress-linear>
   	</div>
   
-	<div layout="row">
+	<div layout="row"  layout-align="center center" >
      	<md-button class="md-raised" style="width:150px;" ng-click="navigaTor(stepCount-2)" ng-disabled="showReportProgess">ย้อนกลับ</md-button>             
 		<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()" ng-disabled="showReportProgess">ต่อไป</md-button>   
 	</div>  
@@ -491,19 +493,49 @@
   </md-toolbar>
   <md-content layout-padding>
     
-    <h3 class="md-subhead">กดปุ่มเพื่อแสดงตัวอย่างเอกสาร</h3>
 
+    <h2 class="md-subhead">กดปุ่มเพื่อแสดงตัวอย่างเอกสาร</h2>
+    
 	<div layout="row"  layout-align="center center" style="width: 100%;">
-			 <md-button class="md-raised" ng-click="open(0)" >แบบ สร.๑๒๐-๑๑</md-button>
-			  <md-button class="md-raised"  ng-click="open(1)">แบบ สสส.๑/๐๑</md-button>
-			   <md-button class="md-raised"  ng-click="open(2)">แบบ สสท.๑/๐๑</md-button>
-			    <md-button class="md-raised"  ng-click="open(3)">แบบ กกท.๑/๐๑</md-button>
+	
+		<md-button class="md-raised quickMenuPDF" ng-click="open(0)">
+		  	<div layout="column"  layout-align="center center">
+			   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
+				<span>แบบ สร.๑๒๐-๑๑</span>
+			</div>
+		 </md-button>
+	
+		<md-button class="md-raised quickMenuPDF" ng-click="open(1)">
+		  	<div layout="column"  layout-align="center center">
+			   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
+				<span>แบบ สสส.๑/๐๑</span>
+			</div>
+		 </md-button>
+	
+		<md-button class="md-raised quickMenuPDF" ng-click="open(2)">
+		  	<div layout="column"  layout-align="center center">
+			   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
+				<span>แบบ สสท.๑๒๐-๑๑</span>
+			</div>
+		 </md-button>
+	
+		<md-button class="md-raised quickMenuPDF" ng-click="open(3)">
+		  	<div layout="column"  layout-align="center center">
+			   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
+				<span>แบบ กกท.๑๒๐-๑๑</span>
+			</div>
+		 </md-button>
+		 
+<!-- 			 <md-button class="md-raised" ng-click="open(0)" >แบบ สร.๑๒๐-๑๑</md-button> -->
+<!-- 			  <md-button class="md-raised"  ng-click="open(1)">แบบ สสส.๑/๐๑</md-button> -->
+<!-- 			   <md-button class="md-raised"  ng-click="open(2)">แบบ สสท.๑/๐๑</md-button> -->
+<!-- 			    <md-button class="md-raised"  ng-click="open(3)">แบบ กกท.๑/๐๑</md-button> -->
 	</div>
 	
 
   </md-content>
   
-  <div  layout="row"  layout-align="left center" >
+  <div  layout="row"  layout-align="center center" >
 	  <md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>  
 	  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="saveHistory()">เสร็จสิ้น</md-button>    
   </div>
@@ -524,12 +556,21 @@
     
 	    <h3 class="md-subhead">กดปุ่ม เพื่อพิมพ์เอกสาร</h3>
       <div  layout="column"  layout-align="center center" >
-		<md-button class="md-raised" style="width:150px;" ng-click="open(4)"> พิมพ์เอกสารทั้งหมด </md-button>  
+      
+      
+		<md-button class="md-raised quickMenuPDF" ng-click="open(4)">
+		  	<div layout="column"  layout-align="center center">
+			   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
+				<span>พิมพ์เอกสารทั้งหมด </span>
+			</div>
+		 </md-button>
+		 
+<!-- 		<md-button class="md-raised" style="width:150px;" ng-click="open(4)"> พิมพ์เอกสารทั้งหมด </md-button>   -->
 	 </div>
 
   </md-content>
   
-  <div  layout="row"  layout-align="left center" >
+  <div  layout="row"  layout-align="center center" >
 	  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="doAgain()"> ทำรายการใหม่ </md-button>    
   </div>
 

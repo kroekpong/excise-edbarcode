@@ -59,6 +59,10 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 		if (_index == 0) {
 			$scope.resetProductChecked();
+			$rootScope.$broadcast("updateTitleText", "สร้าง สร. 120-11 > เพิ่ม");
+		}
+		if (_index == 1) {
+			$rootScope.$broadcast("updateTitle", 1);
 		}
 	};
 
@@ -116,7 +120,6 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 		$scope.navigaTor(1);
 		console.info("onAdd");
-
 	};
 
 	$scope.onDelete = function(ev) {

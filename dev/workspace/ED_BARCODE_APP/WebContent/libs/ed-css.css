@@ -13,6 +13,18 @@
 	width: 60px;
 }
 
+.quickMenuPDF{
+	margin: 5px;
+	cursor: pointer;
+	padding: 5px;
+	font-weight: bold;
+}
+
+.quickMenuPDF > div > img{
+	width: 80px;
+}
+
+
 .titleBarInfo{
 	padding: 10px;
 	margin-bottom: 5px;
