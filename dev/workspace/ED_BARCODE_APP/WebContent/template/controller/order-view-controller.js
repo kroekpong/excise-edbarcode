@@ -374,12 +374,16 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			var stempType = 0;
 			var GoodsEntryInfo = $soapService.getObject("GoodsEntryInfo");
 			GoodsListInfo.push(GoodsEntryInfo);
+			
+//			70010101#39K,00,000,055,27#3#0#08##-
+			var catCode = item.Goods.GoodsCode.split("#")[1].split(",");
+			
 			GoodsEntryInfo.push($soapService.getObjectItem("ProductCode", item.Goods.ProductTypeCode));
-			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode1", item.Goods.GoodsCode));
-			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode2", item.Goods.GoodsCode));
-			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode3", item.Goods.GoodsCode));
-			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode4", item.Goods.GoodsCode));
-			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode5", item.Goods.GoodsCode));
+			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode1", catCode[0]));
+			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode2", catCode[1]));
+			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode3", catCode[2]));
+			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode4", catCode[3]));
+			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode5", catCode[4]));
 			GoodsEntryInfo.push($soapService.getObjectItem("UnitCode", item.Goods.UnitCode));
 			GoodsEntryInfo.push($soapService.getObjectItem("RateFlag", ""));
 			GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantity", item.Goods.TaxRateByQuantityAmount));
