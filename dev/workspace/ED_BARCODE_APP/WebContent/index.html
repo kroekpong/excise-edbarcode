@@ -55,14 +55,24 @@
 		</h2>
 		<span style="margin-left: 22%;font-size: 12px;margin-top: 20px;">โปรแกรมเวอร์ชั่น 1.0</span>
 	</div>
-	</md-toolbar> </md-content>
+	</md-toolbar> 
+   <md-whiteframe class="md-whiteframe-z1 titleBarInfo" layout layout-align="left center">
+	   <div style="width: 300px;">
+	     <span>{{toolbarTitle}}</span>
+	   </div>
+	   <div style="margin-left: 58%;vertical-align: middle;display: table;height: 25px;">
+	   		<span style="margin-right: 10px;">ผู้ใช้งาน</span><md-icon class="material-icons">account_circle</md-icon><span style="margin-left: 5px;">{{userLogin}}</span>
+	   </div>
+   </md-whiteframe>
+   
+	</md-content>
 	<!-- end toolbar -->
 	<!-- 	menu -->
 
 
 	<div
 		layout="column"
-		style="height: 630px;">
+		style="height: 560px;">
 		<section
 			layout="row"
 			flex>
@@ -92,14 +102,14 @@
 				flex
 				layout-padding>
 
-		   <md-whiteframe class="md-whiteframe-z1 titleBarInfo" layout layout-align="left center">
-			   <div style="width: 300px;">
-			     <span>{{toolbarTitle}}</span>
-			   </div>
-			   <div style="margin-left: 58%;vertical-align: middle;display: table;height: 25px;">
-			   		<span style="margin-right: 10px;">ผู้ใช้งาน</span><md-icon class="material-icons">account_circle</md-icon><span style="margin-left: 5px;">{{userLogin}}</span>
-			   </div>
-		   </md-whiteframe>
+<!-- 		   <md-whiteframe class="md-whiteframe-z1 titleBarInfo" layout layout-align="left center"> -->
+<!-- 			   <div style="width: 300px;"> -->
+<!-- 			     <span>{{toolbarTitle}}</span> -->
+<!-- 			   </div> -->
+<!-- 			   <div style="margin-left: 58%;vertical-align: middle;display: table;height: 25px;"> -->
+<!-- 			   		<span style="margin-right: 10px;">ผู้ใช้งาน</span><md-icon class="material-icons">account_circle</md-icon><span style="margin-left: 5px;">{{userLogin}}</span> -->
+<!-- 			   </div> -->
+<!-- 		   </md-whiteframe> -->
 			<div
 				layout="column"
 				layout-fill
