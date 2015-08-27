@@ -27,10 +27,10 @@ import org.w3c.dom.Document;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
 
-@Service("sendFormSR12011Service")
-public class SubmitOnlineServiceImpl implements SubmitOnlineService {
+@Service("submitOnlineServiceTest")
+public class SubmitOnlineServiceTestImpl implements SubmitOnlineServiceTest {
 	
-	private static final Logger logger = LogManager.getLogger(SubmitOnlineServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(SubmitOnlineServiceTestImpl.class);
 	
 	@Autowired
 	private WebServiceTemplate submitOnlineWsTemplateTest;
