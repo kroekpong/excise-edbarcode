@@ -32,7 +32,9 @@ public class SubmitOnlineControllerTest {
 	public ModelAndView submitOnlineWs() throws IOException{
 		logger.info("Inside submitOnlineWs()");
 		
-		StringBuilder strRequestXML = readFileXMLServiceTest.callRequest("C:/Users/Hashimoto Ai/Downloads/Documents/work P'SU webService/submit_online_request.txt");
+		String strPathRequest = "C:/Users/Hashimoto Ai/Documents/Project_EDBarcode v4/trunk/dev/workspace/EDBarcodeWeb/src/test/resources/xml/submit_online_request.xml";
+//		String strPathRequest = "../submit_online_request.xml";
+		StringBuilder strRequestXML = readFileXMLServiceTest.callRequest(strPathRequest);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("strurl", submitOnlineServiceTest.getWsuri());

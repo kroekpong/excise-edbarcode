@@ -16,7 +16,6 @@ public class ReadFileXMLServiceTestImpl implements ReadFileXMLServiceTest {
 		
 		BufferedReader br = new BufferedReader(new FileReader(new File(strNameRequestController)));
 		String line;
-		br.readLine();
 		StringBuilder sb = new StringBuilder();
 
 		while((line=br.readLine())!= null){
