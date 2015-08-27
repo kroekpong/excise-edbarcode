@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ws.client.core.WebServiceTemplate;
 
 import th.go.excise.edbarcode.testws.service.ReadFileXMLServiceTest;
 import th.go.excise.edbarcode.testws.service.SendFormSR12011ServiceTest;
@@ -28,6 +29,9 @@ public class SendFormSR12011ControllerTest {
 	@Autowired
 	private ReadFileXMLServiceTest readFileXMLServiceTest;
 	
+	@Autowired
+	private WebServiceTemplate sendFormSR12011WsTemplateTest;
+	
 	@RequestMapping( method = RequestMethod.GET)
 	public ModelAndView sendFormSR12011Ws() throws IOException{
 		logger.info("Inside sendFormSR12011Ws()");
@@ -37,7 +41,7 @@ public class SendFormSR12011ControllerTest {
 		StringBuilder strRequestXML = readFileXMLServiceTest.callRequest(strPathRequest);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("strurl", sendFormSR12011Service.getWsUri());
+		mav.addObject("strurl", sendFormSR12011WsTemplateTest.getDefaultUri());
 		mav.addObject("strRequestXML", strRequestXML);
 		mav.setViewName("sendFormSR12011TestWs");
 		

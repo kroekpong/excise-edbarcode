@@ -82,11 +82,5 @@ private static final Logger logger = LogManager.getLogger(SendFormSR12011Service
 		  }
 		  return sw.toString();
 	}
-
-	@Override
-	public String getWsUri() {
-		// TODO Auto-generated method stub
-		return sendFormSR12011WsTemplateTest.getDefaultUri();
-	}
 	
 }

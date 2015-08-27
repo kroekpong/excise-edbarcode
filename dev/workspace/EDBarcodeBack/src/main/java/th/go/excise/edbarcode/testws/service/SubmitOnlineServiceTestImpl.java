@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.w3c.dom.Document;
 
-import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeGetSR12011ReportResponse;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
 
@@ -100,12 +98,6 @@ public class SubmitOnlineServiceTestImpl implements SubmitOnlineServiceTest {
 				e.printStackTrace();
 			}
 		  return output;
-	}
-
-	@Override
-	public String getWsUri() {
-		// TODO Auto-generated method stub
-		return submitOnlineWsTemplateTest.getDefaultUri();
 	}
 	
 }
