@@ -24,7 +24,7 @@
 	</definition>
 	
 	<definition name="testSyncMasterDataWs" extends="exciseBaseLayout">
-		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/testSyncMasterDataWs.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/SyncMasterDataWsTest.jsp" />
 	</definition>
 
 	<definition name="submitOnlineTestWs" extends="exciseBaseLayout">
