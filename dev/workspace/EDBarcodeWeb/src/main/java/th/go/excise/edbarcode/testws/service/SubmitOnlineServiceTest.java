@@ -5,6 +5,4 @@ public interface SubmitOnlineServiceTest {
 
 	public String doService(String request, String uri);
 
-	public Object getWsuri();
-
 }

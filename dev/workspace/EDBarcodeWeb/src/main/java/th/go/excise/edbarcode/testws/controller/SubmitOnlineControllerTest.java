@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ws.client.core.WebServiceTemplate;
 
 import th.go.excise.edbarcode.testws.service.ReadFileXMLServiceTest;
 import th.go.excise.edbarcode.testws.service.SubmitOnlineServiceTest;
@@ -28,6 +29,9 @@ public class SubmitOnlineControllerTest {
 	@Autowired
 	private ReadFileXMLServiceTest readFileXMLServiceTest;
 	
+	@Autowired
+	private WebServiceTemplate submitOnlineWsTemplateTest;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView submitOnlineWs() throws IOException{
 		logger.info("Inside submitOnlineWs()");
@@ -37,7 +41,7 @@ public class SubmitOnlineControllerTest {
 		StringBuilder strRequestXML = readFileXMLServiceTest.callRequest(strPathRequest);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("strurl", submitOnlineServiceTest.getWsuri());
+		mav.addObject("strurl", submitOnlineWsTemplateTest.getDefaultUri());
 		mav.addObject("strRequestXML", strRequestXML);
 		mav.setViewName("submitOnlineTestWs");
 		
