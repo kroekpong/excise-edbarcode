@@ -1,57 +1,89 @@
 <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" style="min-height:580px;">
 
 
-<div layout="column" style="width: 600px;margin-top: 10px;">
+<div layout="row" style="width: 100%;margin-top: 10px;" layout-align="center center" >
+		
+<!-- 		Menu -->
 
-	<md-input-container class="md-icon-float">
-        <label class="input-has-value-label">ชื่อผู้ได้รับอนุญาทำสุรา</label>
-        <md-icon class="material-icons">account_circle</md-icon>
-	<input type="text" ng-model="profile.CompanyName" readonly> </md-input-container>
+		<div layout="column">
 
-	<div  layout="row" layout-align="left center">
-	    <md-input-container class="md-icon-float" style="width:450px;">
-	        <label class="input-has-value-label">ชื่อโรงงานสุรา</label>
-	        <md-icon class="material-icons">account_balance</md-icon>
-	    <input type="text"  ng-model="profile.TaxpayerNameDes" readonly> </md-input-container>
-	    
-	    <md-button class="md-raised md-primary" style="height:40px;" ng-click="showAdvanced($event)" ng-show="factoryList.length > 1">เลือกโรงานสุรา</md-button>
-	    
-	</div>
+		  <md-whiteframe class="md-whiteframe-z1 quickMenu" layout layout-align="center center" ng-click="quickMenuClick(1)">
+		  	<div layout="column"  layout-align="center center">
+			   	<img src="img/icons/document.png" class="md-card-image" alt="Washed Out">
+				<span>สร้าง สร 20-11</span>
+			</div>
+		  </md-whiteframe>
 
+		  <md-whiteframe class="md-whiteframe-z1 quickMenu" layout layout-align="center center" ng-click="quickMenuClick(2)">
+		  	<div layout="column"  layout-align="center center">
+			   	<img src="img/icons/folder_history.png" class="md-card-image" alt="Washed Out">
+				<span>ประวัติการทำรายการ</span>
+			</div>
+		  </md-whiteframe>
 
-	<div  layout="row" layout-wrap>
-	
-	    <md-input-container class="md-icon-float" flax="50">
-	        <label class="input-has-value-label">ใบอนุญาตทำสุราเลขที่</label>
-	        <md-icon class="material-icons">assignment_turned_in</md-icon>
-	    <input type="text"   ng-model="profile.LicenseNo" readonly> </md-input-container>
-	
-	
-	    <md-input-container class="md-icon-float"  flax="50">
-	        <label class="input-has-value-label">วันที่</label>
-	        <md-icon class="material-icons">query_builder</md-icon>
-	    <input type="text"  ng-model="profile.LicenseDate" readonly> </md-input-container>
-    
-	</div>
+		  <md-whiteframe class="md-whiteframe-z1 quickMenu" layout layout-align="center center" ng-click="quickMenuClick(3)">
+		  	<div layout="column"  layout-align="center center">
+			   	<img src="img/icons/system_software_update.png" class="md-card-image" alt="Washed Out">
+				<span>อัพเดทโปรแกรม</span>
+			</div>
+		  </md-whiteframe>
 
+		 
 
-    <md-input-container class="md-icon-float">
-        <label class="input-has-value-label">เลขที่ประจำตัว</label>
-        <md-icon class="material-icons">assignment_ind</md-icon>
-    <input type="text"    ng-model="profile.CompanyId" readonly> </md-input-container>
-
-	<md-input-container class="md-icon-float" >
-        <label class="input-has-value-label">ที่อยู่</label>
-          <md-icon class="material-icons">home</md-icon>
-         <input type="text" ng-model="profile.Address" readonly> </md-input-container>
-    </md-input-container>
-        
-        
-        
-    <md-button class="md-raised md-primary" ng-click="btnOrderClick()">สร้าง สร. 120-11</md-button>
-        
-</div>
-        
+	     
+		</div>
+		
+		<div layout="column" style="width: 600px;">
+		
+			<md-input-container class="md-icon-float">
+		        <label class="input-has-value-label">ชื่อผู้ได้รับอนุญาทำสุรา</label>
+		        <md-icon class="material-icons">account_circle</md-icon>
+			<input type="text" ng-model="profile.CompanyName" readonly> </md-input-container>
+		
+			<div  layout="row" layout-align="left center">
+			    <md-input-container class="md-icon-float" style="width:450px;">
+			        <label class="input-has-value-label">ชื่อโรงงานสุรา</label>
+			        <md-icon class="material-icons">account_balance</md-icon>
+			    <input type="text"  ng-model="profile.TaxpayerNameDes" readonly> </md-input-container>
+			    
+			    <md-button class="md-raised md-primary" style="height:40px;" ng-click="showAdvanced($event)" ng-show="factoryList.length > 1">เลือกโรงานสุรา</md-button>
+			    
+			</div>
+		
+		
+			<div  layout="row" layout-wrap>
+			
+			    <md-input-container class="md-icon-float" flax="50">
+			        <label class="input-has-value-label">ใบอนุญาตทำสุราเลขที่</label>
+			        <md-icon class="material-icons">assignment_turned_in</md-icon>
+			    <input type="text"   ng-model="profile.LicenseNo" readonly> </md-input-container>
+			
+			
+			    <md-input-container class="md-icon-float"  flax="50">
+			        <label class="input-has-value-label">วันที่</label>
+			        <md-icon class="material-icons">query_builder</md-icon>
+			    <input type="text"  ng-model="profile.LicenseDate" readonly> </md-input-container>
+		    
+			</div>
+		
+		
+		    <md-input-container class="md-icon-float">
+		        <label class="input-has-value-label">เลขที่ประจำตัว</label>
+		        <md-icon class="material-icons">assignment_ind</md-icon>
+		    <input type="text"    ng-model="profile.CompanyId" readonly> </md-input-container>
+		
+			<md-input-container class="md-icon-float" >
+		        <label class="input-has-value-label">ที่อยู่</label>
+		          <md-icon class="material-icons">home</md-icon>
+		         <input type="text" ng-model="profile.Address" readonly> </md-input-container>
+		    </md-input-container>
+		        
+		        
+		        
+		<!--     <md-button class="md-raised md-primary" ng-click="btnOrderClick()">สร้าง สร. 120-11</md-button> -->
+		        
+		</div>
+ </div>       
         
         
 </md-whiteframe>

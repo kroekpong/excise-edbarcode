@@ -46,6 +46,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
 module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $location) {
 
 	console.log('AppCtrl');
+	$scope.userLogin = localStorage["CompanyUserPwd"].split("#")[0];
 
 	function buildToggler(navID) {
 		var debounceFn = $mdUtil.debounce(function() {
@@ -59,7 +60,7 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 	$scope.toggleLeft = buildToggler('left');
 	$scope.settings = [ {
 		"iconName" : "assignment_ind",
-		"label" : "ข้อมูลผู้ประกอบการ"
+		"label" : "หน้าแรก"
 	}, {
 		"iconName" : "assignment",
 		"label" : "สร้าง สร. 120-11"
@@ -88,7 +89,7 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 		$location.path("/view/" + _iconName.iconName);
 		$mdSidenav('left').close();
 	};
-
+	
 	
 	$scope.$on("gotoMenuIndex", function(event, args) {
 		$scope.toolbarTitle = $scope.settings[args].label;

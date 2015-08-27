@@ -45,13 +45,15 @@
 	<div class="md-toolbar-tools">
 		<md-button
 			ng-click="toggleLeft()"
-			class="md-icon-button"
+			
 			aria-label="Settings"> <md-icon class="material-icons">menu</md-icon>เมนู
 		</md-button>
+		<img src="img/icons/logo.png" width="50" style="margin-left: 33%;">
 		<h2>
-			<span>{{toolbarTitle}}</span>
+			<span>โปรแกรมชำระภาษีสุราโดยบาโค้ด</span>
+<!-- 			<span>{{toolbarTitle}}</span> -->
 		</h2>
-		<span flex></span>
+		<span style="margin-left: 22%;font-size: 12px;margin-top: 20px;">โปรแกรมเวอร์ชั่น 1.0</span>
 	</div>
 	</md-toolbar> </md-content>
 	<!-- end toolbar -->
@@ -68,7 +70,13 @@
 				class="md-sidenav-left md-whiteframe-z2"
 				md-component-id="left"> <md-toolbar
 				class="md-theme-indigo">
-			<h1 class="md-toolbar-tools">เมนู</h1>
+			<div layout="row">
+				<h1 class="md-toolbar-tools">เมนู</h1>
+				 <md-button ng-click="toggleLeft()" class="md-primary">
+		          <md-icon class="material-icons" style="color:white;">arrow_back</md-icon>
+		        </md-button>
+			</div>	
+			
 			</md-toolbar> <md-content layout-padding> <md-list> <md-subheader
 				class="md-no-sticky">เมนูหลัก </md-subheader> <md-list-item
 				ng-repeat="setting in settings"
@@ -84,6 +92,14 @@
 				flex
 				layout-padding>
 
+		   <md-whiteframe class="md-whiteframe-z1 titleBarInfo" layout layout-align="left center">
+			   <div style="width: 300px;">
+			     <span>{{toolbarTitle}}</span>
+			   </div>
+			   <div style="margin-left: 58%;vertical-align: middle;display: table;height: 25px;">
+			   		<span style="margin-right: 10px;">ผู้ใช้งาน</span><md-icon class="material-icons">account_circle</md-icon><span style="margin-left: 5px;">{{userLogin}}</span>
+			   </div>
+		   </md-whiteframe>
 			<div
 				layout="column"
 				layout-fill

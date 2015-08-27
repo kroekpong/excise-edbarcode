@@ -19,6 +19,10 @@ module.controller('profile.view.controller', function($scope, $rootScope, $mdDia
 		$location.path("/view/assignment");
 		$rootScope.$broadcast("updateTitle", 1);
 	};
+	
+	$scope.quickMenuClick = function(_index) {
+		$rootScope.$broadcast("gotoMenuIndex", _index);
+	};
 
 	$scope.showAdvanced = function(ev) {
 		$mdDialog.show({
