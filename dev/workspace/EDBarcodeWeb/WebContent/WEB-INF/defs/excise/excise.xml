@@ -27,12 +27,12 @@
 		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/testSyncMasterDataWs.jsp" />
 	</definition>
 
-	<definition name="submitOnlineTestWS" extends="exciseBaseLayout">
-		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/submitOnlineTestWS.jsp" />
+	<definition name="submitOnlineTestWs" extends="exciseBaseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/submitOnlineTestWs.jsp" />
 	</definition>
 	
-	<definition name="menuTestWS" extends="exciseBaseLayout">
-		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/menuTestWS.jsp" />
+	<definition name="mainTestWs" extends="exciseBaseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/mainTestWs.jsp" />
 	</definition>
 	
 </tiles-definitions>
