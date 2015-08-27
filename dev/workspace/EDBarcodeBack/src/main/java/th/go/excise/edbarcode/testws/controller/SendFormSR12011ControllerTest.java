@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import th.go.excise.edbarcode.testws.service.ReadFileXMLServiceTest;
-import th.go.excise.edbarcode.testws.service.SendFormSR12011Service;
+import th.go.excise.edbarcode.testws.service.SendFormSR12011ServiceTest;
 
 @Controller
 @RequestMapping(value = "/testws/sendFormSR12011Ws.htm")
@@ -23,7 +23,7 @@ public class SendFormSR12011ControllerTest {
 	private static final Logger logger = LogManager.getLogger(SendFormSR12011ControllerTest.class);
 	
 	@Autowired
-	private SendFormSR12011Service sendFormSR12011Service;
+	private SendFormSR12011ServiceTest sendFormSR12011Service;
 	
 	@Autowired
 	private ReadFileXMLServiceTest readFileXMLServiceTest;

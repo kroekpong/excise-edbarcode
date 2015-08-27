@@ -29,9 +29,9 @@ import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
 
 @Service("submitOnlineService")
-public class SubmitOnlineServiceImpl implements SubmitOnlineService {
+public class SubmitOnlineServiceTestImpl implements SubmitOnlineServiceTest {
 	
-	private static final Logger logger = LogManager.getLogger(SubmitOnlineServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(SubmitOnlineServiceTestImpl.class);
 	
 	@Autowired
 	private WebServiceTemplate submitOnlineWsTemplateTest;

@@ -23,9 +23,9 @@ import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Request;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Response;
 
 @Service("sendFormSR12011Service")
-public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
+public class SendFormSR12011ServiceTestImpl implements SendFormSR12011ServiceTest {
 
-private static final Logger logger = LogManager.getLogger(SendFormSR12011ServiceImpl.class);
+private static final Logger logger = LogManager.getLogger(SendFormSR12011ServiceTestImpl.class);
 	
 	@Autowired
 	private WebServiceTemplate sendFormSR12011WsTemplateTest;

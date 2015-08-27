@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import th.go.excise.edbarcode.testws.service.ReadFileXMLServiceTest;
-import th.go.excise.edbarcode.testws.service.SubmitOnlineService;
+import th.go.excise.edbarcode.testws.service.SubmitOnlineServiceTest;
 
 @Controller
 @RequestMapping(value = "/testws/submitOnlineWs.htm")
@@ -24,7 +24,7 @@ public class SubmitOnlineControllerTest {
 	private static final Logger logger = LogManager.getLogger(SubmitOnlineControllerTest.class);
 	
 	@Autowired
-	private SubmitOnlineService submitOnlineService;
+	private SubmitOnlineServiceTest submitOnlineService;
 	
 	@Autowired
 	private ReadFileXMLServiceTest readFileXMLServiceTest;
