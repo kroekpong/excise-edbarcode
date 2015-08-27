@@ -43,7 +43,7 @@ public class SubmitOnlineControllerTest {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView responseSubmitOnlineWs(@RequestParam("strInput") String request, @RequestParam("strurl") String strurl, @RequestParam("strRequestXML") String strRequestXML){
+	public ModelAndView responseSubmitOnlineWs(@RequestParam("strInput") String request, @RequestParam("strurl") String strurl){
 		logger.info("Inside responseSubmitOnlineWs()");
 		
 		ModelAndView mav = new ModelAndView();
@@ -52,7 +52,7 @@ public class SubmitOnlineControllerTest {
 		logger.debug(ToStringBuilder.reflectionToString(response, ToStringStyle.MULTI_LINE_STYLE));
 		mav.addObject("strXML", response);
 		mav.addObject("strurl", strurl);
-		mav.addObject("strRequestXML", strRequestXML);
+		mav.addObject("strRequestXML", request);
 		mav.setViewName("submitOnlineTestWs");
 			
 		return mav;
