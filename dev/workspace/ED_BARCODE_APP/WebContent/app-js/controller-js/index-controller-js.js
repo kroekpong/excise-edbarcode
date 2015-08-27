@@ -5,8 +5,8 @@ var module = angular.module('indexApp', [ 'ngMaterial', "ui.router" ,"profile.vi
 
 module.config(function($mdThemingProvider) {
 	  $mdThemingProvider.theme('default')
-	    .primaryPalette('light-blue' , {
-	    	 'default': '600'
+	    .primaryPalette('blue-grey' , {
+	    	 'default': '400'
 	    })
 	    .accentPalette('orange');
 });
