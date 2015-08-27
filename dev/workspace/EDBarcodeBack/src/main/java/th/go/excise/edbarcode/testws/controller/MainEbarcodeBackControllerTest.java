@@ -8,17 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MenuEbarcodeBackController {
+@RequestMapping(value = "/testws")
+public class MainEbarcodeBackControllerTest {
 
-	private static final Logger logger = LogManager.getLogger(MenuEbarcodeBackController.class);
+	private static final Logger logger = LogManager.getLogger(MainEbarcodeBackControllerTest.class);
 	
-	@RequestMapping(value = "/testws/main.htm", method = RequestMethod.GET)
-	public ModelAndView menuTestWS(){
-		logger.info("Inside menuTestWS()");
+	@RequestMapping(value = "/main.htm", method = RequestMethod.GET)
+	public ModelAndView mainTestWs(){
+		logger.info("Inside mainTestWs()");
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("menuEBarcodeBackTestWS");
+		mav.setViewName("mainTestWs");
 		
 		return mav;
 	}

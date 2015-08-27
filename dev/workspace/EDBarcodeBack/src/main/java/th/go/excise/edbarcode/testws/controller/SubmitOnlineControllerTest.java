@@ -1,5 +1,8 @@
 package th.go.excise.edbarcode.testws.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.logging.log4j.LogManager;
@@ -11,28 +14,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import th.go.excise.edbarcode.testws.service.ReadFileXMLServiceTest;
 import th.go.excise.edbarcode.testws.service.SubmitOnlineService;
 
 @Controller
-public class SubmitOnlineController {
+@RequestMapping(value = "/testws/submitOnlineWs.htm")
+public class SubmitOnlineControllerTest {
 	
-	private static final Logger logger = LogManager.getLogger(SubmitOnlineController.class);
+	private static final Logger logger = LogManager.getLogger(SubmitOnlineControllerTest.class);
 	
 	@Autowired
 	private SubmitOnlineService submitOnlineService;
 	
-	@RequestMapping(value = "/testws/submitOnlineWs.htm", method = RequestMethod.GET)
-	public ModelAndView submitOnlineWs(){
+	@Autowired
+	private ReadFileXMLServiceTest readFileXMLServiceTest;
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView submitOnlineWs() throws IOException{
 		logger.info("Inside submitOnlineWs()");
 		
 		ModelAndView mav = new ModelAndView();
+		
+		String strPathRequest = "C:/Users/Hashimoto Ai/Documents/Project_EDBarcode v4/trunk/dev/workspace/EDBarcodeBack/src/test/resources/xml/submit_online_request.xml";
+//		String strPathRequest = "../submit_online_request.xml";
+		StringBuilder strRequestXML = readFileXMLServiceTest.callRequest(strPathRequest);
+		
 		mav.addObject("strurl",submitOnlineService.getWsUri() );
-		mav.setViewName("submitOnlineTestWS");
+		mav.addObject("strRequestXML", strRequestXML);
+		mav.setViewName("submitOnlineTestWs");
 		
 		return mav;
 	}
 	
-	@RequestMapping(value = "/testws/responseSubmitOnlineWs.htm", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView responseSubmitOnlineWs(@RequestParam("strInput") String request,@RequestParam("strurl") String strurl){
 		logger.info("Inside responseSubmitOnlineWs()");
 		
@@ -42,7 +56,8 @@ public class SubmitOnlineController {
 		logger.debug(ToStringBuilder.reflectionToString(response, ToStringStyle.MULTI_LINE_STYLE));
 		mav.addObject("strXML", response);
 		mav.addObject("strurl", strurl);
-		mav.setViewName("submitOnlineTestWS");
+		mav.addObject("strRequestXML", request);
+		mav.setViewName("submitOnlineTestWs");
 			
 		return mav;
 	}
