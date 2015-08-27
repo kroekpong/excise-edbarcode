@@ -24,7 +24,7 @@
 	</definition>
 	
 	<definition name="tesGetSrReportws" extends="exciseBaseLayout">
-		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/testgetSrReportWs.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/excise/testWs/GetSrReportWsTest.jsp" />
 	</definition>
 	
 	<definition name="submitOnlineTestWS" extends="exciseBaseLayout">
