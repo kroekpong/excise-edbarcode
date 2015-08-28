@@ -19,6 +19,7 @@ import javax.xml.soap.SOAPMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.w3c.dom.Document;
@@ -31,7 +32,14 @@ public class SyncMasterDataServiceTest {
 	
 	private static final Logger logger = LogManager.getLogger(SyncMasterDataServiceTest.class);
 
-		
+	@Value("${edBarcodeServiceTest.GetSR12011Report.init.xml}")
+	String linkUrl;
+	
+	@Autowired
+	private ReadFileXMLServiceTest readFileXMLServiceTest;
+	
+
+
 	@Autowired
 	private WebServiceTemplate syncMasterDataWsTemplateTest;
 
@@ -92,10 +100,14 @@ public class SyncMasterDataServiceTest {
 		
 	}
 	
-	
 	public String getwsuri() {
-
 		return syncMasterDataWsTemplateTest.getDefaultUri();
+	}
+	
+	public String getStringInitXml() {
+		String rt=null;
+		rt= readFileXMLServiceTest.callRequest(linkUrl).toString();
+		return  rt;
 	}
 
 }

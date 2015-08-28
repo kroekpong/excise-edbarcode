@@ -7,6 +7,6 @@
 	<div>
 		<a href="/EDBarcodeWeb/testws/submitOnlineWs.htm">SubmitOnlineWs</a>
 		<br>
-		<a href="/EDBarcodeWeb/testsyncmasterdata.htm">SyncMasterDataWs</a>
+		<a href="/EDBarcodeWeb/testws/syncmasterdata.htm">SyncMasterDataWs</a>
 	</div>
 </div>

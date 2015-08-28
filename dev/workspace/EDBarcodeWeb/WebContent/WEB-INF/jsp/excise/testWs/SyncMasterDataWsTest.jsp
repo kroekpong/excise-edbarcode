@@ -43,4 +43,4 @@ ${strxmlrt}
 </div>
 
 </form>
-<input type="button" value="Back" onclick="window.location.href=''">
+<input type="button" value="Back" onclick="window.location.href='main.htm'">

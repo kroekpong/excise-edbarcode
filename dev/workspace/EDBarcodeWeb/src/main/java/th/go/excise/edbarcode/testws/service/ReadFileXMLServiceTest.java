@@ -4,5 +4,5 @@ import java.io.IOException;
 
 public interface ReadFileXMLServiceTest {
 
-	public StringBuilder callRequest(String strNameRequestController) throws IOException;
+	public String callRequest(String strNameRequestController);
 }

@@ -13,7 +13,7 @@ public class MainEBarcodeWebControllerTest {
 
 	private static final Logger logger = LogManager.getLogger(MainEBarcodeWebControllerTest.class);
 	
-	@RequestMapping(value = "/main.htm", method = RequestMethod.GET)
+	@RequestMapping(value = {"main.htm","index.htm"}, method = RequestMethod.GET)
 	public ModelAndView mainTestWs(){
 		logger.info("Inside mainTestWs()");
 		
