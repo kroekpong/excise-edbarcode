@@ -31,7 +31,7 @@
 
 			<tr>
 				<td>
-					<textarea rows="1" cols="1" style="height: 500px; width: 500px;" name="strInput">${strRequestXML}</textarea>
+					<textarea rows="1" cols="1" style="height: 500px; width: 500px;" name="strInput">${strInput}</textarea>
 				</td>
 
 				<td>
