@@ -32,13 +32,11 @@ public class SyncMasterDataServiceTest {
 	
 	private static final Logger logger = LogManager.getLogger(SyncMasterDataServiceTest.class);
 
-	@Value("${edBarcodeServiceTest.GetSR12011Report.init.xml}")
-	String linkUrl;
+	@Value("${edBarcodeServiceTest.syscMaster.init.xml}")
+	String linkURI;
 	
 	@Autowired
 	private ReadFileXMLServiceTest readFileXMLServiceTest;
-	
-
 
 	@Autowired
 	private WebServiceTemplate syncMasterDataWsTemplateTest;
@@ -106,7 +104,8 @@ public class SyncMasterDataServiceTest {
 	
 	public String getStringInitXml() {
 		String rt=null;
-		rt= readFileXMLServiceTest.callRequest(linkUrl).toString();
+		System.out.println(linkURI);
+		rt= readFileXMLServiceTest.callRequest(linkURI).toString();
 		return  rt;
 	}
 

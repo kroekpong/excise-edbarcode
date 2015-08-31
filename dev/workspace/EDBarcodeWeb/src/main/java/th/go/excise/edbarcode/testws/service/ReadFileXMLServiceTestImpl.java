@@ -18,6 +18,7 @@ public class ReadFileXMLServiceTestImpl implements ReadFileXMLServiceTest {
 	@SuppressWarnings("resource")
 	@Override
 	public String callRequest(String strRmf) {
+//		C:/Users/Hashimoto Ai/Documents/Project_EDBarcode v4/trunk/dev/workspace/EDBarcodeWeb/src/main/resources/
 		
 		ClassLoader classLoader = getClass().getClassLoader();
 		File fi = new File(classLoader.getResource(strRmf).getFile());
@@ -36,6 +37,7 @@ public class ReadFileXMLServiceTestImpl implements ReadFileXMLServiceTest {
 	    	}
 		
 		} catch (FileNotFoundException e) {
+			System.out.println("FileNotFoundException");
 			logger.error(e.getStackTrace());
 		} catch (IOException e) {
 			logger.error(e.getStackTrace());

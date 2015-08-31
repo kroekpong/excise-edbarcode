@@ -15,22 +15,7 @@
 ${strxml}
 </textarea>
 </c:if>
-<c:if test="${strxml==null}">
-<textarea rows="25" name="strxml" style="width:100%" >
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bar="http://www.excise.go.th/xsd/barcode">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <bar:EbarcodeSyncMasterDataRequest>
-         <InternetUser>
-            <CompanyId>0105529039293</CompanyId>
-            <CompanyUserId>tip1</CompanyUserId>
-            <CompanyUserPwd>tip1</CompanyUserPwd>
-         </InternetUser>
-      </bar:EbarcodeSyncMasterDataRequest>
-   </soapenv:Body>
-</soapenv:Envelope>
-</textarea>
-</c:if>
+
 </div>
 <div style="width:49%; float: left;">
 <label style="display: block;" >Response XML</label>
