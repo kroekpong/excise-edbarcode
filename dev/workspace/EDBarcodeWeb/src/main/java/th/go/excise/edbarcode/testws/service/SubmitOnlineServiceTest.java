@@ -112,14 +112,19 @@ public class SubmitOnlineServiceTest {
 	}
 	
 	public String getStringRequestXMLInit(){
-		
 		String strGetRequestXMLInit = null;
 		
-		System.out.println("1"+linkURI);
 		strGetRequestXMLInit = readFileXMLServiceTest.callRequest(linkURI).toString();
-		System.out.println("2"+strGetRequestXMLInit);
 		
 		return strGetRequestXMLInit;
+	}
+	
+	public String getURI(){
+		String strURI = null;
+		
+		strURI = submitOnlineWsTemplateTest.getDefaultUri();
+		
+		return strURI;
 	}
 	
 }

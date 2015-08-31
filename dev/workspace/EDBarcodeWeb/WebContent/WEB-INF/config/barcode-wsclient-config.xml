@@ -52,7 +52,7 @@
 			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
 		</property>
 		<property name="defaultUri">
-			<value>${edBarcodeServiceTest.client.submitOnlineServiceTest.xml}</value>
+			<value>${edBarcodeServiceTest.client.submitOnlineServiceTest.wsdl}</value>
 		</property>
 	</bean>
 	
