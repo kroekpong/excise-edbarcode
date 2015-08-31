@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,15 +20,18 @@ public class GetSR12011ReportControllerTest {
 	
 	private static final Logger logger = LogManager.getLogger(GetSR12011ReportControllerTest.class);
 	
+	@Value("${edBarcodeServiceTest.client.getSR12011ReportServiceTest.xml}")
+	private String strGetURI;
+	
 	@Autowired
-	GetSR12011ReportServiceTest getSRReportServiceTest;
+	private GetSR12011ReportServiceTest getSRReportServiceTest;
 
 	@RequestMapping( method = RequestMethod.GET)
 	public ModelAndView welcome(HttpServletRequest httpRequest) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tesGetSrReportws");
-//		mav.addObject("strxml", "Stringngngngngngngngngngngn/n/nStringngngngngngngn/nasdasd");
-		mav.addObject("strurl",getSRReportServiceTest.getUri() );
+//		mav.addObject("strxml", getSRReportServiceTest.getStringRequestXMLInit());
+		mav.addObject("strurl", strGetURI);
 		logger.info(" ####### testgetsr12011report ####");
 		return mav;
 
@@ -41,7 +45,7 @@ public class GetSR12011ReportControllerTest {
 		mav.setViewName("tesGetSrReportws");
 		mav.addObject("strxml", strxml);
 		mav.addObject("strurl", strurl );
-		mav.addObject("strxmlrt", getSRReportServiceTest.xmlcallws(strxml,strurl));
+		mav.addObject("strxmlrt", getSRReportServiceTest.xmlcallws(strxml));
 		logger.info(" ####### testgetsr12011reportsubmit ####");
 		return mav;
 

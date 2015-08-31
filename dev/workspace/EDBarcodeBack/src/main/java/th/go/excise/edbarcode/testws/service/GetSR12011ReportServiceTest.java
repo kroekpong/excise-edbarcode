@@ -22,7 +22,6 @@ import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -33,7 +32,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeGetSR12011ReportRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeGetSR12011ReportResponse;
@@ -43,22 +41,16 @@ public class GetSR12011ReportServiceTest {
 	
 	private static final Logger logger = LogManager.getLogger(GetSR12011ReportServiceTest.class);
 	
+	@Value("${edBarcodeServiceTest.getSR12011Report.init.xml}")
+	private String linkURI;
+	
 	@Autowired
 	private WebServiceTemplate getSR12011ReportWsTemplateTest;
 	
-	@Value("${edBarcodeServiceTest.client.service}")
-	private String uri;
-	
-	public String getUri() {
-		return uri;
-	}
-	public void setUri(String uri) {
-		this.uri = uri;
-	}
+	@Autowired
+	private ReadFileXMLServiceTest readFileXMLServiceTest;
 
-	
-
-	public String xmlcallws(String xmlDataString,String uri) {
+	public String xmlcallws(String xmlDataString) {
 	
 	
 		EbarcodeGetSR12011ReportRequest request = null;
@@ -78,7 +70,6 @@ public class GetSR12011ReportServiceTest {
 			logger.error(e.getStackTrace());
 		}
 		
-		getSR12011ReportWsTemplateTest.setDefaultUri(uri);
 		EbarcodeGetSR12011ReportResponse ebarcodeGetSR12011ReportResponse = callClientWs(request);
 		
 		String xmlString =null;
@@ -127,6 +118,10 @@ public class GetSR12011ReportServiceTest {
 		
 	}
 
-	
+	public String getStringRequestXMLInit(){
+		String strGetRequestXMLInit = null;
+		strGetRequestXMLInit = readFileXMLServiceTest.callRequest(linkURI).toString();
+		return strGetRequestXMLInit;
+	}
 	
 }

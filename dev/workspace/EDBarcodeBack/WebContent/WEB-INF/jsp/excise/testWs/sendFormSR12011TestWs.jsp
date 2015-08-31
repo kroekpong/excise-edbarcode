@@ -9,7 +9,7 @@
 		<table style="height: 500px;">
 		
 			<tr>
-				<td><label >URI</label><input type="text"  id="strurl" name="strurl" value="${strurl}" style="width: 425px;" /></td>
+				<td><label >URI</label><input type="text"  id="struri" name="struri" value="${struri}" style="width: 425px;" /></td>
 			</tr>
 			
 			<tr>

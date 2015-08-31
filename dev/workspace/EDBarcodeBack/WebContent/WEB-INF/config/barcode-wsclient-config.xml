@@ -65,7 +65,7 @@
 			<bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender" />
 		</property>
 		<property name="defaultUri">
-			<value>${edBarcodeServiceTest.client.service}</value>
+			<value>${edBarcodeServiceTest.client.getSR12011ReportServiceTest.xml}</value>
 		</property>
 	</bean>
 	
