@@ -59,7 +59,6 @@ public class SubmitOnlineServiceTest {
 		
 		try {
 			InputStream xmlInputStream = new ByteArrayInputStream(xmlString.getBytes("UTF-8"));
-			System.out.println(xmlInputStream);
 			
 			MessageFactory messageFactory = MessageFactory.newInstance();
 			SOAPMessage soapMessage = messageFactory.createMessage(new MimeHeaders(), xmlInputStream);
