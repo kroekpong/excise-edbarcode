@@ -35,7 +35,6 @@ import org.w3c.dom.Document;
 
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Request;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Response;
-import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
 
 @Service("sendFormSR12011Service")
 public class SendFormSR12011ServiceTest {
@@ -87,27 +86,27 @@ private static final Logger logger = LogManager.getLogger(SendFormSR12011Service
 		String xmlStringOutput = null;
 		  try {
 		   
-			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			Marshaller marshaller = JAXBContext.newInstance(EbarcodeSubmitOnlineResponse.class).createMarshaller();
-			marshaller.marshal(response, document);
+				Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+				Marshaller marshaller = JAXBContext.newInstance(EbarcodeSendFormSR12011Response.class).createMarshaller();
+				marshaller.marshal(response, document);
+				
+				SOAPMessage soapMessage = MessageFactory.newInstance().createMessage();
+				soapMessage.getSOAPBody().addDocument(document);
 
-			SOAPMessage soapMessage = MessageFactory.newInstance().createMessage();
-			soapMessage.getSOAPBody().addDocument(document);
-
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			soapMessage.writeTo(outputStream);
-			output = new String(outputStream.toByteArray()); 
-			
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-	        transformerFactory.setAttribute("indent-number", 2);
-			Transformer transformer = transformerFactory.newTransformer(); 
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			
-			StreamResult result = new StreamResult(new StringWriter());
-			Source source = new StreamSource(new StringReader(output));
-			transformer.transform(source, result);
-			xmlStringOutput = result.getWriter().toString();
+				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				soapMessage.writeTo(outputStream);
+				output = new String(outputStream.toByteArray()); 
+				
+				TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		        transformerFactory.setAttribute("indent-number", 2);
+				Transformer transformer = transformerFactory.newTransformer(); 
+				transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+				transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+				
+				StreamResult result = new StreamResult(new StringWriter());
+				Source source = new StreamSource(new StringReader(output));
+				transformer.transform(source, result);
+				xmlStringOutput = result.getWriter().toString();
 		      
 			} catch (ParserConfigurationException e) {
 				// TODO Auto-generated catch block
