@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
+import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -15,6 +17,13 @@ import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -72,7 +81,8 @@ public class SubmitOnlineServiceTest {
 		
 		response = callClientWs(request);
 		
-		String output =null;
+		String output = null;
+		String xmlStringOutput = null;
 		  try {
 		   
 			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -86,6 +96,16 @@ public class SubmitOnlineServiceTest {
 			soapMessage.writeTo(outputStream);
 			output = new String(outputStream.toByteArray()); 
 			
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	        transformerFactory.setAttribute("indent-number", 2);
+			Transformer transformer = transformerFactory.newTransformer(); 
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			
+			StreamResult result = new StreamResult(new StringWriter());
+			Source source = new StreamSource(new StringReader(output));
+			transformer.transform(source, result);
+			xmlStringOutput = result.getWriter().toString();
 		      
 			} catch (ParserConfigurationException e) {
 				// TODO Auto-generated catch block
@@ -99,9 +119,12 @@ public class SubmitOnlineServiceTest {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				logger.error(e.getStackTrace());
 			}
 		  
-		  return output;
+		  return xmlStringOutput;
 	}
 	
 	private EbarcodeSubmitOnlineResponse callClientWs(EbarcodeSubmitOnlineRequest ebarcodeSubmitOnlineRequest){
