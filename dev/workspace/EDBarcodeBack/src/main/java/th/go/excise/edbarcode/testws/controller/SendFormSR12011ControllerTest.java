@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,20 +21,17 @@ public class SendFormSR12011ControllerTest {
 	
 	private static final Logger logger = LogManager.getLogger(SendFormSR12011ControllerTest.class);
 	
-	@Value("${edBarcodeServiceTest.client.sendFormSR12011ServiceTest.xml}")
-	private String strGetURI;
-	
 	@Autowired
 	private SendFormSR12011ServiceTest sendFormSR12011Service;
 	
-	@RequestMapping( method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView sendFormSR12011Ws() throws IOException{
 		logger.info("Inside sendFormSR12011Ws()");
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("struri", strGetURI);
-		mav.addObject("strRequestXML", sendFormSR12011Service.getStringRequestXMLInit());
+		mav.addObject("struri", sendFormSR12011Service.getURI());
+		mav.addObject("strInput", sendFormSR12011Service.getStringRequestXMLInit());
 		mav.setViewName("sendFormSR12011TestWs");
 		
 		return mav;
@@ -51,7 +47,7 @@ public class SendFormSR12011ControllerTest {
 		logger.debug(ToStringBuilder.reflectionToString(response, ToStringStyle.MULTI_LINE_STYLE));
 		mav.addObject("strXML", response);
 		mav.addObject("struri", struri);
-		mav.addObject("strRequestXML", request);
+		mav.addObject("strInput", request);
 		mav.setViewName("sendFormSR12011TestWs");
 			
 		return mav;

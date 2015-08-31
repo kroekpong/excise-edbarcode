@@ -117,4 +117,12 @@ public class SubmitOnlineServiceTest {
 		return strGetRequestXMLInit;
 	}
 	
+	public String getURI(){
+		String strURI = null;
+		
+		strURI = submitOnlineWsTemplateTest.getDefaultUri();
+		
+		return strURI;
+	}
+	
 }

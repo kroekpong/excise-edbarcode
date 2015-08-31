@@ -101,5 +101,12 @@ private static final Logger logger = LogManager.getLogger(SendFormSR12011Service
 		strGetRequestXMLInit = readFileXMLServiceTest.callRequest(linkURI).toString();
 		return strGetRequestXMLInit;
 	}
-	
+
+	public String getURI(){
+		String strURI = null;
+		
+		strURI = sendFormSR12011WsTemplateTest.getDefaultUri();
+		
+		return strURI;
+	}
 }

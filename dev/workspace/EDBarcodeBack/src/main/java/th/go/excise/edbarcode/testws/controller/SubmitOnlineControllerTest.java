@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,9 +21,6 @@ public class SubmitOnlineControllerTest {
 	
 	private static final Logger logger = LogManager.getLogger(SubmitOnlineControllerTest.class);
 	
-	@Value("${edBarcodeServiceTest.client.submitOnlineServiceTest.xml}")
-	private String strGetURI;
-	
 	@Autowired
 	private SubmitOnlineServiceTest submitOnlineService;
 	
@@ -34,8 +30,8 @@ public class SubmitOnlineControllerTest {
 
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("strurl",strGetURI);
-		mav.addObject("strRequestXML", submitOnlineService.getStringRequestXMLInit());
+		mav.addObject("struri", submitOnlineService.getURI());
+		mav.addObject("strInput", submitOnlineService.getStringRequestXMLInit());
 		mav.setViewName("submitOnlineTestWs");
 		
 		return mav;
@@ -51,7 +47,7 @@ public class SubmitOnlineControllerTest {
 		logger.debug(ToStringBuilder.reflectionToString(response, ToStringStyle.MULTI_LINE_STYLE));
 		mav.addObject("strXML", response);
 		mav.addObject("struri", struri);
-		mav.addObject("strRequestXML", request);
+		mav.addObject("strInput", request);
 		mav.setViewName("submitOnlineTestWs");
 			
 		return mav;
