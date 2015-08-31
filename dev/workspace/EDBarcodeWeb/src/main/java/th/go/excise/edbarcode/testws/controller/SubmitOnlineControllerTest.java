@@ -37,7 +37,7 @@ public class SubmitOnlineControllerTest {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView responseSubmitOnlineWs(@RequestParam("strInput") String request, @RequestParam("strurl") String struri){
+	public ModelAndView responseSubmitOnlineWs(@RequestParam("strInput") String request, @RequestParam("struri") String struri){
 		logger.info("Inside responseSubmitOnlineWs()");
 		
 		ModelAndView mav = new ModelAndView();
