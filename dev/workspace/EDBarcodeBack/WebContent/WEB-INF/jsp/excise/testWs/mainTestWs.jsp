@@ -9,7 +9,7 @@
 		<br>
 		<a href="/EDBarcodeBack/testws/sendFormSR12011Ws.htm">SendFormSR12011Ws</a>
 		<br>
-		<a href="/EDBarcodeBack/testgetsr12011report.htm">testgetsr12011report EbarcodeBack</a>
+		<a href="/EDBarcodeBack/testws/getsr12011report.htm">GetSR12011ReportWs</a>
 		<br>
 	</div>
 </div>

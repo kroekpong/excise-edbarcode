@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,9 +19,6 @@ public class GetSR12011ReportControllerTest {
 	
 	private static final Logger logger = LogManager.getLogger(GetSR12011ReportControllerTest.class);
 	
-	@Value("${edBarcodeServiceTest.client.getSR12011ReportServiceTest.xml}")
-	private String strGetURI;
-	
 	@Autowired
 	private GetSR12011ReportServiceTest getSRReportServiceTest;
 
@@ -31,7 +27,7 @@ public class GetSR12011ReportControllerTest {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tesGetSrReportws");
 //		mav.addObject("strxml", getSRReportServiceTest.getStringRequestXMLInit());
-		mav.addObject("strurl", strGetURI);
+		mav.addObject("strurl", getSRReportServiceTest.getURI());
 		logger.info(" ####### testgetsr12011report ####");
 		return mav;
 

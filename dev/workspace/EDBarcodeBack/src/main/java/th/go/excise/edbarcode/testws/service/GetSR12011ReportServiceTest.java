@@ -124,4 +124,12 @@ public class GetSR12011ReportServiceTest {
 		return strGetRequestXMLInit;
 	}
 	
+	public String getURI(){
+		String strURI = null;
+		
+		strURI = getSR12011ReportWsTemplateTest.getDefaultUri();
+		
+		return strURI;
+	}
+	
 }
