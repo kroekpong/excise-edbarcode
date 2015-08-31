@@ -10,13 +10,6 @@
 		
 			<tr>
 				<td><label >URI</label><input type="text"  id="struri" name="struri" value="${struri}" style="width: 425px;" /></td>
-			</tr>
-			
-			<tr>
-				<td><br></td>
-			</tr>
-			
-			<tr>
 				<td><input type="submit" /></td>
 			</tr>
 
