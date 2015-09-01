@@ -1,24 +1,24 @@
-<md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" style="min-height:520px;">
+<md-whiteframe class="md-whiteframe-z0" layout layout-align="center center" style="min-height:520px;">
 
 <div  layout="column" >
 	<div layout="column" style="width: 600px;margin-top: 10%;">
 	
 		<md-input-container class="md-icon-float">
-	        <label>อัพเดตข้อมูลล่าสุด</label>
+	        <label>ปรับปรุงข้อมูลล่าสุดข้อมูลล่าสุด</label>
 	        <md-icon class="material-icons">check_circle</md-icon>
 		<input type="text" ng-model="updateDate" readonly> </md-input-container>
 		<md-input-container class="md-icon-float">
 	        <label>โปรแกรมเวอร์ชั่น</label>
 	        <md-icon class="material-icons">info_outline</md-icon>
-		<input type="text" ng-model="version" readonly> </md-input-container>
+		<input type="text" ng-model="versionPrograme" readonly> </md-input-container>
 		
 		<h3 ng-show="!isCurrentVersion" style="color: red;">*{{WarningText}}</h3>
 		
 	</div>
 	
-	<div layout="column" style="width: 600px;">
+	<div layout="column" style="width: 600px;"  layout-align="center center" >
 	
-		 <md-button class="md-raised" style="width:150px;  margin-left: 226px;" ng-click="btnUpdate()" ng-disabled="showProgess" >อัพเดตข้อมูลล่าสุด</md-button>
+		 <md-button class="md-raised" style="min-width:150px;"  ng-click="btnUpdate()" ng-disabled="showProgess" >ปรับปรุงข้อมูลล่าสุด</md-button>
 	     
 	     <md-progress-linear md-mode="indeterminate" ng-show="showProgess"></md-progress-linear>  
 	      

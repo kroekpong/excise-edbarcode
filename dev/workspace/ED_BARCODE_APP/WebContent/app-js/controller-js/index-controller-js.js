@@ -47,7 +47,8 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 
 	console.log('AppCtrl');
 	$scope.userLogin = localStorage["CompanyUserPwd"].split("#")[0];
-
+	$scope.updateProgramDate = (localStorage["CurrentVersionDate"] == "undefined") ? "" : new Date(parseInt(localStorage["CurrentVersionDate"])).toLocaleDateString();
+	
 	function buildToggler(navID) {
 		var debounceFn = $mdUtil.debounce(function() {
 			$mdSidenav(navID).toggle().then(function() {
@@ -63,13 +64,13 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 		"label" : "หน้าแรก"
 	}, {
 		"iconName" : "assignment",
-		"label" : "สร้าง สร. 120-11"
+		"label" : "สร้าง สร. ๑๒๐-๑๑"
 	}, {
 		"iconName" : "history",
 		"label" : "ประวัติการทำรายการ"
 	}, {
 		"iconName" : "inbox",
-		"label" : "อัพเดทโปรแกรม"
+		"label" : "ปรับปรุงข้อมูลผู้ประกอบการ"
 	}
 //	,{
 //		"iconName" : "settings",
@@ -80,7 +81,8 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 //	} 
 	];
 
-	$scope.toolbarTitle = "หน้าแรก ED Barcode";
+	$scope.toolbarTitle = $scope.settings[0].label;
+	$scope.versionPrograme =  localStorage["versionPrograme"];
 
 	$scope.navigateTo = function(_iconName, _event) {
 		$rootScope.$broadcast("checkSaveDraff");

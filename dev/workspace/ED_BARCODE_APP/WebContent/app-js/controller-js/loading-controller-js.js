@@ -19,6 +19,9 @@ module.controller('loadingAppCtrl', function($scope, $location , $fileUtils , $c
 	var xml = $fileUtils.readCurrentProfile();
 	$convertDataXml.convertXMLtoLocalStorage(xml);
 	
+	//versionPrograme
+	localStorage["versionPrograme"] = "1.00";
+	 
 //	goto loading
 	setTimeout(function() {
 		window.location="index.html";

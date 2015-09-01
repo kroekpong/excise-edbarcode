@@ -1,5 +1,27 @@
+body{
+	background-color: rgb(245,245,245);
+}
+.ui-view-content{
+	background-color: rgb(245,245,245);
+}
+
+
+.titleBarInfo{
+	padding: 3px;
+/* 	margin-bottom: 5px; */
+	background-color: rgb(225,225,225);
+	font-size: 14px;
+}
+
+.header-toolbar{
+	background-image: url("../img/headerbg.jpg");	
+}
+
 .input-has-value-label{
 	font-size: 20px;	
+}
+.md-tab{
+	font-weight:bold;
 }
 .quickMenu{
 	margin: 10px;
@@ -25,17 +47,15 @@
 }
 
 
-.titleBarInfo{
-	padding: 10px;
-	margin-bottom: 5px;
-}
-
 
 .div-padding-select{
 	min-width: 100px;
 	text-align: right;
 	margin-right: 5px;
 }
+
+
+
 
 /* select item */
 

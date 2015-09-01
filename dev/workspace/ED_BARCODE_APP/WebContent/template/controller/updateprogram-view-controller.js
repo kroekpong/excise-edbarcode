@@ -37,9 +37,9 @@ module.controller('updateprogram.view.controller', function($scope, $rootScope, 
 	console.info("updateprogram.view.controller");
 	var tempDate = (localStorage["CurrentVersionDate"] == "undefined") ? "" : new Date(parseInt(localStorage["CurrentVersionDate"]));
 	$scope.isCurrentVersion = false;
-	$scope.WarningText = "กรุณากดอัพเดตข้อมูลล่าสุด";
+	$scope.WarningText = "กรุณากดปรับปรุงข้อมูลล่าสุดข้อมูลล่าสุด";
 	$scope.updateDate = 'ไม่ได้ระบุ';
-
+	$scope.versionPrograme =  localStorage["versionPrograme"];
 	
 	if (tempDate != "") {
 		var dateDiffCount = 0;
@@ -48,7 +48,7 @@ module.controller('updateprogram.view.controller', function($scope, $rootScope, 
 			$scope.isCurrentVersion = true;
 			$scope.WarningText = "";
 		} else {
-			$scope.WarningText =  "อัพเดตเมื่อ " + Math.abs(dateDiffCount) + " วันที่แล้ว " + $scope.WarningText;
+			$scope.WarningText =  "ปรับปรุงข้อมูลล่าสุดเมื่อ " + Math.abs(dateDiffCount) + " วันที่แล้ว " + $scope.WarningText;
 		}
 
 		$scope.updateDate = tempDate.toLocaleDateString();
@@ -67,7 +67,6 @@ module.controller('updateprogram.view.controller', function($scope, $rootScope, 
 		}).join(' ');
 	};
 
-	$scope.version = "1.0012";
 	$scope.showProgess = false;
 
 	$scope.btnUpdate = function() {
@@ -91,6 +90,8 @@ module.controller('updateprogram.view.controller', function($scope, $rootScope, 
 					$soapService.writeUpdateFile(data);
 					localStorage["CurrentVersionDate"] = Date.parse(new Date());
 					$mdToast.show($mdToast.simple().content('สำเร็จ').position($scope.getToastPosition()).hideDelay(3000));
+					//reload Local Data
+					window.location = "loading.html";
 				}else{
 					$mdToast.show($mdToast.simple().content('ไม่สำเร็จ Error Code ' + status).position($scope.getToastPosition()).hideDelay(8000));
 				}

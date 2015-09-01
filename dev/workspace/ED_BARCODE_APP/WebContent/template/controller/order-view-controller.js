@@ -18,9 +18,27 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.historyMode = (localStorage["historyMod"] == "ON") ? true : false;
 	$scope.haveSaveDraff = (localStorage["saveDraffItems"] == undefined || localStorage["saveDraffItems"] == "") ? false : true;
 	$scope.profile = $profileService.getProfile();
+	$scope.roundTaxDate = new Date().toLocaleDateString();
 	
 	console.info("historyMode ", $scope.historyMode);
 	console.info("haveSaveDraff ", $scope.haveSaveDraff);
+	/** search item */
+	$scope.userSearch = {};
+	$scope.userSearch.GoodsDescriptionText = "";
+	$scope.userSearch.Degree = "";
+
+	/**
+	 * อัตราภาษี
+	 * <MunicipalRateAmount>10</MunicipalRateAmount>
+	 * <FundSSSRateAmount>2.0</FundSSSRateAmount>
+	 * <FundSSTRateAmount>1.5</FundSSTRateAmount>
+	 * <FundKKTRateAmount>2.0</FundKKTRateAmount>
+	 */
+	$scope.MunicipalRateAmountRate = 0;
+	$scope.FundSSSRateAmountRate = 0;
+	$scope.FundSSTRateAmountRate = 0;
+	$scope.FundKKTRateAmountRate = 0;
+	
 
 	if ($scope.historyMode === true) {
 		$scope.gridList = JSON.parse(localStorage["historyItems"]);
@@ -35,6 +53,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.showDataSearch = $scope.searchProduct.length > 0;
 	var productCheck = [];
 	var tempSelect = [];
+	$scope.canDelete = false ;
+	console.info("canDelete ", $scope.canDelete);
 
 	$scope.submitType = "offline";
 	$scope.step = [ false, true, false, false, false, false ];
@@ -116,6 +136,18 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			var gl = new GridItem();
 			gl.Goods = tempSelect[_i];
 			$scope.gridList.push(gl);
+			
+			/**
+			 * อัตราภาษี
+			 * <MunicipalRateAmount>10</MunicipalRateAmount>
+			 * <FundSSSRateAmount>2.0</FundSSSRateAmount>
+			 * <FundSSTRateAmount>1.5</FundSSTRateAmount>
+			 * <FundKKTRateAmount>2.0</FundKKTRateAmount>
+			 */
+			$scope.MunicipalRateAmountRate = gl.Goods.MunicipalRateAmount;
+			$scope.FundSSSRateAmountRate = gl.Goods.FundSSSRateAmount;
+			$scope.FundSSTRateAmountRate = gl.Goods.FundSSTRateAmount;
+			$scope.FundKKTRateAmountRate = gl.Goods.FundKKTRateAmount;
 		}
 
 		$scope.navigaTor(1);
@@ -136,8 +168,24 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 				var findex = $scope.gridList.indexOf(del[_i]);
 				$scope.gridList.splice(findex, 1);
 			}
+			
+			//check when OK!
+			$scope.onBlurCheckDelete(ev);
 
 		});
+	};
+	
+	$scope.onBlurCheckDelete = function(ev) {
+			var del = [];
+			for ( var _i in $scope.gridList) {
+				var item = $scope.gridList[_i];
+				if (item.checkbox) {
+					del.push(item);
+				}
+			}
+			
+			$scope.canDelete = del.length > 0;
+			console.info("onBlurCheckDelete ", $scope.canDelete);
 	};
 
 	$scope.showConfirm = function(ev, _title, _fn) {
@@ -203,7 +251,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.calcPriceAmount = function(_GridItem) {
 		// F
 		var price = _GridItem.Goods.GoodsPrice;
-		if (_GridItem.Goods.PriceFlag == "P") {
+		if (_GridItem.Goods.DeclarePrice > 0) {
 			price = _GridItem.Goods.DeclarePrice;
 		}
 		return _GridItem.PriceAmountTax = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.TaxRateByPriceAmount * price / 100;
@@ -359,21 +407,17 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var GoodsListInfo = $soapService.getObject("GoodsListInfo");
 		SR12011Info.push(GoodsListInfo);
 		var Griditems = $scope.gridList;
-		var FundSSSRateAmountRate  = 0;
-		var FundSSTRateAmountRate = 0;
-		var FundKKTRateAmountRate = 0;
 		
 		for ( var _i in Griditems) {
 
 			var item = Griditems[_i];
 			var index = parseInt(_i) + 1;
 			var price = item.Goods.GoodsPrice;
-			if (item.Goods.PriceFlag == "P") {
+			if (item.Goods.DeclarePrice > 0) {
 				price = item.Goods.DeclarePrice;
 			}
 			var GoodsValue = item.GoodsCount * price;
 			var TaxAmount = item.PriceAmountTax + item.QuantityAmountTax;
-			var MoiRate = 10;
 			var stempType = 0;
 			var GoodsEntryInfo = $soapService.getObject("GoodsEntryInfo");
 			GoodsListInfo.push(GoodsEntryInfo);
@@ -414,52 +458,31 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			GoodsEntryInfo.push($soapService.getObjectItem("NetTaxByValue", item.PriceAmountTax));
 			GoodsEntryInfo.push($soapService.getObjectItem("NetTaxByQuantity", item.QuantityAmountTax));
 
-			MoiRate = item.Goods.MunicipalRateAmount;
-			stempType = (item.Goods.ProductTypeDescriptionText.trim() == "เบียร์") ? 2 : 1;
-			
-//			<MunicipalRateAmount>10</MunicipalRateAmount>
-//            <FundSSSRateAmount>2.0</FundSSSRateAmount>
-//            <FundSSTRateAmount>1.5</FundSSTRateAmount>
-//            <FundKKTRateAmount>2.0</FundKKTRateAmount>
-			 if(FundSSSRateAmountRate == 0){
-				 FundSSSRateAmountRate = parseFloat(item.Goods.FundSSSRateAmount);
-			 }
-			 if(FundSSTRateAmountRate == 0){
-				 FundSSTRateAmountRate = parseFloat(item.Goods.FundSSTRateAmount);
-			 }
-			 if(FundKKTRateAmountRate == 0){
-				 FundKKTRateAmountRate = parseFloat(item.Goods.FundKKTRateAmount);
-			 }
+			stempType = (item.Goods.ProductTypeDescriptionText.trim() == "เบียร์") ? 1 : 3;
 		}
 
 		// sum
-		var TaxDeductionOnBookAmount = "";
-		var TaxDeductionOnBookAmount = 0;
-		var PaymentFundHealthAmount = $scope.totalTax * FundSSSRateAmountRate;
-		var PaymentFundTVAmount = $scope.totalTax * FundSSTRateAmountRate;
-		var PaymentFundSportAmount = $scope.totalTax * FundKKTRateAmountRate;
-		var Amount = ($scope.totalTax + $scope.royalTotal).toFixed(2);
 
 		var SummaryInfo = $soapService.getObject("SummaryInfo");
 		SR12011Info.push(SummaryInfo);
 		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByValue", $scope.sumCalcPriceAmountValue));
 		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByQuantity", $scope.sumCalcQuantityAmountValue));
 		SummaryInfo.push($soapService.getObjectItem("SumAllTax", $scope.totalTax));
-		SummaryInfo.push($soapService.getObjectItem("TaxLessType", $scope.totalTax));
-		SummaryInfo.push($soapService.getObjectItem("TaxLessFrom", $scope.totalTax));
-		SummaryInfo.push($soapService.getObjectItem("TaxLessAmount", $scope.totalTax));
-		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo", TaxDeductionOnBookAmount));
-		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", TaxDeductionOnBookAmount));
+		SummaryInfo.push($soapService.getObjectItem("TaxLessType", ""));
+		SummaryInfo.push($soapService.getObjectItem("TaxLessFrom", ($scope.inputSum8 == undefined)? "" : $scope.inputSum8));
+		SummaryInfo.push($soapService.getObjectItem("TaxLessAmount", $scope.toNumber($scope.sumTax8)));
+		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo", ($scope.inputSum9 == undefined)? "" : $scope.inputSum9 ));
+		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", $scope.toNumber($scope.sumTax9)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount", $scope.totalTax));
 		SummaryInfo.push($soapService.getObjectItem("PaymentMunicipalAmount", $scope.royalTotal));
-		SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount", PaymentFundHealthAmount.toFixed(2)));
-		SummaryInfo.push($soapService.getObjectItem("PaymentFundTVAmount", PaymentFundTVAmount.toFixed(2)));
-		SummaryInfo.push($soapService.getObjectItem("PaymentFundSportAmount", PaymentFundSportAmount.toFixed(2)));
-		SummaryInfo.push($soapService.getObjectItem("MoiRate", MoiRate));
+		SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount", $scope.sss));
+		SummaryInfo.push($soapService.getObjectItem("PaymentFundTVAmount", $scope.sst));
+		SummaryInfo.push($soapService.getObjectItem("PaymentFundSportAmount", $scope.kkt));
+		SummaryInfo.push($soapService.getObjectItem("MoiRate", $scope.MunicipalRateAmountRate));
 		SummaryInfo.push($soapService.getObjectItem("PrintType", stempType));
-		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAndMunicipalTaxAmount", Amount));
-		SummaryInfo.push($soapService.getObjectItem("PaymentOtherAmount", Amount));
-		SummaryInfo.push($soapService.getObjectItem("PaymentNetTaxAmount", Amount));
+		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAndMunicipalTaxAmount", $scope.col12));
+		SummaryInfo.push($soapService.getObjectItem("PaymentOtherAmount", $scope.col13));
+		SummaryInfo.push($soapService.getObjectItem("PaymentNetTaxAmount", $scope.col14));
 
 		var str = EbarcodeSubmitOnlineRequest.getString();
 		// writeFile
@@ -499,7 +522,20 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	};
 	
 	
+	$scope.toNumber = function (_strNumber ){
+		if(parseFloat(_strNumber).toString() == "NaN"){
+			return 0;
+		}
+		return parseFloat(_strNumber);
+	};
 	
+	
+	/***
+	 * for รวมภาษี
+	 *  (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก   (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่	
+	 */
+	$scope.sumTax8 = $scope.toStringDec(0,2);
+	$scope.sumTax9 = $scope.toStringDec(0,2);
 	
 	
 
