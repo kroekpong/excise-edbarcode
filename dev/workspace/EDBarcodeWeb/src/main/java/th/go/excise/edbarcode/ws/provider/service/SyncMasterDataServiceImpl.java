@@ -171,23 +171,28 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 			taxpayerDetail.setTaxpayerAddress(taxpayerAddress);
 			
 			licenseList = new LicenseList();
-			for (th.go.excise.edbarcode.ws.client.sta.oxm.LicenseInfo wsLicenseInfo : wsTaxpayerDetail.getLicenseList().getLicenseInfo()) {
+			if (wsTaxpayerDetail.getLicenseList().getLicenseInfo().size() > 0) {
+				for (th.go.excise.edbarcode.ws.client.sta.oxm.LicenseInfo wsLicenseInfo : wsTaxpayerDetail.getLicenseList().getLicenseInfo()) {
+					licenseInfo = new LicenseInfo();
+					licenseInfo.setLicenseNo(wsLicenseInfo.getLicenseNo());
+					licenseInfo.setLicenseType(wsLicenseInfo.getLicenseType());
+					licenseInfo.setLicenseCode(wsLicenseInfo.getLicenseCode());
+					licenseInfo.setLicenseSeq(wsLicenseInfo.getLicenseSeq());
+					licenseInfo.setLicenseName(wsLicenseInfo.getLicenseName());
+					licenseInfo.setLicenseCurrentPrice(NumberUtils.nullToZero(wsLicenseInfo.getLicenseCurrentPrice()));
+					licenseInfo.setEffectiveDate(wsLicenseInfo.getEffectiveDate());
+					licenseInfo.setExpireDate(wsLicenseInfo.getEffectiveDate());
+					licenseInfo.setFirstDate(wsLicenseInfo.getFirstDate());
+					licenseInfo.setOfficeCode(wsLicenseInfo.getOfficeCode());
+					licenseInfo.setLicBook(wsLicenseInfo.getLicBook());
+					licenseInfo.setLicDate(wsLicenseInfo.getLicDate());
+					licenseInfo.setDocNo(wsLicenseInfo.getDocNo());
+					licenseInfo.setDocType(wsLicenseInfo.getDocType());
+					licenseInfo.setLineNo(wsLicenseInfo.getLineNo());
+					licenseList.getLicenseInfo().add(licenseInfo);
+				}
+			} else {
 				licenseInfo = new LicenseInfo();
-				licenseInfo.setLicenseNo(wsLicenseInfo.getLicenseNo());
-				licenseInfo.setLicenseType(wsLicenseInfo.getLicenseType());
-				licenseInfo.setLicenseCode(wsLicenseInfo.getLicenseCode());
-				licenseInfo.setLicenseSeq(wsLicenseInfo.getLicenseSeq());
-				licenseInfo.setLicenseName(wsLicenseInfo.getLicenseName());
-				licenseInfo.setLicenseCurrentPrice(NumberUtils.nullToZero(wsLicenseInfo.getLicenseCurrentPrice()));
-				licenseInfo.setEffectiveDate(wsLicenseInfo.getEffectiveDate());
-				licenseInfo.setExpireDate(wsLicenseInfo.getEffectiveDate());
-				licenseInfo.setFirstDate(wsLicenseInfo.getFirstDate());
-				licenseInfo.setOfficeCode(wsLicenseInfo.getOfficeCode());
-				licenseInfo.setLicBook(wsLicenseInfo.getLicBook());
-				licenseInfo.setLicDate(wsLicenseInfo.getLicDate());
-				licenseInfo.setDocNo(wsLicenseInfo.getDocNo());
-				licenseInfo.setDocType(wsLicenseInfo.getDocType());
-				licenseInfo.setLineNo(wsLicenseInfo.getLineNo());
 				licenseList.getLicenseInfo().add(licenseInfo);
 			}
 			taxpayerDetail.setLicenseList(licenseList);
@@ -208,8 +213,7 @@ public class SyncMasterDataServiceImpl implements SyncMasterDataService {
 				goods.setMunicipalRateAmount(NumberUtils.nullToZero(new BigDecimal("10")));// FIXME
 				goods.setFundSSSRateAmount(NumberUtils.nullToZero(wsGoods.getFundSSSRateAmount()));
 				goods.setFundSSTRateAmount(NumberUtils.nullToZero(wsGoods.getFundSSTRateAmount()));
-				//goods.setFundKKTRateAmount(NumberUtils.nullToZero(wsGoods.getFundKKTRateAmount()));
-				goods.setFundKKTRateAmount(NumberUtils.nullToZero(new BigDecimal("2")));// FIXME
+				goods.setFundKKTRateAmount(NumberUtils.nullToZero(wsGoods.getFundKKTRateAmount()));
 				goods.setDegree(wsGoods.getDegree());
 				goods.setPriceFlag(wsGoods.getPriceFlag());
 				goods.setDeclarePrice(NumberUtils.nullToZero(wsGoods.getDeclarePrice()));

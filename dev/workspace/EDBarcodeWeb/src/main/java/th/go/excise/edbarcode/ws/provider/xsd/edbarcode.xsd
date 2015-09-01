@@ -71,24 +71,24 @@
 
 	<complexType name="Address">
 		<sequence>
-			<element name="HouseIdNumber"				type="string"			minOccurs="0" />
-			<element name="BuildingName"				type="string"			minOccurs="0" />
-			<element name="RoomNumber"					type="string"			minOccurs="0" />
-			<element name="FloorNumber"					type="string"			minOccurs="0" />
-			<element name="VillageName"					type="string"			minOccurs="0" />
-			<element name="HouseNumber"					type="string"			minOccurs="0" />
-			<element name="MooNumber"					type="string"			minOccurs="0" />
-			<element name="TrokSoiName"					type="string"			minOccurs="0" />
-			<element name="StreetName"					type="string"			minOccurs="0" />
-			<element name="ThambolCode"					type="string"			minOccurs="1" />
-			<element name="ThambolName"					type="string"			minOccurs="1" />
-			<element name="AmphurCode"					type="string"			minOccurs="1" />
-			<element name="AmphurName"					type="string"			minOccurs="1" />
-			<element name="ProvinceCode"				type="string"			minOccurs="1" />
-			<element name="ProvinceName"				type="string"			minOccurs="1" />
-			<element name="Postcode"					type="string"			minOccurs="0" />
-			<element name="TelNumber"					type="string"			minOccurs="0" />
-			<element name="EmailAddress"				type="string"			minOccurs="0" />
+			<element name="HouseIdNumber"				type="string"			nillable="true" />
+			<element name="BuildingName"				type="string"			nillable="true" />
+			<element name="RoomNumber"					type="string"			nillable="true" />
+			<element name="FloorNumber"					type="string"			nillable="true" />
+			<element name="VillageName"					type="string"			nillable="true" />
+			<element name="HouseNumber"					type="string"			nillable="true" />
+			<element name="MooNumber"					type="string"			nillable="true" />
+			<element name="TrokSoiName"					type="string"			nillable="true" />
+			<element name="StreetName"					type="string"			nillable="true" />
+			<element name="ThambolCode"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="ThambolName"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="AmphurCode"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="AmphurName"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="ProvinceCode"				type="string"			minOccurs="1"	nillable="true" />
+			<element name="ProvinceName"				type="string"			minOccurs="1"	nillable="true" />
+			<element name="Postcode"					type="string"			nillable="true" />
+			<element name="TelNumber"					type="string"			nillable="true" />
+			<element name="EmailAddress"				type="string"			nillable="true" />
 		</sequence>
 	</complexType>
 
@@ -114,21 +114,21 @@
 	</complexType>
 	<complexType name="LicenseInfo">
 		<sequence>
-			<element name="LicenseNo"					type="string"			minOccurs="1" />
-			<element name="LicenseType"					type="string"			minOccurs="1" />
-			<element name="LicenseCode"					type="string"			minOccurs="1" />
-			<element name="LicenseSeq"					type="string"			minOccurs="1" />
-			<element name="LicenseName"					type="string"			minOccurs="1" />
-			<element name="LicenseCurrentPrice"			type="decimal"			minOccurs="0" />
-			<element name="EffectiveDate"				type="string"			minOccurs="1" />
-			<element name="ExpireDate"					type="string"			minOccurs="1" />
-			<element name="FirstDate"					type="string"			minOccurs="0" />
-			<element name="OfficeCode"					type="string"			minOccurs="1" />
-			<element name="LicBook"						type="string"			minOccurs="1" />
-			<element name="LicDate"						type="string"			minOccurs="1" />
-			<element name="DocNo"						type="string"			minOccurs="1" />
-			<element name="DocType"						type="string"			minOccurs="1" />
-			<element name="LineNo"						type="string"			minOccurs="1" />
+			<element name="LicenseNo"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="LicenseType"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="LicenseCode"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="LicenseSeq"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="LicenseName"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="LicenseCurrentPrice"			type="decimal"			nillable="true" />
+			<element name="EffectiveDate"				type="string"			minOccurs="1"	nillable="true" />
+			<element name="ExpireDate"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="FirstDate"					type="string"			nillable="true" />
+			<element name="OfficeCode"					type="string"			minOccurs="1"	nillable="true" />
+			<element name="LicBook"						type="string"			minOccurs="1"	nillable="true" />
+			<element name="LicDate"						type="string"			minOccurs="1"	nillable="true" />
+			<element name="DocNo"						type="string"			minOccurs="1"	nillable="true" />
+			<element name="DocType"						type="string"			minOccurs="1"	nillable="true" />
+			<element name="LineNo"						type="string"			minOccurs="1"	nillable="true" />
 		</sequence>
 	</complexType>
 
