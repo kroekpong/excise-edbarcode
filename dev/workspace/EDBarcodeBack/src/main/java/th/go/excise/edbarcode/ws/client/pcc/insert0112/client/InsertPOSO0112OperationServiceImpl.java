@@ -41,7 +41,7 @@ public class InsertPOSO0112OperationServiceImpl implements InsertPOSO0112Operati
 		InsertPOSO0112OperationResponse response = new InsertPOSO0112OperationResponse();
 		
 		th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.InquiryBcsResHeader resHeader = new th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.InquiryBcsResHeader();
-		resHeader.setReturnCode("OK");
+		resHeader.setReturnCode("E00000");
 		resHeader.setReturnDesc("Success");
 		
 		response.setReturn(resHeader);

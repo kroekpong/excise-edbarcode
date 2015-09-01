@@ -32,7 +32,7 @@ import th.go.excise.edbarcode.ws.provider.oxm.GoodsEntryInfo;
 import th.go.excise.edbarcode.ws.provider.oxm.SR12011Info;
 import th.go.excise.edbarcode.ws.provider.oxm.SubmitOnlineHeader;
 
-@Service("sendToBackendService")
+@Service("sendFormSR12011Service")
 public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 	
 	private static final Logger logger = LogManager.getLogger(SendFormSR12011ServiceImpl.class);
@@ -53,10 +53,10 @@ public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 			// Call Service
 			InsertPOSO0112OperationResponse wsResponse = insertPOSO0112OperationService.doService(wsRequest);
 			
-			if (WebServiceConstant.STATUS_CODE.OK.equalsIgnoreCase(wsResponse.getReturn().getReturnCode())) {
+			if ("E00000".equalsIgnoreCase(wsResponse.getReturn().getReturnCode())) {
 				// success
 				response = new EbarcodeSendFormSR12011Response();
-				response.setSendFormSR12011Status(wsResponse.getReturn().getReturnCode());
+				response.setSendFormSR12011Status(WebServiceConstant.STATUS_CODE.OK);
 				response.setSendFormSR12011Desc(wsResponse.getReturn().getReturnDesc());
 			} else {
 				// error
