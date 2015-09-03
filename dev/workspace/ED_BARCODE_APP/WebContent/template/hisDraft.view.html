@@ -1,8 +1,18 @@
-<md-whiteframe class="md-whiteframe-z0" layout layout-align="top center" style="min-height:568px;">
+<md-whiteframe class="md-whiteframe-z0" layout layout-align="start start" style="min-height:568px;">
 
+
+	<div layout="column" layout-align="start start" style="width: 100%;">
+	
+			<div layout="row" layout-align="start start" style="width: 100%;">
+				<md-button class="md-raised md-primary" style="width:150px;" ng-click="removeItem($event)">ลบ </md-button>
+			</div>
+		
 			<div class="CSSTableGenerator" style="height: 100%;">
-		                <table >
+		                <table style="width: 100%;">
 		                    <tr>
+		                        <td style="width: 2%;">
+		                            	
+		                        </td>
 		                        <td>
 		                            	ที่
 		                        </td>
@@ -16,16 +26,14 @@
 		                            	วันที่ทำรายการ
 		                        </td>
 		                        <td>
-		                            	ประเภท
-		                        </td>
-		                        <td>
 		                            	ดูรายละเอียด
-		                        </td>
-		                        <td>
-		                            	พิมพ์ (PDF)
 		                        </td>
 		                    </tr>
 		                    <tr ng-repeat="item in hisList | filter:profile track by $index">
+		                        <td>
+		                        	<md-checkbox aria-label="item.ischeck" ng-model="item.ischeck" style="width:20px"
+			                    	 />
+		                        </td>
 		                        <td>
 		                            	{{$index+1}}
 		                        </td>
@@ -38,29 +46,16 @@
 		                        <td>
 		                            	{{toStringDate(item.submitDate)}}
 		                        </td>
-		                        <td >
-		                            	{{item["submitType"]}}
-		                        </td>
 		                        <td style="text-align: center;">
-		                            	  <md-button class="md-raised" aria-label="More" ng-click="openHistory(item.fileName,$index)" aria-label="More"> 
+		                            	  <md-button class="md-raised" aria-label="More" ng-click="openHistory($index)" aria-label="More"> 
 									         	<md-icon class="material-icons">open_in_new</md-icon>
 									      </md-button>
-		                        </td>
-		                        <td style="text-align: center;">
-<!-- 		                            	  <md-button class="md-raised" aria-label="More" ng-click="openPdf(item.pdfName)"> -->
-<!-- 									         	<img src="img/icons/filetype_pdf.png" width="24"> -->
-<!-- 									      </md-button> -->
-									      <md-button class="md-raised quickMenu" ng-click="openPdf(item.pdfName)"  aria-label="More">
-										  	<div layout="column"  layout-align="center center">
-											   	<img src="img/icons/filetype_pdf.png" style="width: 24px;" class="md-card-image" alt="Washed Out">
-											</div>
-										  </md-button>
 		                        </td>
 		                    </tr>
 		                    
 		                    
 		                </table>
            		 </div>
-            
+      </div>  
 
 </md-whiteframe>

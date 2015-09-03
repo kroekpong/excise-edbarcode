@@ -42,10 +42,40 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 	if ($scope.historyMode === true) {
 		$scope.gridList = JSON.parse(localStorage["historyItems"]);
+		var HistoryList = JSON.parse(localStorage["HistoryList"]);
+		/**set Tax Rate */
+		$scope.MunicipalRateAmountRate = HistoryList.MunicipalRateAmountRate;
+		$scope.FundSSSRateAmountRate = HistoryList.FundSSSRateAmountRate;
+		$scope.FundSSTRateAmountRate = HistoryList.FundSSTRateAmountRate;
+		$scope.FundKKTRateAmountRate = HistoryList.FundKKTRateAmountRate;
+		$scope.inputSum8 = HistoryList.inputSum8;
+		$scope.sumTax8 = HistoryList.sumTax8;
+		$scope.inputSum9 = HistoryList.inputSum9;
+		$scope.sumTax9 = HistoryList.sumTax9;
+		$scope.roundTaxDate = new Date(parseInt(HistoryList.submitDate));
+		
 		localStorage["historyItems"] = JSON.stringify([]);
+		localStorage["HistoryList"] = JSON.stringify({});
 		localStorage["historyMod"] = "OFF";
 	} else {
 		$scope.gridList = [];
+	}
+	
+	/**
+	 * Draft MODE
+	 * ON
+	 * **/
+	if(localStorage["DraftMode"] == "ON"){
+		 var DraftData = JSON.parse(localStorage["DraftData"]);
+
+		$scope.MunicipalRateAmountRate = DraftData.MunicipalRateAmountRate;
+		$scope.FundSSSRateAmountRate = DraftData.FundSSSRateAmountRate;
+		$scope.FundSSTRateAmountRate = DraftData.FundSSTRateAmountRate;
+		$scope.FundKKTRateAmountRate = DraftData.FundKKTRateAmountRate;
+		$scope.gridList = JSON.parse(DraftData.dataGrid);
+
+		localStorage["DraftMode"] = "OFF";
+		localStorage["DraftData"] = "";
 	}
 
 	$scope.topProduct = $productService.getTopProduct();
@@ -171,6 +201,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			
 			//check when OK!
 			$scope.onBlurCheckDelete(ev);
+			$mdToast.show($mdToast.simple().content("ทำรายการเรียบร้อย").position($scope.getToastPosition()).hideDelay(6000));
 
 		});
 	};
@@ -201,8 +232,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 	// report
 	$scope.toastPosition = {
-		bottom : false,
-		top : true,
+		bottom : true,
+		top : false,
 		left : false,
 		right : true
 	};
@@ -329,7 +360,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 //					$scope.navigaTor(5);
 					$fileUtils.runGenReportOnline(function(error) {
 						if (error == null) {
-							$historyService.save($scope.profile, $scope.gridList, $scope.submitType);
+							$historyService.save($scope.profile, $scope.gridList, $scope.submitType,$scope);
 							$rootScope.$broadcast("gotoStep", 5);
 						} else {
 							console.log(error);
@@ -343,7 +374,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			})
 		}else{
 			//OFF line
-			$historyService.save($scope.profile, $scope.gridList, $scope.submitType);
+			$historyService.save($scope.profile, $scope.gridList, $scope.submitType,$scope);
 			$scope.navigaTor(5);
 		}
 		
@@ -534,9 +565,24 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	 * for รวมภาษี
 	 *  (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก   (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่	
 	 */
-	$scope.sumTax8 = $scope.toStringDec(0,2);
-	$scope.sumTax9 = $scope.toStringDec(0,2);
+	if($scope.historyMode == false){
+		$scope.sumTax8 = $scope.toStringDec(0,2);
+		$scope.sumTax9 = $scope.toStringDec(0,2);
+	}
 	
+	
+	/**
+	 * Save Draft
+	 * 
+	 * **/
+	
+	$scope.clickSaveDraft = function (ev){
+		
+		$scope.showConfirm(ev, "ยืนยันการทำรายการ ?", function() {
+			$historyService.savDraft ($scope.profile,$scope.gridList,$scope);
+			$mdToast.show($mdToast.simple().content("ทำรายการเรียบร้อย ที่ ฉบับร่าง").position($scope.getToastPosition()).hideDelay(6000));
+		});
+	}
 	
 
 });

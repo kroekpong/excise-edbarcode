@@ -20,8 +20,8 @@ module.controller('history.view.controller', function($scope, $rootScope, $soapS
 		$historyService.openHisPdfFile(_pdfName);
 	};
 	
-	$scope.openHistory = function(_fileName){
-		$historyService.openHistoryText(_fileName);
+	$scope.openHistory = function(_fileName,_index){
+		$historyService.openHistoryText(_fileName,$scope.hisList[_index]);
 		$rootScope.$broadcast("gotoMenuIndex",1);
 	}
 

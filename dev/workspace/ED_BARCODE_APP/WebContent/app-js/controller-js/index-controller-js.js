@@ -1,7 +1,7 @@
 /**
  * 
  */
-var module = angular.module('indexApp', [ 'ngMaterial', "ui.router" ,"profile.view","order.view" ,"updateprogram.view","history.view"]);
+var module = angular.module('indexApp', [ 'ngMaterial', "ui.router" ,"profile.view","order.view" ,"updateprogram.view","history.view","hisDraft.view"]);
 
 module.config(function($mdThemingProvider) {
 	  $mdThemingProvider.theme('default')
@@ -41,6 +41,12 @@ module.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl : "template/history.view.html",
 		controller : "history.view.controller"
 	});
+	// hisDraft
+	$stateProvider.state('hisDraft', {
+		url : "/view/notifications",
+		templateUrl : "template/hisDraft.view.html",
+		controller : "hisDraft.view.controller"
+	});
 });
 
 module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $location) {
@@ -71,7 +77,10 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 	}, {
 		"iconName" : "inbox",
 		"label" : "ปรับปรุงข้อมูลผู้ประกอบการ"
-	}
+	}, {
+		"iconName" : "notifications",
+		"label" : "ฉบับร่าง"
+	} 
 //	,{
 //		"iconName" : "settings",
 //		"label" : "ตั้งค่า"
@@ -92,6 +101,9 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 		$mdSidenav('left').close();
 	};
 	
+	$scope.gotoHome = function (){
+		$scope.$broadcast("gotoMenuIndex",0);
+	};
 	
 	$scope.$on("gotoMenuIndex", function(event, args) {
 		$scope.toolbarTitle = $scope.settings[args].label;

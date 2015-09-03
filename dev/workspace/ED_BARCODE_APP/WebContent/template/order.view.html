@@ -225,7 +225,11 @@
 	 <md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(0)"  ng-hide="historyMode" >เพิ่มรายการสุรา</md-button>
 	 <md-button class="md-raised" style="width:150px;"
 	 		 ng-click="onDelete()"  ng-hide="historyMode"  ng-disabled="!canDelete"> ลบรายการที่เลือก </md-button>
-	 <md-button class="md-raised " style="width:200px;" ng-click="clickLoadDraff()" ng-show="haveSaveDraff&&!historyMode"> โหลดรายการทำค้างใว้ล่าสุด </md-button>
+<!-- 	 <md-button class="md-raised " style="width:200px;"  -->
+<!-- 	 		ng-click="clickLoadDraff()" ng-show="haveSaveDraff&&!historyMode"> โหลดรายการทำค้างใว้ล่าสุด </md-button> -->
+	 		
+	 <md-button class="md-raised " style="width:200px;" 
+	 		ng-click="clickSaveDraft($event)" ng-show="haveSaveDraff&&!historyMode"  ng-disabled="gridList.length==0"> บันทึกฉบับร่าง </md-button>
 	 
 </div>
 
@@ -362,24 +366,24 @@
 		                    <tr>
 		                        <td>
 			                           (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
-										<input type="text" ng-model="inputSum8">
+										<input type="text" ng-model="inputSum8" ng-disabled="historyMode">
 		                        	
 							        
 		                        </td>
 		                        <td style="text-align: right;" >
 <!-- 		                            {{toStringDec(sumTax8,2)}} -->
-		                            <input type="text" ng-model="sumTax8" style="text-align: right;">	
+		                            <input type="text" ng-model="sumTax8" style="text-align: right;" ng-disabled="historyMode">	
 		                        </td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>
 		                            (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่	
-							         <input type="text" ng-model="inputSum9">
+							         <input type="text" ng-model="inputSum9" ng-disabled="historyMode">
 		                        </td>
 		                        <td style="text-align: right;" >
 <!-- 		                            {{toStringDec(sumTax9,2)}} -->
-		                            <input type="text" ng-model="sumTax9" style="text-align: right;">	
+		                            <input type="text" ng-model="sumTax9" style="text-align: right;" ng-disabled="historyMode">	
 		                        </td>
 		                    </tr>
 		                    
