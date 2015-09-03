@@ -36,7 +36,7 @@ import org.w3c.dom.Document;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
 
-@Service("submitOnlineService")
+@Service("submitOnlineServiceTest")
 public class SubmitOnlineServiceTest {
 	
 	private static final Logger logger = LogManager.getLogger(SubmitOnlineServiceTest.class);
@@ -45,7 +45,7 @@ public class SubmitOnlineServiceTest {
 	private String linkURI;
 	
 	@Autowired
-	private WebServiceTemplate submitOnlineWsTemplateTest;
+	private WebServiceTemplate submitOnlineWsTemplateBackTest;
 	
 	@Autowired
 	private ReadFileXMLServiceTest readFileXMLServiceTest;
@@ -128,7 +128,7 @@ public class SubmitOnlineServiceTest {
 	
 	private EbarcodeSubmitOnlineResponse callClientWs(EbarcodeSubmitOnlineRequest ebarcodeSubmitOnlineRequest){
 		
-		EbarcodeSubmitOnlineResponse ebarcodeSubmitOnlineResponse = (EbarcodeSubmitOnlineResponse)submitOnlineWsTemplateTest.marshalSendAndReceive(ebarcodeSubmitOnlineRequest);
+		EbarcodeSubmitOnlineResponse ebarcodeSubmitOnlineResponse = (EbarcodeSubmitOnlineResponse)submitOnlineWsTemplateBackTest.marshalSendAndReceive(ebarcodeSubmitOnlineRequest);
 		return ebarcodeSubmitOnlineResponse;
 	}
 	
@@ -142,7 +142,7 @@ public class SubmitOnlineServiceTest {
 	public String getURI(){
 		String strURI = null;
 		
-		strURI = submitOnlineWsTemplateTest.getDefaultUri();
+		strURI = submitOnlineWsTemplateBackTest.getDefaultUri();
 		
 		return strURI;
 	}

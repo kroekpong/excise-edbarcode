@@ -22,7 +22,7 @@ public class SendFormSR12011ControllerTest {
 	private static final Logger logger = LogManager.getLogger(SendFormSR12011ControllerTest.class);
 	
 	@Autowired
-	private SendFormSR12011ServiceTest sendFormSR12011Service;
+	private SendFormSR12011ServiceTest sendFormSR12011ServiceTest;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView sendFormSR12011Ws() throws IOException{
@@ -30,8 +30,8 @@ public class SendFormSR12011ControllerTest {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("struri", sendFormSR12011Service.getURI());
-		mav.addObject("strInput", sendFormSR12011Service.getStringRequestXMLInit());
+		mav.addObject("struri", sendFormSR12011ServiceTest.getURI());
+		mav.addObject("strInput", sendFormSR12011ServiceTest.getStringRequestXMLInit());
 		mav.setViewName("sendFormSR12011TestWs");
 		
 		return mav;
@@ -43,7 +43,7 @@ public class SendFormSR12011ControllerTest {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		String response = sendFormSR12011Service.doService(request);
+		String response = sendFormSR12011ServiceTest.doService(request);
 		logger.debug(ToStringBuilder.reflectionToString(response, ToStringStyle.MULTI_LINE_STYLE));
 		mav.addObject("strXML", response);
 		mav.addObject("struri", struri);

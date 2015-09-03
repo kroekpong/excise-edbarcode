@@ -22,7 +22,7 @@ public class SubmitOnlineControllerTest {
 	private static final Logger logger = LogManager.getLogger(SubmitOnlineControllerTest.class);
 	
 	@Autowired
-	private SubmitOnlineServiceTest submitOnlineService;
+	private SubmitOnlineServiceTest submitOnlineServiceTest;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView submitOnlineWs() throws IOException{
@@ -30,8 +30,8 @@ public class SubmitOnlineControllerTest {
 
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("struri", submitOnlineService.getURI());
-		mav.addObject("strInput", submitOnlineService.getStringRequestXMLInit());
+		mav.addObject("struri", submitOnlineServiceTest.getURI());
+		mav.addObject("strInput", submitOnlineServiceTest.getStringRequestXMLInit());
 		mav.setViewName("submitOnlineTestWs");
 		
 		return mav;
@@ -43,7 +43,7 @@ public class SubmitOnlineControllerTest {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		String response = submitOnlineService.doService(request);
+		String response = submitOnlineServiceTest.doService(request);
 		logger.debug(ToStringBuilder.reflectionToString(response, ToStringStyle.MULTI_LINE_STYLE));
 		mav.addObject("strXML", response);
 		mav.addObject("struri", struri);

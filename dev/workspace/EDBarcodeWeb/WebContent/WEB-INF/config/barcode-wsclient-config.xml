@@ -44,7 +44,7 @@
 	</bean>
 	
 	<!-- submitOnlineWsTemplateTest -->
-	<bean id="submitOnlineWsTemplateTest" class="org.springframework.ws.client.core.WebServiceTemplate">
+	<bean id="submitOnlineWsTemplateWebTest" class="org.springframework.ws.client.core.WebServiceTemplate">
 		<constructor-arg ref="messageFactory" />
 		<property name="marshaller" ref="clientMarshallerTest" />
 		<property name="unmarshaller" ref="clientMarshallerTest" />
