@@ -100,6 +100,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		}
 		return _number.toFixed(4);
 	}
+	$scope.floorNumber = function(_number) {
+		return Math.floor(_number);
+	}
 
 	$scope.navigaTor = function(_index) {
 		$scope.step = [ false, false, false, false, false, false];

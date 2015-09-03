@@ -271,7 +271,7 @@
        			<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize)}}</td>
        			<td style="text-align: center;"> 
 <!--        				<md-input-container md-no-float style="padding:0;width:90px;"> -->
-			        	<input type="number" style="text-align: right;height:22px;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode">
+			        	<input type="number" style="text-align: right;height:22px;width:90px;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode">
 <!-- 			      	</md-input-container> -->
 			      	{{item.Goods.GoodsSizeUnitDescriptionText}}
 			    </td>
@@ -281,7 +281,7 @@
        			<td>
        			
 <!-- 					<md-input-container md-no-float style="padding:0;width:100px;" > -->
-			        	<input type="number" style="text-align: right;height:22px;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
+			        	<input type="number" style="text-align: right;height:22px;width:90px;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
 <!-- 			      	</md-input-container> -->
 
 				</td>
@@ -341,7 +341,7 @@
 		                            (๖.๑) รวมภาษีสุราตามมูลค่า "เศษของบาทให้ปัดทิ้ง"
 		                        </td>
 		                        <td style="text-align: right;" >
-		                            {{toStringDec(sumCalcPriceAmountValue,2)}}	
+		                            {{toStringDec(sumCalcPriceAmountValue=floorNumber(sumCalcPriceAmountValue),2)}}	
 		                        </td>
 		                    </tr>
 		               
