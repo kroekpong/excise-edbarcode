@@ -135,6 +135,8 @@ module.service('$profileService', function() {
 			"TaxpayerName" : profiles.factorys[index].TaxpayerName ,
 			"TaxpayerNameDes" : profiles.factorys[index].TaxpayerName  + " [" + profiles.factorys[index].LicenseName + "]",
 			"LicenseNo" : profiles.factorys[index].LicenseNo,
+			"LicBook" : profiles.factorys[index].LicBook ,
+			"LicenseNoAndLicBook" : profiles.factorys[index].LicBook + "/" + profiles.factorys[index].LicenseNo,
 			"LicenseDate" : profiles.factorys[index].EffectiveDate + "-" + profiles.factorys[index].ExpireDate,
 			"CompanyId" : profiles.CompanyId,
 			"Address" : profiles.Address,
@@ -213,6 +215,7 @@ module.service('$convertDataXml', function() {
 				"TaxpayerName" : pxml.getByTagName("TaxpayerName",_i),
 				"TaxpayerId" : pxml.getByTagName("TaxpayerId",_i),
 				"LicenseNo" : pxml.getByTagName("LicenseNo",_i),
+				"LicBook" : pxml.getByTagName("LicBook",_i),
 				"LicenseName" : pxml.getByTagName("LicenseName",_i),
 				"EffectiveDate" : pxml.getByTagName("EffectiveDate",_i),
 				"ExpireDate" : pxml.getByTagName("ExpireDate",_i),
@@ -305,7 +308,7 @@ module.service('$convertDataXml', function() {
 			 g.setNumber("Degree", _ParserXml.getByTagName("Degree",_i));
 			 g.setString("PriceFlag", _ParserXml.getByTagName("PriceFlag",_i));
 			 g.setNumber("DeclarePrice", _ParserXml.getByTagName("DeclarePrice",_i));
-			 g.setNumber("UnitCode", _ParserXml.getByTagName("UnitCode",_i));
+			 g.setString("UnitCode", _ParserXml.getByTagName("UnitCode",_i));
 			 g.setString("GoodsUnitsDescriptionText", _ParserXml.getByTagName("GoodsUnitsDescriptionText",_i));
 			 g.setString("IncomeCode", _ParserXml.getByTagName("IncomeCode",_i));
 			 g.setString("SeqNo", _ParserXml.getByTagName("SeqNo",_i));

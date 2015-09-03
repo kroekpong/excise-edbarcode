@@ -164,7 +164,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.onAdd = function() {
 		for ( var _i in tempSelect) {
 			var gl = new GridItem();
-			gl.Goods = tempSelect[_i];
+			gl.Goods = angular.copy( tempSelect[_i] );
 			$scope.gridList.push(gl);
 			
 			/**
@@ -418,7 +418,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SR12011Info.push(TaxpayerInfo);
 		TaxpayerInfo.push($soapService.getObjectItem("CompanyName", profile.CompanyName));
 		TaxpayerInfo.push($soapService.getObjectItem("Tin", profile.CompanyId));
-		TaxpayerInfo.push($soapService.getObjectItem("LicenseNo", profile.LicenseNo));
+		TaxpayerInfo.push($soapService.getObjectItem("LicenseNo", profile.LicBook + "/" + profile.LicenseNo));
 		TaxpayerInfo.push($soapService.getObjectItem("EffectiveDate", profile.factorys.EffectiveDate));
 		TaxpayerInfo.push($soapService.getObjectItem("ExpireDate", profile.factorys.ExpireDate));
 		TaxpayerInfo.push($soapService.getObjectItem("TaxpayerName", profile.TaxpayerName));
@@ -463,31 +463,31 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode4", catCode[3]));
 			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode5", catCode[4]));
 			GoodsEntryInfo.push($soapService.getObjectItem("UnitCode", item.Goods.UnitCode));
-			GoodsEntryInfo.push($soapService.getObjectItem("RateFlag", ""));
-			GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantity", item.Goods.TaxRateByQuantityAmount));
-			GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantityNumber", item.col45));
-			GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantityPerUnit", item.Goods.RatePerLitre));
-			GoodsEntryInfo.push($soapService.getObjectItem("TaxValue", item.Goods.TaxRateByPriceAmount));
+			GoodsEntryInfo.push($soapService.getObjectItem("RateFlag", "Q"));
+			GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantity", item.Goods.TaxRateByQuantityAmount.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantityNumber", item.col45.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("TaxQuantityPerUnit", item.Goods.RatePerLitre.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("TaxValue", item.Goods.TaxRateByPriceAmount.toFixed(4)));
 			GoodsEntryInfo.push($soapService.getObjectItem("PriceFlag", item.Goods.PriceFlag));
-			GoodsEntryInfo.push($soapService.getObjectItem("InformPrice", item.Goods.GoodsPrice));
-			GoodsEntryInfo.push($soapService.getObjectItem("DeclarePrice", item.Goods.DeclarePrice));
-			GoodsEntryInfo.push($soapService.getObjectItem("UnitPrice", item.Goods.GoodsPrice));
+			GoodsEntryInfo.push($soapService.getObjectItem("InformPrice", item.Goods.GoodsPrice.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("DeclarePrice", item.Goods.DeclarePrice.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("UnitPrice", item.Goods.GoodsPrice.toFixed(4)));
 			GoodsEntryInfo.push($soapService.getObjectItem("GoodsNum", item.col45));
-			GoodsEntryInfo.push($soapService.getObjectItem("GoodsValue", GoodsValue));
-			GoodsEntryInfo.push($soapService.getObjectItem("TaxAmount", TaxAmount));
+			GoodsEntryInfo.push($soapService.getObjectItem("GoodsValue", GoodsValue.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("TaxAmount", TaxAmount.toFixed(4)));
 			GoodsEntryInfo.push($soapService.getObjectItem("SeqNo", index));
 			GoodsEntryInfo.push($soapService.getObjectItem("ProductTypeDesc", item.Goods.ProductTypeDescriptionText));
 			GoodsEntryInfo.push($soapService.getObjectItem("GoodsDesc", item.Goods.GoodsDescriptionText));
 			GoodsEntryInfo.push($soapService.getObjectItem("Degree", item.Goods.Degree));
 			GoodsEntryInfo.push($soapService.getObjectItem("GoodsSize", item.Goods.GoodsSize));
 			GoodsEntryInfo.push($soapService.getObjectItem("GoodsPiece", item.GoodsCount));
-			GoodsEntryInfo.push($soapService.getObjectItem("GoodsQuantity", item.col45));
-			GoodsEntryInfo.push($soapService.getObjectItem("TaxByValue", item.col51));
-			GoodsEntryInfo.push($soapService.getObjectItem("TaxByQuantity", item.col52));
-			GoodsEntryInfo.push($soapService.getObjectItem("TaxByQuantityOver", item.col53));
-			GoodsEntryInfo.push($soapService.getObjectItem("TaxByQuantityWithOver", item.col54));
-			GoodsEntryInfo.push($soapService.getObjectItem("NetTaxByValue", item.PriceAmountTax));
-			GoodsEntryInfo.push($soapService.getObjectItem("NetTaxByQuantity", item.QuantityAmountTax));
+			GoodsEntryInfo.push($soapService.getObjectItem("GoodsQuantity", item.col45.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("TaxByValue", item.col51.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("TaxByQuantity", item.col52.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("TaxByQuantityOver", item.col53.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("TaxByQuantityWithOver", item.col54.toFixed(4)));
+			GoodsEntryInfo.push($soapService.getObjectItem("NetTaxByValue", item.PriceAmountTax.toFixed(2)));
+			GoodsEntryInfo.push($soapService.getObjectItem("NetTaxByQuantity", item.QuantityAmountTax.toFixed(2)));
 
 			stempType = (item.Goods.ProductTypeDescriptionText.trim() == "เบียร์") ? 1 : 3;
 		}
@@ -496,24 +496,24 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 		var SummaryInfo = $soapService.getObject("SummaryInfo");
 		SR12011Info.push(SummaryInfo);
-		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByValue", $scope.sumCalcPriceAmountValue));
-		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByQuantity", $scope.sumCalcQuantityAmountValue));
-		SummaryInfo.push($soapService.getObjectItem("SumAllTax", $scope.totalTax));
+		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByValue", $scope.sumCalcPriceAmountValue.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByQuantity", $scope.sumCalcQuantityAmountValue.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("SumAllTax", $scope.totalTax.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("TaxLessType", ""));
 		SummaryInfo.push($soapService.getObjectItem("TaxLessFrom", ($scope.inputSum8 == undefined)? "" : $scope.inputSum8));
-		SummaryInfo.push($soapService.getObjectItem("TaxLessAmount", $scope.toNumber($scope.sumTax8)));
+		SummaryInfo.push($soapService.getObjectItem("TaxLessAmount", $scope.toNumber($scope.sumTax8).toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo", ($scope.inputSum9 == undefined)? "" : $scope.inputSum9 ));
-		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", $scope.toNumber($scope.sumTax9)));
-		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount", $scope.totalTax));
-		SummaryInfo.push($soapService.getObjectItem("PaymentMunicipalAmount", $scope.royalTotal));
-		SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount", $scope.sss));
-		SummaryInfo.push($soapService.getObjectItem("PaymentFundTVAmount", $scope.sst));
-		SummaryInfo.push($soapService.getObjectItem("PaymentFundSportAmount", $scope.kkt));
-		SummaryInfo.push($soapService.getObjectItem("MoiRate", $scope.MunicipalRateAmountRate));
+		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", $scope.toNumber($scope.sumTax9).toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount", $scope.totalTax.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("PaymentMunicipalAmount", $scope.royalTotal.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount", $scope.sss.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("PaymentFundTVAmount", $scope.sst.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("PaymentFundSportAmount", $scope.kkt.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("MoiRate", $scope.MunicipalRateAmountRate.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PrintType", stempType));
-		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAndMunicipalTaxAmount", $scope.col12));
-		SummaryInfo.push($soapService.getObjectItem("PaymentOtherAmount", $scope.col13));
-		SummaryInfo.push($soapService.getObjectItem("PaymentNetTaxAmount", $scope.col14));
+		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAndMunicipalTaxAmount", $scope.col12.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("PaymentOtherAmount", $scope.col13.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("PaymentNetTaxAmount", $scope.col14.toFixed(2)));
 
 		var str = EbarcodeSubmitOnlineRequest.getString();
 		// writeFile

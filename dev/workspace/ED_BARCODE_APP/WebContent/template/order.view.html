@@ -270,9 +270,9 @@
        			<td style="text-align: right;">{{toStringDec(item.Goods.Degree,2)}}</td>
        			<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize)}}</td>
        			<td style="text-align: center;"> 
-       				<md-input-container md-no-float style="padding:0;width:90px;">
-			        	<input type="number" style="text-align: right;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode">
-			      	</md-input-container>
+<!--        				<md-input-container md-no-float style="padding:0;width:90px;"> -->
+			        	<input type="number" style="text-align: right;height:22px;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode">
+<!-- 			      	</md-input-container> -->
 			      	{{item.Goods.GoodsSizeUnitDescriptionText}}
 			    </td>
 			    
@@ -280,9 +280,9 @@
        			
        			<td>
        			
-					<md-input-container md-no-float style="padding:0;width:100px;" >
-			        	<input type="number" style="text-align: right;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
-			      	</md-input-container>
+<!-- 					<md-input-container md-no-float style="padding:0;width:100px;" > -->
+			        	<input type="number" style="text-align: right;height:22px;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
+<!-- 			      	</md-input-container> -->
 
 				</td>
        			
@@ -366,24 +366,24 @@
 		                    <tr>
 		                        <td>
 			                           (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
-										<input type="text" ng-model="inputSum8" ng-disabled="historyMode">
+										<input type="text" ng-model="inputSum8" style="height: 22px;" ng-disabled="historyMode">
 		                        	
 							        
 		                        </td>
 		                        <td style="text-align: right;" >
 <!-- 		                            {{toStringDec(sumTax8,2)}} -->
-		                            <input type="text" ng-model="sumTax8" style="text-align: right;" ng-disabled="historyMode">	
+		                            <input type="text" ng-model="sumTax8" style="text-align: right;height: 22px;" ng-disabled="historyMode">	
 		                        </td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>
 		                            (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่	
-							         <input type="text" ng-model="inputSum9" ng-disabled="historyMode">
+							         <input type="text" ng-model="inputSum9"  style="height: 22px;" ng-disabled="historyMode" >
 		                        </td>
 		                        <td style="text-align: right;" >
 <!-- 		                            {{toStringDec(sumTax9,2)}} -->
-		                            <input type="text" ng-model="sumTax9" style="text-align: right;" ng-disabled="historyMode">	
+		                            <input type="text" ng-model="sumTax9" style="text-align: right;height: 22px;" ng-disabled="historyMode">	
 		                        </td>
 		                    </tr>
 		                    
