@@ -33,6 +33,7 @@ public class ReportConstant {
 	}
 	
 	public static final class EVENT_CODE {
+		public static final String PAGE = "P";
 		public static final String HEADER = "H";
 		public static final String DETAIL = "D";
 		public static final String SUMMARY = "S";

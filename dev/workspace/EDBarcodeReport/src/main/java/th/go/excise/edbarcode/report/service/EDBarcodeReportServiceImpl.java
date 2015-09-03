@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -249,10 +250,14 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		List<JasperPrint> jasperPrintList = new ArrayList<JasperPrint>(totalPages);
 		StringBuilder builder = null;
 		boolean isRefNumFlag = StringUtils.isNotEmpty(form.getSummaryReport().getReferenceNumber());
+		String formId = UUID.randomUUID().toString();
 		
 		for (int i = 0; i < totalPages; i++) {
 			
 			builder = new StringBuilder();
+			
+			// set page information
+			generateBarcodePageData(builder, formId, (i + 1), totalPages);
 			
 			// Set header data in barcode
 			if (i == 0) {
@@ -269,7 +274,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			if (i == (totalPages - 1)) {
 				// Last Page, Set summary data
 				paramMap.put("sumAllTaxByValue", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getSumAllTaxByValue())));
-				paramMap.put("sumAllTaxByValue2", decimalFormatZeroDigit.format(new BigDecimal(form.getSummaryReport().getSumAllTaxByValue())));
+				paramMap.put("sumAllTaxByValue2", decimalFormatZeroDigit.format(Math.floor(new BigDecimal(form.getSummaryReport().getSumAllTaxByValue()).doubleValue())));
 				paramMap.put("sumAllTaxByQuantity", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getSumAllTaxByQuantity())));
 				paramMap.put("sumAllTax", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getSumAllTax())));
 				paramMap.put("taxLessType", form.getSummaryReport().getTaxLessType());
@@ -295,7 +300,8 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 				generateBarcodeReferenceData(builder, form.getSummaryReport().getReferenceNumber());
 			}
 			
-			System.out.println(builder);
+			//System.out.println(builder);
+			logger.debug("Data in barcode:\n" + builder);
 			paramMap.put("barcodeData", builder.toString());
 			
 			// InputStream will load every page
@@ -423,7 +429,18 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("telNumber", taxpayerInfo.getTaxpayerAddressReport().getTelNumber());
 	}
 	
+	private void generateBarcodePageData(StringBuilder builder, String formId, int currentPage, int totalPage) {
+		builder.append(ReportConstant.EVENT_CODE.PAGE);
+		builder.append(ReportConstant.SEPERATE_STRING);
+		builder.append(formId);
+		builder.append(ReportConstant.SEPERATE_STRING);
+		builder.append(currentPage);
+		builder.append(ReportConstant.SEPERATE_STRING);
+		builder.append(totalPage);
+	}
+	
 	private void generateBarcodeHeaderData(StringBuilder builder, TaxpayerInfoReport taxpayerInfo) {
+		builder.append(ReportConstant.SEPERATE_LINE);
 		builder.append(ReportConstant.EVENT_CODE.HEADER);
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(taxpayerInfo.getLicenseNo());
@@ -434,12 +451,6 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	}
 	
 	private void generateBarcodeDetailData(StringBuilder builder, List<GoodsEntryReport> goodsEntryList) {
-		// Flag for delete first seperate_line in case data more than one page like page 2 or 3
-		boolean deleteSeperateLineFlag = false;
-		if (builder.length() == 0) {
-			deleteSeperateLineFlag = true;
-		}
-		
 		for (GoodsEntryReport goodsEntry : goodsEntryList) {
 			builder.append(ReportConstant.SEPERATE_LINE);
 			builder.append(ReportConstant.EVENT_CODE.DETAIL);
@@ -473,17 +484,6 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			builder.append(goodsEntry.getTaxByQuantity().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
 			builder.append(goodsEntry.getTaxByQuantityOver().replaceAll(",", ""));
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getTaxByQuantityWithOver().replaceAll(",", ""));
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getNetTaxByValue().replaceAll(",", ""));
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getNetTaxByQuantity().replaceAll(",", ""));
-		}
-		
-		if (deleteSeperateLineFlag) {
-			// Delete seperate_line
-			builder.delete(0, ReportConstant.SEPERATE_LINE.length());
 		}
 	}
 	
@@ -494,8 +494,6 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		builder.append(summary.getSumAllTaxByValue().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(summary.getSumAllTaxByQuantity().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getSumAllTax().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(summary.getTaxLessFrom());
 		builder.append(ReportConstant.SEPERATE_STRING);
@@ -525,6 +523,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 	}
 	
 	private void generateBarcodeReferenceData(StringBuilder builder, String referenceNumber) {
+		builder.append(ReportConstant.SEPERATE_LINE);
 		builder.append(ReportConstant.EVENT_CODE.REFERENCE);
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(referenceNumber);
