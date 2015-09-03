@@ -45,7 +45,7 @@ private static final Logger logger = LogManager.getLogger(SendFormSR12011Service
 	private String linkURI;
 	
 	@Autowired
-	private WebServiceTemplate sendFormSR12011WsTemplateBackTest;
+	private WebServiceTemplate sendFormSR12011WsTemplateTest;
 	
 	@Autowired
 	private ReadFileXMLServiceTest readFileXMLServiceTest;
@@ -130,7 +130,7 @@ private static final Logger logger = LogManager.getLogger(SendFormSR12011Service
 	
 	private EbarcodeSendFormSR12011Response callClientWs(EbarcodeSendFormSR12011Request ebarcodeSendFormSR12011Request){
 		
-		EbarcodeSendFormSR12011Response ebarcodeSendFormSR12011Response = (EbarcodeSendFormSR12011Response)sendFormSR12011WsTemplateBackTest.marshalSendAndReceive(ebarcodeSendFormSR12011Request);
+		EbarcodeSendFormSR12011Response ebarcodeSendFormSR12011Response = (EbarcodeSendFormSR12011Response)sendFormSR12011WsTemplateTest.marshalSendAndReceive(ebarcodeSendFormSR12011Request);
 		return ebarcodeSendFormSR12011Response;
 	}
 	
@@ -144,7 +144,7 @@ private static final Logger logger = LogManager.getLogger(SendFormSR12011Service
 	public String getURI(){
 		String strURI = null;
 		
-		strURI = sendFormSR12011WsTemplateBackTest.getDefaultUri();
+		strURI = sendFormSR12011WsTemplateTest.getDefaultUri();
 		
 		return strURI;
 	}

@@ -45,7 +45,7 @@ public class SubmitOnlineServiceTest {
 	private String linkURI;
 	
 	@Autowired
-	private WebServiceTemplate submitOnlineWsTemplateBackTest;
+	private WebServiceTemplate submitOnlineWsTemplateTest;
 	
 	@Autowired
 	private ReadFileXMLServiceTest readFileXMLServiceTest;
@@ -128,7 +128,7 @@ public class SubmitOnlineServiceTest {
 	
 	private EbarcodeSubmitOnlineResponse callClientWs(EbarcodeSubmitOnlineRequest ebarcodeSubmitOnlineRequest){
 		
-		EbarcodeSubmitOnlineResponse ebarcodeSubmitOnlineResponse = (EbarcodeSubmitOnlineResponse)submitOnlineWsTemplateBackTest.marshalSendAndReceive(ebarcodeSubmitOnlineRequest);
+		EbarcodeSubmitOnlineResponse ebarcodeSubmitOnlineResponse = (EbarcodeSubmitOnlineResponse)submitOnlineWsTemplateTest.marshalSendAndReceive(ebarcodeSubmitOnlineRequest);
 		return ebarcodeSubmitOnlineResponse;
 	}
 	
@@ -142,7 +142,7 @@ public class SubmitOnlineServiceTest {
 	public String getURI(){
 		String strURI = null;
 		
-		strURI = submitOnlineWsTemplateBackTest.getDefaultUri();
+		strURI = submitOnlineWsTemplateTest.getDefaultUri();
 		
 		return strURI;
 	}
