@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import th.go.excise.edbarcode.report.common.util.ThaiNumberUtils;
 
-public class ThaiNumberUtilsTests {
+public class ThaiNumberUtilsTest {
 
 	@Test
 	public void test_0_Baht() {
