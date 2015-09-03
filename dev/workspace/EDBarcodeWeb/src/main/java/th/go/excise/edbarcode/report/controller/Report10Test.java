@@ -26,7 +26,7 @@ public class Report10Test {
 		d1.setPricedifpercent("-100.00");
 		
 		R010DDomain d2= new R010DDomain();
-		d2.setCompanyName("สยามไวน์ซอสซิ่ง");
+		d2.setCompanyName("เสิร์ฟ ออล");
 		d2.setTypeName("สุราแช่");
 		d2.setGoodsName("Wine Cooler Jus Black");
 		d2.setDegree("5.0");
@@ -37,7 +37,7 @@ public class Report10Test {
 		d2.setPricedifpercent("-100.00");
 		
 		R010DDomain d3= new R010DDomain();
-		d3.setCompanyName("สยามไวน์ซอสซิ่ง");
+		d3.setCompanyName("สยามไวเนอรี่");
 		d3.setTypeName("สุราแช่");
 		d3.setGoodsName("Zearch Wine Cooler");
 		d3.setDegree("5.0");
