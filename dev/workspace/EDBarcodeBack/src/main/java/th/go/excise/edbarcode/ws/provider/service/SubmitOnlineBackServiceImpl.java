@@ -88,7 +88,7 @@ public class SubmitOnlineBackServiceImpl implements SubmitOnlineBackService {
 		wsDataInformation.setPaymentFundHealthAmount(request.getSR12011Info().getSummaryInfo().getPaymentFundHealthAmount().toString());
 		wsDataInformation.setPaymentFundTVAmount(request.getSR12011Info().getSummaryInfo().getPaymentFundTVAmount().toString());
 		wsDataInformation.setPaymentFundSportAmount(request.getSR12011Info().getSummaryInfo().getPaymentFundSportAmount().toString());
-		wsDataInformation.setInternetUniqueId(request.getSubmitOnlineHeader().getCompanyUserId());
+		wsDataInformation.setInternetUniqueId(request.getSubmitOnlineHeader().getInternetUniqueId());
 		
 		// Prepare Xml CData
 		XmlData xmlData = new XmlData();
@@ -129,7 +129,7 @@ public class SubmitOnlineBackServiceImpl implements SubmitOnlineBackService {
 	private EbarcodeSubmitOnlineResponse prepareWsResponse(th.go.excise.edbarcode.ws.client.sta.oxm.StaBacResponse wsResponse) {
 		
 		EbarcodeSubmitOnlineResponse response = new EbarcodeSubmitOnlineResponse();
-		response.setReferenceNumber(wsResponse.getBody().getReferenceId());
+		response.setReferenceNumber(wsResponse.getBody().getFormSubmissionId());
 		
 		return response;
 	}
