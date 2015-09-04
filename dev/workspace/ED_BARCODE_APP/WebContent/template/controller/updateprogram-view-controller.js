@@ -81,7 +81,7 @@ module.controller('updateprogram.view.controller', function($scope, $rootScope, 
 
 		EbarcodeSyncMasterDataRequest.push(InternetUser);
 
-		$soapService.post(EbarcodeSyncMasterDataRequest, "http://124.109.26.20:7001/EDBarcodeWeb/ws/EDBarcodeService", function(status, xmlDoc, data) {
+		$soapService.post(EbarcodeSyncMasterDataRequest, localStorage["soaphost"], function(status, xmlDoc, data) {
 			$scope.showProgess = false;
 			console.log(status,resStatus);
 			if (status == 200) {

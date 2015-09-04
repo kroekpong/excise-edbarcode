@@ -144,6 +144,7 @@ module.service('$profileService', function() {
 			"CusId" : profiles.CusId,
 			"AddrBean" : profiles.AddrBean,
 			"InternetUniqueId" : profiles.InternetUniqueId,
+			"ExciseOfficeId" : profiles.ExciseOfficeId,
 			"factorys" : profiles.factorys[index]
 		};
 
@@ -219,7 +220,7 @@ module.service('$convertDataXml', function() {
 				"LicenseName" : pxml.getByTagName("LicenseName",_i),
 				"EffectiveDate" : pxml.getByTagName("EffectiveDate",_i),
 				"ExpireDate" : pxml.getByTagName("ExpireDate",_i),
-				"ExciseOfficeId" : pxml.getByTagName("ExciseOfficeId",_i),
+//				"ExciseOfficeId" : pxml.getByTagName("ExciseOfficeId",_i),
 				"EmailAddress" : pxml.getByTagName("EmailAddress",_i)
 			});
 		}
@@ -243,6 +244,7 @@ module.service('$convertDataXml', function() {
 			"AddrBean" : addrBean,
 			"CompanyUserPwd" : pxml.getByTagName("CompanyUserPwd"),
 			"InternetUniqueId" : pxml.getByTagName("InternetUniqueId"),
+			"ExciseOfficeId" : pxml.getByTagName("ExciseOfficeId"),
 			"CusId" : pxml.getByTagName("CusId")
 		};
 

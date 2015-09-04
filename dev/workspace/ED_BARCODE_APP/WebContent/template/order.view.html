@@ -271,7 +271,7 @@
        			<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize)}}</td>
        			<td style="text-align: center;"> 
 <!--        				<md-input-container md-no-float style="padding:0;width:90px;"> -->
-			        	<input type="number" style="text-align: right;height:22px;width:90px;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode">
+			        	<input type="number" style="text-align: right;padding:3px; width:90px;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode">
 <!-- 			      	</md-input-container> -->
 			      	{{item.Goods.GoodsSizeUnitDescriptionText}}
 			    </td>
@@ -281,7 +281,7 @@
        			<td>
        			
 <!-- 					<md-input-container md-no-float style="padding:0;width:100px;" > -->
-			        	<input type="number" style="text-align: right;height:22px;width:90px;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
+			        	<input type="number" style="text-align: right;width:90px;padding:3px;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
 <!-- 			      	</md-input-container> -->
 
 				</td>
@@ -366,24 +366,24 @@
 		                    <tr>
 		                        <td>
 			                           (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
-										<input type="text" ng-model="inputSum8" style="height: 22px;" ng-disabled="historyMode">
+										<input type="text" ng-model="inputSum8" style="padding:3px;" ng-disabled="historyMode">
 		                        	
 							        
 		                        </td>
 		                        <td style="text-align: right;" >
 <!-- 		                            {{toStringDec(sumTax8,2)}} -->
-		                            <input type="text" ng-model="sumTax8" style="text-align: right;height: 22px;" ng-disabled="historyMode">	
+		                            <input type="text" ng-model="sumTax8" style="text-align: right;padding:3px;" ng-disabled="historyMode">	
 		                        </td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>
 		                            (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่	
-							         <input type="text" ng-model="inputSum9"  style="height: 22px;" ng-disabled="historyMode" >
+							         <input type="text" ng-model="inputSum9"  style="padding:3px;" ng-disabled="historyMode" >
 		                        </td>
 		                        <td style="text-align: right;" >
 <!-- 		                            {{toStringDec(sumTax9,2)}} -->
-		                            <input type="text" ng-model="sumTax9" style="text-align: right;height: 22px;" ng-disabled="historyMode">	
+		                            <input type="text" ng-model="sumTax9" style="text-align: right;padding:3px;" ng-disabled="historyMode">	
 		                        </td>
 		                    </tr>
 		                    
@@ -478,10 +478,15 @@
 
   </md-content>
   
+	  	<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
+	  		<h3>loading...</h3>
+	  		<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"></md-progress-linear>
+	  	</div>
+  
   		<div layout="row"  layout-align="center center" >
 <!-- 	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>              -->
-			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(3)"
-				  ng-hide="historyMode" ng-disabled="gridList.length==0" >ต่อไป</md-button>
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()"
+				  ng-hide="historyMode" ng-disabled="gridList.length==0||showReportProgess" >ต่อไป</md-button>
 			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>   
 			   
 		</div>
@@ -564,17 +569,37 @@
 			</div>
 		 </md-button>
 		 
-<!-- 			 <md-button class="md-raised" ng-click="open(0)" >แบบ สร.๑๒๐-๑๑</md-button> -->
-<!-- 			  <md-button class="md-raised"  ng-click="open(1)">แบบ สสส.๑/๐๑</md-button> -->
-<!-- 			   <md-button class="md-raised"  ng-click="open(2)">แบบ สสท.๑/๐๑</md-button> -->
-<!-- 			    <md-button class="md-raised"  ng-click="open(3)">แบบ กกท.๑/๐๑</md-button> -->
 	</div>
 	
+<!-- 	 <div layout="row"  layout-align="center center" style="width: 100%;"> -->
+<!-- 		    <h2 class="md-subhead">*ถ้ามีอินเตอร์เน็ต</h2> -->
+<!-- 	</div> -->
+	 <div layout="row"  layout-align="center center" style="width: 100%;" ng-hide="showpanelOnline" >
+   	    <h2 class="md-subhead">*ถ้ามีอินเตอร์เน็ต</h2>
+	    <md-button class="md-raised md-primary" ng-click="buttononlinesubmit()" > แบบออนไลน์ (ฝากข้อมูล) </md-button>
+	    
+	</div>
+	
+	 <div layout="column"  layout-align="center center" style="width: 100%;" ng-show="showpanelOnline">
+		 <div layout="row"  layout-align="center center">
+	   	    <h2 class="md-subhead">วันที่ยื่นแบบ</h2>
+	   	    <input type="text" ng-model="datepickerValue" style="margin-left: 5px;"  datepicker> 
+		 </div>
+		  <div layout="row"  layout-align="center center">
+			    <md-button class="md-raised" ng-click="buttononlinesubmitCancle()"  ng-disabled="showReportProgess" > ยกเลิก </md-button>
+			    <md-button class="md-raised md-primary" ng-click="saveHistory()"   ng-disabled="showReportProgess" > ตกลง </md-button>
+		  </div>
+	</div>
+	
+	<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
+  		<h3>loading...</h3>
+  		<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"></md-progress-linear>
+  	</div>
 
   </md-content>
   
-  <div  layout="row"  layout-align="center center" >
-	  <md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>  
+  <div  layout="row"  layout-align="center center" ng-hide="showpanelOnline">
+	  <md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(1)">ย้อนกลับ</md-button>  
 	  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="saveHistory()">เสร็จสิ้น</md-button>    
   </div>
 

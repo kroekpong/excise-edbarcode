@@ -11,6 +11,18 @@ module.config(function($mdThemingProvider) {
 	    .accentPalette('orange');
 });
 
+module.directive("datepicker",function(){
+	  return {
+	    restrict:"A",
+	    link:function(scope,el,attr){
+			      el.datepicker({
+			    	  minDate: 0,
+			    	  dateFormat : 'dd/mm/yy'
+			      });
+	    }
+	  };
+});
+
 module.config(function($stateProvider, $urlRouterProvider) {
 	//
 	// For any unmatched url, redirect to /state1

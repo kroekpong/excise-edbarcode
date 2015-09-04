@@ -128,6 +128,9 @@ module.service('$historyService', function() {
 
 	/**
 	 * hisDraft save Draft
+	 * 
+	 * read and write
+	 * 
 	 */
 
 	var pathDraft = this.execPath + "\\gen-report\\draft";
@@ -163,7 +166,7 @@ module.service('$historyService', function() {
 			return -1;
 		}
 
-		console.info("removeDraftById");
+		console.info("removeDraftById", _ids);
 		var drafts = this.loadDraftFromFile();
 
 		for ( var _i in _ids) {
@@ -179,7 +182,7 @@ module.service('$historyService', function() {
 
 		console.log("drafts", drafts.length);
 		rw.writeFileSync(pathDraft + "\\draft.json", JSON.stringify(drafts), "utf8");
-		
+
 		return 0;
 	};
 
@@ -195,6 +198,17 @@ module.service('$historyService', function() {
 		}
 
 		return myDrafts;
+	};
+
+	this.clearAllCurrentByUser = function() {
+		var drafts = this.loadDraftByCurrentUser();
+		console.log("clearAllCurrentByUser");
+		var rmDraft = [];
+		for ( var _index in drafts) {
+			rmDraft.push(drafts[_index].id);
+		}
+
+		this.removeDraftById(rmDraft);
 	};
 
 	this.openDraftMode = function(_Draft) {
@@ -230,6 +244,8 @@ module.service('$historyService', function() {
 		drafts.push(newDraft);
 		rw.writeFileSync(pathDraft + "\\draft.json", JSON.stringify(drafts), "utf8");
 		console.info("savDraft ... finish");
+
+		return newDraft.id;
 	}
 
 });

@@ -3,7 +3,7 @@
   "window": {
     "width": 1300,
     "height": 768,
-    "toolbar": false,
+    "toolbar": true,
     "title": "โปรแกรมชำระภาษีสุราโดยบาร์โค้ต",
     "icon": "img/icons/logo.png"
   },

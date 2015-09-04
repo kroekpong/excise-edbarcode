@@ -19,31 +19,28 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.haveSaveDraff = (localStorage["saveDraffItems"] == undefined || localStorage["saveDraffItems"] == "") ? false : true;
 	$scope.profile = $profileService.getProfile();
 	$scope.roundTaxDate = new Date().toLocaleDateString();
-	
+
 	console.info("historyMode ", $scope.historyMode);
 	console.info("haveSaveDraff ", $scope.haveSaveDraff);
 	/** search item */
 	$scope.userSearch = {};
 	$scope.userSearch.GoodsDescriptionText = "";
 	$scope.userSearch.Degree = "";
-
+	$scope.DraftMode = false;
 	/**
-	 * อัตราภาษี
-	 * <MunicipalRateAmount>10</MunicipalRateAmount>
-	 * <FundSSSRateAmount>2.0</FundSSSRateAmount>
-	 * <FundSSTRateAmount>1.5</FundSSTRateAmount>
+	 * อัตราภาษี <MunicipalRateAmount>10</MunicipalRateAmount>
+	 * <FundSSSRateAmount>2.0</FundSSSRateAmount> <FundSSTRateAmount>1.5</FundSSTRateAmount>
 	 * <FundKKTRateAmount>2.0</FundKKTRateAmount>
 	 */
 	$scope.MunicipalRateAmountRate = 0;
 	$scope.FundSSSRateAmountRate = 0;
 	$scope.FundSSTRateAmountRate = 0;
 	$scope.FundKKTRateAmountRate = 0;
-	
 
 	if ($scope.historyMode === true) {
 		$scope.gridList = JSON.parse(localStorage["historyItems"]);
 		var HistoryList = JSON.parse(localStorage["HistoryList"]);
-		/**set Tax Rate */
+		/** set Tax Rate */
 		$scope.MunicipalRateAmountRate = HistoryList.MunicipalRateAmountRate;
 		$scope.FundSSSRateAmountRate = HistoryList.FundSSSRateAmountRate;
 		$scope.FundSSTRateAmountRate = HistoryList.FundSSTRateAmountRate;
@@ -53,27 +50,28 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		$scope.inputSum9 = HistoryList.inputSum9;
 		$scope.sumTax9 = HistoryList.sumTax9;
 		$scope.roundTaxDate = new Date(parseInt(HistoryList.submitDate));
-		
+
 		localStorage["historyItems"] = JSON.stringify([]);
 		localStorage["HistoryList"] = JSON.stringify({});
 		localStorage["historyMod"] = "OFF";
 	} else {
 		$scope.gridList = [];
 	}
-	
-	/**
-	 * Draft MODE
-	 * ON
-	 * **/
-	if(localStorage["DraftMode"] == "ON"){
-		 var DraftData = JSON.parse(localStorage["DraftData"]);
+
+	/***************************************************************************
+	 * Draft MODE ON
+	 **************************************************************************/
+	if (localStorage["DraftMode"] == "ON") {
+		var DraftData = JSON.parse(localStorage["DraftData"]);
 
 		$scope.MunicipalRateAmountRate = DraftData.MunicipalRateAmountRate;
 		$scope.FundSSSRateAmountRate = DraftData.FundSSSRateAmountRate;
 		$scope.FundSSTRateAmountRate = DraftData.FundSSTRateAmountRate;
 		$scope.FundKKTRateAmountRate = DraftData.FundKKTRateAmountRate;
 		$scope.gridList = JSON.parse(DraftData.dataGrid);
-
+		$scope.DraftMode = true;
+		$scope.DraftModeId = DraftData.id;
+		console.log("DraftMode", $scope.DraftMode, "DraftModeId", $scope.DraftModeId);
 		localStorage["DraftMode"] = "OFF";
 		localStorage["DraftData"] = "";
 	}
@@ -83,7 +81,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.showDataSearch = $scope.searchProduct.length > 0;
 	var productCheck = [];
 	var tempSelect = [];
-	$scope.canDelete = false ;
+	$scope.canDelete = false;
 	console.info("canDelete ", $scope.canDelete);
 
 	$scope.submitType = "offline";
@@ -105,7 +103,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	}
 
 	$scope.navigaTor = function(_index) {
-		$scope.step = [ false, false, false, false, false, false];
+		$scope.step = [ false, false, false, false, false, false ];
 		$scope.step[_index] = true;
 		$scope.stepCount = _index;
 		console.info("navigaTor", _index);
@@ -167,12 +165,11 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.onAdd = function() {
 		for ( var _i in tempSelect) {
 			var gl = new GridItem();
-			gl.Goods = angular.copy( tempSelect[_i] );
+			gl.Goods = angular.copy(tempSelect[_i]);
 			$scope.gridList.push(gl);
-			
+
 			/**
-			 * อัตราภาษี
-			 * <MunicipalRateAmount>10</MunicipalRateAmount>
+			 * อัตราภาษี <MunicipalRateAmount>10</MunicipalRateAmount>
 			 * <FundSSSRateAmount>2.0</FundSSSRateAmount>
 			 * <FundSSTRateAmount>1.5</FundSSTRateAmount>
 			 * <FundKKTRateAmount>2.0</FundKKTRateAmount>
@@ -201,25 +198,25 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 				var findex = $scope.gridList.indexOf(del[_i]);
 				$scope.gridList.splice(findex, 1);
 			}
-			
-			//check when OK!
+
+			// check when OK!
 			$scope.onBlurCheckDelete(ev);
-			$mdToast.show($mdToast.simple().content("ทำรายการเรียบร้อย").position($scope.getToastPosition()).hideDelay(6000));
+			$scope.showSimpleToast("ทำรายการเรียบร้อย");
 
 		});
 	};
-	
+
 	$scope.onBlurCheckDelete = function(ev) {
-			var del = [];
-			for ( var _i in $scope.gridList) {
-				var item = $scope.gridList[_i];
-				if (item.checkbox) {
-					del.push(item);
-				}
+		var del = [];
+		for ( var _i in $scope.gridList) {
+			var item = $scope.gridList[_i];
+			if (item.checkbox) {
+				del.push(item);
 			}
-			
-			$scope.canDelete = del.length > 0;
-			console.info("onBlurCheckDelete ", $scope.canDelete);
+		}
+
+		$scope.canDelete = del.length > 0;
+		console.info("onBlurCheckDelete ", $scope.canDelete);
 	};
 
 	$scope.showConfirm = function(ev, _title, _fn) {
@@ -341,52 +338,87 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	// last step
 	$scope.doAgain = function() {
 		console.info("doAgain ...");
-		$scope.gridList = [];
-		$scope.navigaTor(1);
+		// $scope.gridList = [];
+		// $scope.navigaTor(1);
+		window.location.reload(true);
 	}
 
 	// history
 	$scope.saveHistory = function() {
-		
-		if($scope.submitType === "online"){
-			
-			var xmlRequest = $scope.submitOnlineRequest();
-			var _endpoint = "http://124.109.26.20:7001/EDBarcodeWeb/ws/EDBarcodeService/";
-			
-			console.log(xmlRequest.getSOAP());
-			$soapService.post(xmlRequest,_endpoint,function (status,xmlDoc, data){
-				var resStatus = xmlDoc.getVal("SubmitOnlineStatus");
-				console.log(status,resStatus);
-				if(status == 200 && resStatus == "OK"){
-					var referenceNumber  = xmlDoc.getVal("ReferenceNumber");
-					console.log("referenceNumber",referenceNumber);
-//					$scope.navigaTor(5);
-					$fileUtils.runGenReportOnline(function(error) {
-						if (error == null) {
-							$historyService.save($scope.profile, $scope.gridList, $scope.submitType,$scope);
-							$rootScope.$broadcast("gotoStep", 5);
-						} else {
-							console.log(error);
-							$scope.showSimpleToast(error.message);
-						}
+		if ($scope.submitType === "online") {
+			// online
+			console.info("submitOnlinefn");
+			if ($scope.datepickerValue == "") {
+				console.info("datepickerValue not have value");
+				return;
+			}
 
-					},referenceNumber);
-				}else{
-					$scope.showSimpleToast("error " + resStatus);
-				}
-			})
-		}else{
-			//OFF line
-			$historyService.save($scope.profile, $scope.gridList, $scope.submitType,$scope);
+			$scope.submitOnlinefn();
+			
+		} else {
+			// OFF line
+			$historyService.save($scope.profile, $scope.gridList, $scope.submitType, $scope);
+			if ($scope.DraftMode === true) {
+				$historyService.clearAllCurrentByUser();
+			}
 			$scope.navigaTor(5);
 		}
-		
+
 	};
 
 	/**
-	 * submitOnline * gen report
-	 * 
+	 * submitOnline * gen report online button
 	 */
+	$scope.buttononlinesubmit = function() {
+		$scope.showpanelOnline = true;
+		$scope.datepickerValue = "";
+		$scope.submitType = "online"
+	};
+
+	$scope.$watch("datepicker", function(old, newv) {
+		console.log("datepicker", old, newv);
+	});
+
+	$scope.buttononlinesubmitCancle = function() {
+		$scope.showpanelOnline = false;
+		$scope.datepickerValue = "";
+		$scope.submitType = "offline"
+	};
+
+	$scope.submitOnlinefn = function() {
+		$scope.showReportProgess = true;
+
+		var xmlRequest = $scope.submitOnlineRequest();
+		var _endpoint = localStorage["soaphost"];
+
+		console.log(xmlRequest.getSOAP());
+		$soapService.post(xmlRequest, _endpoint, function(status, xmlDoc, data) {
+			var resStatus = xmlDoc.getVal("SubmitOnlineStatus");
+			console.log(status, resStatus);
+			if (status == 200 && resStatus == "OK") {
+				var referenceNumber = xmlDoc.getVal("ReferenceNumber");
+				console.log("referenceNumber", referenceNumber);
+				// $scope.navigaTor(5);
+				$fileUtils.runGenReportOnline(function(error) {
+					if (error == null) {
+						$historyService.save($scope.profile, $scope.gridList, $scope.submitType, $scope);
+						$scope.showSimpleToast("ทำรายการเรียบร้อย");
+						$rootScope.$broadcast("gotoStep", 5);
+						$scope.showpanelOnline = false;
+					} else {
+						console.log(error);
+						$scope.showSimpleToast(error.message);
+					}
+					
+					$scope.showReportProgess = false;
+				}, referenceNumber);
+			} else {
+				$scope.showSimpleToast("error " + resStatus);
+				$scope.showReportProgess = false;
+			}
+		})
+
+	};
 
 	$scope.submitOnlineRequest = function() {
 
@@ -395,10 +427,10 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var userId = "";
 		var pws = "";
 		var IpAddress = "192.168.1.1";
-
-		var EbarcodeSubmitOnlineRequestReQuest = $soapService.getSOAPMessage("EbarcodeSubmitOnlineRequest","http://www.excise.go.th/xsd/barcode");
+		var SubmissionDate = ($scope.datepickerValue != undefined && $scope.datepickerValue.length > 9 )? $scope.datepickerValue.split("/").reverse().join("") : "";
+		var EbarcodeSubmitOnlineRequestReQuest = $soapService.getSOAPMessage("EbarcodeSubmitOnlineRequest", "http://www.excise.go.th/xsd/barcode");
 		var EbarcodeSubmitOnlineRequest = $soapService.getObject("XmlData");
-		
+
 		var SubmitOnlineHeader = $soapService.getObject("SubmitOnlineHeader");
 		SubmitOnlineHeader.push($soapService.getObjectItem("RegistrationId", ""));
 		SubmitOnlineHeader.push($soapService.getObjectItem("CusId", profile.CusId));
@@ -406,17 +438,18 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SubmitOnlineHeader.push($soapService.getObjectItem("CompanyUserId", userId));
 		SubmitOnlineHeader.push($soapService.getObjectItem("CompanyUserPwd", pws));
 		SubmitOnlineHeader.push($soapService.getObjectItem("TaxpayerId", profile.factorys.TaxpayerId));
-		SubmitOnlineHeader.push($soapService.getObjectItem("ExciseOfficeId", profile.factorys.ExciseOfficeId));
+		SubmitOnlineHeader.push($soapService.getObjectItem("ExciseOfficeId", profile.ExciseOfficeId));
 		SubmitOnlineHeader.push($soapService.getObjectItem("InternetUniqueId", profile.InternetUniqueId));
 		SubmitOnlineHeader.push($soapService.getObjectItem("IpAddress", IpAddress));
 		SubmitOnlineHeader.push($soapService.getObjectItem("SubmissionEmail", profile.factorys.EmailAddress));
+		SubmitOnlineHeader.push($soapService.getObjectItem("SubmissionDate", SubmissionDate));
 		EbarcodeSubmitOnlineRequest.push(SubmitOnlineHeader);
 		EbarcodeSubmitOnlineRequestReQuest.push(SubmitOnlineHeader);
-		
+
 		var SR12011Info = $soapService.getObject("SR12011Info");
 		EbarcodeSubmitOnlineRequest.push(SR12011Info);
 		EbarcodeSubmitOnlineRequestReQuest.push(SR12011Info);
-		
+
 		var TaxpayerInfo = $soapService.getObject("TaxpayerInfo");
 		SR12011Info.push(TaxpayerInfo);
 		TaxpayerInfo.push($soapService.getObjectItem("CompanyName", profile.CompanyName));
@@ -441,7 +474,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var GoodsListInfo = $soapService.getObject("GoodsListInfo");
 		SR12011Info.push(GoodsListInfo);
 		var Griditems = $scope.gridList;
-		
+
 		for ( var _i in Griditems) {
 
 			var item = Griditems[_i];
@@ -455,10 +488,10 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			var stempType = 0;
 			var GoodsEntryInfo = $soapService.getObject("GoodsEntryInfo");
 			GoodsListInfo.push(GoodsEntryInfo);
-			
-//			70010101#39K,00,000,055,27#3#0#08##-
+
+			// 70010101#39K,00,000,055,27#3#0#08##-
 			var catCode = item.Goods.GoodsCode.split("#")[1].split(",");
-			
+
 			GoodsEntryInfo.push($soapService.getObjectItem("ProductCode", item.Goods.ProductTypeCode));
 			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode1", catCode[0]));
 			GoodsEntryInfo.push($soapService.getObjectItem("CategoryCode2", catCode[1]));
@@ -503,9 +536,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByQuantity", $scope.sumCalcQuantityAmountValue.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("SumAllTax", $scope.totalTax.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("TaxLessType", ""));
-		SummaryInfo.push($soapService.getObjectItem("TaxLessFrom", ($scope.inputSum8 == undefined)? "" : $scope.inputSum8));
+		SummaryInfo.push($soapService.getObjectItem("TaxLessFrom", ($scope.inputSum8 == undefined) ? "" : $scope.inputSum8));
 		SummaryInfo.push($soapService.getObjectItem("TaxLessAmount", $scope.toNumber($scope.sumTax8).toFixed(2)));
-		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo", ($scope.inputSum9 == undefined)? "" : $scope.inputSum9 ));
+		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo", ($scope.inputSum9 == undefined) ? "" : $scope.inputSum9));
 		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", $scope.toNumber($scope.sumTax9).toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount", $scope.totalTax.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentMunicipalAmount", $scope.royalTotal.toFixed(2)));
@@ -521,71 +554,80 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var str = EbarcodeSubmitOnlineRequest.getString();
 		// writeFile
 		var data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + str;
-//		data = data.replace("EbarcodeSubmitOnlineRequest", "XmlData").replace("/EbarcodeSubmitOnlineRequest", "/XmlData");
+		// data = data.replace("EbarcodeSubmitOnlineRequest",
+		// "XmlData").replace("/EbarcodeSubmitOnlineRequest", "/XmlData");
 		$fileUtils.writeFileGenReport(data);
 		console.log(data);
 
 		return EbarcodeSubmitOnlineRequestReQuest;
 
 	};
-	
-	
-	
-	$scope.openHistory = function(){
-		$rootScope.$broadcast("gotoMenuIndex",2);
+
+	$scope.openHistory = function() {
+		$rootScope.$broadcast("gotoMenuIndex", 2);
 	}
-	
+
 	// save draff
-	
-	$scope.$on("checkSaveDraff",function(event,args){
+
+	$scope.$on("checkSaveDraff", function(event, args) {
 		console.info("checkSaveDraff");
-		if($scope.gridList.length > 0){
+		if ($scope.gridList.length > 0) {
 			localStorage["saveDraffItems"] = JSON.stringify($scope.gridList);
 		}
 	});
-	
-	$scope.clickLoadDraff = function (){
-		if(localStorage["saveDraffItems"] == "undefined" || localStorage["saveDraffItems"] == ""){
-			return ;
+
+	$scope.clickLoadDraff = function() {
+		if (localStorage["saveDraffItems"] == "undefined" || localStorage["saveDraffItems"] == "") {
+			return;
 		}
-		
+
 		console.info("clickLoadDraff");
 		$scope.gridList = JSON.parse(localStorage["saveDraffItems"]);
 		localStorage["saveDraffItems"] = "";
 		$scope.haveSaveDraff = false;
 	};
-	
-	
-	$scope.toNumber = function (_strNumber ){
-		if(parseFloat(_strNumber).toString() == "NaN"){
+
+	$scope.toNumber = function(_strNumber) {
+		if (parseFloat(_strNumber).toString() == "NaN") {
 			return 0;
 		}
 		return parseFloat(_strNumber);
 	};
-	
-	
-	/***
-	 * for รวมภาษี
-	 *  (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก   (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่	
+
+	/***************************************************************************
+	 * for รวมภาษี (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก (๙) หัก
+	 * คืนภาษีสุราตามหนังสือกรมฯ ที่
 	 */
-	if($scope.historyMode == false){
-		$scope.sumTax8 = $scope.toStringDec(0,2);
-		$scope.sumTax9 = $scope.toStringDec(0,2);
+	if ($scope.historyMode == false) {
+		$scope.sumTax8 = $scope.toStringDec(0, 2);
+		$scope.sumTax9 = $scope.toStringDec(0, 2);
 	}
-	
-	
-	/**
+
+	/***************************************************************************
 	 * Save Draft
 	 * 
-	 * **/
-	
-	$scope.clickSaveDraft = function (ev){
-		
+	 **************************************************************************/
+
+	$scope.clickSaveDraft = function(ev) {
+
 		$scope.showConfirm(ev, "ยืนยันการทำรายการ ?", function() {
-			$historyService.savDraft ($scope.profile,$scope.gridList,$scope);
+			if ($scope.DraftMode === true) {
+				var draftId = $historyService.savDraft($scope.profile, $scope.gridList, $scope);
+				console.info("Save again!!! ID:", draftId);
+				var rmId = [];
+				rmId.push($scope.DraftModeId);
+				$historyService.removeDraftById(rmId);
+
+				$scope.DraftModeId = draftId;
+			} else {
+				$historyService.clearAllCurrentByUser();
+				var draftId = $historyService.savDraft($scope.profile, $scope.gridList, $scope);
+				// open draft Mode
+				$scope.DraftMode = true;
+				$scope.DraftModeId = draftId;
+			}
 			$mdToast.show($mdToast.simple().content("ทำรายการเรียบร้อย ที่ ฉบับร่าง").position($scope.getToastPosition()).hideDelay(6000));
 		});
 	}
-	
 
 });
