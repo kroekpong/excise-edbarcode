@@ -65,10 +65,13 @@ public class EDBarcodeReportUtil {
 			
 			xmlData = (XmlData) jaxbUnmarshaller.unmarshal(file);
 			form = xmlData.getSr12011FormReport();
+			
+			// Set Extra parameter
 			form.getTaxpayerInfoReport().setCusId(xmlData.getSubmitOnlineHeader().getCusId());
 			form.getTaxpayerInfoReport().setTaxpayerId(xmlData.getSubmitOnlineHeader().getTaxpayerId());
+			form.getSummaryReport().setSubmissionDate(xmlData.getSubmitOnlineHeader().getSubmissionDate());
 			
-			logger.debug("Object: " + form.toString());
+			//logger.debug("Object: " + form.toString());
 			
 		} catch (JAXBException e) {
 			logger.error(e.getMessage(), e);

@@ -22,11 +22,6 @@ public class ReportConstant {
 		public static final String ALL = "ALL_EXCISE";
 	}
 	
-	public static final class MODE {
-		public static final String ALL = "A";
-		public static final String SEPERATE = "S";
-	}
-	
 	public static final class REPORT_STATUS {
 		public static final int SUCCESS = 1;
 		public static final int FAILED = 0;

@@ -15,6 +15,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRAbstractBeanDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 
 /**
@@ -71,6 +72,7 @@ public class ReportUtil {
 		InputStream jrxmlFile = getReportFile(jrxmlFileName + "." + ReportConstant.FILE.JRXML);
 		JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFile);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramMap, new JREmptyDataSource());
+		jrxmlFile.close();
 		return jasperPrint;
 	}
 	
@@ -80,6 +82,23 @@ public class ReportUtil {
 		InputStream jrxmlFile = getReportFile(jrxmlFileName + "." + ReportConstant.FILE.JRXML);
 		JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFile);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramMap, dataSource);
+		jrxmlFile.close();
+		return jasperPrint;
+	}
+	
+	public static JasperPrint complieReportWithJasperDesign(JasperDesign jasperDesign, Map<String, Object> paramMap) throws JRException, IOException {
+		logger.info("Complie Report from JasperDesign");
+		
+		JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramMap, new JREmptyDataSource());
+		return jasperPrint;
+	}
+	
+	public static JasperPrint complieReportWithJasperDesign(JasperDesign jasperDesign, Map<String, Object> paramMap, JRAbstractBeanDataSource dataSource) throws JRException, IOException {
+		logger.info("Complie Report from JasperDesign");
+		
+		JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramMap, dataSource);
 		return jasperPrint;
 	}
 	
@@ -88,6 +107,7 @@ public class ReportUtil {
 		
 		InputStream jrxmlFile = getReportFile(jasperFileName + "." + ReportConstant.FILE.JASPER);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jrxmlFile, paramMap, new JREmptyDataSource());
+		jrxmlFile.close();
 		return jasperPrint;
 	}
 	
@@ -96,6 +116,7 @@ public class ReportUtil {
 		
 		InputStream jrxmlFile = getReportFile(jasperFileName + "." + ReportConstant.FILE.JASPER);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jrxmlFile, paramMap, dataSource);
+		jrxmlFile.close();
 		return jasperPrint;
 	}
 	

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <XmlData>
 	<SubmitOnlineHeader>
-		<RegistrationId></RegistrationId>
 		<CusId>51103369</CusId>
 		<CompanyId>0105529039293</CompanyId>
 		<CompanyUserId></CompanyUserId>
@@ -11,6 +10,7 @@
 		<InternetUniqueId></InternetUniqueId>
 		<IpAddress>192.168.1.1</IpAddress>
 		<SubmissionEmail></SubmissionEmail>
+		<SubmissionDate>20150915</SubmissionDate>
 	</SubmitOnlineHeader>
 	<SR12011Info>
 		<TaxpayerInfo>

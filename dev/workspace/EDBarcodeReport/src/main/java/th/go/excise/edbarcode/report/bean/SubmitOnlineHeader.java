@@ -6,6 +6,7 @@ public class SubmitOnlineHeader {
 
 	private String cusId;
 	private String taxpayerId;
+	private String submissionDate;
 
 	@XmlElement(name = "CusId")
 	public String getCusId() {
@@ -23,6 +24,15 @@ public class SubmitOnlineHeader {
 
 	public void setTaxpayerId(String taxpayerId) {
 		this.taxpayerId = taxpayerId;
+	}
+
+	@XmlElement(name = "SubmissionDate")
+	public String getSubmissionDate() {
+		return submissionDate;
+	}
+
+	public void setSubmissionDate(String submissionDate) {
+		this.submissionDate = submissionDate;
 	}
 
 }

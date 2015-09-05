@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-08-12T21:52:27 -->
+<!-- 2015-09-04T23:41:13 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="KKT1_01" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b028837b-4b98-440d-8ef1-edc36f8c0def">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="StyleFont" fontName="TH Sarabun New" fontSize="9"/>
@@ -24,6 +24,8 @@
 	<parameter name="paymentFundSportAmountBaht" class="java.lang.String"/>
 	<parameter name="paymentFundSportAmountStang" class="java.lang.String"/>
 	<parameter name="paymentFundSportAmountString" class="java.lang.String"/>
+	<parameter name="referenceNumber" class="java.lang.String"/>
+	<parameter name="submissionDate" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -110,16 +112,32 @@
 					<text><![CDATA[สำหรับเจ้าพนักงาน]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="0" y="56" width="60" height="18" uuid="f49d0ea7-83d9-468d-b114-9df4e6fab158">
+					<reportElement x="0" y="20" width="60" height="18" uuid="4880d08a-48c9-4fd3-99d3-8f2782f77035">
 						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
 						<font fontName="TH Sarabun New" size="12"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<text><![CDATA[ เจ้าพนักงานผู้รับ]]></text>
+					<text><![CDATA[ ทะเบียนรับเลขที่]]></text>
 				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="66" y="20" width="128" height="18" uuid="f7343cf6-ca63-4949-9f3e-90532d980b46">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box topPadding="2" leftPadding="2">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="TH Sarabun New" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{referenceNumber}]]></textFieldExpression>
+				</textField>
 				<staticText>
 					<reportElement x="0" y="38" width="60" height="18" uuid="e3709332-7ed1-46f6-bee1-ea8c1ba82539">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -129,35 +147,29 @@
 					</textElement>
 					<text><![CDATA[ วัน เดือน ปี ที่รับ]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="66" y="20" width="128" height="15" uuid="9e0c3a55-f00e-47ca-916e-8e0c5f9df443">
-						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="local_mesure_unity" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="px"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<box>
-						<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="66" y="38" width="128" height="18" uuid="28d287eb-5300-4871-88c5-62fae01706a5"/>
+					<box topPadding="2" leftPadding="2">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement>
-						<font fontName="TH Sarabun New" size="10"/>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="TH Sarabun New" size="12"/>
 					</textElement>
-					<text><![CDATA[]]></text>
-				</staticText>
+					<textFieldExpression><![CDATA[$P{submissionDate}]]></textFieldExpression>
+				</textField>
 				<staticText>
-					<reportElement x="66" y="38" width="128" height="15" uuid="5877725d-0bf3-413b-b858-e345b01bfc9c">
+					<reportElement x="0" y="56" width="60" height="18" uuid="f49d0ea7-83d9-468d-b114-9df4e6fab158">
 						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<property name="local_mesure_unity" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
-					<box>
-						<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
-					</box>
-					<textElement>
-						<font fontName="TH Sarabun New" size="10"/>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="TH Sarabun New" size="12"/>
+						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<text><![CDATA[]]></text>
+					<text><![CDATA[ เจ้าพนักงานผู้รับ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="66" y="56" width="128" height="15" uuid="d41c2bc2-5e4d-4318-a28f-e2a91f2c5ea4">
@@ -173,18 +185,6 @@
 						<font fontName="TH Sarabun New" size="10"/>
 					</textElement>
 					<text><![CDATA[]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="0" y="20" width="60" height="18" uuid="4880d08a-48c9-4fd3-99d3-8f2782f77035">
-						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="local_mesure_unitwidth" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<textElement textAlignment="Left" verticalAlignment="Bottom">
-						<font fontName="TH Sarabun New" size="12"/>
-					</textElement>
-					<text><![CDATA[ ทะเบียนรับเลขที่]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -1371,15 +1371,75 @@
 					<text><![CDATA[(๑๒)]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="0" y="20" width="179" height="80" uuid="aa9455d1-d679-4006-bd0d-2bbb77806b62"/>
+					<reportElement x="0" y="20" width="179" height="48" uuid="aa9455d1-d679-4006-bd0d-2bbb77806b62">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
 					<box leftPadding="5" rightPadding="5"/>
 					<textElement verticalAlignment="Top">
 						<font fontName="TH Sarabun New" size="12"/>
 					</textElement>
-					<text><![CDATA[ข้าพเจ้าขอรับรองว่ารายการที่แสดงในแบบรายการ
+					<text><![CDATA[ ข้าพเจ้าขอรับรองว่ารายการที่แสดงในแบบรายการ
  เงินบำรุงกองทุนนี้ ถูกต้องครบถ้วนตามความเป็นจริง
- ทุกประการ และได้แนบแบบ สร.๑๒๐-๑๑
- เลขที่…………..……….จำนวน………….……..ชุด]]></text>
+ ทุกประการ และได้แนบแบบ สร.๑๒๐-๑๑]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="68" width="30" height="16" uuid="98958b54-398b-4799-a0ae-085f25aeb932">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box leftPadding="5" rightPadding="5"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="TH Sarabun New" size="12"/>
+					</textElement>
+					<text><![CDATA[ เลขที่]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="30" y="68" width="60" height="16" uuid="95b7f303-804f-4f0f-b3db-07a495ab25a4">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box topPadding="0" leftPadding="0">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="TH Sarabun New" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{referenceNumber}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="90" y="68" width="25" height="16" uuid="4eb78a26-9895-41ac-858b-48ca99f8ea0a">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box leftPadding="0" rightPadding="0"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="TH Sarabun New" size="12"/>
+					</textElement>
+					<text><![CDATA[จำนวน]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="135" y="68" width="20" height="16" uuid="54d9e12c-2b66-4589-bed1-a842ebc7ce6c">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box leftPadding="5" rightPadding="5"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="TH Sarabun New" size="12"/>
+					</textElement>
+					<text><![CDATA[ชุด]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="115" y="68" width="20" height="16" uuid="cf4354de-1f74-406b-823f-2ecdc789a7b2">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box leftPadding="5" rightPadding="5">
+						<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+					</box>
+					<textElement verticalAlignment="Top">
+						<font fontName="TH Sarabun New" size="12"/>
+					</textElement>
+					<text><![CDATA[]]></text>
 				</staticText>
 			</frame>
 			<frame>

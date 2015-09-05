@@ -25,7 +25,10 @@ public class SummaryReport {
 	private String paymentFundHealthAmount;
 	private String paymentFundTVAmount;
 	private String paymentFundSportAmount;
+	
+	// Parameter for Staff (2)
 	private String referenceNumber;
+	private String submissionDate;
 	
 	
 	@XmlElement(name = "SumAllTaxByValue")
@@ -190,13 +193,20 @@ public class SummaryReport {
 		this.paymentFundSportAmount = paymentFundSportAmount;
 	}
 
-	@XmlElement(name = "ReferenceNumber")
 	public String getReferenceNumber() {
 		return referenceNumber;
 	}
 
 	public void setReferenceNumber(String referenceNumber) {
 		this.referenceNumber = referenceNumber;
+	}
+	
+	public String getSubmissionDate() {
+		return submissionDate;
+	}
+
+	public void setSubmissionDate(String submissionDate) {
+		this.submissionDate = submissionDate;
 	}
 
 	@Override

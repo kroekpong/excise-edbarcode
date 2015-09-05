@@ -1,10 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <XmlData>
+	<SubmitOnlineHeader>
+		<CusId>51103369</CusId>
+		<CompanyId>0105529039293</CompanyId>
+		<CompanyUserId>tip1</CompanyUserId>
+		<CompanyUserPwd>tip1</CompanyUserPwd>
+		<TaxpayerId>50L43370</TaxpayerId>
+		<ExciseOfficeId>010900</ExciseOfficeId>
+		<InternetUniqueId>00009862</InternetUniqueId>
+		<IpAddress>192.168.1.16</IpAddress>
+		<SubmissionEmail>my@mail.com</SubmissionEmail>
+		<SubmissionDate>20150915</SubmissionDate>
+	</SubmitOnlineHeader>
 	<SR12011Info>
 		<TaxpayerInfo>
 			<CompanyName>บริษัท เบียร์ทิพย์ บริวเวอรี่ (1991) จำกัด </CompanyName>
 			<Tin>0105529039293</Tin>
-			<LicenseNo>10905817600001</LicenseNo>
+			<LicenseNo>2558/10905817600001</LicenseNo>
 			<EffectiveDate>20150101</EffectiveDate>
 			<ExpireDate>20150101</ExpireDate>
 			<TaxpayerName>เบียร์ทิพย์ บริวเวอรี่ (1991)</TaxpayerName>
@@ -99,7 +111,7 @@
 			<TaxLessAmount>0</TaxLessAmount>
 			<TaxDeductionOnBookNo/>
 			<TaxDeductionOnBookAmount>0</TaxDeductionOnBookAmount>
-			<PaymentExciseAmount>2506.3284</PaymentExciseAmount>
+			<PaymentExciseAmount>2506.33</PaymentExciseAmount>
 			<PaymentMunicipalAmount>250.63</PaymentMunicipalAmount>
 			<PaymentFundHealthAmount>50.13</PaymentFundHealthAmount>
 			<PaymentFundTVAmount>37.59</PaymentFundTVAmount>
@@ -111,15 +123,4 @@
 			<PaymentNetTaxAmount>2756.96</PaymentNetTaxAmount>
 		</SummaryInfo>
 	</SR12011Info>
-	<SubmitOnlineHeader>
-		<CusId>51103369</CusId>
-		<CompanyId>0105529039293</CompanyId>
-		<CompanyUserId>tip1</CompanyUserId>
-		<CompanyUserPwd>tip1</CompanyUserPwd>
-		<TaxpayerId>50L43370</TaxpayerId>
-		<ExciseOfficeId>010900</ExciseOfficeId>
-		<InternetUniqueId>00009862</InternetUniqueId>
-		<IpAddress>192.168.1.16</IpAddress>
-		<SubmissionEmail>my@mail.com</SubmissionEmail>
-	</SubmitOnlineHeader>
 </XmlData>

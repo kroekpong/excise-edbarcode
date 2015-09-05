@@ -19,23 +19,16 @@ public class EDBarcodeReportApp {
 		try {
 			String xmlFile = null;
 			String outputPath = null;
-			String mode = null;
 			String referenceNumber = null;
-//			String xmlFile = "C:\\Users\\SU\\Desktop\\New Text Document (2).txt";
-//			String outputPath = "C:\\iReport\\TEST\\";
-//			String referenceNumber = "";
-//			String mode = ReportConstant.MODE.ALL;
-			if (args.length == 3) {
+			if (args.length == 2) {
 				xmlFile = args[0];
 				outputPath = args[1];
-				mode = args[2];
-				reportService.generateReport(xmlFile, outputPath, mode);
-			} else if (args.length == 4) {
+				reportService.generateReport(xmlFile, outputPath);
+			} else if (args.length == 3) {
 				xmlFile = args[0];
 				outputPath = args[1];
-				mode = args[2];
-				referenceNumber = args[3];
-				reportService.generateReport(xmlFile, outputPath, mode, referenceNumber);
+				referenceNumber = args[2];
+				reportService.generateReport(xmlFile, outputPath, referenceNumber);
 			} else {
 				logger.warn("Wrong no. of input, can not create pdf file.");
 			}
