@@ -67,17 +67,18 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 	private th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest prepareWsRequest(EbarcodeSubmitOnlineRequest request) throws IllegalAccessException, InvocationTargetException {
 		
 		// SubmitOnlineHeader
-		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SubmitOnlineHeader wsSummitOnlineHeader = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SubmitOnlineHeader();
-		wsSummitOnlineHeader.setCompanyId(request.getSubmitOnlineHeader().getCompanyId());
-		wsSummitOnlineHeader.setCompanyUserId(request.getSubmitOnlineHeader().getCompanyUserId());
-		wsSummitOnlineHeader.setCompanyUserPwd(request.getSubmitOnlineHeader().getCompanyUserPwd());
-		wsSummitOnlineHeader.setCusId(request.getSubmitOnlineHeader().getCusId());
-		wsSummitOnlineHeader.setExciseOfficeId(request.getSubmitOnlineHeader().getExciseOfficeId());
-		wsSummitOnlineHeader.setInternetUniqueId(request.getSubmitOnlineHeader().getInternetUniqueId());
-		wsSummitOnlineHeader.setIpAddress(request.getSubmitOnlineHeader().getIpAddress());
-		wsSummitOnlineHeader.setRegistratronId(request.getSubmitOnlineHeader().getRegistratronId());
-		wsSummitOnlineHeader.setSubmissionEmail(request.getSubmitOnlineHeader().getSubmissionEmail());
-		wsSummitOnlineHeader.setTaxpayerId(request.getSubmitOnlineHeader().getTaxpayerId());
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SubmitOnlineHeader wsSubmitOnlineHeader = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SubmitOnlineHeader();
+		wsSubmitOnlineHeader.setCompanyId(request.getSubmitOnlineHeader().getCompanyId());
+		wsSubmitOnlineHeader.setCompanyUserId(request.getSubmitOnlineHeader().getCompanyUserId());
+		wsSubmitOnlineHeader.setCompanyUserPwd(request.getSubmitOnlineHeader().getCompanyUserPwd());
+		wsSubmitOnlineHeader.setCusId(request.getSubmitOnlineHeader().getCusId());
+		wsSubmitOnlineHeader.setExciseOfficeId(request.getSubmitOnlineHeader().getExciseOfficeId());
+		wsSubmitOnlineHeader.setInternetUniqueId(request.getSubmitOnlineHeader().getInternetUniqueId());
+		wsSubmitOnlineHeader.setIpAddress(request.getSubmitOnlineHeader().getIpAddress());
+		wsSubmitOnlineHeader.setRegistratronId(request.getSubmitOnlineHeader().getRegistratronId());
+		wsSubmitOnlineHeader.setSubmissionEmail(request.getSubmitOnlineHeader().getSubmissionEmail());
+		wsSubmitOnlineHeader.setSubmissionDate(request.getSubmitOnlineHeader().getSubmissionDate());
+		wsSubmitOnlineHeader.setTaxpayerId(request.getSubmitOnlineHeader().getTaxpayerId());
 		
 		// SR12011Info
 		// TaxpayerInfo
@@ -167,7 +168,7 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		wsSR12011Info.setSummaryInfo(wsSummaryInfo);
 		
 		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest wsRequest = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest();
-		wsRequest.setSubmitOnlineHeader(wsSummitOnlineHeader);
+		wsRequest.setSubmitOnlineHeader(wsSubmitOnlineHeader);
 		wsRequest.setSR12011Info(wsSR12011Info);
 		
 		return wsRequest;
