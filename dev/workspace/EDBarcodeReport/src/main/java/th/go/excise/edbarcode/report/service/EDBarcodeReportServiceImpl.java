@@ -186,6 +186,8 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		DecimalFormat decimalFormatTwoDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
 		DecimalFormat decimalFormatFourDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.FOUR_DIGIT);
 		
+		boolean isRefNumFlag = StringUtils.isNotEmpty(form.getSummaryReport().getReferenceNumber());
+		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// Page Header
 		paramMap.put("companyName", form.getTaxpayerInfoReport().getCompanyName());
@@ -197,10 +199,11 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		putAddressData(paramMap, form.getTaxpayerInfoReport());
 		
 		// For Staff
-		paramMap.put("referenceNumber", form.getSummaryReport().getReferenceNumber());
-		if (StringUtils.isNotEmpty(form.getSummaryReport().getReferenceNumber())) {
+		if (isRefNumFlag) {
+			paramMap.put("referenceNumber", form.getSummaryReport().getReferenceNumber());
 			paramMap.put("submissionDate", EDBarcodeReportUtil.toThaiDateFormat(form.getSummaryReport().getSubmissionDate()));
 		} else {
+			paramMap.put("referenceNumber", "");
 			paramMap.put("submissionDate", "");
 		}
 				
@@ -222,8 +225,17 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("paymentNetTaxAmount", "");
 		paramMap.put("paymentNetTaxAmountText", "");
 		
+		// Initial Paging
+		int goodsPerPage;
+		// Offline
+		if (!isRefNumFlag) {
+			goodsPerPage = ReportConstant.GOODS_PER_PAGE_OFFLINE;
+		} else {
+			goodsPerPage = ReportConstant.GOODS_PER_PAGE_ONLINE;
+		}
+		
 		// Find totalPages
-		int totalPages = (int) Math.ceil((float) form.getGoodsListReport().size() / ReportConstant.GOODS_PER_PAGE);
+		int totalPages = (int) Math.ceil((float) form.getGoodsListReport().size() / goodsPerPage);
 		
 		// Split List to each pages
 		List<List<GoodsEntryReport>> goodsPerPageList = new ArrayList<List<GoodsEntryReport>>(totalPages);
@@ -232,10 +244,12 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		int startIndex = 0;
 		int endIndex = 0;
 		for (int i = 0; i < totalPages; i++) {
-			endIndex = ((i + 1) * ReportConstant.GOODS_PER_PAGE) - 1;
+			endIndex = ((i + 1) * goodsPerPage) - 1;
 			goodsEntryList = new ArrayList<GoodsEntryReport>();
 			for (int j = startIndex; j <= endIndex; j++) {
 				goodsEntry = form.getGoodsListReport().get(j);
+				goodsEntry.setDegree(decimalFormatTwoDigit.format(new BigDecimal((goodsEntry.getDegree()))));
+				goodsEntry.setGoodsSize(decimalFormatFourDigit.format(new BigDecimal((goodsEntry.getGoodsSize()))));
 				goodsEntry.setGoodsPiece(decimalFormatZeroDigit.format(new BigDecimal(goodsEntry.getGoodsPiece())));
 				goodsEntry.setGoodsQuantity(decimalFormatFourDigit.format(new BigDecimal(goodsEntry.getGoodsQuantity())));
 				goodsEntry.setUnitPrice(decimalFormatTwoDigit.format(new BigDecimal(goodsEntry.getUnitPrice())));
@@ -252,34 +266,16 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 					break;
 				}
 			}
-			startIndex = (i + 1) * ReportConstant.GOODS_PER_PAGE;
+			startIndex = (i + 1) * goodsPerPage;
 		}
 		
 		JasperPrint jasperPrint = null;
 		JRBeanCollectionDataSource dataSource = null;
 		List<JasperPrint> jasperPrintList = new ArrayList<JasperPrint>(totalPages);
 		StringBuilder builder = null;
-		boolean isRefNumFlag = StringUtils.isNotEmpty(form.getSummaryReport().getReferenceNumber());
 		String formId = UUID.randomUUID().toString();
 		
 		for (int i = 0; i < totalPages; i++) {
-			
-			builder = new StringBuilder();
-			
-			// set page information
-			generateBarcodePageData(builder, formId, (i + 1), totalPages);
-			
-			// Set header data in barcode
-			if (i == 0) {
-				if (!isRefNumFlag) {
-					generateBarcodeHeaderData(builder, form);
-				}
-			}
-			
-			// Set detail data in barcode
-			if (!isRefNumFlag) {
-				generateBarcodeDetailData(builder, goodsPerPageList.get(i));
-			}
 			
 			if (i == (totalPages - 1)) {
 				// Last Page, Set summary data
@@ -299,14 +295,31 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 				paramMap.put("paymentOtherAmount", decimalFormatTwoDigit.format(new BigDecimal(EDBarcodeReportUtil.blankToZero(form.getSummaryReport().getPaymentOtherAmount()))));
 				paramMap.put("paymentNetTaxAmount", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getPaymentNetTaxAmount())));
 				paramMap.put("paymentNetTaxAmountString", ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentNetTaxAmount()));
-				
-				// Set summary data in barcode
-				if (!isRefNumFlag) {
-					generateBarcodeSummaryData(builder, form.getSummaryReport());
-				}
 			}
 			
-			if (isRefNumFlag) {
+			builder = new StringBuilder();
+			
+			// set page information
+			generateBarcodePageData(builder, formId, (i + 1), totalPages);
+			
+			// Offline
+			if (!isRefNumFlag) {
+				
+				// Set header data in barcode
+				if (i == 0) {
+					generateBarcodeHeaderData(builder, form);
+				}
+				
+				// Set detail data in barcode
+				generateBarcodeDetailData(builder, goodsPerPageList.get(i));
+				
+				// Set summary data in last page
+				if (i == (totalPages - 1)) {
+					generateBarcodeSummaryData(builder, form.getSummaryReport());
+				}
+				
+			// Online
+			} else {
 				generateBarcodeReferenceData(builder, form.getSummaryReport().getReferenceNumber());
 			}
 			
@@ -317,19 +330,18 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			// InputStream will load every page
 			paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.SR120_11));
 			
-			// FIXME
-			// Resize QR-Code
-			//InputStream jrxmlFile = ReportUtil.getReportFile(ReportConstant.REPORT.SR120_11 + "." + ReportConstant.FILE.JRXML);
-			//JasperDesign jasperDesign = JRXmlLoader.load(jrxmlFile);
-            //
-			//JRDesignElement qrcode = (JRDesignElement) jasperDesign.getBackground().getElementByKey("qrcode");
-			//qrcode.setX(10);
-			//qrcode.setY(150);
-			
 			dataSource = new JRBeanCollectionDataSource(goodsPerPageList.get(i), true);
+			
+			// Offline
+			if (!isRefNumFlag) {
+				jasperPrint = ReportUtil.getJasperPrintWithJasper(ReportConstant.REPORT.SR120_11, paramMap, dataSource);
+			// Online
+			} else {
+				// Resize QR-Code
+				jasperPrint = ReportUtil.complieReportWithJasperDesign(getJasperDesignWithResizeQrCode(), paramMap, dataSource);
+			}
+			
 			//jasperPrint = ReportUtil.complieReportWithJrxml(ReportConstant.REPORT.SR120_11, paramMap, dataSource);
-			//jasperPrint = ReportUtil.complieReportWithJasperDesign(jasperDesign, paramMap, dataSource);
-			jasperPrint = ReportUtil.getJasperPrintWithJasper(ReportConstant.REPORT.SR120_11, paramMap, dataSource);
 			jasperPrintList.add(jasperPrint);
 		}
 		
@@ -557,6 +569,44 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		builder.append(ReportConstant.EVENT_CODE.REFERENCE);
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(referenceNumber);
+	}
+	
+	private JasperDesign getJasperDesignWithResizeQrCode() throws JRException {
+		InputStream jrxmlFile = ReportUtil.getReportFile(ReportConstant.REPORT.SR120_11 + "." + ReportConstant.FILE.JRXML);
+		JasperDesign jasperDesign = JRXmlLoader.load(jrxmlFile);
+		
+		final int heightChange = 100;
+		
+		JRDesignElement qrCode = (JRDesignElement) jasperDesign.getBackground().getElementByKey("qrCode");
+		qrCode.setX(100);
+		qrCode.setHeight(55);
+		qrCode.setWidth(55);
+		
+		JRDesignElement summaryLeftFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("summaryLeftFrame");
+		summaryLeftFrame.setHeight(summaryLeftFrame.getHeight() - heightChange);
+		summaryLeftFrame.setY(summaryLeftFrame.getY() + heightChange);
+		
+		JRDesignElement summaryCenterFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("summaryCenterFrame");
+		summaryCenterFrame.setHeight(summaryCenterFrame.getHeight() - heightChange);
+		summaryCenterFrame.setY(summaryCenterFrame.getY() + heightChange);
+		
+		JRDesignElement summaryRightFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("summaryRightFrame");
+		summaryRightFrame.setHeight(summaryRightFrame.getHeight() - heightChange);
+		summaryRightFrame.setY(summaryRightFrame.getY() + heightChange);
+		
+		JRDesignElement summaryFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("summaryFrame");
+		summaryFrame.setY(summaryFrame.getY() + heightChange);
+		
+		JRDesignElement detailFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("detailFrame");
+		detailFrame.setHeight(detailFrame.getHeight() + heightChange);
+		
+		JRDesignElement detailXFrame = null;
+		for (int i = 0; i < 8; i++) {
+			detailXFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("d" + (i + 1));
+			detailXFrame.setHeight(detailXFrame.getHeight() + heightChange);
+		}
+		
+		return jasperDesign;
 	}
 	
 }

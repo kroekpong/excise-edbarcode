@@ -35,7 +35,8 @@ public class ReportConstant {
 		public static final String REFERENCE = "R";
 	}
 	
-	public static final int GOODS_PER_PAGE = 8;
+	public static final int GOODS_PER_PAGE_OFFLINE = 8;
+	public static final int GOODS_PER_PAGE_ONLINE = 12;
 	public static final String SEPERATE_STRING = "|";
 	public static final String SEPERATE_LINE = "}|}";
 	
