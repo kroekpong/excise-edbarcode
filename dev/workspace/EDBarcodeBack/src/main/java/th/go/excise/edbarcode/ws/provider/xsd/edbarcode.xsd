@@ -75,6 +75,7 @@
 			<element name="InternetUniqueId"			type="string"		minOccurs="1" />
 			<element name="IpAddress"					type="string"		minOccurs="1" />
 			<element name="SubmissionEmail"				type="string"		minOccurs="0" />
+			<element name="SubmissionDate"				type="string"		minOccurs="1" />
 		</sequence>
 	</complexType>
 

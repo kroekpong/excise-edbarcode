@@ -2,7 +2,7 @@ package th.go.excise.edbarcode.ws.provider.service;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Date;
+import java.text.DecimalFormat;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
-import th.go.excise.edbarcode.common.util.DateUtils;
+import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 import th.go.excise.edbarcode.ws.client.sta.service.AddNewFormSR12011Service;
 import th.go.excise.edbarcode.ws.provider.bean.XmlData;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
@@ -65,6 +65,8 @@ public class SubmitOnlineBackServiceImpl implements SubmitOnlineBackService {
 
 	private th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest prepareWsRequest(EbarcodeSubmitOnlineRequest request) throws JAXBException, IOException {
 		
+		DecimalFormat decimalFormatTwoDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
+		
 		// Prepare Request Header
 		th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest wsHeader = new th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest();
 		wsHeader.setSourceSystem(WebServiceConstant.STA.SYSTEM_BARCODE);
@@ -72,7 +74,6 @@ public class SubmitOnlineBackServiceImpl implements SubmitOnlineBackService {
 		wsHeader.setTransactionCode(WebServiceConstant.STA.TRAN_CODE_ADD_NEW_FORM_SR12011);
 		
 		// Prepare Request Body
-		Date currentDate = new Date();
 		th.go.excise.edbarcode.ws.client.sta.oxm.DataInformation wsDataInformation = new th.go.excise.edbarcode.ws.client.sta.oxm.DataInformation();
 		wsDataInformation.setCusId(request.getSubmitOnlineHeader().getCusId());
 		wsDataInformation.setCompanyId(request.getSubmitOnlineHeader().getCompanyId());
@@ -80,14 +81,14 @@ public class SubmitOnlineBackServiceImpl implements SubmitOnlineBackService {
 		wsDataInformation.setTaxpayerId(request.getSubmitOnlineHeader().getTaxpayerId());
 		wsDataInformation.setTaxpayerName(request.getSR12011Info().getTaxpayerInfo().getTaxpayerName());
 		wsDataInformation.setExciseOfficeId(request.getSubmitOnlineHeader().getExciseOfficeId());
-		wsDataInformation.setFormPeriodBeginDate(DateUtils.wsDateFormat.format(currentDate));
-		wsDataInformation.setFormPeriodEndDate(DateUtils.wsDateFormat.format(currentDate));
+		wsDataInformation.setFormPeriodBeginDate(request.getSubmitOnlineHeader().getSubmissionDate());
+		wsDataInformation.setFormPeriodEndDate(request.getSubmitOnlineHeader().getSubmissionDate());
 		wsDataInformation.setFormPeriodResubmissionCode("");
-		wsDataInformation.setPaymentExciseAmount(request.getSR12011Info().getSummaryInfo().getPaymentExciseAmount().toString());
-		wsDataInformation.setPaymentMunicipalAmount(request.getSR12011Info().getSummaryInfo().getPaymentMunicipalAmount().toString());
-		wsDataInformation.setPaymentFundHealthAmount(request.getSR12011Info().getSummaryInfo().getPaymentFundHealthAmount().toString());
-		wsDataInformation.setPaymentFundTVAmount(request.getSR12011Info().getSummaryInfo().getPaymentFundTVAmount().toString());
-		wsDataInformation.setPaymentFundSportAmount(request.getSR12011Info().getSummaryInfo().getPaymentFundSportAmount().toString());
+		wsDataInformation.setPaymentExciseAmount(decimalFormatTwoDigit.format(request.getSR12011Info().getSummaryInfo().getPaymentExciseAmount()));
+		wsDataInformation.setPaymentMunicipalAmount(decimalFormatTwoDigit.format(request.getSR12011Info().getSummaryInfo().getPaymentMunicipalAmount()));
+		wsDataInformation.setPaymentFundHealthAmount(decimalFormatTwoDigit.format(request.getSR12011Info().getSummaryInfo().getPaymentFundHealthAmount()));
+		wsDataInformation.setPaymentFundTVAmount(decimalFormatTwoDigit.format(request.getSR12011Info().getSummaryInfo().getPaymentFundTVAmount()));
+		wsDataInformation.setPaymentFundSportAmount(decimalFormatTwoDigit.format(request.getSR12011Info().getSummaryInfo().getPaymentFundSportAmount()));
 		wsDataInformation.setInternetUniqueId(request.getSubmitOnlineHeader().getInternetUniqueId());
 		
 		// Prepare Xml CData
