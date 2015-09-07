@@ -102,8 +102,7 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 //	} 
 	];
 
-//	$scope.toolbarTitle = $scope.settings[0].label;
-	$scope.toolbarTitle = "";
+	$scope.toolbarTitle = $scope.settings[0].label;
 	
 	$scope.versionPrograme =  localStorage["versionPrograme"];
 
