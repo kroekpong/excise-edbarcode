@@ -1,723 +1,707 @@
 <md-whiteframe class="md-whiteframe-z0" layout layout-align="center center" style="width:100%">
 
-<!-- add item -->
-<div layout="column" style="width: 100%" ng-show="step[0]">
-<!--   <md-toolbar> -->
-<!--     <div class="md-toolbar-tools"> -->
-<!--       <h2 class="md-flex"> รายการสุรา </h2> -->
-<!--     </div> -->
-<!--   </md-toolbar> -->
-<!--   <md-content layout-padding> -->
-    
-            	
-<!-- 		  <md-content class="md-padding"> -->
-		  
-	    <div layout="row" style="width: 100%"  layout-align="end center">
-<!-- 	         	<md-button class="md-raised md-primary" ng-show="showDataSearch" ng-click="onAdd()">เพิ่ม</md-button> -->
-	           	<md-button class="md-raised md-warn" style="width:150px;" ng-click="resetProductChecked()"> รีเซตที่แลือกไว้ </md-button>
-	    </div>
-		  
-		    <md-tabs md-dynamic-height md-border-bottom>
-		      <md-tab label="รายการสุรา แนะนำ">
-		        <md-content class="md-padding">
-					
+	<!-- add item -->
+	<div layout="column" style="width: 100%" ng-show="step[0]">
+
+		<div layout="row" style="width: 100%"  layout-align="end center">
+			<!-- 	         	<md-button class="md-raised md-primary" ng-show="showDataSearch" ng-click="onAdd()">เพิ่ม</md-button> -->
+			<md-button class="md-raised md-warn" style="width:150px;" ng-click="resetProductChecked()"> รีเซตที่แลือกไว้ </md-button>
+		</div>
+
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="รายการสุรา แนะนำ">
+				<md-content class="md-padding">
+
 					<div class="CSSTableGenerator" >
-		                <table >
-		                    <tr>
-		                        <td>
-		                            
-		                        </td>
-		                        <td >
-		                            	ชนิดสุรา
-		                        </td>
-		                        <td >
-		                            	ชื่อสุรา
-		                        </td>
-		                        <td>
-		                            	เครืองหมายการค้าหลัก
-		                        </td>
-		                        <td>
-		                            	ดีกรี
-		                        </td>
-		                        <td>
-		                            	ขนาดบรรจุ(ลิตร)
-		                        </td>
-		                        <td>
-		                            	หน่วยนับ
-		                        </td>
-		                        <td>
-		                            	ราคาตามประกาศ
-		                        </td>
-		                    </tr>
-		                    
-		                    <tr ng-repeat="product in topProduct track by $index">
-		                    	<td style="text-align: center;width: 1%"> 
-			                    	<md-checkbox aria-label="product.checkbox" ng-checked="getProductChecked(product.GoodId)" 
-			                    	style="width:20px"
-			                    	ng-click="productCheckedClick(product.GoodId,product)" />
-						        </td>
-					       		<td>{{product.ProductTypeDescriptionText}}</td>
-					       		<td>{{product.GoodsDescriptionText}}</td>
-						        <td>{{product.BrandName}}</td>
-						        <td style="text-align: right;">{{toStringDec(product.Degree,2)}}</td>
-						        <td style="text-align: right;">{{toStringDec(product.GoodsSize)}}</td>
-						        <td>{{product.GoodsSizeUnitDescriptionText}}</td>
-						        <td style="text-align: right;">{{toStringDec(product.DeclarePrice)}}</td>
-						       
-		                    </tr>
-		                    
-		                </table>
-           		 </div>
-            
-            
-		        </md-content>
-		      </md-tab>
-		      <md-tab label="ค้นหา">
-		        <md-content  class="md-padding">
-					
-					  <md-whiteframe class="md-whiteframe-z3" layout layout-align="start center"  style="margin-bottom:10px;">
-						 <div layout="column" style="width: 100%;margin: 10px;">
-								 
-								  <div layout="row" layout-align="left center">
-								  	 <h3 style="margin-right: 77px;">ชื่อสุรา</h3>
-									 <md-autocomplete style="margin-bottom:10px;width:500px;"
-							          ng-disabled="false"
-							          md-selected-item="selectedItem1"
-							          md-search-text="userSearch.GoodsDescriptionText"
-							          md-items="item in querySearch(userSearch.GoodsDescriptionText,'GoodsDescriptionText')"
-							          md-item-text="item.GoodsDescriptionText"
-							          md-min-length="3"
-							          placeholder="ชื่อสุรา">
-								        <md-item-template>
-											  <span md-highlight-text="ausearchText" md-highlight-flags="^i">{{item.GoodsDescriptionText}}</span>
-											  <span md-highlight-text="ausearchText" >(ขนาด {{item.GoodsSize}} )</span>
-											  <span md-highlight-text="ausearchText" >(ดีกรี {{item.Degree}} )</span>
-								        </md-item-template>
-								        <md-not-found>
-								          No matches found for "{{userSearch.GoodsDescriptionText}}".
-								        </md-not-found>
-								      </md-autocomplete>
-								  </div>	
-							      
-							      
-						        <div layout="row" layout-align="start center">
-							  	 <h3 style="margin-right: 100px;">ดีกรี</h3>
-								 <md-autocomplete style="width:500px;"
-						          ng-disabled="false"
-						          md-selected-item="selectedItem2"
-						          md-search-text="userSearch.Degree"
-						          md-items="item in querySearch(userSearch.Degree,'Degree')"
-						          md-item-text="item.Degree"
-						          md-min-length="1"
-						          placeholder="ดีกรี">
-							        <md-item-template>
-										 <span md-highlight-text="ausearchText" >{{item.GoodsDescriptionText}}</span>
-										  <span md-highlight-text="ausearchText">(ขนาด {{item.GoodsSize}} )</span>
-										  <span md-highlight-text="ausearchText" md-highlight-flags="^i">(ดีกรี {{item.Degree}} )</span>
-							        </md-item-template>
-							        <md-not-found>
-							          No matches found for "{{userSearch.Degree}}".
-							        </md-not-found>
-							      </md-autocomplete>
-						        </div>
-						        
-								</div>	
-								
-						</md-whiteframe>
-				
-				
-					<div class="CSSTableGenerator"  ng-show="showDataSearch">
-		                <table >
-		                    <tr>
-		                        <td>
-		                            
-		                        </td>
-		                        <td >
-		                            	ชนิดสุรา
-		                        </td>
-		                        <td >
-		                            	ชื่อสุรา
-		                        </td>
-		                        <td>
-		                            	เครืองหมายการค้าหลัก
-		                        </td>
-		                        <td>
-		                            	ดีกรี
-		                        </td>
-		                        <td>
-		                            	ขนาดบรรจุ(ลิตร)
-		                        </td>
-		                        <td>
-		                            	หน่วยนับ
-		                        </td>
-		                        <td>
-		                            	ราคาตามประกาศ
-		                        </td>
-		                    </tr>
-		                    
-		                    <tr ng-repeat="product in searchProduct | filter:userSearch">
-		                    	<td style="text-align: center;width: 1%"> 
-			                    	<md-checkbox aria-label="product.checkbox" style="width:20px"
-			                    	ng-checked="getProductChecked(product.GoodId)" ng-click="productCheckedClick(product.GoodId,product)" />
-						        </td>
-						        <td>{{product.ProductTypeDescriptionText}}</td>
-					       		<td>{{product.GoodsDescriptionText}}</td>
-						        <td>{{product.BrandName}}</td>
-						        <td style="text-align: right;">{{toStringDec(product.Degree,2)}}</td>
-						       	<td style="text-align: right;">{{toStringDec(product.GoodsSize)}}</td>
-						       	<td>{{product.GoodsSizeUnitDescriptionText}}</td>
-						        <td style="text-align: right;">{{toStringDec(product.DeclarePrice)}}</td>
-						       
-		                    </tr>
-		                    
-		                </table>
-           		 </div>
-            
-            
-				
-					
-				  </md-content>
-		      </md-tab>
-		    </md-tabs>
-		    
-			<div layout="row"  layout-align="center center" >
-			    
-			    <md-button class="md-raised md-primary" ng-show="showDataSearch" ng-click="onAdd()">เพิ่ม</md-button>
-		        <md-button class="md-raised" ng-click="navigaTor(1)">ย้อนกลับ</md-button>
-            	
-			</div>
-		        
-		        
-<!-- 		  </md-content> -->
+						<table >
+							<tr>
+								<td>
 
+								</td>
+								<td >
+									ชนิดสุรา
+								</td>
+								<td >
+									ชื่อสุรา
+								</td>
+								<td>
+									เครืองหมายการค้าหลัก
+								</td>
+								<td>
+									ดีกรี
+								</td>
+								<td>
+									ขนาดบรรจุ(ลิตร)
+								</td>
+								<td>
+									หน่วยนับ
+								</td>
+								<td>
+									ราคาตามประกาศ
+								</td>
+							</tr>
 
-<!--   </md-content> -->
-</div>
+							<tr ng-repeat="product in topProduct track by $index">
+								<td style="text-align: center;width: 1%"> 
+									<md-checkbox aria-label="product.checkbox" ng-checked="getProductChecked(product.GoodId)" 
+											style="width:20px"
+											ng-click="productCheckedClick(product.GoodId,product)" />
+								</td>
+								<td>{{product.ProductTypeDescriptionText}}</td>
+								<td>{{product.GoodsDescriptionText}}</td>
+								<td>{{product.BrandName}}</td>
+								<td style="text-align: right;">{{toStringDec(product.Degree,2)}}</td>
+								<td style="text-align: right;">{{toStringDec(product.GoodsSize)}}</td>
+								<td>{{product.GoodsSizeUnitDescriptionText}}</td>
+								<td style="text-align: right;">{{toStringDec(product.DeclarePrice)}}</td>
 
-<!-- add item -->
+							</tr>
 
-<!-- Grid -->
-<div layout="column">
-
-<div ng-show="step[1]">
-<div layout="column">
- 
- <md-tabs md-dynamic-height md-border-bottom>
-		      <md-tab label="โรงงาน">
-		      <md-content class="md-padding">
-					 <div  layout="row" layout-align="center center" style="width: 100%">
-						    <md-input-container class="md-icon-float" style="width:450px;">
-						        <label class="input-has-value-label">ชื่อโรงงานสุรา</label>
-						        <md-icon class="material-icons">account_balance</md-icon>
-						    <input type="text"  ng-model="profile.TaxpayerNameDes" readonly> </md-input-container>
-						    
-						     <md-input-container class="md-icon-float" flax="50">
-						        <label class="input-has-value-label">ใบอนุญาตทำสุราเลขที่</label>
-						        <md-icon class="material-icons">assignment_turned_in</md-icon>
-						    <input type="text"   ng-model="profile.LicenseNo" readonly> </md-input-container>
-						    
-						     <md-input-container class="md-icon-float" flax="50">
-						        <label class="input-has-value-label">ชำระรอบภาษีวันที</label>
-						        <md-icon class="material-icons">access_time</md-icon>
-						    <input type="text"   ng-model="roundTaxDate" readonly> </md-input-container>
-	    
- 					</div>
- 			</md-content>
- </md-tab>
- </md-tabs>
- 
- 
-  <md-tabs md-dynamic-height md-border-bottom>
-		      <md-tab label="รายการสินค้า">
-		      <md-content class="md-padding">
-		      
-					 <div layout="row">
-					 
-						 <md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(0)"  ng-hide="historyMode" >เพิ่มรายการสุรา</md-button>
-						 <md-button class="md-raised" style="width:150px;"
-						 		 ng-click="onDelete()"  ng-hide="historyMode"  ng-disabled="!canDelete"> ลบรายการที่เลือก </md-button>
-					<!-- 	 <md-button class="md-raised " style="width:200px;"  -->
-					<!-- 	 		ng-click="clickLoadDraff()" ng-show="haveSaveDraff&&!historyMode"> โหลดรายการทำค้างใว้ล่าสุด </md-button> -->
-						 		
-						 <md-button class="md-raised " style="width:200px;" 
-						 		ng-click="clickSaveDraft($event)" ng-show="haveSaveDraff&&!historyMode"  ng-disabled="gridList.length==0"> บันทึกฉบับร่าง </md-button>
-						 
+						</table>
 					</div>
 
+
+				</md-content>
+			</md-tab>
+			<md-tab label="ค้นหา">
+				<md-content  class="md-padding">
+
+					<md-whiteframe class="md-whiteframe-z3" layout layout-align="start center"  style="margin-bottom:10px;">
+						<div layout="column" style="width: 100%;margin: 10px;">
+
+							<div layout="row" layout-align="left center">
+								<h3 style="margin-right: 77px;">ชื่อสุรา</h3>
+								<md-autocomplete style="margin-bottom:10px;width:500px;"
+										ng-disabled="false"
+										md-selected-item="selectedItem1"
+										md-search-text="userSearch.GoodsDescriptionText"
+										md-items="item in querySearch(userSearch.GoodsDescriptionText,'GoodsDescriptionText')"
+										md-item-text="item.GoodsDescriptionText"
+										md-min-length="3"
+										placeholder="ชื่อสุรา">
+									<md-item-template>
+										<span md-highlight-text="ausearchText" md-highlight-flags="^i">{{item.GoodsDescriptionText}}</span>
+										<span md-highlight-text="ausearchText" >(ขนาด {{item.GoodsSize}} )</span>
+										<span md-highlight-text="ausearchText" >(ดีกรี {{item.Degree}} )</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found for "{{userSearch.GoodsDescriptionText}}".
+									</md-not-found>
+								</md-autocomplete>
+							</div>	
+
+
+							<div layout="row" layout-align="start center">
+								<h3 style="margin-right: 100px;">ดีกรี</h3>
+								<md-autocomplete style="width:500px;"
+										ng-disabled="false"
+										md-selected-item="selectedItem2"
+										md-search-text="userSearch.Degree"
+										md-items="item in querySearch(userSearch.Degree,'Degree')"
+										md-item-text="item.Degree"
+										md-min-length="1"
+										placeholder="ดีกรี">
+									<md-item-template>
+										<span md-highlight-text="ausearchText" >{{item.GoodsDescriptionText}}</span>
+										<span md-highlight-text="ausearchText">(ขนาด {{item.GoodsSize}} )</span>
+										<span md-highlight-text="ausearchText" md-highlight-flags="^i">(ดีกรี {{item.Degree}} )</span>
+									</md-item-template>
+									<md-not-found>
+										No matches found for "{{userSearch.Degree}}".
+									</md-not-found>
+								</md-autocomplete>
+							</div>
+
+						</div>	
+
+					</md-whiteframe>
+
+
 					<div class="CSSTableGenerator"  ng-show="showDataSearch">
-					       <table >
-					       									<tr >
-																<td rowspan="3" style="vertical-align: top;">ที่</td>
-																<td rowspan="3" style="vertical-align: top;"><strong>(๓)</strong> <br>ชนิดสุรา</td>
-																<td colspan="7"><strong>(๔)</strong> <br> รายการสุรา</td>
-																<td colspan="3"><strong>(๕)</strong> <br>ภาษีสุราต่อภาชนะ</td>
-																<td colspan="3"><strong>(๖)</strong> <br>รวมภาษีสุรา</td>
-																<td rowspan="3"  style="vertical-align: top;">ลบ</td>
-															</tr>
-															
-															<tr class="header-td">
-																<td rowspan="2"  style="vertical-align: top;min-width:100px;">(๔.๑)<br>ชื่อสุรา</td>
-																<td rowspan="2"  style="vertical-align: top;">(๔.๒)<br>ดีกรี</td>
-																<td rowspan="2"  style="vertical-align: top;">(๔.๓)<br>ขนาดบรรจุ (ลิตร)</td>
-																<td rowspan="2"  style="vertical-align: top;">(๔.๔)<br>จำนวนภาชนะ</td>
-																<td rowspan="2"  style="vertical-align: top;">(๔.๕)<br>ปริมาณสุราที่เสียภาษี (ลิตร)</td>
-																<td colspan="2"  style="vertical-align: top;min-width:120px;">(๔.๖)<br>ราคาขายส่งช่วง<br>สุดท้ายของสุรา<br>(บาท/ภาชนะ)<br>ไม่รวมภาษีมูลค่าเพิ่ม</td>
-																<td rowspan="2"  style="vertical-align: top;">(๕.๑)<br>ภาษีตามมูลค่า (บาท/ภาชนะ)</td>
-																<td rowspan="2"  style="vertical-align: top;">(๕.๒)<br>ภาษีตามปริมาณ (บาท/ภาชนะ)</td>
-																<td rowspan="2"  style="vertical-align: top;min-width:80px;">(๕.๓)<br>ภาษีตามปริมาณ<br>กรณีภาษี<br>ดีกรีเกิน<br>(บาท/ภาชนะ)</td>
-																<td rowspan="2"  style="vertical-align: top;">(๕.๔)<br> รวมภาษีสุรา<br>ตามปริมาณ (บาท/ภาชนะ) (๕.๒+๕.๓)	</td>
-																<td rowspan="2"  style="vertical-align: top;">(๖.๑)<br> ตามมูลค่า (๔.๔ * ๕.๑)</td>
-																<td rowspan="2"  style="vertical-align: top;">(๖.๒)<br> ตามปริมาณ (๔.๔ * ๕.๔)</td>
-															</tr>
-															<tr  class="header-td">
-																<td style="vertical-align: top;">ตามแจ้ง</td>
-																<td style="vertical-align: top;">ตามประกาศ</td>
-															</tr>
-					       	
-					       		<tr ng-repeat="item in gridList track by $index">
-					       			<td>{{$index+1}}</td>
-					       			<td>{{item.Goods.ProductTypeDescriptionText}}</td>
-					       			<td>{{item.Goods.GoodsDescriptionText}}</td>
-					       			<td style="text-align: right;">{{toStringDec(item.Goods.Degree,2)}}</td>
-					       			<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize)}}</td>
-					       			<td style="text-align: center;"> 
-					<!--        				<md-input-container md-no-float style="padding:0;width:90px;"> -->
-								        	<input type="number" style="text-align: right;padding:3px; width:90px;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode">
-					<!-- 			      	</md-input-container> -->
-								      	{{item.Goods.GoodsSizeUnitDescriptionText}}
-								    </td>
-								    
-					       			<td style="text-align: right;">{{toStringDec(item.col45=item.Goods.GoodsSize*item.GoodsCount)}}</td>
-					       			
-					       			<td>
-					       			
-					<!-- 					<md-input-container md-no-float style="padding:0;width:100px;" > -->
-								        	<input type="number" style="text-align: right;width:90px;padding:3px;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode">
-					<!-- 			      	</md-input-container> -->
-					
-									</td>
-					       			
-					       			<td style="text-align: right;">{{toStringDec(item.Goods.DeclarePrice,2)}}</td>
-					       			<td style="text-align: right;">{{toStringDec(item.col51=calcPriceAmount(item))}}</td>
-					       			<td style="text-align: right;">{{toStringDec(item.col52=calcQuantityAmount(item))}}</td>
-					       			<td style="text-align: right;">{{toStringDec(item.col53=calcDegreeOver(item))}}</td>
-					       			<td style="text-align: right;">{{toStringDec(item.col54=item.PriceAmountTax+item.QuantityAmountTax)}}</td>
-					       			<td style="text-align: right;">{{toStringDec(item.PriceAmountTax,2)}}</td>
-					       			<td style="text-align: right;">{{toStringDec(item.QuantityAmountTax,2)}}</td>
-					       			<td>
-										<md-checkbox ng-model="item.checkbox" aria-label="item.checkbox" ng-blur="onBlurCheckDelete()" >
-										</md-checkbox>
-									</td>
-					
-					       		</tr>
-					       		<tr>
-					       			<td colspan="13" style="text-align: right;font-size:14px;"> รวม </td>
-					       			<td style="text-align: right;">{{toStringDec(sumCalcPriceAmount(),2)}}</td>
-					       			<td style="text-align: right;">{{toStringDec(sumCalcQuantityAmount(),2)}}</td>
-					       			<td></td>
-					       			
-					       		</tr>
-					       	
-					       	
-					      </table>
+						<table >
+							<tr>
+								<td>
+
+								</td>
+								<td >
+									ชนิดสุรา
+								</td>
+								<td >
+									ชื่อสุรา
+								</td>
+								<td>
+									เครืองหมายการค้าหลัก
+								</td>
+								<td>
+									ดีกรี
+								</td>
+								<td>
+									ขนาดบรรจุ(ลิตร)
+								</td>
+								<td>
+									หน่วยนับ
+								</td>
+								<td>
+									ราคาตามประกาศ
+								</td>
+							</tr>
+
+							<tr ng-repeat="product in searchProduct | filter:userSearch">
+								<td style="text-align: center;width: 1%"> 
+									<md-checkbox aria-label="product.checkbox" style="width:20px"
+											ng-checked="getProductChecked(product.GoodId)" ng-click="productCheckedClick(product.GoodId,product)" />
+								</td>
+								<td>{{product.ProductTypeDescriptionText}}</td>
+								<td>{{product.GoodsDescriptionText}}</td>
+								<td>{{product.BrandName}}</td>
+								<td style="text-align: right;">{{toStringDec(product.Degree,2)}}</td>
+								<td style="text-align: right;">{{toStringDec(product.GoodsSize)}}</td>
+								<td>{{product.GoodsSizeUnitDescriptionText}}</td>
+								<td style="text-align: right;">{{toStringDec(product.DeclarePrice)}}</td>
+
+							</tr>
+
+						</table>
 					</div>
-</md-content>
-</md-tab>
-</md-tabs>		
-		<div layout="row">
-<!-- 			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(2)">ต่อไป</md-button>    -->
-<!-- 			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>    -->
+
+
+
+
+				</md-content>
+			</md-tab>
+		</md-tabs>
+
+		<div layout="row"  layout-align="center center" >
+
+			<md-button class="md-raised md-primary" ng-show="showDataSearch" ng-click="onAdd()">เพิ่ม</md-button>
+			<md-button class="md-raised" ng-click="navigaTor(1)">ย้อนกลับ</md-button>
+
 		</div>
-		                
-</div>		                
-		                
-</div>	                
-<!-- end Grid		                 -->
 
 
-<!-- tax calc -->
-<div layout="column" style="width: 100%;" ng-show="step[1]">
-  <md-tabs md-dynamic-height md-border-bottom>
-		      <md-tab label="รวมภาษีสุรา">
-			  <md-content layout-padding>
-			    <div class="datagrid"  ng-show="showDataSearch" style="color: black;">
-					                <table >
-										
-			<!-- 						List	 -->
-					                    <tr>
-					                        <td>
-					                            (๖.๑) รวมภาษีสุราตามมูลค่า (เศษของบาทให้ปัดทิ้ง)
-					                        </td>
-					                        <td style="text-align: right;" >
-					                            {{toStringDec(sumCalcPriceAmountValue,2)}}	
-					                        </td>
-					                    </tr>
-					               
-					                    <tr>
-					                        <td>
-					                            (๖.๒) รวมภาษีสุราตามปริมาณ
-					                        </td>
-					                        <td style="text-align: right;" >
-					                             {{toStringDec(sumCalcQuantityAmountValue,2)}}	
-					                        </td>
-					                    </tr>
-			
-					                    <tr>
-					                        <td>
-					                            (๗) รวมภาษีสุรา (๖.๑) + (๖.๒)
-					                        </td>
-					                        <td style="text-align: right;" >
-					                            {{toStringDec(sumNetTax(),2)}}	
-					                        </td>
-					                    </tr>
-			
-					                    <tr>
-					                        <td>
-						                           (๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
-													<input type="text" ng-model="inputSum8" style="padding:3px;" ng-disabled="historyMode">
-					                        	
-										        
-					                        </td>
-					                        <td style="text-align: right;" >
-			<!-- 		                            {{toStringDec(sumTax8,2)}} -->
-					                            <input type="text" ng-model="sumTax8" style="text-align: right;padding:3px;" ng-disabled="historyMode">	
-					                        </td>
-					                    </tr>
-			
-					                    <tr>
-					                        <td>
-					                            (๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่ 	
-										         <input type="text" ng-model="inputSum9"  style="padding:3px;" ng-disabled="historyMode" >
-					                        </td>
-					                        <td style="text-align: right;" >
-			<!-- 		                            {{toStringDec(sumTax9,2)}} -->
-					                            <input type="text" ng-model="sumTax9" style="text-align: right;padding:3px;" ng-disabled="historyMode">	
-					                        </td>
-					                    </tr>
-					                    
-					                    <tr>
-					                        <td>
-					                            (๑๐) คงเหลือภาษีสุรา	
-					                        </td>
-					                        <td style="text-align: right;" >
-					                            {{toStringDec(col10,2)}}		
-					                        </td>
-					                    </tr>
-					                    
-					                    
-					                    <tr>
-					                        <td>
-					                            
-												(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทย ร้อยละ {{MunicipalRateAmountRate}} 
-					                        </td>
-					                        <td style="text-align: right;" >
-					                            {{toStringDec(royalTotal,2)}}		
-					                        </td>
-					                    </tr>
-					                    
-					                    <tr>
-					                        <td>
-					                            
-												(๑๒) รวมภาษีที่ต้องชำระทั้งสิ้น (๑๐) + (๑๑)
-					                        </td>
-					                        <td style="text-align: right;" >
-					                            {{toStringDec(col12,2)}}	
-					                        </td>
-					                    </tr>
-					                    
-					                    <tr>
-					                        <td>
-					                            
-												(๑๓) อื่นๆ
-					                        </td>
-					                        <td style="text-align: right;" >
-					                             {{toStringDec(col13,2)}}			
-					                        </td>
-					                    </tr>
-					                    
-					                    <tr>
-					                        <td>
-					                            
-												(๑๔) รวม (๑๒) + (๑๓)
-					                        </td>
-					                        <td style="text-align: right;" >
-					                             {{toStringDec(col14,2,2)}}	
-					                        </td>
-					                    </tr>
-<!-- 					                    <tr> -->
-<!-- 					                        <td> -->
-<!-- 												ภาษีเก็บเพิ่ม อื่นๆ -->
-<!-- 					                        </td> -->
-<!-- 					                        <td style="text-align: right;" > -->
-					                             
-<!-- 					                        </td> -->
-<!-- 					                    </tr> -->
-<!-- 					                    <tr> -->
-<!-- 					                        <td> -->
-<!-- 												ภาษีเก็บเพิ่ม สสส ร้อยละ {{FundSSSRateAmountRate}} -->
-<!-- 					                        </td> -->
-<!-- 					                        <td style="text-align: right;" > -->
-<!-- 					                             {{toStringDec(sss=totalTax*FundSSSRateAmountRate*0.01,2)}}		 -->
-<!-- 					                        </td> -->
-<!-- 					                    </tr> -->
-<!-- 					                    <tr> -->
-<!-- 					                        <td> -->
-<!-- 												ภาษีเก็บเพิ่ม สสท ร้อยละ {{FundSSTRateAmountRate}} -->
-<!-- 					                        </td> -->
-<!-- 					                        <td style="text-align: right;" > -->
-<!-- 					                             {{toStringDec(sst=totalTax*FundSSTRateAmountRate*0.01,2)}}		 -->
-<!-- 					                        </td> -->
-<!-- 					                    </tr> -->
-<!-- 					                    <tr> -->
-<!-- 					                        <td> -->
-<!-- 												ภาษีเก็บเพิ่ม กกท ร้อยละ {{FundKKTRateAmountRate}} -->
-<!-- 					                        </td> -->
-<!-- 					                        <td style="text-align: right;" > -->
-<!-- 					                             {{toStringDec(kkt=totalTax*FundKKTRateAmountRate*0.01,2)}}		 -->
-<!-- 					                        </td> -->
-<!-- 					                    </tr> -->
-					                    
-					                </table>
-			           		 </div>
-			
-			  </md-content>
-</md-tab>
-</md-tabs>
-
-<!-- kang toon -->
-  <md-tabs md-dynamic-height md-border-bottom>
-		      <md-tab label="เงินบำรุงกองทุน">
-			  <md-content layout-padding>
-			    <div class="datagrid"  ng-show="showDataSearch" style="color: black;">
-					                <table >
-					                   <tr>
-					                        <td>
-												ภาษีเก็บเพิ่ม สสส ร้อยละ {{FundSSSRateAmountRate}}
-					                        </td>
-					                        <td style="text-align: right;" >
-					                             {{toStringDec(sss,2)}}		
-					                        </td>
-					                    </tr>
-					                    <tr>
-					                        <td>
-												ภาษีเก็บเพิ่ม สสท ร้อยละ {{FundSSTRateAmountRate}}
-					                        </td>
-					                        <td style="text-align: right;" >
-					                             {{toStringDec(sst,2)}}		
-					                        </td>
-					                    </tr>
-					                    <tr>
-					                        <td>
-												ภาษีเก็บเพิ่ม กกท ร้อยละ {{FundKKTRateAmountRate}}
-					                        </td>
-					                        <td style="text-align: right;" >
-					                             {{toStringDec(kkt,2)}}		
-					                        </td>
-					                    </tr>
-									</table>
-			  </div>
-			  </md-content>
-			  </md-tab>
-  </md-tabs>
+		<!-- 		  </md-content> -->
 
 
+		<!--   </md-content> -->
+	</div>
 
-	  	<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
-	  		<h3>loading...</h3>
-	  		<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"></md-progress-linear>
-	  	</div>
-  
-  		<div layout="row"  layout-align="center center" >
-<!-- 	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>              -->
+	<!-- add item -->
+
+	<!-- Grid -->
+	<div layout="column">
+
+		<div ng-show="step[1]">
+			<div layout="column">
+
+				<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab label="โรงงาน">
+						<md-content class="md-padding">
+							<div  layout="row" layout-align="center center" style="width: 100%">
+								<md-input-container class="md-icon-float" style="width:450px;">
+									<label class="input-has-value-label">ชื่อโรงงานสุรา</label>
+									<md-icon class="material-icons">account_balance</md-icon>
+									<input type="text"  ng-model="profile.TaxpayerNameDes" readonly/>
+								</md-input-container>
+
+								<md-input-container class="md-icon-float" flax="50">
+									<label class="input-has-value-label">ใบอนุญาตทำสุราเลขที่</label>
+									<md-icon class="material-icons">assignment_turned_in</md-icon>
+									<input type="text"   ng-model="profile.LicenseNo" readonly />
+								</md-input-container>
+
+								<md-input-container class="md-icon-float" flax="50">
+									<label class="input-has-value-label">ชำระรอบภาษีวันที</label>
+									<md-icon class="material-icons">access_time</md-icon>
+									<input type="text"   ng-model="roundTaxDate" readonly />
+								</md-input-container>
+
+							</div>
+						</md-content>
+					</md-tab>
+				</md-tabs>
+
+				<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab label="รายการสินค้า">
+						<md-content class="md-padding">
+
+							<div layout="row">
+
+								<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(0)"  ng-hide="historyMode" >เพิ่มรายการสุรา</md-button>
+								<md-button class="md-raised" style="width:150px;"
+										ng-click="onDelete()"  ng-hide="historyMode"  ng-disabled="!canDelete"> ลบรายการที่เลือก </md-button>
+								<!-- 	 <md-button class="md-raised " style="width:200px;"  -->
+								<!-- 	 		ng-click="clickLoadDraff()" ng-show="haveSaveDraff&&!historyMode"> โหลดรายการทำค้างใว้ล่าสุด </md-button> -->
+
+								<md-button class="md-raised " style="width:200px;" 
+										ng-click="clickSaveDraft($event)" ng-show="haveSaveDraff&&!historyMode"  ng-disabled="gridList.length==0"> บันทึกฉบับร่าง </md-button>
+
+							</div>
+
+							<div class="CSSTableGenerator"  ng-show="showDataSearch">
+								<table >
+									<tr >
+										<td rowspan="3" style="vertical-align: top;">ที่</td>
+										<td rowspan="3" style="vertical-align: top;">
+											<strong>(๓)</strong>
+											<br/>ชนิดสุรา</td>
+										<td colspan="7">
+											<strong>(๔)</strong>
+											<br/> รายการสุรา</td>
+										<td colspan="3">
+											<strong>(๕)</strong>
+											<br/>ภาษีสุราต่อภาชนะ</td>
+										<td colspan="3">
+											<strong>(๖)</strong>
+											<br/>รวมภาษีสุรา</td>
+										<td rowspan="3"  style="vertical-align: top;">ลบ</td>
+									</tr>
+
+									<tr class="header-td">
+										<td rowspan="2"  style="vertical-align: top;min-width:100px;">(๔.๑)<br/>ชื่อสุรา</td>
+										<td rowspan="2"  style="vertical-align: top;">(๔.๒)<br/>ดีกรี</td>
+										<td rowspan="2"  style="vertical-align: top;">(๔.๓)<br/>ขนาดบรรจุ (ลิตร)</td>
+										<td rowspan="2"  style="vertical-align: top;">(๔.๔)<br/>จำนวนภาชนะ</td>
+										<td rowspan="2"  style="vertical-align: top;">(๔.๕)<br/>ปริมาณสุราที่เสียภาษี (ลิตร)</td>
+										<td colspan="2"  style="vertical-align: top;min-width:120px;">(๔.๖)<br/>ราคาขายส่งช่วง<br/>สุดท้ายของสุรา<br/>(บาท/ภาชนะ)<br/>ไม่รวมภาษีมูลค่าเพิ่ม</td>
+										<td rowspan="2"  style="vertical-align: top;">(๕.๑)<br/>ภาษีตามมูลค่า (บาท/ภาชนะ)</td>
+										<td rowspan="2"  style="vertical-align: top;">(๕.๒)<br/>ภาษีตามปริมาณ (บาท/ภาชนะ)</td>
+										<td rowspan="2"  style="vertical-align: top;min-width:80px;">(๕.๓)<br/>ภาษีตามปริมาณ<br/>กรณีภาษี<br/>ดีกรีเกิน<br/>(บาท/ภาชนะ)</td>
+										<td rowspan="2"  style="vertical-align: top;">(๕.๔)<br/> รวมภาษีสุรา<br/>ตามปริมาณ (บาท/ภาชนะ) (๕.๒+๕.๓)	</td>
+										<td rowspan="2"  style="vertical-align: top;">(๖.๑)<br/> ตามมูลค่า (๔.๔ * ๕.๑)</td>
+										<td rowspan="2"  style="vertical-align: top;">(๖.๒)<br/> ตามปริมาณ (๔.๔ * ๕.๔)</td>
+									</tr>
+									<tr  class="header-td">
+										<td style="vertical-align: top;">ตามแจ้ง</td>
+										<td style="vertical-align: top;">ตามประกาศ</td>
+									</tr>
+
+									<tr ng-repeat="item in gridList track by $index">
+										<td>{{$index+1}}</td>
+										<td>{{item.Goods.ProductTypeDescriptionText}}</td>
+										<td>{{item.Goods.GoodsDescriptionText}}</td>
+										<td style="text-align: right;">{{toStringDec(item.Goods.Degree,2)}}</td>
+										<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize)}}</td>
+										<td style="text-align: center;"> 
+											<!--        				<md-input-container md-no-float style="padding:0;width:90px;"> -->
+											<input type="number" style="text-align: right;padding:3px; width:90px;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode" />
+											<!-- 			      	</md-input-container> -->
+																																		{{item.Goods.GoodsSizeUnitDescriptionText}}
+										</td>
+
+										<td style="text-align: right;">{{toStringDec(item.col45=item.Goods.GoodsSize*item.GoodsCount)}}</td>
+
+										<td>
+
+											<!-- 					<md-input-container md-no-float style="padding:0;width:100px;" > -->
+											<input type="number" style="text-align: right;width:90px;padding:3px;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode" />
+											<!-- 			      	</md-input-container> -->
+
+										</td>
+
+										<td style="text-align: right;">{{toStringDec(item.Goods.DeclarePrice,2)}}</td>
+										<td style="text-align: right;">{{toStringDec(item.col51=calcPriceAmount(item))}}</td>
+										<td style="text-align: right;">{{toStringDec(item.col52=calcQuantityAmount(item))}}</td>
+										<td style="text-align: right;">{{toStringDec(item.col53=calcDegreeOver(item))}}</td>
+										<td style="text-align: right;">{{toStringDec(item.col54=item.PriceAmountTax+item.QuantityAmountTax)}}</td>
+										<td style="text-align: right;">{{toStringDec(item.PriceAmountTax,2)}}</td>
+										<td style="text-align: right;">{{toStringDec(item.QuantityAmountTax,2)}}</td>
+										<td>
+											<md-checkbox ng-model="item.checkbox" aria-label="item.checkbox" ng-blur="onBlurCheckDelete()" >
+											</md-checkbox>
+										</td>
+
+									</tr>
+
+									<tr>
+										<td colspan="13" style="text-align: right;font-size:14px;"> รวม </td>
+										<td style="text-align: right;">{{toStringDec(sumCalcPriceAmount(),2)}}</td>
+										<td style="text-align: right;">{{toStringDec(sumCalcQuantityAmount(),2)}}</td>
+									</tr>
+
+
+								</table>
+							</div>
+						</md-content>
+					</md-tab>
+				</md-tabs>		
+				<!--			<div layout="row"> -->
+				<!-- 			<md-button class="md-raised md-primary" style="width:150px;" ng-click="navigaTor(2)">ต่อไป</md-button>    -->
+				<!-- 			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>    -->
+				<!--			</div>-->
+
+			</div>		                
+		</div>
+	</div>	                
+	<!-- end Grid		                 -->
+
+
+	<!-- tax calc -->
+	<div layout="column" style="width: 100%;" ng-show="step[1]">
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="รวมภาษีสุรา">
+				<md-content layout-padding>
+					<div class="datagrid"  ng-show="showDataSearch" style="color: black;">
+						<table>
+
+							<!-- 						List	 -->
+							<tr>
+								<td>
+																																(๖.๑) รวมภาษีสุราตามมูลค่า (เศษของบาทให้ปัดทิ้ง)
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(sumCalcPriceAmountValue,2)}}	
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+																																(๖.๒) รวมภาษีสุราตามปริมาณ
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(sumCalcQuantityAmountValue,2)}}	
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+																																(๗) รวมภาษีสุรา (๖.๑) + (๖.๒)
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(sumNetTax(),2)}}	
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+																																(๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
+									<input type="text" ng-model="inputSum8" style="padding:3px;" ng-disabled="historyMode" />
+								</td>
+								<td style="text-align: right;" >
+									<!-- 		                            {{toStringDec(sumTax8,2)}} -->
+									<input type="text" ng-model="sumTax8" style="text-align: right;padding:3px;" ng-disabled="historyMode" />	
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+																																(๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่ 	
+									<input type="text" ng-model="inputSum9"  style="padding:3px;" ng-disabled="historyMode" />
+								</td>
+								<td style="text-align: right;" >
+									<!-- 		                            {{toStringDec(sumTax9,2)}} -->
+									<input type="text" ng-model="sumTax9" style="text-align: right;padding:3px;" ng-disabled="historyMode" />	
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+																																(๑๐) คงเหลือภาษีสุรา	
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(col10,2)}}		
+								</td>
+							</tr>
+							<tr>
+								<td>
+
+																																(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทย ร้อยละ {{MunicipalRateAmountRate}} 
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(royalTotal,2)}}		
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+																																(๑๒) รวมภาษีที่ต้องชำระทั้งสิ้น (๑๐) + (๑๑)
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(col12,2)}}	
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+																																(๑๓) อื่นๆ
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(col13,2)}}			
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+
+																																(๑๔) รวม (๑๒) + (๑๓)
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(col14,2,2)}}	
+								</td>
+							</tr>
+							<!-- 					                    <tr> -->
+							<!-- 					                        <td> -->
+							<!-- 												ภาษีเก็บเพิ่ม อื่นๆ -->
+							<!-- 					                        </td> -->
+							<!-- 					                        <td style="text-align: right;" > -->
+
+							<!-- 					                        </td> -->
+							<!-- 					                    </tr> -->
+							<!-- 					                    <tr> -->
+							<!-- 					                        <td> -->
+							<!-- 												ภาษีเก็บเพิ่ม สสส ร้อยละ {{FundSSSRateAmountRate}} -->
+							<!-- 					                        </td> -->
+							<!-- 					                        <td style="text-align: right;" > -->
+							<!-- 					                             {{toStringDec(sss=totalTax*FundSSSRateAmountRate*0.01,2)}}		 -->
+							<!-- 					                        </td> -->
+							<!-- 					                    </tr> -->
+							<!-- 					                    <tr> -->
+							<!-- 					                        <td> -->
+							<!-- 												ภาษีเก็บเพิ่ม สสท ร้อยละ {{FundSSTRateAmountRate}} -->
+							<!-- 					                        </td> -->
+							<!-- 					                        <td style="text-align: right;" > -->
+							<!-- 					                             {{toStringDec(sst=totalTax*FundSSTRateAmountRate*0.01,2)}}		 -->
+							<!-- 					                        </td> -->
+							<!-- 					                    </tr> -->
+							<!-- 					                    <tr> -->
+							<!-- 					                        <td> -->
+							<!-- 												ภาษีเก็บเพิ่ม กกท ร้อยละ {{FundKKTRateAmountRate}} -->
+							<!-- 					                        </td> -->
+							<!-- 					                        <td style="text-align: right;" > -->
+							<!-- 					                             {{toStringDec(kkt=totalTax*FundKKTRateAmountRate*0.01,2)}}		 -->
+							<!-- 					                        </td> -->
+							<!-- 					                    </tr> -->
+
+						</table>
+					</div>
+
+				</md-content>
+			</md-tab>
+		</md-tabs>
+
+		<!-- kong toon -->
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="เงินบำรุงกองทุน">
+				<md-content layout-padding>
+					<div class="datagrid"  ng-show="showDataSearch" style="color: black;">
+						<table >
+							<tr>
+								<td>
+																																ภาษีเก็บเพิ่ม สสส ร้อยละ {{FundSSSRateAmountRate}}
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(sss,2)}}		
+								</td>
+							</tr>
+							<tr>
+								<td>
+																																ภาษีเก็บเพิ่ม สสท ร้อยละ {{FundSSTRateAmountRate}}
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(sst,2)}}		
+								</td>
+							</tr>
+							<tr>
+								<td>
+																																ภาษีเก็บเพิ่ม กกท ร้อยละ {{FundKKTRateAmountRate}}
+								</td>
+								<td style="text-align: right;" >
+																																{{toStringDec(kkt,2)}}		
+								</td>
+							</tr>
+						</table>
+					</div>
+				</md-content>
+			</md-tab>
+		</md-tabs>
+
+		<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
+			<h3>loading...</h3>
+			<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"/>
+		</div>
+
+		<div layout="row"  layout-align="center center" >
+			<!-- 	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>              -->
 			<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()"
-				  ng-hide="historyMode" ng-disabled="gridList.length==0||showReportProgess" >แสดงตัวอย่างเอกสาร</md-button>
+																												ng-hide="historyMode" ng-disabled="gridList.length==0||showReportProgess" >แสดงตัวอย่างเอกสาร</md-button>
 			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>   
-			   
 		</div>
-  
-  </div>
 
-<!-- end tax calc -->
-</div>
-
-<!-- summit type -->
-<div layout="column" style="width: 100%" ng-show="step[3]">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2 class="md-flex">เลือกช่องทางชำระ</h2>
-    </div>
-  </md-toolbar>
-  <md-content layout-padding>
-    
-       <md-radio-group ng-model="submitType">
-		      <md-radio-button value="offline"> แบบออฟไลน์ ไม่ใช้ อินเตอร์เน็ต </md-radio-button>
-		      <md-radio-button value="online">  แบบออนไลน์ (ฝากข้อมูล) </md-radio-button>
-   	  </md-radio-group>
-
-
-  </md-content>
-  
-  	<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
-  		<h3>loading...</h3>
-  		<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"></md-progress-linear>
-  	</div>
-  
-	<div layout="row"  layout-align="center center" >
-     	<md-button class="md-raised" style="width:150px;" ng-click="navigaTor(stepCount-2)" ng-disabled="showReportProgess">ย้อนกลับ</md-button>             
-		<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()" ng-disabled="showReportProgess">ต่อไป</md-button>   
-	</div>  
-  
-  </div>
-
-
-<!-- summit type -->
-<div layout="column" style="width: 100%" ng-show="step[4]">
-
-<md-tabs md-dynamic-height md-border-bottom>
-  <md-tab label="ตัวอย่างเอกสาร">
-  <md-content layout-padding>
-
-    <div layout="row"  layout-align="center center" style="width: 100%;">
-	    <h2 class="md-subhead" style="font-weight: bold;">กดปุ่มเพื่อแสดงตัวอย่างเอกสาร</h2>
 	</div>
-	<div layout="row"  layout-align="center center" style="width: 100%;">
-	
-		<md-button class="md-raised quickMenuPDF" ng-click="open(0)">
-		  	<div layout="column"  layout-align="center center">
-			   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
-				<span>แบบ สร.๑๒๐-๑๑</span>
+	<!-- end tax calc -->
+
+
+	<!-- summit type -->
+	<div layout="column" style="width: 100%" ng-show="step[3]">
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 class="md-flex">เลือกช่องทางชำระ</h2>
 			</div>
-		 </md-button>
-	
-		<md-button class="md-raised quickMenuPDF" ng-click="open(1)">
-		  	<div layout="column"  layout-align="center center">
-			   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
-				<span>แบบ สสส.๑/๐๑</span>
-			</div>
-		 </md-button>
-	
-		<md-button class="md-raised quickMenuPDF" ng-click="open(2)">
-		  	<div layout="column"  layout-align="center center">
-			   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
-				<span>แบบ สสท.๑/๐๑</span>
-			</div>
-		 </md-button>
-	
-		<md-button class="md-raised quickMenuPDF" ng-click="open(3)">
-		  	<div layout="column"  layout-align="center center">
-			   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
-				<span>แบบ กกท.๑/๐๑</span>
-			</div>
-		 </md-button>
-		 
+		</md-toolbar>
+		<md-content layout-padding>
+
+			<md-radio-group ng-model="submitType">
+				<md-radio-button value="offline"> แบบออฟไลน์ ไม่ใช้ อินเตอร์เน็ต </md-radio-button>
+				<md-radio-button value="online">  แบบออนไลน์ (ฝากข้อมูล) </md-radio-button>
+			</md-radio-group>
+
+
+		</md-content>
+
+		<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
+			<h3>loading...</h3>
+			<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"/>
+		</div>
+
+		<div layout="row"  layout-align="center center" >
+			<md-button class="md-raised" style="width:150px;" ng-click="navigaTor(stepCount-2)" ng-disabled="showReportProgess">ย้อนกลับ</md-button>             
+			<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()" ng-disabled="showReportProgess">ต่อไป</md-button>   
+		</div>  
+
 	</div>
-  </md-content>
-</md-tab>
-</md-tabs>	
 
-<md-tabs md-dynamic-height md-border-bottom>
-  <md-tab label="ฝากข้อมูลออนไลน์">
-  <md-content layout-padding>
-  	
-	 <div layout="row"  layout-align="center center" style="width: 100%;" ng-hide="showpanelOnline" >
-	    <md-button class="md-raised md-primary" ng-click="buttononlinesubmit()" >ฝากข้อมูล </md-button>
+
+	<!-- summit type -->
+	<div layout="column" style="width: 100%" ng-show="step[4]">
+
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="ตัวอย่างเอกสาร">
+				<md-content layout-padding>
+
+					<div layout="row"  layout-align="center center" style="width: 100%;">
+						<h2 class="md-subhead" style="font-weight: bold;">กดปุ่มเพื่อแสดงตัวอย่างเอกสาร</h2>
+					</div>
+					<div layout="row"  layout-align="center center" style="width: 100%;">
+
+						<md-button class="md-raised quickMenuPDF" ng-click="open(0)">
+							<div layout="column"  layout-align="center center">
+								<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out" />
+								<span>แบบ สร.๑๒๐-๑๑</span>
+							</div>
+						</md-button>
+
+						<md-button class="md-raised quickMenuPDF" ng-click="open(1)">
+							<div layout="column"  layout-align="center center">
+								<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out"/>
+								<span>แบบ สสส.๑/๐๑</span>
+							</div>
+						</md-button>
+
+						<md-button class="md-raised quickMenuPDF" ng-click="open(2)">
+							<div layout="column"  layout-align="center center">
+								<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out"/>
+								<span>แบบ สสท.๑/๐๑</span>
+							</div>
+						</md-button>
+
+						<md-button class="md-raised quickMenuPDF" ng-click="open(3)">
+							<div layout="column"  layout-align="center center">
+								<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out"/>
+								<span>แบบ กกท.๑/๐๑</span>
+							</div>
+						</md-button>
+
+					</div>
+				</md-content>
+			</md-tab>
+		</md-tabs>	
+
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="ฝากข้อมูลออนไลน์">
+				<md-content layout-padding>
+
+					<div layout="row"  layout-align="center center" style="width: 100%;" ng-hide="showpanelOnline" >
+						<md-button class="md-raised md-primary" ng-click="buttononlinesubmit()" >ฝากข้อมูล </md-button>
+					</div>
+
+					<div layout="column"  layout-align="center center" style="width: 100%;" ng-show="showpanelOnline">
+						<div layout="row"  layout-align="center center">
+							<h2 class="md-subhead">วันที่ยื่นแบบ</h2>
+							<input type="text" ng-model="inputdatavalue" style="margin-left: 5px;" datepicker /> 
+																																		{{inputdatavalue}}
+						</div>
+						<div layout="row"  layout-align="center center">
+							<md-button class="md-raised" ng-click="buttononlinesubmitCancle()"  ng-disabled="showReportProgess" > ยกเลิก </md-button>
+							<md-button class="md-raised md-primary" ng-click="saveHistory()"   ng-disabled="showReportProgess" > ตกลง </md-button>
+						</div>
+					</div>
+
+					<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
+						<h3>loading...</h3>
+						<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"/>
+					</div>
+
+				</md-content>
+			</md-tab>
+		</md-tabs>
+
+		<div  layout="row"  layout-align="center center" ng-hide="showpanelOnline">
+			<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(1)">ย้อนกลับ</md-button>  
+			<md-button class="md-raised md-primary" style="width:150px;"  ng-click="saveHistory()">เสร็จสิ้น</md-button>    
+		</div>
+
+
 	</div>
-	
-	 <div layout="column"  layout-align="center center" style="width: 100%;" ng-show="showpanelOnline">
-		 <div layout="row"  layout-align="center center">
-	   	    <h2 class="md-subhead">วันที่ยื่นแบบ</h2>
-	   	    <input type="text" ng-model="inputdatavalue" style="margin-left: 5px;" datepicker> 
-	   	    {{inputdatavalue}}
-		 </div>
-		  <div layout="row"  layout-align="center center">
-			    <md-button class="md-raised" ng-click="buttononlinesubmitCancle()"  ng-disabled="showReportProgess" > ยกเลิก </md-button>
-			    <md-button class="md-raised md-primary" ng-click="saveHistory()"   ng-disabled="showReportProgess" > ตกลง </md-button>
-		  </div>
+	<!-- summit type -->
+
+	<!-- finish type -->
+	<div layout="column" style="width: 100%" ng-show="step[5]">
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="พิมพ์เอกสาร">
+				<md-content layout-padding>
+
+					<div  layout="row"  layout-align="center center" >
+						<h3 class="md-subhead" style="font-weight: bold;">กดปุ่ม เพื่อพิมพ์เอกสาร</h3>
+					</div>
+
+					<div  layout="row"  layout-align="center center" >
+
+						<md-button class="md-raised quickMenuPDF" ng-click="open(0)">
+							<div layout="column"  layout-align="center center">
+								<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out" />
+								<span>แบบ สร.๑๒๐-๑๑</span>
+							</div>
+						</md-button>
+
+						<md-button class="md-raised quickMenuPDF" ng-click="open(1)">
+							<div layout="column"  layout-align="center center">
+								<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out" />
+								<span>แบบ สสส.๑/๐๑</span>
+							</div>
+						</md-button>
+
+						<md-button class="md-raised quickMenuPDF" ng-click="open(2)">
+							<div layout="column"  layout-align="center center">
+								<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out" />
+								<span>แบบ สสท.๑/๐๑</span>
+							</div>
+						</md-button>
+
+						<md-button class="md-raised quickMenuPDF" ng-click="open(3)">
+							<div layout="column"  layout-align="center center">
+								<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out" />
+								<span>แบบ กกท.๑/๐๑</span>
+							</div>
+						</md-button>
+
+						<md-button class="md-raised quickMenuPDF" ng-click="open(4)">
+							<div layout="column"  layout-align="center center">
+								<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out"/>
+								<span>พิมพ์เอกสารทั้งหมด </span>
+							</div>
+						</md-button>
+
+					</div>
+
+				</md-content>
+			</md-tab>
+		</md-tabs>
+
+
+		<div  layout="row"  layout-align="center center" >
+			<md-button class="md-raised md-primary" style="width:150px;"  ng-click="doAgain()"> ทำรายการใหม่ </md-button>    
+		</div>
+
+
 	</div>
-	
-	<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
-  		<h3>loading...</h3>
-  		<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"></md-progress-linear>
-  	</div>
-
-</md-content>
-</md-tab>
-</md-tabs>
-  
-  <div  layout="row"  layout-align="center center" ng-hide="showpanelOnline">
-	  <md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(1)">ย้อนกลับ</md-button>  
-	  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="saveHistory()">เสร็จสิ้น</md-button>    
-  </div>
-
-
-  </div>
-
-<!-- summit type -->
-
-<!-- finish type -->
-<div layout="column" style="width: 100%" ng-show="step[5]">
-<md-tabs md-dynamic-height md-border-bottom>
-  <md-tab label="พิมพ์เอกสาร">
-  <md-content layout-padding>
-    
-       <div  layout="row"  layout-align="center center" >
-	   		<h3 class="md-subhead" style="font-weight: bold;">กดปุ่ม เพื่อพิมพ์เอกสาร</h3>
-	   </div>
-	    
-      <div  layout="row"  layout-align="center center" >
-      
-			<md-button class="md-raised quickMenuPDF" ng-click="open(0)">
-			  	<div layout="column"  layout-align="center center">
-				   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
-					<span>แบบ สร.๑๒๐-๑๑</span>
-				</div>
-			 </md-button>
-		
-			<md-button class="md-raised quickMenuPDF" ng-click="open(1)">
-			  	<div layout="column"  layout-align="center center">
-				   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
-					<span>แบบ สสส.๑/๐๑</span>
-				</div>
-			 </md-button>
-		
-			<md-button class="md-raised quickMenuPDF" ng-click="open(2)">
-			  	<div layout="column"  layout-align="center center">
-				   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
-					<span>แบบ สสท.๑/๐๑</span>
-				</div>
-			 </md-button>
-		
-			<md-button class="md-raised quickMenuPDF" ng-click="open(3)">
-			  	<div layout="column"  layout-align="center center">
-				   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
-					<span>แบบ กกท.๑/๐๑</span>
-				</div>
-			 </md-button>
-			 
-			<md-button class="md-raised quickMenuPDF" ng-click="open(4)">
-			  	<div layout="column"  layout-align="center center">
-				   	<img src="img/icons/filetype_pdf.png" class="md-card-image" alt="Washed Out">
-					<span>พิมพ์เอกสารทั้งหมด </span>
-				</div>
-			 </md-button>
-		 
-		 
-	 </div>
-
-  </md-content>
-</md-tab>
-</md-tabs>
-
-  
-  <div  layout="row"  layout-align="center center" >
-	  <md-button class="md-raised md-primary" style="width:150px;"  ng-click="doAgain()"> ทำรายการใหม่ </md-button>    
-  </div>
-
-
-  </div>
-
-		                
-
-
 
 </md-whiteframe>

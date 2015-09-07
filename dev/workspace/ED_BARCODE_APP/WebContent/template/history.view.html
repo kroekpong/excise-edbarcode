@@ -1,14 +1,22 @@
-<md-whiteframe class="md-whiteframe-z0" layout layout-align="top center" style="min-height:568px;">
+<md-whiteframe class="md-whiteframe-z0" layout layout-align="center start" style="min-height:568px;">
 
-			<div class="CSSTableGenerator" style="height: 100%;">
-		                <table >
+<div  layout="column" layout-align="center center" style="width: 100%;">
+
+		    <md-input-container class="md-icon-float" style="width:450px;">
+		        <label class="input-has-value-label">ชื่อโรงงานสุรา</label>
+		        <md-icon class="material-icons">account_balance</md-icon>
+		    <input type="text"  ng-model="TaxpayerNameDes" readonly> </md-input-container>
+	    
+			<div class="CSSTableGenerator" style="width: 100%">
+		              
+		                <table style="width: 100%">
 		                    <tr>
 		                        <td>
 		                            	ที่
 		                        </td>
-		                        <td>
-		                            	ชื่อโรงงานสุรา
-		                        </td>
+<!-- 		                        <td> -->
+<!-- 		                            	ชื่อโรงงานสุรา -->
+<!-- 		                        </td> -->
 		                        <td >
 		                            	ใบอนุญาตเลขที่
 		                        </td>
@@ -18,10 +26,10 @@
 		                        <td>
 		                            	ประเภท
 		                        </td>
-		                        <td>
+		                        <td width="15%">
 		                            	ดูรายละเอียด
 		                        </td>
-		                        <td>
+		                        <td width="15%">
 		                            	พิมพ์ (PDF)
 		                        </td>
 		                    </tr>
@@ -29,9 +37,9 @@
 		                        <td>
 		                            	{{$index+1}}
 		                        </td>
-		                        <td>
-		                            	{{item.taxpayerName}}
-		                        </td>
+<!-- 		                        <td> -->
+<!-- 		                            	{{item.taxpayerName}} -->
+<!-- 		                        </td> -->
 		                        <td >
 		                            	{{item.licenseNo}}
 		                        </td>
@@ -47,10 +55,7 @@
 									      </md-button>
 		                        </td>
 		                        <td style="text-align: center;">
-<!-- 		                            	  <md-button class="md-raised" aria-label="More" ng-click="openPdf(item.pdfName)"> -->
-<!-- 									         	<img src="img/icons/filetype_pdf.png" width="24"> -->
-<!-- 									      </md-button> -->
-									      <md-button class="md-raised quickMenu" ng-click="openPdf(item.pdfName)"  aria-label="More">
+									      <md-button class="md-raised quickMenu" style="margin-right:0" ng-click="openPdf(item.pdfName)"  aria-label="More">
 										  	<div layout="column"  layout-align="center center">
 											   	<img src="img/icons/filetype_pdf.png" style="width: 24px;" class="md-card-image" alt="Washed Out">
 											</div>
@@ -61,6 +66,6 @@
 		                    
 		                </table>
            		 </div>
-            
+    </div>        
 
 </md-whiteframe>

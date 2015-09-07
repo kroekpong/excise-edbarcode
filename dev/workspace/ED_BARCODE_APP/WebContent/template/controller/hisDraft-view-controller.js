@@ -9,6 +9,8 @@ module.controller('hisDraft.view.controller', function($scope, $rootScope, $soap
 	$scope.hisList = $historyService.loadDraftByCurrentUser(profile).slice(0).reverse();
 	$scope.profile = {};
 	$scope.profile.licenseNo = profile.LicenseNo;
+	$scope.TaxpayerNameDes = profile.TaxpayerNameDes;
+
 	console.log("profile.licenseNo",$scope.profile.licenseNo);
 	$scope.toastPosition = {
 			bottom : true,

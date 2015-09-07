@@ -1,6 +1,13 @@
 <md-whiteframe class="md-whiteframe-z0" layout layout-align="start start" style="min-height:568px;">
 
 
+<div  layout="column" layout-align="center center" style="width: 100%;">
+
+		    <md-input-container class="md-icon-float" style="width:450px;">
+		        <label class="input-has-value-label">ชื่อโรงงานสุรา</label>
+		        <md-icon class="material-icons">account_balance</md-icon>
+		    <input type="text"  ng-model="TaxpayerNameDes" readonly> </md-input-container>
+		    
 	<div layout="column" layout-align="start start" style="width: 100%;">
 	
 			<div layout="row" layout-align="start start" style="width: 100%;">
@@ -16,9 +23,9 @@
 		                        <td>
 		                            	ที่
 		                        </td>
-		                        <td>
-		                            	ชื่อโรงงานสุรา
-		                        </td>
+<!-- 		                        <td> -->
+<!-- 		                            	ชื่อโรงงานสุรา -->
+<!-- 		                        </td> -->
 		                        <td >
 		                            	ใบอนุญาตเลขที่
 		                        </td>
@@ -37,9 +44,9 @@
 		                        <td>
 		                            	{{$index+1}}
 		                        </td>
-		                        <td>
-		                            	{{item.taxpayerName}}
-		                        </td>
+<!-- 		                        <td> -->
+<!-- 		                            	{{item.taxpayerName}} -->
+<!-- 		                        </td> -->
 		                        <td >
 		                            	{{item.licenseNo}}
 		                        </td>
@@ -57,5 +64,7 @@
 		                </table>
            		 </div>
       </div>  
+      
+</div>
 
 </md-whiteframe>

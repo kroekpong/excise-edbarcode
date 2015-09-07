@@ -1,8 +1,8 @@
 <md-dialog aria-label="Mango (Fruit)">
 <form>
-	<md-toolbar>
+	<md-toolbar class="dialogtitleBar">
 	<div class="md-toolbar-tools">
-		<h2>โรงงานสุรา</h2>
+		<span class="dialogheader">โรงงานสุรา</span>
 		<span flex></span>
 		<md-button
 			class="md-icon-button"
@@ -51,18 +51,23 @@
 		                </table>
            		 </div>
 	
+				<div
+					 layout="row"  layout-align="center center" >
+			
+					<md-button
+						class="md-raised md-primary"
+						ng-click="answer('OK')"> ตกลง </md-button>
+				</div>
 	
 	
 	
 	</div>
 	</md-dialog-content>
-	<div
-		class="md-actions"
-		layout="row">
-		<span flex></span>
-		<md-button
-			class="md-raised md-primary"
-			ng-click="answer('OK')"> ตกลง </md-button>
-	</div>
+<!-- 	<div class="md-actions"		 layout="row"  layout-align="center center" > -->
+
+<!-- 		<md-button -->
+<!-- 			class="md-raised md-primary" -->
+<!-- 			ng-click="answer('OK')"> ตกลง </md-button> -->
+<!-- 	</div> -->
 </form>
 </md-dialog>

@@ -9,6 +9,7 @@ module.controller('history.view.controller', function($scope, $rootScope, $soapS
 	$scope.hisList = $historyService.loadLocal(profile);
 	$scope.profile = {};
 	$scope.profile.licenseNo = profile.LicenseNo;
+	$scope.TaxpayerNameDes = profile.TaxpayerNameDes;
 	console.log("profile.licenseNo",$scope.profile.licenseNo);
 	
 	$scope.toStringDate = function(_datemillisec) {

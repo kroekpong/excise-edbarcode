@@ -27,6 +27,13 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.userSearch.GoodsDescriptionText = "";
 	$scope.userSearch.Degree = "";
 	$scope.DraftMode = false;
+	$scope.totalTax = 0;
+	$scope.royalTotal = 0;
+	$scope.sss = 0;
+	$scope.sst = 0;
+	$scope.kkt = 0;
+	$scope.col13 = 0;
+	
 	/**
 	 * อัตราภาษี <MunicipalRateAmount>10</MunicipalRateAmount>
 	 * <FundSSSRateAmount>2.0</FundSSSRateAmount> <FundSSTRateAmount>1.5</FundSSTRateAmount>
@@ -320,8 +327,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			var item = $scope.gridList[_i];
 			sum += item.PriceAmountTax;
 		}
-		$scope.sumCalcPriceAmountValue = sum;
-		return sum;
+		$scope.sumCalcPriceAmountValue = Math.floor(sum);
+//		console.log("sumCalcPriceAmountValue", $scope.sumCalcPriceAmountValue);
+		return Math.floor(sum);
 	};
 
 	$scope.sumCalcQuantityAmount = function() {
@@ -333,6 +341,19 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 		$scope.sumCalcQuantityAmountValue = sum;
 		return sum;
+	};
+
+	$scope.sumNetTax = function() {
+		$scope.totalTax = $scope.sumCalcPriceAmountValue + $scope.sumCalcQuantityAmountValue;
+		$scope.royalTotal = $scope.totalTax * $scope.MunicipalRateAmountRate * 0.01;
+		$scope.sss = $scope.totalTax * $scope.FundSSSRateAmountRate * 0.01;
+		$scope.sst = $scope.totalTax * $scope.FundSSTRateAmountRate * 0.01;
+		$scope.kkt = $scope.totalTax * $scope.FundKKTRateAmountRate * 0.01;
+		$scope.col10 = $scope.totalTax - $scope.toNumber($scope.sumTax8) - $scope.toNumber($scope.sumTax9);
+		$scope.col12 = $scope.col10 + $scope.royalTotal;
+		$scope.col14 = $scope.col12 + $scope.col13;
+
+		return $scope.totalTax;
 	};
 
 	// last step
@@ -348,13 +369,14 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		if ($scope.submitType === "online") {
 			// online
 			console.info("submitOnlinefn");
+			console.info("inputdatavalue",$scope.inputdatavalue);
 			if ($scope.datepickerValue == "") {
 				console.info("datepickerValue not have value");
 				return;
 			}
 
 			$scope.submitOnlinefn();
-			
+
 		} else {
 			// OFF line
 			$historyService.save($scope.profile, $scope.gridList, $scope.submitType, $scope);
@@ -369,14 +391,16 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	/**
 	 * submitOnline * gen report online button
 	 */
+	
 	$scope.buttononlinesubmit = function() {
+		console.log("buttononlinesubmit");
 		$scope.showpanelOnline = true;
 		$scope.datepickerValue = "";
 		$scope.submitType = "online"
 	};
 
-	$scope.$watch("datepicker", function(old, newv) {
-		console.log("datepicker", old, newv);
+	$scope.$watch("inputdatavalue", function(old, newv) {
+		console.log("inputdatavalue", old, newv);
 	});
 
 	$scope.buttononlinesubmitCancle = function() {
@@ -393,27 +417,34 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 		console.log(xmlRequest.getSOAP());
 		$soapService.post(xmlRequest, _endpoint, function(status, xmlDoc, data) {
-			var resStatus = xmlDoc.getVal("SubmitOnlineStatus");
-			console.log(status, resStatus);
-			if (status == 200 && resStatus == "OK") {
-				var referenceNumber = xmlDoc.getVal("ReferenceNumber");
-				console.log("referenceNumber", referenceNumber);
-				// $scope.navigaTor(5);
-				$fileUtils.runGenReportOnline(function(error) {
-					if (error == null) {
-						$historyService.save($scope.profile, $scope.gridList, $scope.submitType, $scope);
-						$scope.showSimpleToast("ทำรายการเรียบร้อย");
-						$rootScope.$broadcast("gotoStep", 5);
-						$scope.showpanelOnline = false;
-					} else {
-						console.log(error);
-						$scope.showSimpleToast(error.message);
-					}
-					
+
+			if (status == 200) {
+				console.log(status, resStatus);
+				var resStatus = xmlDoc.getVal("SubmitOnlineStatus");
+				if (resStatus == "OK") {
+					var referenceNumber = xmlDoc.getVal("ReferenceNumber");
+					console.log("referenceNumber", referenceNumber);
+					// $scope.navigaTor(5);
+					$fileUtils.runGenReportOnline(function(error) {
+						if (error == null) {
+							$historyService.save($scope.profile, $scope.gridList, $scope.submitType, $scope);
+							$scope.showSimpleToast("ทำรายการเรียบร้อย");
+							$rootScope.$broadcast("gotoStep", 5);
+							$scope.showpanelOnline = false;
+						} else {
+							console.log(error);
+							$scope.showSimpleToast(error.message);
+						}
+
+						$scope.showReportProgess = false;
+					}, referenceNumber);
+
+				} else {
+					$scope.showSimpleToast("error SubmitOnlineStatus status" + resStatus);
 					$scope.showReportProgess = false;
-				}, referenceNumber);
+				}
 			} else {
-				$scope.showSimpleToast("error " + resStatus);
+				$scope.showSimpleToast("กรุณาแช็คการเชื่อมต่ออินเตอร์  error  status" + status);
 				$scope.showReportProgess = false;
 			}
 		})
@@ -427,7 +458,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var userId = "";
 		var pws = "";
 		var IpAddress = "192.168.1.1";
-		var SubmissionDate = ($scope.datepickerValue != undefined && $scope.datepickerValue.length > 9 )? $scope.datepickerValue.split("/").reverse().join("") : "";
+		var SubmissionDate = ($scope.datepickerValue != undefined && $scope.datepickerValue.length > 9) ? $scope.datepickerValue.split("/").reverse().join("") : "";
 		var EbarcodeSubmitOnlineRequestReQuest = $soapService.getSOAPMessage("EbarcodeSubmitOnlineRequest", "http://www.excise.go.th/xsd/barcode");
 		var EbarcodeSubmitOnlineRequest = $soapService.getObject("XmlData");
 
