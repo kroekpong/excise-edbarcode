@@ -33,7 +33,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.sst = 0;
 	$scope.kkt = 0;
 	$scope.col13 = 0;
-	
+	$scope.onlinesubmitData = {};
+	$scope.onlinesubmitData.date = "";
 	/**
 	 * อัตราภาษี <MunicipalRateAmount>10</MunicipalRateAmount>
 	 * <FundSSSRateAmount>2.0</FundSSSRateAmount> <FundSSTRateAmount>1.5</FundSSTRateAmount>
@@ -117,7 +118,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 		if (_index == 0) {
 			$scope.resetProductChecked();
-			$rootScope.$broadcast("updateTitleText", "สร้าง สร. 120-11 > เพิ่ม");
+			$rootScope.$broadcast("updateTitleText", "สร้าง สร. 120-11 ► เพิ่ม");
 		}
 		if (_index == 1) {
 			$rootScope.$broadcast("updateTitle", 1);
@@ -369,9 +370,10 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		if ($scope.submitType === "online") {
 			// online
 			console.info("submitOnlinefn");
-			console.info("inputdatavalue",$scope.inputdatavalue);
-			if ($scope.datepickerValue == "") {
-				console.info("datepickerValue not have value");
+			console.info("onlinesubmitData.date",$scope.onlinesubmitData.date);
+			if ($scope.onlinesubmitData.date == "") {
+				console.info("$scope.onlinesubmitData.date not have value");
+				$scope.showSimpleToast("กรุณากรอก วันที่ยื่นแบบ");
 				return;
 			}
 
@@ -395,17 +397,14 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.buttononlinesubmit = function() {
 		console.log("buttononlinesubmit");
 		$scope.showpanelOnline = true;
-		$scope.datepickerValue = "";
+		$scope.onlinesubmitData.date = "";
 		$scope.submitType = "online"
 	};
 
-	$scope.$watch("inputdatavalue", function(old, newv) {
-		console.log("inputdatavalue", old, newv);
-	});
 
 	$scope.buttononlinesubmitCancle = function() {
 		$scope.showpanelOnline = false;
-		$scope.datepickerValue = "";
+		$scope.onlinesubmitData.date = "";
 		$scope.submitType = "offline"
 	};
 
@@ -458,7 +457,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var userId = "";
 		var pws = "";
 		var IpAddress = "192.168.1.1";
-		var SubmissionDate = ($scope.datepickerValue != undefined && $scope.datepickerValue.length > 9) ? $scope.datepickerValue.split("/").reverse().join("") : "";
+		var currentDate = "20150908";
+		var SubmissionDate = ($scope.onlinesubmitData.date != undefined && $scope.onlinesubmitData.date.length > 9) ? $scope.onlinesubmitData.date.split("/").reverse().join("") : currentDate;
 		var EbarcodeSubmitOnlineRequestReQuest = $soapService.getSOAPMessage("EbarcodeSubmitOnlineRequest", "http://www.excise.go.th/xsd/barcode");
 		var EbarcodeSubmitOnlineRequest = $soapService.getObject("XmlData");
 

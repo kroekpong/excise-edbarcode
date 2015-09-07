@@ -187,10 +187,10 @@
 
 	<!-- add item -->
 
-	<!-- Grid -->
 	<div layout="column">
 
 		<div ng-show="step[1]">
+	<!-- Grid -->
 			<div layout="column">
 
 				<md-tabs md-dynamic-height md-border-bottom>
@@ -330,204 +330,204 @@
 				<!--			</div>-->
 
 			</div>		                
+	<!-- end Grid		                 -->
+	<!-- tax calc -->
+			<div layout="column" style="width: 100%;">
+				<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab label="รวมภาษีสุรา">
+						<md-content layout-padding>
+							<div class="datagrid"  ng-show="showDataSearch" style="color: black;">
+								<table>
+		
+									<!-- 						List	 -->
+									<tr>
+										<td>
+																																		(๖.๑) รวมภาษีสุราตามมูลค่า (เศษของบาทให้ปัดทิ้ง)
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(sumCalcPriceAmountValue,2)}}	
+										</td>
+									</tr>
+		
+									<tr>
+										<td>
+																																		(๖.๒) รวมภาษีสุราตามปริมาณ
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(sumCalcQuantityAmountValue,2)}}	
+										</td>
+									</tr>
+		
+									<tr>
+										<td>
+																																		(๗) รวมภาษีสุรา (๖.๑) + (๖.๒)
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(sumNetTax(),2)}}	
+										</td>
+									</tr>
+		
+									<tr>
+										<td>
+																																		(๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
+											<input type="text" ng-model="inputSum8" style="padding:3px;" ng-disabled="historyMode" />
+										</td>
+										<td style="text-align: right;" >
+											<!-- 		                            {{toStringDec(sumTax8,2)}} -->
+											<input type="text" ng-model="sumTax8" style="text-align: right;padding:3px;" ng-disabled="historyMode" />	
+										</td>
+									</tr>
+		
+									<tr>
+										<td>
+																																		(๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่ 	
+											<input type="text" ng-model="inputSum9"  style="padding:3px;" ng-disabled="historyMode" />
+										</td>
+										<td style="text-align: right;" >
+											<!-- 		                            {{toStringDec(sumTax9,2)}} -->
+											<input type="text" ng-model="sumTax9" style="text-align: right;padding:3px;" ng-disabled="historyMode" />	
+										</td>
+									</tr>
+		
+									<tr>
+										<td>
+																																		(๑๐) คงเหลือภาษีสุรา	
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(col10,2)}}		
+										</td>
+									</tr>
+									<tr>
+										<td>
+		
+																																		(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทย ร้อยละ {{MunicipalRateAmountRate}} 
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(royalTotal,2)}}		
+										</td>
+									</tr>
+		
+									<tr>
+										<td>
+																																		(๑๒) รวมภาษีที่ต้องชำระทั้งสิ้น (๑๐) + (๑๑)
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(col12,2)}}	
+										</td>
+									</tr>
+		
+									<tr>
+										<td>
+																																		(๑๓) อื่นๆ
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(col13,2)}}			
+										</td>
+									</tr>
+		
+									<tr>
+										<td>
+		
+																																		(๑๔) รวม (๑๒) + (๑๓)
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(col14,2,2)}}	
+										</td>
+									</tr>
+									<!-- 					                    <tr> -->
+									<!-- 					                        <td> -->
+									<!-- 												ภาษีเก็บเพิ่ม อื่นๆ -->
+									<!-- 					                        </td> -->
+									<!-- 					                        <td style="text-align: right;" > -->
+		
+									<!-- 					                        </td> -->
+									<!-- 					                    </tr> -->
+									<!-- 					                    <tr> -->
+									<!-- 					                        <td> -->
+									<!-- 												ภาษีเก็บเพิ่ม สสส ร้อยละ {{FundSSSRateAmountRate}} -->
+									<!-- 					                        </td> -->
+									<!-- 					                        <td style="text-align: right;" > -->
+									<!-- 					                             {{toStringDec(sss=totalTax*FundSSSRateAmountRate*0.01,2)}}		 -->
+									<!-- 					                        </td> -->
+									<!-- 					                    </tr> -->
+									<!-- 					                    <tr> -->
+									<!-- 					                        <td> -->
+									<!-- 												ภาษีเก็บเพิ่ม สสท ร้อยละ {{FundSSTRateAmountRate}} -->
+									<!-- 					                        </td> -->
+									<!-- 					                        <td style="text-align: right;" > -->
+									<!-- 					                             {{toStringDec(sst=totalTax*FundSSTRateAmountRate*0.01,2)}}		 -->
+									<!-- 					                        </td> -->
+									<!-- 					                    </tr> -->
+									<!-- 					                    <tr> -->
+									<!-- 					                        <td> -->
+									<!-- 												ภาษีเก็บเพิ่ม กกท ร้อยละ {{FundKKTRateAmountRate}} -->
+									<!-- 					                        </td> -->
+									<!-- 					                        <td style="text-align: right;" > -->
+									<!-- 					                             {{toStringDec(kkt=totalTax*FundKKTRateAmountRate*0.01,2)}}		 -->
+									<!-- 					                        </td> -->
+									<!-- 					                    </tr> -->
+		
+								</table>
+							</div>
+		
+						</md-content>
+					</md-tab>
+				</md-tabs>
+		
+				<!-- kong toon -->
+				<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab label="เงินบำรุงกองทุน">
+						<md-content layout-padding>
+							<div class="datagrid"  ng-show="showDataSearch" style="color: black;">
+								<table >
+									<tr>
+										<td>
+																																		ภาษีเก็บเพิ่ม สสส ร้อยละ {{FundSSSRateAmountRate}}
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(sss,2)}}		
+										</td>
+									</tr>
+									<tr>
+										<td>
+																																		ภาษีเก็บเพิ่ม สสท ร้อยละ {{FundSSTRateAmountRate}}
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(sst,2)}}		
+										</td>
+									</tr>
+									<tr>
+										<td>
+																																		ภาษีเก็บเพิ่ม กกท ร้อยละ {{FundKKTRateAmountRate}}
+										</td>
+										<td style="text-align: right;" >
+																																		{{toStringDec(kkt,2)}}		
+										</td>
+									</tr>
+								</table>
+							</div>
+						</md-content>
+					</md-tab>
+				</md-tabs>
+		
+				<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
+					<h3>loading...</h3>
+					<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"/>
+				</div>
+		
+				<div layout="row"  layout-align="center center" >
+					<!-- 	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>              -->
+					<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()"
+																														ng-hide="historyMode" ng-disabled="gridList.length==0||showReportProgess" >แสดงตัวอย่างเอกสาร</md-button>
+					<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>   
+				</div>
+		
+			</div>
+	<!-- end tax calc -->
 		</div>
 	</div>	                
-	<!-- end Grid		                 -->
 
 
-	<!-- tax calc -->
-	<div layout="column" style="width: 100%;" ng-show="step[1]">
-		<md-tabs md-dynamic-height md-border-bottom>
-			<md-tab label="รวมภาษีสุรา">
-				<md-content layout-padding>
-					<div class="datagrid"  ng-show="showDataSearch" style="color: black;">
-						<table>
-
-							<!-- 						List	 -->
-							<tr>
-								<td>
-																																(๖.๑) รวมภาษีสุราตามมูลค่า (เศษของบาทให้ปัดทิ้ง)
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(sumCalcPriceAmountValue,2)}}	
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-																																(๖.๒) รวมภาษีสุราตามปริมาณ
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(sumCalcQuantityAmountValue,2)}}	
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-																																(๗) รวมภาษีสุรา (๖.๑) + (๖.๒)
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(sumNetTax(),2)}}	
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-																																(๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
-									<input type="text" ng-model="inputSum8" style="padding:3px;" ng-disabled="historyMode" />
-								</td>
-								<td style="text-align: right;" >
-									<!-- 		                            {{toStringDec(sumTax8,2)}} -->
-									<input type="text" ng-model="sumTax8" style="text-align: right;padding:3px;" ng-disabled="historyMode" />	
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-																																(๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่ 	
-									<input type="text" ng-model="inputSum9"  style="padding:3px;" ng-disabled="historyMode" />
-								</td>
-								<td style="text-align: right;" >
-									<!-- 		                            {{toStringDec(sumTax9,2)}} -->
-									<input type="text" ng-model="sumTax9" style="text-align: right;padding:3px;" ng-disabled="historyMode" />	
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-																																(๑๐) คงเหลือภาษีสุรา	
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(col10,2)}}		
-								</td>
-							</tr>
-							<tr>
-								<td>
-
-																																(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทย ร้อยละ {{MunicipalRateAmountRate}} 
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(royalTotal,2)}}		
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-																																(๑๒) รวมภาษีที่ต้องชำระทั้งสิ้น (๑๐) + (๑๑)
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(col12,2)}}	
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-																																(๑๓) อื่นๆ
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(col13,2)}}			
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-
-																																(๑๔) รวม (๑๒) + (๑๓)
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(col14,2,2)}}	
-								</td>
-							</tr>
-							<!-- 					                    <tr> -->
-							<!-- 					                        <td> -->
-							<!-- 												ภาษีเก็บเพิ่ม อื่นๆ -->
-							<!-- 					                        </td> -->
-							<!-- 					                        <td style="text-align: right;" > -->
-
-							<!-- 					                        </td> -->
-							<!-- 					                    </tr> -->
-							<!-- 					                    <tr> -->
-							<!-- 					                        <td> -->
-							<!-- 												ภาษีเก็บเพิ่ม สสส ร้อยละ {{FundSSSRateAmountRate}} -->
-							<!-- 					                        </td> -->
-							<!-- 					                        <td style="text-align: right;" > -->
-							<!-- 					                             {{toStringDec(sss=totalTax*FundSSSRateAmountRate*0.01,2)}}		 -->
-							<!-- 					                        </td> -->
-							<!-- 					                    </tr> -->
-							<!-- 					                    <tr> -->
-							<!-- 					                        <td> -->
-							<!-- 												ภาษีเก็บเพิ่ม สสท ร้อยละ {{FundSSTRateAmountRate}} -->
-							<!-- 					                        </td> -->
-							<!-- 					                        <td style="text-align: right;" > -->
-							<!-- 					                             {{toStringDec(sst=totalTax*FundSSTRateAmountRate*0.01,2)}}		 -->
-							<!-- 					                        </td> -->
-							<!-- 					                    </tr> -->
-							<!-- 					                    <tr> -->
-							<!-- 					                        <td> -->
-							<!-- 												ภาษีเก็บเพิ่ม กกท ร้อยละ {{FundKKTRateAmountRate}} -->
-							<!-- 					                        </td> -->
-							<!-- 					                        <td style="text-align: right;" > -->
-							<!-- 					                             {{toStringDec(kkt=totalTax*FundKKTRateAmountRate*0.01,2)}}		 -->
-							<!-- 					                        </td> -->
-							<!-- 					                    </tr> -->
-
-						</table>
-					</div>
-
-				</md-content>
-			</md-tab>
-		</md-tabs>
-
-		<!-- kong toon -->
-		<md-tabs md-dynamic-height md-border-bottom>
-			<md-tab label="เงินบำรุงกองทุน">
-				<md-content layout-padding>
-					<div class="datagrid"  ng-show="showDataSearch" style="color: black;">
-						<table >
-							<tr>
-								<td>
-																																ภาษีเก็บเพิ่ม สสส ร้อยละ {{FundSSSRateAmountRate}}
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(sss,2)}}		
-								</td>
-							</tr>
-							<tr>
-								<td>
-																																ภาษีเก็บเพิ่ม สสท ร้อยละ {{FundSSTRateAmountRate}}
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(sst,2)}}		
-								</td>
-							</tr>
-							<tr>
-								<td>
-																																ภาษีเก็บเพิ่ม กกท ร้อยละ {{FundKKTRateAmountRate}}
-								</td>
-								<td style="text-align: right;" >
-																																{{toStringDec(kkt,2)}}		
-								</td>
-							</tr>
-						</table>
-					</div>
-				</md-content>
-			</md-tab>
-		</md-tabs>
-
-		<div layout="column" style="width: 100%;padding: 15px;"  layout-align="center center"  ng-show="showReportProgess" >
-			<h3>loading...</h3>
-			<md-progress-linear md-mode="indeterminate" style="margin-bottom:15px;"/>
-		</div>
-
-		<div layout="row"  layout-align="center center" >
-			<!-- 	     	<md-button class="md-raised" style="width:150px;"  ng-click="navigaTor(stepCount-1)">ย้อนกลับ</md-button>              -->
-			<md-button class="md-raised md-primary" style="width:150px;" ng-click="nextAndGenReport()"
-																												ng-hide="historyMode" ng-disabled="gridList.length==0||showReportProgess" >แสดงตัวอย่างเอกสาร</md-button>
-			<md-button class="md-raised" style="width:150px;" ng-click="openHistory()" ng-show="historyMode">ประวัติการทำรายการ</md-button>   
-		</div>
-
-	</div>
-	<!-- end tax calc -->
 
 
 	<!-- summit type -->
@@ -615,9 +615,8 @@
 
 					<div layout="column"  layout-align="center center" style="width: 100%;" ng-show="showpanelOnline">
 						<div layout="row"  layout-align="center center">
-							<h2 class="md-subhead">วันที่ยื่นแบบ</h2>
-							<input type="text" ng-model="inputdatavalue" style="margin-left: 5px;" datepicker /> 
-																																		{{inputdatavalue}}
+							<h2 class="md-subhead">วันที่ยื่นแบบ<span style="color: red;">*</span></h2>
+							<input type="text" ng-model="onlinesubmitData.date" style="margin-left: 5px;" datepicker/> 
 						</div>
 						<div layout="row"  layout-align="center center">
 							<md-button class="md-raised" ng-click="buttononlinesubmitCancle()"  ng-disabled="showReportProgess" > ยกเลิก </md-button>

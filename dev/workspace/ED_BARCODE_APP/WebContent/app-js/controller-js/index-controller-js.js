@@ -61,7 +61,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
 	});
 });
 
-module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $location) {
+module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $location , $state) {
 
 	console.log('AppCtrl');
 	$scope.userLogin = localStorage["CompanyUserPwd"].split("#")[0];
@@ -104,6 +104,7 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 
 //	$scope.toolbarTitle = $scope.settings[0].label;
 	$scope.toolbarTitle = "";
+	
 	$scope.versionPrograme =  localStorage["versionPrograme"];
 
 	$scope.navigateTo = function(_iconName, _event) {
@@ -132,4 +133,28 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 		$scope.toolbarTitle = args;
 	});
 
+	/**
+	 * Name when refresh
+	 * */
+//	console.info("$state.current.name", $location.path());
+		for(var _i in $scope.settings){
+			var menu = $scope.settings[_i];
+			if($location.path().indexOf( menu.iconName) > -1){
+				console.log("f index ",menu.label);
+				$scope.toolbarTitle = menu.label;
+				break;
+			}
+		}
 });
+
+
+
+
+
+
+
+
+
+
+
+
