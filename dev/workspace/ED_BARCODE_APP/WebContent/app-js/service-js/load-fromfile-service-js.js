@@ -198,6 +198,23 @@ module.service('$fileUtils', function() {
 		console.info("open", _url);
 		gui.Shell.openItem(_url);
 	};
+	
+	
+	this.readVersion = function(_path , defualtVersion ) {
+		try{
+			var version = rw.readFileSync(this.execPath + "/" + _path, "utf8");
+			var v = parseFloat(version);
+			if(v.toString() === "NaN"){
+				console.error("invalie version file");
+				return defualtVersion
+			}
+			return v.toString();
+			
+		}catch (e) {
+			console.error(e.message);
+			return defualtVersion;
+		}
+	};
 
 });
 
