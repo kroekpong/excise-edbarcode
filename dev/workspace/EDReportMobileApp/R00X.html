@@ -1,83 +1,168 @@
 <!DOCTYPE html>
 <!-- saved from url=(0043)http://kroekpong.esy.es/report/report1.html -->
 <html class="ui-mobile">
-   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <!--<base href="http://kroekpong.esy.es/report/report1.html">-->
-      <base href=".">
-      <meta charset="UTF-8">
-      <title>Report R00X</title>
-	  
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">    
-      <link rel="stylesheet" href="css/report.css">
-	  
-	 <link rel="stylesheet" href="css/R00X.css">
-	  
-      <script src="js/jquery.js"></script> 
-      <script src="js/jquery.mobile-1.4.5.min.js"></script>
-	  
-      <script src="js/R00X.js"></script>
-      <script>
-         $(function(){
-         	_pageData.arrType =false;
-         //	getData();
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <!--<base href="http://kroekpong.esy.es/report/report1.html">-->
+   <base href=".">
+   <meta charset="UTF-8">
+   <title>Report R00X</title>
+
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">    
+   <link rel="stylesheet" href="css/report.css">
+
+   <link rel="stylesheet" href="css/R00X.css">
+
+   <script src="js/jquery.js"></script> 
+   <script src="js/jquery.mobile-1.4.5.min.js"></script>
+   <script src="json/R00X.json"></script>
+   <script src="js/R00X.js"></script>
+   <script>
+      $(function(){
+       _pageData.arrType =false;
+         //	gethata();
          
-         });
-         
-      </script>
-   </head>
-   <body class="ui-mobile-viewport ui-overlay-a">
-   
-      <div data-role="page" data-url="/report/report1.html" tabindex="0" class="ui-page ui-page-theme-a ui-page-active">
-        
-	 
-         <div id="page-wrap">
-		 
-		 
-            <p id="tb-title"> OOOO
-            </p> 
-			
-			
-			
-			
-			
-            <table cellpadding="0" cellspacing="0">
-			
-               <tbody id="tb-data">
-                  <tr class="header">
-                     <th rowspan="2"> ลำดับ </th>
-                     <th rowspan="2">ชื่อผู้ประกอบการ </th>
-                     <th rowspan="2">ชื่อสินค้า </th>
-                     <th rowspan="2">ดีกรี </th>
-                     <th rowspan="2">ขนาด </th>
-                     <th rowspan="2">ราคาขายส่งช่วงสุดท้าย </th>
-                     <th colspan="3">ต.ค. </th>
-                  </tr>
-                  <tr class="header">
-                     <th>จำนวน<br>(ขวด) </th>
-                     <th>ปริมาณ<br>(ลิตร)  </th>
-                     <th>ภาษี<br>(บาท)  </th>
-                  </tr>
-				  
-				   
-				   
-				   
-				  
-				   
-               </tbody>
-            </table>
-			
-			
-			
-			
-			
-			
-         </div>
+      });
+
+   </script>
+</head>
+<body class="ui-mobile-viewport ui-overlay-a">
+
+   <div data-role="page" data-url="/report/report1.html" tabindex="0" class="ui-page ui-page-theme-a ui-page-active">
+
+
+      <div id="page-wrap">
+
+
+      <p id="tb-title"> ROOX
+         </p> 
+
+
+         <p id="demo"></p>
+
+
+         <table cellpadding="0" cellspacing="0">
+
+            <tbody id="tb-data">
+
+               <tr class="header">
+                  <th rowspan="2"> ลำดับ </th>
+                  <th rowspan="2">ชื่อผู้ประกอบการ </th>
+                  <th rowspan="2">ชื่อสินค้า </th>
+                  <th rowspan="2">ดีกรี </th>
+                  <th rowspan="2">ขนาด </th>
+                  <th rowspan="2">ราคาขายส่งช่วงสุดท้าย </th>
+                  <th colspan="3">ต.ค. </th>
+               </tr>
+               <tr class="header">
+                  <th>จำนวน<br>(ขวด) </th>
+                  <th>ปริมาณ<br>(ลิตร)  </th>
+                  <th>ภาษี<br>(บาท)  </th>
+               </tr>
+
+               <tr>
+                  <td><p id="orderNo"></p></td>    
+                  <td><p id="companyName"></p></td>    
+                  <td><p id="goodsName"></p> </td>    
+                  <td><p id="degree"></p></td>    
+                  <td><p id="size"></p></td>    
+                  <td><p id="pric1"></p></td>    
+                  <td><p id="quantityBottle"></p></td>        
+                  <td><p id="quantityLite"></p></td>  
+                  <td><p id="vat"></p></td>  
+               </tr>
+
+               <tr>
+                  <td></td>    
+                  <td></td>    
+                  <td><p id="goodsName2"></p> </td>    
+                  <td><p id="degree2"></p></td>    
+                  <td><p id="size2"></p></td>    
+                  <td><p id="pric12"></p></td>    
+                  <td><p id="quantityBottle2"></p></td>        
+                  <td><p id="quantityLite2"></p></td>  
+                  <td><p id="vat2"></p></td>  
+               </tr>
+
+               <tr>
+                  <td></td>    
+                  <td></td>    
+                  <td><p id="goodsName3"></p> </td>    
+                  <td><p id="degree3"></p></td>    
+                  <td><p id="size3"></p></td>    
+                  <td><p id="pric13"></p></td>    
+                  <td><p id="quantityBottle3"></p></td>        
+                  <td><p id="quantityLite3"></p></td>  
+                  <td><p id="vat3"></p></td>  
+               </tr>
+
+               <tr>
+                  <td></td>    
+                  <td></td>    
+                  <td><p id="goodsName4"></p> </td>    
+                  <td><p id="degree4"></p></td>    
+                  <td><p id="size4"></p></td>    
+                  <td><p id="pric14"></p></td>    
+                  <td><p id="quantityBottle4"></p></td>        
+                  <td><p id="quantityLite4"></p></td>  
+                  <td><p id="vat4"></p></td>  
+               </tr>
+
+
+
+            </tbody>
+         </table>
+
+
+         <script type="text/javascript">
+            document.getElementById("demo").innerHTML = _pageData.title;
+            document.getElementById("orderNo").innerHTML = valueJson.orderNo;
+            document.getElementById("companyName").innerHTML = valueJson.companyName;
+            document.getElementById("goodsName").innerHTML = valueJson.r001DDomainList[0].goodsName;
+            document.getElementById("degree").innerHTML = valueJson.r001DDomainList[0].degree;
+            document.getElementById("size").innerHTML = valueJson.r001DDomainList[0].size;
+            document.getElementById("pric1").innerHTML = valueJson.r001DDomainList[0].pric1;
+            document.getElementById("quantityBottle").innerHTML = valueJson.r001DDomainList[0].quantityBottle;
+            document.getElementById("quantityLite").innerHTML = valueJson.r001DDomainList[0].quantityLite;
+            document.getElementById("vat").innerHTML = valueJson.r001DDomainList[0].vat;
+         </script>
+
+         <script type="text/javascript">
+            document.getElementById("goodsName2").innerHTML = valueJson.r001DDomainList[1].goodsName;
+            document.getElementById("degree2").innerHTML = valueJson.r001DDomainList[1].degree;
+            document.getElementById("size2").innerHTML = valueJson.r001DDomainList[1].size;
+            document.getElementById("pric12").innerHTML = valueJson.r001DDomainList[1].pric1;
+            document.getElementById("quantityBottle2").innerHTML = valueJson.r001DDomainList[1].quantityBottle;
+            document.getElementById("quantityLite2").innerHTML = valueJson.r001DDomainList[1].quantityLite;
+            document.getElementById("vat2").innerHTML = valueJson.r001DDomainList[1].vat;
+         </script>
+
+         <script type="text/javascript">
+            document.getElementById("goodsName3").innerHTML = valueJson.r001DDomainList[2].goodsName;
+            document.getElementById("degree3").innerHTML = valueJson.r001DDomainList[2].degree;
+            document.getElementById("size3").innerHTML = valueJson.r001DDomainList[2].size;
+            document.getElementById("pric13").innerHTML = valueJson.r001DDomainList[2].pric1;
+            document.getElementById("quantityBottle3").innerHTML = valueJson.r001DDomainList[2].quantityBottle;
+            document.getElementById("quantityLite3").innerHTML = valueJson.r001DDomainList[2].quantityLite;
+            document.getElementById("vat3").innerHTML = valueJson.r001DDomainList[2].vat;
+         </script>
+
+         <script type="text/javascript">
+            document.getElementById("goodsName4").innerHTML = valueJson.r001DDomainList[3].goodsName;
+            document.getElementById("degree4").innerHTML = valueJson.r001DDomainList[3].degree;
+            document.getElementById("size4").innerHTML = valueJson.r001DDomainList[3].size;
+            document.getElementById("pric14").innerHTML = valueJson.r001DDomainList[3].pric1;
+            document.getElementById("quantityBottle4").innerHTML = valueJson.r001DDomainList[3].quantityBottle;
+            document.getElementById("quantityLite4").innerHTML = valueJson.r001DDomainList[3].quantityLite;
+            document.getElementById("vat4").innerHTML = valueJson.r001DDomainList[3].vat;
+         </script>
+
       </div>
-      <div class="ui-loader ui-corner-all ui-body-a ui-loader-default">
-         <span class="ui-icon-loading"></span>
-         <h1>loading</h1>
-      </div>
-   </body>
+   </div>
+   <div class="ui-loader ui-corner-all ui-body-a ui-loader-default">
+      <span class="ui-icon-loading"></span>
+      <h1>loading</h1>
+   </div>
+</body>
 </html>

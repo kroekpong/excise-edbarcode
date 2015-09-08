@@ -1,0 +1,61 @@
+* { 
+	margin: 0; 
+	padding: 0; 
+}
+body { 
+	font: 14px/1.4 Georgia, Serif; 
+}
+#page-wrap {
+	margin: 5%;
+	margin-top: 20px;
+}
+p {
+	margin: 20px 0; 
+}
+
+/* 
+Generic Styling, for Desktops/Laptops 
+*/
+table { 
+	width: 100%; 
+	border-collapse: collapse; 
+}
+/* Zebra striping */
+.tr-company  tr:nth-of-type(odd) { 
+	background: #eee;
+		
+}
+
+.tr-product:nth-of-type(odd) { 
+	background: #eee; 
+}
+
+th { 
+	background: #0082B9; 
+	color: white; 
+	font-weight: bold; 
+	text-shadow: 0 0 0 #f3f3f3;
+}
+td, th { 
+	padding: 6px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+}
+
+.header th{
+	text-align:center;
+}
+.center{
+	text-align:center;
+}
+.right{
+	text-align:right;
+} 
+.summary{
+	text-align:right;
+	background-color: #DFDFDF;
+} 
+
+.btn-right , .ui-btn{
+  font-size: 11.5px !important;
+}
