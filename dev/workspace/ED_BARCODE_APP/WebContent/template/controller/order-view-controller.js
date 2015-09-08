@@ -418,8 +418,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		$soapService.post(xmlRequest, _endpoint, function(status, xmlDoc, data) {
 
 			if (status == 200) {
-				console.log(status, resStatus);
 				var resStatus = xmlDoc.getVal("SubmitOnlineStatus");
+				console.log(status, resStatus);
 				if (resStatus == "OK") {
 					var referenceNumber = xmlDoc.getVal("ReferenceNumber");
 					console.log("referenceNumber", referenceNumber);
@@ -582,6 +582,41 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SummaryInfo.push($soapService.getObjectItem("PaymentOtherAmount", $scope.col13.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentNetTaxAmount", $scope.col14.toFixed(2)));
 
+		//kong toon
+		var FundListInfo = $soapService.getObject("FundListInfo");
+		SR12011Info.push(FundListInfo);
+		var FundEntryInfo = [];
+		
+//		$scope.FundSSSRateAmountRate = 0;
+//		$scope.FundSSTRateAmountRate = 0;
+//		$scope.FundKKTRateAmountRate = 0;
+		
+		FundEntryInfo = $soapService.getObject("FundEntryInfo");
+		FundEntryInfo.push($soapService.getObjectItem("FundType", "S"));
+		FundEntryInfo.push($soapService.getObjectItem("FundAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundSSSRateAmountRate.toFixed(2)));
+		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", "0"));
+		FundListInfo.push(FundEntryInfo);
+		
+		FundEntryInfo = $soapService.getObject("FundEntryInfo");
+		FundEntryInfo.push($soapService.getObjectItem("FundType", "T"));
+		FundEntryInfo.push($soapService.getObjectItem("FundAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundSSTRateAmountRate.toFixed(2)));
+		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", "0"));
+		FundListInfo.push(FundEntryInfo);
+		
+		FundEntryInfo = $soapService.getObject("FundEntryInfo");
+		FundEntryInfo.push($soapService.getObjectItem("FundType", "K"));
+		FundEntryInfo.push($soapService.getObjectItem("FundAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundKKTRateAmountRate.toFixed(2)));
+		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", "0"));
+		FundListInfo.push(FundEntryInfo);
+		
+		
+		
 		var str = EbarcodeSubmitOnlineRequest.getString();
 		// writeFile
 		var data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + str;
