@@ -20,7 +20,7 @@ module.controller('loadingAppCtrl', function($scope, $location , $fileUtils , $c
 	$convertDataXml.convertXMLtoLocalStorage(xml);
 	
 	//versionPrograme
-	localStorage["versionPrograme"] = $fileUtils.readVersion("version.dat", "1.00");
+	localStorage["versionPrograme"] = $fileUtils.readVersion("version.dat", "1.00B");
 	
 	localStorage["soaphost"] = "http://124.109.26.20:7001/EDBarcodeWeb/ws/EDBarcodeService"; 
 //	localStorage["soaphost"] = "http://192.168.3.196:7001/EDBarcodeWeb/ws/EDBarcodeService"; 

@@ -37,7 +37,7 @@
         "min_height": 768, 
         "visible": true, 
         "as_desktop": true, 
-        "toolbar": false, 
+        "toolbar": true, 
         "mac_icon": "", 
         "min_width": 1300, 
         "position": "center", 
