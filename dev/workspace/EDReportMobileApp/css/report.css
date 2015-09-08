@@ -1,0 +1,133 @@
+﻿/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { 
+		border-bottom: 1px solid #9B9B9B;
+	}
+	/*
+	.tr-product:nth-of-type(odd) td{  
+	   border-bottom: 1px solid #fff;
+	}
+	*/
+	.tr-product:nth-of-type(odd) { 
+		background: #fff; 
+	}
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+		text-align:right;
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	td:nth-of-type(1):before { 
+		content: "ชื่อสินค้า";  
+	}
+	td:nth-of-type(2):before { 
+		content: "ดีกรี";  
+	}
+	td:nth-of-type(3):before { content: "ขนาด"; }
+	td:nth-of-type(4):before { content: "ราคาขายส่งช่วงสุดท้าย"; }
+	td:nth-of-type(5):before { content: "จำนวน (ขวด)"; }
+	td:nth-of-type(6):before { content: "ปริมาณ (ลิตร)"; }
+	td:nth-of-type(7):before { content: "ภาษี (บาท)"; } 
+	
+	.tr-company { 
+		line-height: 35px;
+		background: #81B3FF;
+		color: white;
+		text-shadow: 0 0 0 #f3f3f3; 			
+	}
+	
+	.tr-company td:nth-of-type(1):before { 
+		content: "ลำดับที่";  
+		text-align: right;
+	}
+	.tr-company td:nth-of-type(2):before { 
+		content: "ชื่อผู้ประกอบการ";   
+		text-align: right;
+	}
+	
+	.center {
+	  text-align: right;
+	}
+	 
+	.header{
+		  display: none;
+	}
+	
+	.tr-product{ 
+		background: #fff; 
+	}
+	
+	
+	.tr-summary td:nth-of-type(1):before { 
+		content: "";   
+	}
+	.tr-summary td:nth-of-type(2):before { 
+		content: "จำนวน (ขวด)";   
+		font-weight: bold;
+	}.tr-summary td:nth-of-type(3):before { 
+		content: "ปริมาณ (ลิตร)";
+		font-weight: bold;		
+	}.tr-summary td:nth-of-type(4):before { 
+		content: "ภาษี (บาท)";   
+		font-weight: bold;
+	}
+	
+	#page-wrap {
+		margin: 3%;
+	}
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+	body { 
+		padding: 0; 
+		margin: 0; 
+		width: 320px; }
+	}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	body { 
+		width: 495px; 
+	}
+}
+

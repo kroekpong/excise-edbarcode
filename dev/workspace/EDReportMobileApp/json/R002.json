@@ -1,0 +1,43 @@
+﻿{
+	"orderNo": "1",
+	"companyName": " บริษัท บางกอกพัฒนาไวน์เนอรี่ จำกัด",
+	"r001DDomainList": [
+		{
+			"goodsName": "Wine Cooler Cocktail",
+			"degree": "5.0",
+			"size": "0.275",
+			"pric1": "140.00",
+			"price2": "",
+			"quantityBottle": "1,000",
+			"quantityLite": "275.000",
+			"vat": "4675.00"
+		},{
+			"goodsName": "Wine Cooler Jus Black",
+			"degree": "5.0",
+			"size": "0.275",
+			"pric1": "140.00",
+			"price2": "",
+			"quantityBottle": "1,500",
+			"quantityLite": "412.500",
+			"vat": "7,012.50"
+		},{
+			"goodsName": "Wine Cooler Jus Black",
+			"degree": "5.0",
+			"size": "0.75",
+			"pric1": "",
+			"price2": "",
+			"quantityBottle": "",
+			"quantityLite": "",
+			"vat": ""
+		},{
+			"goodsName": "Wine Cooler Jus Red",
+			"degree": "5.0",
+			"size": "0.275",
+			"pric1": "140.00",
+			"price2": "",
+			"quantityBottle": "1,500",
+			"quantityLite": "412.500",
+			"vat": "7,012.50"
+		}
+	]
+}
