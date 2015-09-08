@@ -24,7 +24,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	console.info("haveSaveDraff ", $scope.haveSaveDraff);
 	/** search item */
 	$scope.userSearch = {};
-	$scope.userSearch.GoodsDescriptionText = "";
+	$scope.userSearch.BrandName = "";
 	$scope.userSearch.Degree = "";
 	$scope.DraftMode = false;
 	$scope.totalTax = 0;
@@ -131,9 +131,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			if (type === "Degree") {
 				return (state.Degree.toString().indexOf(lowercaseQuery) === 0);
 			} else {
-				var dis = angular.lowercase(state.GoodsDescriptionText);
+				var dis = angular.lowercase(state.BrandName);
 				// console.log(lowercaseQuery,state.GoodsDescriptionText);
-				return (dis.indexOf(lowercaseQuery) === 0);
+				return (dis.indexOf(lowercaseQuery) >= 0);
 			}
 		};
 	}
@@ -587,32 +587,32 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SR12011Info.push(FundListInfo);
 		var FundEntryInfo = [];
 		
-//		$scope.FundSSSRateAmountRate = 0;
-//		$scope.FundSSTRateAmountRate = 0;
-//		$scope.FundKKTRateAmountRate = 0;
 		
+		var taxRate = $scope.FundSSSRateAmountRate * $scope.FundSSSRateAmountRate * 0.01;
 		FundEntryInfo = $soapService.getObject("FundEntryInfo");
 		FundEntryInfo.push($soapService.getObjectItem("FundType", "S"));
-		FundEntryInfo.push($soapService.getObjectItem("FundAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.totalTax.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundSSSRateAmountRate.toFixed(2)));
-		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", "0"));
-		FundEntryInfo.push($soapService.getObjectItem("NetAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", taxRate));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.totalTax-taxRate ).toFixed(2) ));
 		FundListInfo.push(FundEntryInfo);
 		
+		var taxRate = $scope.FundSSSRateAmountRate * $scope.FundSSTRateAmountRate * 0.01;
 		FundEntryInfo = $soapService.getObject("FundEntryInfo");
 		FundEntryInfo.push($soapService.getObjectItem("FundType", "T"));
-		FundEntryInfo.push($soapService.getObjectItem("FundAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.totalTax.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundSSTRateAmountRate.toFixed(2)));
-		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", "0"));
-		FundEntryInfo.push($soapService.getObjectItem("NetAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", taxRate));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.totalTax-taxRate ).toFixed(2) ));
 		FundListInfo.push(FundEntryInfo);
 		
+		var taxRate = $scope.FundSSSRateAmountRate * $scope.FundKKTRateAmountRate * 0.01;
 		FundEntryInfo = $soapService.getObject("FundEntryInfo");
 		FundEntryInfo.push($soapService.getObjectItem("FundType", "K"));
-		FundEntryInfo.push($soapService.getObjectItem("FundAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.totalTax.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundKKTRateAmountRate.toFixed(2)));
-		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", "0"));
-		FundEntryInfo.push($soapService.getObjectItem("NetAmt", "0"));
+		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", taxRate));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.totalTax-taxRate ).toFixed(2) ));
 		FundListInfo.push(FundEntryInfo);
 		
 		

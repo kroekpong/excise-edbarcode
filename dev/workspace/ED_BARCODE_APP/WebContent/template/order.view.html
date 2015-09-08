@@ -70,29 +70,29 @@
 						<div layout="column" style="width: 100%;margin: 10px;">
 
 							<div layout="row" layout-align="left center">
-								<h3 style="margin-right: 77px;">ชื่อสุรา</h3>
+								<h3 style="margin-right: 60px;font-size: 14px;">เครืองหมายการค้าหลัก</h3>
 								<md-autocomplete style="margin-bottom:10px;width:500px;"
 										ng-disabled="false"
 										md-selected-item="selectedItem1"
-										md-search-text="userSearch.GoodsDescriptionText"
-										md-items="item in querySearch(userSearch.GoodsDescriptionText,'GoodsDescriptionText')"
-										md-item-text="item.GoodsDescriptionText"
+										md-search-text="userSearch.BrandName"
+										md-items="item in querySearch(userSearch.BrandName,'BrandName')"
+										md-item-text="item.BrandName"
 										md-min-length="3"
-										placeholder="ชื่อสุรา">
+										placeholder="เครืองหมายการค้าหลัก">
 									<md-item-template>
-										<span md-highlight-text="ausearchText" md-highlight-flags="^i">{{item.GoodsDescriptionText}}</span>
+										<span md-highlight-text="ausearchText" md-highlight-flags="^i">{{item.BrandName}}</span>
 										<span md-highlight-text="ausearchText" >(ขนาด {{item.GoodsSize}} )</span>
 										<span md-highlight-text="ausearchText" >(ดีกรี {{item.Degree}} )</span>
 									</md-item-template>
 									<md-not-found>
-										No matches found for "{{userSearch.GoodsDescriptionText}}".
+										No matches found for "{{userSearch.BrandName}}".
 									</md-not-found>
 								</md-autocomplete>
 							</div>	
 
 
 							<div layout="row" layout-align="start center">
-								<h3 style="margin-right: 100px;">ดีกรี</h3>
+								<h3 style="margin-right: 176px;font-size: 14px;">ดีกรี</h3>
 								<md-autocomplete style="width:500px;"
 										ng-disabled="false"
 										md-selected-item="selectedItem2"
