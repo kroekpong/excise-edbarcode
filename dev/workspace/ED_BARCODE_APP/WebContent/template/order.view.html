@@ -21,9 +21,9 @@
 								<td >
 									ชนิดสุรา
 								</td>
-								<td >
-									ชื่อสุรา
-								</td>
+<!-- 								<td > -->
+<!-- 									ชื่อสุรา -->
+<!-- 								</td> -->
 								<td>
 									เครืองหมายการค้าหลัก
 								</td>
@@ -48,7 +48,7 @@
 											ng-click="productCheckedClick(product.GoodId,product)" />
 								</td>
 								<td>{{product.ProductTypeDescriptionText}}</td>
-								<td>{{product.GoodsDescriptionText}}</td>
+<!-- 								<td>{{product.GoodsDescriptionText}}</td> -->
 								<td>{{product.BrandName}}</td>
 								<td style="text-align: right;">{{toStringDec(product.Degree,2)}}</td>
 								<td style="text-align: right;">{{toStringDec(product.GoodsSize)}}</td>
@@ -126,9 +126,9 @@
 								<td >
 									ชนิดสุรา
 								</td>
-								<td >
-									ชื่อสุรา
-								</td>
+<!-- 								<td > -->
+<!-- 									ชื่อสุรา -->
+<!-- 								</td> -->
 								<td>
 									เครืองหมายการค้าหลัก
 								</td>
@@ -152,7 +152,7 @@
 											ng-checked="getProductChecked(product.GoodId)" ng-click="productCheckedClick(product.GoodId,product)" />
 								</td>
 								<td>{{product.ProductTypeDescriptionText}}</td>
-								<td>{{product.GoodsDescriptionText}}</td>
+<!-- 								<td>{{product.GoodsDescriptionText}}</td> -->
 								<td>{{product.BrandName}}</td>
 								<td style="text-align: right;">{{toStringDec(product.Degree,2)}}</td>
 								<td style="text-align: right;">{{toStringDec(product.GoodsSize)}}</td>
@@ -278,13 +278,11 @@
 									<tr ng-repeat="item in gridList track by $index">
 										<td>{{$index+1}}</td>
 										<td>{{item.Goods.ProductTypeDescriptionText}}</td>
-										<td>{{item.Goods.GoodsDescriptionText}}</td>
+										<td>{{item.Goods.ProductTypeDescriptionText + " " + item.Goods.BrandName}}</td>
 										<td style="text-align: right;">{{toStringDec(item.Goods.Degree,2)}}</td>
 										<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize)}}</td>
 										<td style="text-align: center;"> 
-											<!--        				<md-input-container md-no-float style="padding:0;width:90px;"> -->
 											<input type="number" style="text-align: right;padding:3px; width:90px;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode" />
-											<!-- 			      	</md-input-container> -->
 																																		{{item.Goods.GoodsSizeUnitDescriptionText}}
 										</td>
 
@@ -292,9 +290,7 @@
 
 										<td>
 
-											<!-- 					<md-input-container md-no-float style="padding:0;width:100px;" > -->
 											<input type="number" style="text-align: right;width:90px;padding:3px;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode" />
-											<!-- 			      	</md-input-container> -->
 
 										</td>
 
