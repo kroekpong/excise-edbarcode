@@ -2,4 +2,4 @@
 SET cdir=%cd%
 echo %cdir%
 rem nw %cdir%
-nw "C:\Users\ARM\Documents\ED_APP_Workspace\ED_BARCODE_APP\WebContent"
+"C:\nodewebkit\nwjs-v0.12.3-win-ia32\nw.exe" "C:\Users\Armdev\git\excise-edbarcode\dev\workspace\ED_BARCODE_APP\WebContent"
