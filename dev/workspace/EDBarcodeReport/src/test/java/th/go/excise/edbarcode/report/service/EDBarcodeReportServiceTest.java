@@ -38,10 +38,24 @@ public class EDBarcodeReportServiceTest {
 		return (new File(ClassLoader.getSystemResource("xml/" + fileName).getPath())).getPath();
 	}
 	
-	//@Test
+	@Test
 	public void test_GenerateReport_BeerTip_1_Page() {
 		String xmlFile = getXmlFile("BeerTip_1_Page.xml");
 		String outputPath = OUTPUT_PATH_BEER_TIP + PATH_1_PAGE;
+		
+		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
+		try {
+			reportService.generateReport(xmlFile, outputPath);
+		} catch (EDBarcodeReportException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test_GenerateReport_BeerTip_1_Page_2() {
+		String xmlFile = getXmlFile("BeerTip_1_Page_2.xml");
+		String outputPath = OUTPUT_PATH_BEER_TIP + "1_Page_2\\";
 		
 		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
 		try {
@@ -68,7 +82,7 @@ public class EDBarcodeReportServiceTest {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void test_GenerateReport_BeerTip_X_Page() {
 		String xmlFile = getXmlFile("BeerTip_X_Page.xml");
 		String outputPath = OUTPUT_PATH_BEER_TIP + PATH_X_PAGE;
@@ -82,7 +96,7 @@ public class EDBarcodeReportServiceTest {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void test_GenerateReport_BeerTip_X_Page_Ref() {
 		String xmlFile = getXmlFile("BeerTip_X_Page.xml");
 		String outputPath = OUTPUT_PATH_BEER_TIP + PATH_X_PAGE_REF;
@@ -120,6 +134,22 @@ public class EDBarcodeReportServiceTest {
 		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
 		try {
 			reportService.generateReport(xmlFile, outputPath);
+		} catch (EDBarcodeReportException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test_GenerateReport_MockData_X_Page_Ref() {
+		String xmlFile = getXmlFile("MockData_X_Page.xml");
+		String outputPath = OUTPUT_PATH_MOCK_DATA + PATH_X_PAGE_REF;
+		
+		String referenceNumber = "5840000005";
+		
+		EDBarcodeReportService reportService = new EDBarcodeReportServiceImpl();
+		try {
+			reportService.generateReport(xmlFile, outputPath, referenceNumber);
 		} catch (EDBarcodeReportException e) {
 			fail(e.getMessage());
 			e.printStackTrace();

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XmlData>
+	<SubmitOnlineHeader>
+		<RegistrationId/>
+		<CusId>51103369</CusId>
+		<CompanyId>0105529039293</CompanyId>
+		<CompanyUserId/>
+		<CompanyUserPwd/>
+		<TaxpayerId>50L43370</TaxpayerId>
+		<ExciseOfficeId>010900</ExciseOfficeId>
+		<InternetUniqueId>00009862</InternetUniqueId>
+		<IpAddress>192.168.1.1</IpAddress>
+		<SubmissionEmail/>
+		<SubmissionDate/>
+	</SubmitOnlineHeader>
+	<SR12011Info>
+		<TaxpayerInfo>
+			<CompanyName>บริษัท เบียร์ทิพย์ บริวเวอรี่ (1991) จำกัด </CompanyName>
+			<Tin>0105529039293</Tin>
+			<LicenseNo>2558/10905817600001</LicenseNo>
+			<EffectiveDate>20150101</EffectiveDate>
+			<ExpireDate>20150101</ExpireDate>
+			<TaxpayerName>เบียร์ทิพย์ บริวเวอรี่ (1991)</TaxpayerName>
+			<TaxpayerAddressInfo>
+				<HouseNumber/>
+				<MooNumber>2</MooNumber>
+				<TrokSoiName>-</TrokSoiName>
+				<StreetName>อยุธยา-เสนา</StreetName>
+				<ThambolName>น้ำเต้า</ThambolName>
+				<AmphurName>บางบาล</AmphurName>
+				<ProvinceName>พระนครศรีอยุธยา</ProvinceName>
+				<Postcode>13250</Postcode>
+				<TelNumber>-</TelNumber>
+			</TaxpayerAddressInfo>
+		</TaxpayerInfo>
+		<GoodsListInfo>
+			<GoodsEntryInfo>
+				<ProductCode>70010101</ProductCode>
+				<CategoryCode1>39K</CategoryCode1>
+				<CategoryCode2>00</CategoryCode2>
+				<CategoryCode3>000</CategoryCode3>
+				<CategoryCode4>011</CategoryCode4>
+				<CategoryCode5>CA</CategoryCode5>
+				<UnitCode>07</UnitCode>
+				<RateFlag>Q</RateFlag>
+				<TaxQuantity>155.0000</TaxQuantity>
+				<TaxQuantityNumber>630000.0000</TaxQuantityNumber>
+				<TaxQuantityPerUnit>8.0000</TaxQuantityPerUnit>
+				<TaxValue>48.0000</TaxValue>
+				<PriceFlag>P</PriceFlag>
+				<InformPrice>36.3700</InformPrice>
+				<DeclarePrice>0.0000</DeclarePrice>
+				<UnitPrice>36.3700</UnitPrice>
+				<GoodsNum>630000</GoodsNum>
+				<GoodsValue>36370000.0000</GoodsValue>
+				<TaxAmount>16857288.0000</TaxAmount>
+				<SeqNo>1</SeqNo>
+				<ProductTypeDesc>เบียร์</ProductTypeDesc>
+				<GoodsDesc>ช้าง   0.630 6.0000</GoodsDesc>
+				<Degree>6</Degree>
+				<GoodsSize>0.63</GoodsSize>
+				<GoodsPiece>1000000</GoodsPiece>
+				<GoodsQuantity>630000.0000</GoodsQuantity>
+				<TaxByValue>10998288.0000</TaxByValue>
+				<TaxByQuantity>5859000.0000</TaxByQuantity>
+				<TaxByQuantityOver>0.0000</TaxByQuantityOver>
+				<TaxByQuantityWithOver>16857288.0000</TaxByQuantityWithOver>
+				<NetTaxByValue>10998288.00</NetTaxByValue>
+				<NetTaxByQuantity>5859000.00</NetTaxByQuantity>
+			</GoodsEntryInfo>
+			<GoodsEntryInfo>
+				<ProductCode>70010101</ProductCode>
+				<CategoryCode1>39K</CategoryCode1>
+				<CategoryCode2>00</CategoryCode2>
+				<CategoryCode3>000</CategoryCode3>
+				<CategoryCode4>012</CategoryCode4>
+				<CategoryCode5>27</CategoryCode5>
+				<UnitCode>07</UnitCode>
+				<RateFlag>Q</RateFlag>
+				<TaxQuantity>155.0000</TaxQuantity>
+				<TaxQuantityNumber>1280000.0000</TaxQuantityNumber>
+				<TaxQuantityPerUnit>8.0000</TaxQuantityPerUnit>
+				<TaxValue>48.0000</TaxValue>
+				<PriceFlag>P</PriceFlag>
+				<InformPrice>36.3700</InformPrice>
+				<DeclarePrice>0.0000</DeclarePrice>
+				<UnitPrice>36.3700</UnitPrice>
+				<GoodsNum>1280000</GoodsNum>
+				<GoodsValue>72740000.0000</GoodsValue>
+				<TaxAmount>35043328.0000</TaxAmount>
+				<SeqNo>2</SeqNo>
+				<ProductTypeDesc>เบียร์</ProductTypeDesc>
+				<GoodsDesc>ช้าง   0.640 6.4000</GoodsDesc>
+				<Degree>6.4</Degree>
+				<GoodsSize>0.64</GoodsSize>
+				<GoodsPiece>2000000</GoodsPiece>
+				<GoodsQuantity>1280000.0000</GoodsQuantity>
+				<TaxByValue>22345728.0000</TaxByValue>
+				<TaxByQuantity>12697600.0000</TaxByQuantity>
+				<TaxByQuantityOver>0.0000</TaxByQuantityOver>
+				<TaxByQuantityWithOver>35043328.0000</TaxByQuantityWithOver>
+				<NetTaxByValue>22345728.00</NetTaxByValue>
+				<NetTaxByQuantity>12697600.00</NetTaxByQuantity>
+			</GoodsEntryInfo>
+			<GoodsEntryInfo>
+				<ProductCode>70010101</ProductCode>
+				<CategoryCode1>39K</CategoryCode1>
+				<CategoryCode2>00</CategoryCode2>
+				<CategoryCode3>000</CategoryCode3>
+				<CategoryCode4>055</CategoryCode4>
+				<CategoryCode5>27</CategoryCode5>
+				<UnitCode>08</UnitCode>
+				<RateFlag>Q</RateFlag>
+				<TaxQuantity>155.0000</TaxQuantity>
+				<TaxQuantityNumber>990000.0000</TaxQuantityNumber>
+				<TaxQuantityPerUnit>8.0000</TaxQuantityPerUnit>
+				<TaxValue>48.0000</TaxValue>
+				<PriceFlag>P</PriceFlag>
+				<InformPrice>21.3400</InformPrice>
+				<DeclarePrice>0.0000</DeclarePrice>
+				<UnitPrice>21.3400</UnitPrice>
+				<GoodsNum>990000</GoodsNum>
+				<GoodsValue>64020000.0000</GoodsValue>
+				<TaxAmount>19961568.0000</TaxAmount>
+				<SeqNo>3</SeqNo>
+				<ProductTypeDesc>เบียร์</ProductTypeDesc>
+				<GoodsDesc>ช้าง   0.330 6.4000</GoodsDesc>
+				<Degree>6.4</Degree>
+				<GoodsSize>0.33</GoodsSize>
+				<GoodsPiece>3000000</GoodsPiece>
+				<GoodsQuantity>990000.0000</GoodsQuantity>
+				<TaxByValue>10140768.0000</TaxByValue>
+				<TaxByQuantity>9820800.0000</TaxByQuantity>
+				<TaxByQuantityOver>0.0000</TaxByQuantityOver>
+				<TaxByQuantityWithOver>19961568.0000</TaxByQuantityWithOver>
+				<NetTaxByValue>10140768.00</NetTaxByValue>
+				<NetTaxByQuantity>9820800.00</NetTaxByQuantity>
+			</GoodsEntryInfo>
+			<GoodsEntryInfo>
+				<ProductCode>70010101</ProductCode>
+				<CategoryCode1>39K</CategoryCode1>
+				<CategoryCode2>00</CategoryCode2>
+				<CategoryCode3>000</CategoryCode3>
+				<CategoryCode4>055</CategoryCode4>
+				<CategoryCode5>CA</CategoryCode5>
+				<UnitCode>07</UnitCode>
+				<RateFlag>Q</RateFlag>
+				<TaxQuantity>155.0000</TaxQuantity>
+				<TaxQuantityNumber>1320000.0000</TaxQuantityNumber>
+				<TaxQuantityPerUnit>8.0000</TaxQuantityPerUnit>
+				<TaxValue>48.0000</TaxValue>
+				<PriceFlag>P</PriceFlag>
+				<InformPrice>21.3400</InformPrice>
+				<DeclarePrice>0.0000</DeclarePrice>
+				<UnitPrice>21.3400</UnitPrice>
+				<GoodsNum>1320000</GoodsNum>
+				<GoodsValue>85360000.0000</GoodsValue>
+				<TaxAmount>25797024.0000</TaxAmount>
+				<SeqNo>4</SeqNo>
+				<ProductTypeDesc>เบียร์</ProductTypeDesc>
+				<GoodsDesc>ช้าง   0.330 6.0000</GoodsDesc>
+				<Degree>6</Degree>
+				<GoodsSize>0.33</GoodsSize>
+				<GoodsPiece>4000000</GoodsPiece>
+				<GoodsQuantity>1320000.0000</GoodsQuantity>
+				<TaxByValue>13521024.0000</TaxByValue>
+				<TaxByQuantity>12276000.0000</TaxByQuantity>
+				<TaxByQuantityOver>0.0000</TaxByQuantityOver>
+				<TaxByQuantityWithOver>25797024.0000</TaxByQuantityWithOver>
+				<NetTaxByValue>13521024.00</NetTaxByValue>
+				<NetTaxByQuantity>12276000.00</NetTaxByQuantity>
+			</GoodsEntryInfo>
+			<GoodsEntryInfo>
+				<ProductCode>70010101</ProductCode>
+				<CategoryCode1>39K</CategoryCode1>
+				<CategoryCode2>00</CategoryCode2>
+				<CategoryCode3>000</CategoryCode3>
+				<CategoryCode4>055</CategoryCode4>
+				<CategoryCode5>CA</CategoryCode5>
+				<UnitCode>08</UnitCode>
+				<RateFlag>Q</RateFlag>
+				<TaxQuantity>155.0000</TaxQuantity>
+				<TaxQuantityNumber>1650000.0000</TaxQuantityNumber>
+				<TaxQuantityPerUnit>8.0000</TaxQuantityPerUnit>
+				<TaxValue>48.0000</TaxValue>
+				<PriceFlag>P</PriceFlag>
+				<InformPrice>21.3400</InformPrice>
+				<DeclarePrice>0.0000</DeclarePrice>
+				<UnitPrice>21.3400</UnitPrice>
+				<GoodsNum>1650000</GoodsNum>
+				<GoodsValue>106700000.0000</GoodsValue>
+				<TaxAmount>32246280.0000</TaxAmount>
+				<SeqNo>5</SeqNo>
+				<ProductTypeDesc>เบียร์</ProductTypeDesc>
+				<GoodsDesc>ช้าง   0.330 6.0000</GoodsDesc>
+				<Degree>6</Degree>
+				<GoodsSize>0.33</GoodsSize>
+				<GoodsPiece>5000000</GoodsPiece>
+				<GoodsQuantity>1650000.0000</GoodsQuantity>
+				<TaxByValue>16901280.0000</TaxByValue>
+				<TaxByQuantity>15345000.0000</TaxByQuantity>
+				<TaxByQuantityOver>0.0000</TaxByQuantityOver>
+				<TaxByQuantityWithOver>32246280.0000</TaxByQuantityWithOver>
+				<NetTaxByValue>16901280.00</NetTaxByValue>
+				<NetTaxByQuantity>15345000.00</NetTaxByQuantity>
+			</GoodsEntryInfo>
+			<GoodsEntryInfo>
+				<ProductCode>70010101</ProductCode>
+				<CategoryCode1>39M</CategoryCode1>
+				<CategoryCode2>00</CategoryCode2>
+				<CategoryCode3>000</CategoryCode3>
+				<CategoryCode4>007</CategoryCode4>
+				<CategoryCode5>01</CategoryCode5>
+				<UnitCode>08</UnitCode>
+				<RateFlag>Q</RateFlag>
+				<TaxQuantity>155.0000</TaxQuantity>
+				<TaxQuantityNumber>1920000.0000</TaxQuantityNumber>
+				<TaxQuantityPerUnit>8.0000</TaxQuantityPerUnit>
+				<TaxValue>48.0000</TaxValue>
+				<PriceFlag>P</PriceFlag>
+				<InformPrice>19.0000</InformPrice>
+				<DeclarePrice>0.0000</DeclarePrice>
+				<UnitPrice>19.0000</UnitPrice>
+				<GoodsNum>1920000</GoodsNum>
+				<GoodsValue>114000000.0000</GoodsValue>
+				<TaxAmount>32870400.0000</TaxAmount>
+				<SeqNo>6</SeqNo>
+				<ProductTypeDesc>เบียร์</ProductTypeDesc>
+				<GoodsDesc>อาชา   0.320 5.0000</GoodsDesc>
+				<Degree>5</Degree>
+				<GoodsSize>0.32</GoodsSize>
+				<GoodsPiece>6000000</GoodsPiece>
+				<GoodsQuantity>1920000.0000</GoodsQuantity>
+				<TaxByValue>17510400.0000</TaxByValue>
+				<TaxByQuantity>15360000.0000</TaxByQuantity>
+				<TaxByQuantityOver>0.0000</TaxByQuantityOver>
+				<TaxByQuantityWithOver>32870400.0000</TaxByQuantityWithOver>
+				<NetTaxByValue>17510400.00</NetTaxByValue>
+				<NetTaxByQuantity>15360000.00</NetTaxByQuantity>
+			</GoodsEntryInfo>
+			<GoodsEntryInfo>
+				<ProductCode>70010101</ProductCode>
+				<CategoryCode1>39M</CategoryCode1>
+				<CategoryCode2>00</CategoryCode2>
+				<CategoryCode3>000</CategoryCode3>
+				<CategoryCode4>007</CategoryCode4>
+				<CategoryCode5>97</CategoryCode5>
+				<UnitCode>08</UnitCode>
+				<RateFlag>Q</RateFlag>
+				<TaxQuantity>155.0000</TaxQuantity>
+				<TaxQuantityNumber>2240000.0000</TaxQuantityNumber>
+				<TaxQuantityPerUnit>8.0000</TaxQuantityPerUnit>
+				<TaxValue>48.0000</TaxValue>
+				<PriceFlag>P</PriceFlag>
+				<InformPrice>19.0000</InformPrice>
+				<DeclarePrice>0.0000</DeclarePrice>
+				<UnitPrice>19.0000</UnitPrice>
+				<GoodsNum>2240000</GoodsNum>
+				<GoodsValue>133000000.0000</GoodsValue>
+				<TaxAmount>38348800.0000</TaxAmount>
+				<SeqNo>7</SeqNo>
+				<ProductTypeDesc>เบียร์</ProductTypeDesc>
+				<GoodsDesc>อาชา   0.320 4.9000</GoodsDesc>
+				<Degree>4.9</Degree>
+				<GoodsSize>0.32</GoodsSize>
+				<GoodsPiece>7000000</GoodsPiece>
+				<GoodsQuantity>2240000.0000</GoodsQuantity>
+				<TaxByValue>20428800.0000</TaxByValue>
+				<TaxByQuantity>17920000.0000</TaxByQuantity>
+				<TaxByQuantityOver>0.0000</TaxByQuantityOver>
+				<TaxByQuantityWithOver>38348800.0000</TaxByQuantityWithOver>
+				<NetTaxByValue>20428800.00</NetTaxByValue>
+				<NetTaxByQuantity>17920000.00</NetTaxByQuantity>
+			</GoodsEntryInfo>
+<!-- 			<GoodsEntryInfo> -->
+<!-- 				<ProductCode>70010101</ProductCode> -->
+<!-- 				<CategoryCode1>39M</CategoryCode1> -->
+<!-- 				<CategoryCode2>00</CategoryCode2> -->
+<!-- 				<CategoryCode3>000</CategoryCode3> -->
+<!-- 				<CategoryCode4>007</CategoryCode4> -->
+<!-- 				<CategoryCode5>97</CategoryCode5> -->
+<!-- 				<UnitCode>08</UnitCode> -->
+<!-- 				<RateFlag>Q</RateFlag> -->
+<!-- 				<TaxQuantity>155.0000</TaxQuantity> -->
+<!-- 				<TaxQuantityNumber>2240000.0000</TaxQuantityNumber> -->
+<!-- 				<TaxQuantityPerUnit>8.0000</TaxQuantityPerUnit> -->
+<!-- 				<TaxValue>48.0000</TaxValue> -->
+<!-- 				<PriceFlag>P</PriceFlag> -->
+<!-- 				<InformPrice>19.0000</InformPrice> -->
+<!-- 				<DeclarePrice>0.0000</DeclarePrice> -->
+<!-- 				<UnitPrice>19.0000</UnitPrice> -->
+<!-- 				<GoodsNum>2240000</GoodsNum> -->
+<!-- 				<GoodsValue>133000000.0000</GoodsValue> -->
+<!-- 				<TaxAmount>38348800.0000</TaxAmount> -->
+<!-- 				<SeqNo>8</SeqNo> -->
+<!-- 				<ProductTypeDesc>เบียร์</ProductTypeDesc> -->
+<!-- 				<GoodsDesc>อาชา   0.320 4.9000</GoodsDesc> -->
+<!-- 				<Degree>4.9</Degree> -->
+<!-- 				<GoodsSize>0.32</GoodsSize> -->
+<!-- 				<GoodsPiece>7000000</GoodsPiece> -->
+<!-- 				<GoodsQuantity>2240000.0000</GoodsQuantity> -->
+<!-- 				<TaxByValue>20428800.0000</TaxByValue> -->
+<!-- 				<TaxByQuantity>17920000.0000</TaxByQuantity> -->
+<!-- 				<TaxByQuantityOver>0.0000</TaxByQuantityOver> -->
+<!-- 				<TaxByQuantityWithOver>38348800.0000</TaxByQuantityWithOver> -->
+<!-- 				<NetTaxByValue>20428800.00</NetTaxByValue> -->
+<!-- 				<NetTaxByQuantity>17920000.00</NetTaxByQuantity> -->
+<!-- 			</GoodsEntryInfo> -->
+		</GoodsListInfo>
+		<SummaryInfo>
+			<SumAllTaxByValue>111846288.00</SumAllTaxByValue>
+			<SumAllTaxByQuantity>89278400.00</SumAllTaxByQuantity>
+			<SumAllTax>201124688.00</SumAllTax>
+			<TaxLessType/>
+			<TaxLessFrom>789456123</TaxLessFrom>
+			<TaxLessAmount>8000000.00</TaxLessAmount>
+			<TaxDeductionOnBookNo>999888777888</TaxDeductionOnBookNo>
+			<TaxDeductionOnBookAmount>7000000.00</TaxDeductionOnBookAmount>
+			<PaymentExciseAmount>201124688.00</PaymentExciseAmount>
+			<PaymentMunicipalAmount>20112468.80</PaymentMunicipalAmount>
+			<PaymentFundHealthAmount>4022493.76</PaymentFundHealthAmount>
+			<PaymentFundTVAmount>3016870.32</PaymentFundTVAmount>
+			<PaymentFundSportAmount>4022493.76</PaymentFundSportAmount>
+			<MoiRate>10.00</MoiRate>
+			<PrintType>1</PrintType>
+			<PaymentExciseAndMunicipalTaxAmount>206237156.80</PaymentExciseAndMunicipalTaxAmount>
+			<PaymentOtherAmount>0.00</PaymentOtherAmount>
+			<PaymentNetTaxAmount>206237156.80</PaymentNetTaxAmount>
+		</SummaryInfo>
+		<FundListInfo>
+			<FundEntryInfo>
+				<FundType>S</FundType>
+				<FundAmt>315237.96</FundAmt>
+				<FundRate>2.00</FundRate>
+				<CreditAmt>6304.76</CreditAmt>
+				<NetAmt>308933.20</NetAmt>
+			</FundEntryInfo>
+			<FundEntryInfo>
+				<FundType>T</FundType>
+				<FundAmt>236428.47</FundAmt>
+				<FundRate>1.50</FundRate>
+				<CreditAmt>3546.43</CreditAmt>
+				<NetAmt>232882.04</NetAmt>
+			</FundEntryInfo>
+			<FundEntryInfo>
+				<FundType>K</FundType>
+				<FundAmt>315237.96</FundAmt>
+				<FundRate>2.00</FundRate>
+				<CreditAmt>6304.76</CreditAmt>
+				<NetAmt>308933.20</NetAmt>
+			</FundEntryInfo>
+		</FundListInfo>
+	</SR12011Info>
+</XmlData>

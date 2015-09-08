@@ -10,6 +10,7 @@
 		<InternetUniqueId>65256</InternetUniqueId>
 		<IpAddress>111.22.33.44</IpAddress>
 		<SubmissionEmail>my@mail.com</SubmissionEmail>
+		<SubmissionDate></SubmissionDate>
 	</SubmitOnlineHeader>
 	<SR12011Info>
 		<TaxpayerInfo>
@@ -238,8 +239,9 @@
 			<TaxLessType/>
 			<TaxLessFrom/>
 			<TaxLessAmount/>
-			<TaxDeductionOnBookNo/>
-			<TaxDeductionOnBookAmount/>
+<!-- 			<TaxDeductionOnBookNo>0604.0600/1852</TaxDeductionOnBookNo> -->
+			<TaxDeductionOnBookNo></TaxDeductionOnBookNo>
+			<TaxDeductionOnBookAmount>5000.00</TaxDeductionOnBookAmount>
 			<PaymentExciseAmount>14328998.00</PaymentExciseAmount>
 			<PaymentMunicipalPercent>10</PaymentMunicipalPercent>
 			<PaymentMunicipalAmount>1432899.80</PaymentMunicipalAmount>
@@ -252,5 +254,31 @@
 			<PaymentFundTVAmount>236428.47</PaymentFundTVAmount>
 			<PaymentFundSportAmount>315237.96</PaymentFundSportAmount>
 		</SummaryInfo>
+		<FundListInfo>
+			<FundEntryInfo>
+				<FundType>S</FundType>
+				<FundAmt>315237.96</FundAmt>
+				<FundRate>2.00</FundRate>
+<!-- 				<CreditAmt>6304.76</CreditAmt> -->
+				<CreditAmt>0.00</CreditAmt>
+				<NetAmt>308933.20</NetAmt>
+			</FundEntryInfo>
+			<FundEntryInfo>
+				<FundType>T</FundType>
+				<FundAmt>236428.47</FundAmt>
+				<FundRate>1.50</FundRate>
+<!-- 				<CreditAmt>3546.43</CreditAmt> -->
+				<CreditAmt>0.00</CreditAmt>
+				<NetAmt>232882.04</NetAmt>
+			</FundEntryInfo>
+			<FundEntryInfo>
+				<FundType>K</FundType>
+				<FundAmt>315237.96</FundAmt>
+				<FundRate>2.00</FundRate>
+<!-- 				<CreditAmt>6304.76</CreditAmt> -->
+				<CreditAmt>0.00</CreditAmt>
+				<NetAmt>308933.20</NetAmt>
+			</FundEntryInfo>
+		</FundListInfo>
 	</SR12011Info>
 </XmlData>
