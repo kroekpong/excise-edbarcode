@@ -54,7 +54,7 @@
 		</md-button>
 		<img src="img/icons/logo.png" width="50" style="margin-left: 33%;cursor: pointer;" ng-click="gotoHome()">
 		<h2>
-			<span>โปรแกรมชำระภาษีสุราโดยบาโค้ด</span>
+			<span>โปรแกรมชำระภาษีสุราโดยบาร์โค้ต</span>
 <!-- 			<span>{{toolbarTitle}}</span> -->
 		</h2>
 		<span style="margin-left: 20%;font-size: 12px;margin-top: 20px;">โปรแกรมเวอร์ชัน {{versionPrograme}}<br> ปรับปรุงข้อมูลล่าสุด {{updateProgramDate}}</span>
@@ -93,7 +93,7 @@
 				ng-repeat="setting in settings"
 				ng-click="navigateTo(setting, $event)"> <md-icon
 				class="material-icons">{{setting.iconName}}</md-icon>
-			<p>{{setting.label}}</p>
+			<p style="font-size: 14px;">{{setting.label}}</p>
 			<md-switch
 				class="md-secondary"
 				ng-model="setting.enabled"

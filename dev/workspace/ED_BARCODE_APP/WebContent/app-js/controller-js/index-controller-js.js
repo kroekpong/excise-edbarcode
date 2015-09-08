@@ -88,7 +88,7 @@ module.controller('AppCtrl', function($scope,$rootScope, $mdSidenav, $mdUtil, $l
 		"label" : "ประวัติการทำรายการ"
 	}, {
 		"iconName" : "inbox",
-		"label" : "ปรับปรุงข้อมูลผู้ประกอบการ"
+		"label" : "ปรับปรุงข้อมูลสินค้าและอัตราภาษี"
 	}, {
 		"iconName" : "notifications",
 		"label" : "ฉบับร่าง"
