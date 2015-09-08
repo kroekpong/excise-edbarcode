@@ -3,7 +3,6 @@ package th.go.excise.edbarcode.report.service;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -16,10 +15,7 @@ import java.util.UUID;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.design.JRDesignElement;
-import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.export.ExporterInputItem;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleExporterInputItem;
@@ -29,9 +25,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import th.go.excise.edbarcode.report.bean.FundEntryInfo;
 import th.go.excise.edbarcode.report.bean.GoodsEntryReport;
 import th.go.excise.edbarcode.report.bean.SR12011FormReport;
-import th.go.excise.edbarcode.report.bean.SummaryReport;
 import th.go.excise.edbarcode.report.bean.TaxpayerInfoReport;
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 import th.go.excise.edbarcode.report.common.exception.EDBarcodeReportException;
@@ -51,6 +47,10 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		byte[] content = null;
 		
 		try {
+			// Generate formId
+			String formId = UUID.randomUUID().toString();
+			form.setFormId(formId);
+			
 			List<ExporterInputItem> items = new ArrayList<ExporterInputItem>();
 			items.addAll(getSR12011ExportInputItemList(form));
 			items.addAll(getFundExportInputItemList(form));
@@ -98,6 +98,10 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		try {
 			SR12011FormReport form = EDBarcodeReportUtil.prepareDataWithXmlFile(xmlFile);
 			form.getSummaryReport().setReferenceNumber(referenceNumber);
+			
+			// Generate formId
+			String formId = UUID.randomUUID().toString();
+			form.setFormId(formId);
 			
 			File outputDic = new File(outputPath);
 			if (outputDic.mkdirs()) {
@@ -273,7 +277,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		JRBeanCollectionDataSource dataSource = null;
 		List<JasperPrint> jasperPrintList = new ArrayList<JasperPrint>(totalPages);
 		StringBuilder builder = null;
-		String formId = UUID.randomUUID().toString();
+		SR12011BarcodeData sr12011BarcodeData = new SR12011BarcodeData();
 		
 		for (int i = 0; i < totalPages; i++) {
 			
@@ -300,30 +304,29 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			builder = new StringBuilder();
 			
 			// set page information
-			generateBarcodePageData(builder, formId, (i + 1), totalPages);
+			sr12011BarcodeData.generateBarcodePageData(builder, form.getFormId(), (i + 1), totalPages);
 			
 			// Offline
 			if (!isRefNumFlag) {
 				
 				// Set header data in barcode
 				if (i == 0) {
-					generateBarcodeHeaderData(builder, form);
+					sr12011BarcodeData.generateBarcodeHeaderData(builder, form);
 				}
 				
 				// Set detail data in barcode
-				generateBarcodeDetailData(builder, goodsPerPageList.get(i));
+				sr12011BarcodeData.generateBarcodeDetailData(builder, goodsPerPageList.get(i));
 				
 				// Set summary data in last page
 				if (i == (totalPages - 1)) {
-					generateBarcodeSummaryData(builder, form.getSummaryReport());
+					sr12011BarcodeData.generateBarcodeSummaryData(builder, form.getSummaryReport());
 				}
 				
 			// Online
 			} else {
-				generateBarcodeReferenceData(builder, form.getSummaryReport().getReferenceNumber());
+				sr12011BarcodeData.generateBarcodeReferenceData(builder, form.getSummaryReport().getReferenceNumber());
 			}
 			
-			//System.out.println(builder);
 			logger.debug("Data in barcode:\n" + builder);
 			paramMap.put("barcodeData", builder.toString());
 			
@@ -338,7 +341,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			// Online
 			} else {
 				// Resize QR-Code
-				jasperPrint = ReportUtil.complieReportWithJasperDesign(getJasperDesignWithResizeQrCode(), paramMap, dataSource);
+				jasperPrint = ReportUtil.complieReportWithJasperDesign(sr12011BarcodeData.getJasperDesignWithResizeQrCode(), paramMap, dataSource);
 			}
 			
 			//jasperPrint = ReportUtil.complieReportWithJrxml(ReportConstant.REPORT.SR120_11, paramMap, dataSource);
@@ -356,23 +359,10 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.SSS1_01));
 		
-		// Fund
-		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
-		String paymentExciseAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount()));
-		String paymentExciseAmountBaht = paymentExciseAmount.split("\\.")[0];
-		String paymentExciseAmountStang = paymentExciseAmount.split("\\.")[1];
-		String paymentFundHealthAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundHealthAmount()));
-		String paymentFundHealthAmountBaht = paymentFundHealthAmount.split("\\.")[0];
-		String paymentFundHealthAmountStang = paymentFundHealthAmount.split("\\.")[1];
-		String paymentFundHealthAmountString = ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentFundHealthAmount());
+		// Get FundEntry from fundList
+		FundEntryInfo fundEntry = getFundEntryFromFundList(form.getFundListInfo(), ReportConstant.FUND_TYPE.SSS1_01);
 		
-		paramMap.put("paymentExciseAmountBaht", paymentExciseAmountBaht);
-		paramMap.put("paymentExciseAmountStang", paymentExciseAmountStang);
-		paramMap.put("paymentFundHealthAmountBaht", paymentFundHealthAmountBaht);
-		paramMap.put("paymentFundHealthAmountStang", paymentFundHealthAmountStang);
-		paramMap.put("paymentFundHealthAmountString", paymentFundHealthAmountString);
-		
-		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form);
+		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry);
 		
 		logger.info("Inside getSSS101Report() - End");
 		
@@ -385,23 +375,10 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.SST1_01));
 		
-		// Fund
-		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
-		String paymentExciseAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount()));
-		String paymentExciseAmountBaht = paymentExciseAmount.split("\\.")[0];
-		String paymentExciseAmountStang = paymentExciseAmount.split("\\.")[1];
-		String paymentFundTVAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundTVAmount()));
-		String paymentFundTVAmountBaht = paymentFundTVAmount.split("\\.")[0];
-		String paymentFundTVAmountStang = paymentFundTVAmount.split("\\.")[1];
-		String paymentFundTVAmountString = ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentFundTVAmount());
+		// Get FundEntry from fundList
+		FundEntryInfo fundEntry = getFundEntryFromFundList(form.getFundListInfo(), ReportConstant.FUND_TYPE.SST1_01);
 		
-		paramMap.put("paymentExciseAmountBaht", paymentExciseAmountBaht);
-		paramMap.put("paymentExciseAmountStang", paymentExciseAmountStang);
-		paramMap.put("paymentFundTVAmountBaht", paymentFundTVAmountBaht);
-		paramMap.put("paymentFundTVAmountStang", paymentFundTVAmountStang);
-		paramMap.put("paymentFundTVAmountString", paymentFundTVAmountString);
-		
-		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SST1_01, paramMap, form);
+		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry);
 		
 		logger.info("Inside getSST101Report() - End");
 		
@@ -414,44 +391,72 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.KKT1_01));
 		
-		// Fund
-		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
-		String paymentExciseAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount()));
-		String paymentExciseAmountBaht = paymentExciseAmount.split("\\.")[0];
-		String paymentExciseAmountStang = paymentExciseAmount.split("\\.")[1];
-		String paymentFundSportAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentFundSportAmount()));
-		String paymentFundSportAmountBaht = paymentFundSportAmount.split("\\.")[0];
-		String paymentFundSportAmountStang = paymentFundSportAmount.split("\\.")[1];
-		String paymentFundSportAmountString = ThaiNumberUtils.toThaiBaht(form.getSummaryReport().getPaymentFundSportAmount());
+		// Get FundEntry from fundList
+		FundEntryInfo fundEntry = getFundEntryFromFundList(form.getFundListInfo(), ReportConstant.FUND_TYPE.KKT1_01);
 		
-		paramMap.put("paymentExciseAmountBaht", paymentExciseAmountBaht);
-		paramMap.put("paymentExciseAmountStang", paymentExciseAmountStang);
-		paramMap.put("paymentFundSportAmountBaht", paymentFundSportAmountBaht);
-		paramMap.put("paymentFundSportAmountStang", paymentFundSportAmountStang);
-		paramMap.put("paymentFundSportAmountString", paymentFundSportAmountString);
-		
-		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.KKT1_01, paramMap, form);
+		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry);
 		
 		logger.info("Inside getKKT101Report() - End");
 		
 		return jasperPrint;
 	}
 	
-	private JasperPrint getFundReport(String fileName, Map<String, Object> paramMap, SR12011FormReport form) throws JRException, IOException, ParseException {
+	private JasperPrint getFundReport(String fileName, Map<String, Object> paramMap, SR12011FormReport form, FundEntryInfo fundEntry) throws JRException, IOException, ParseException {
 		logger.info("Prepare data for Fund Report");
 		
+		// Header Data
 		paramMap.put("companyName", form.getTaxpayerInfoReport().getCompanyName());
 		paramMap.put("taxpayerName", form.getTaxpayerInfoReport().getTaxpayerName());
 		paramMap.put("tin", form.getTaxpayerInfoReport().getTin());
 		putAddressData(paramMap, form.getTaxpayerInfoReport());
 		
+		boolean isRefNumFlag = StringUtils.isNotEmpty(form.getSummaryReport().getReferenceNumber());
+		
 		// For Staff
-		paramMap.put("referenceNumber", form.getSummaryReport().getReferenceNumber());
-		if (StringUtils.isNotEmpty(form.getSummaryReport().getReferenceNumber())) {
+		if (isRefNumFlag) {
+			paramMap.put("referenceNumber", form.getSummaryReport().getReferenceNumber());
 			paramMap.put("submissionDate", EDBarcodeReportUtil.toThaiDateFormat(form.getSummaryReport().getSubmissionDate()));
 		} else {
+			paramMap.put("referenceNumber", "");
 			paramMap.put("submissionDate", "");
 		}
+		
+		// Summary Data
+		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
+		
+		// Excise Amount
+		String exciseAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount()));
+		paramMap.put("exciseAmountBaht", exciseAmount.split("\\.")[0]);
+		paramMap.put("exciseAmountStang", exciseAmount.split("\\.")[1]);
+		
+		// Fund, Credit and Net Amount
+		String fundAmount = decimalFormat.format(new BigDecimal(fundEntry.getFundAmt()));
+		String creditAmount = decimalFormat.format(new BigDecimal(fundEntry.getCreditAmt()));
+		String netAmount = decimalFormat.format(new BigDecimal(fundEntry.getNetAmt()));
+		
+		paramMap.put("fundAmountBaht", fundAmount.split("\\.")[0]);
+		paramMap.put("fundAmountStang", fundAmount.split("\\.")[1]);
+		paramMap.put("taxDeductionOnBookNo", form.getSummaryReport().getTaxDeductionOnBookNo());
+		paramMap.put("creditAmountBaht", creditAmount.split("\\.")[0]);
+		paramMap.put("creditAmountStang", creditAmount.split("\\.")[1]);
+		paramMap.put("netAmountBaht", netAmount.split("\\.")[0]);
+		paramMap.put("netAmountStang", netAmount.split("\\.")[1]);
+		paramMap.put("netAmountString", ThaiNumberUtils.toThaiBaht(netAmount.replaceAll(",", "")));
+		
+		
+		// Prepare data in barcode
+		StringBuilder builder = new StringBuilder();
+		FundBarcodeData fundBarcodeData = new FundBarcodeData();
+		if (!isRefNumFlag) {
+			// Offline
+			fundBarcodeData.generateBarcodeForFundReport(builder, form, fundEntry);
+		} else {
+			// Online
+			fundBarcodeData.generateBarcodeForFundReportRef(builder, form, fundEntry.getFundType());
+		}
+		
+		logger.debug("Data in barcode:\n" + builder);
+		paramMap.put("barcodeData", builder.toString());
 		
 		//return ReportUtil.complieReportWithJrxml(fileName, paramMap);
 		return ReportUtil.getJasperPrintWithJasper(fileName, paramMap);
@@ -469,144 +474,15 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("telNumber", taxpayerInfo.getTaxpayerAddressReport().getTelNumber());
 	}
 	
-	private void generateBarcodePageData(StringBuilder builder, String formId, int currentPage, int totalPage) {
-		builder.append(ReportConstant.EVENT_CODE.PAGE);
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(formId);
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(currentPage);
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(totalPage);
-	}
-	
-	private void generateBarcodeHeaderData(StringBuilder builder, SR12011FormReport form) {
-		builder.append(ReportConstant.SEPERATE_LINE);
-		builder.append(ReportConstant.EVENT_CODE.HEADER);
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(form.getTaxpayerInfoReport().getLicenseNo());
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(form.getTaxpayerInfoReport().getCusId());
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(form.getTaxpayerInfoReport().getTaxpayerId());
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(form.getSummaryReport().getPrintType());
-	}
-	
-	private void generateBarcodeDetailData(StringBuilder builder, List<GoodsEntryReport> goodsEntryList) {
-		for (GoodsEntryReport goodsEntry : goodsEntryList) {
-			builder.append(ReportConstant.SEPERATE_LINE);
-			builder.append(ReportConstant.EVENT_CODE.DETAIL);
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getSeqNo());
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getProductTypeCode());
-			builder.append("#");
-			builder.append(goodsEntry.getCategoryCode1());
-			builder.append("#");
-			builder.append(goodsEntry.getCategoryCode2());
-			builder.append("#");
-			builder.append(goodsEntry.getCategoryCode3());
-			builder.append("#");
-			builder.append(goodsEntry.getCategoryCode4());
-			builder.append("#");
-			builder.append(goodsEntry.getCategoryCode5());
-			builder.append("#");
-			builder.append(goodsEntry.getUnitCode());			
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getGoodsPiece().replaceAll(",", ""));
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getGoodsQuantity().replaceAll(",", ""));
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getUnitPrice().replaceAll(",", ""));
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getDeclarePrice().replaceAll(",", ""));
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getTaxByValue().replaceAll(",", ""));
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getTaxByQuantity().replaceAll(",", ""));
-			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getTaxByQuantityOver().replaceAll(",", ""));
+	private FundEntryInfo getFundEntryFromFundList(List<FundEntryInfo> fundList, String fundType) {
+		FundEntryInfo fundEntry = null;
+		for (FundEntryInfo fundEntryInfo : fundList) {
+			if (fundType.equals(fundEntryInfo.getFundType())) {
+				fundEntry = fundEntryInfo;
+				break;
+			}
 		}
-	}
-	
-	private void generateBarcodeSummaryData(StringBuilder builder, SummaryReport summary) {
-		builder.append(ReportConstant.SEPERATE_LINE);
-		builder.append(ReportConstant.EVENT_CODE.SUMMARY);
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getSumAllTaxByValue().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getSumAllTaxByQuantity().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getTaxLessFrom());
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getTaxLessAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getTaxDeductionOnBookNo());
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getTaxDeductionOnBookAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentExciseAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentMunicipalPercent());
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentMunicipalAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentExciseAndMunicipalTaxAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentOtherAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentNetTaxAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentFundHealthAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentFundTVAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentFundSportAmount().replaceAll(",", ""));
-	}
-	
-	private void generateBarcodeReferenceData(StringBuilder builder, String referenceNumber) {
-		builder.append(ReportConstant.SEPERATE_LINE);
-		builder.append(ReportConstant.EVENT_CODE.REFERENCE);
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(referenceNumber);
-	}
-	
-	private JasperDesign getJasperDesignWithResizeQrCode() throws JRException {
-		InputStream jrxmlFile = ReportUtil.getReportFile(ReportConstant.REPORT.SR120_11 + "." + ReportConstant.FILE.JRXML);
-		JasperDesign jasperDesign = JRXmlLoader.load(jrxmlFile);
-		
-		final int heightChange = 100;
-		
-		JRDesignElement qrCode = (JRDesignElement) jasperDesign.getBackground().getElementByKey("qrCode");
-		qrCode.setX(100);
-		qrCode.setHeight(55);
-		qrCode.setWidth(55);
-		
-		JRDesignElement summaryLeftFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("summaryLeftFrame");
-		summaryLeftFrame.setHeight(summaryLeftFrame.getHeight() - heightChange);
-		summaryLeftFrame.setY(summaryLeftFrame.getY() + heightChange);
-		
-		JRDesignElement summaryCenterFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("summaryCenterFrame");
-		summaryCenterFrame.setHeight(summaryCenterFrame.getHeight() - heightChange);
-		summaryCenterFrame.setY(summaryCenterFrame.getY() + heightChange);
-		
-		JRDesignElement summaryRightFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("summaryRightFrame");
-		summaryRightFrame.setHeight(summaryRightFrame.getHeight() - heightChange);
-		summaryRightFrame.setY(summaryRightFrame.getY() + heightChange);
-		
-		JRDesignElement summaryFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("summaryFrame");
-		summaryFrame.setY(summaryFrame.getY() + heightChange);
-		
-		JRDesignElement detailFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("detailFrame");
-		detailFrame.setHeight(detailFrame.getHeight() + heightChange);
-		
-		JRDesignElement detailXFrame = null;
-		for (int i = 0; i < 8; i++) {
-			detailXFrame = (JRDesignElement) jasperDesign.getBackground().getElementByKey("d" + (i + 1));
-			detailXFrame.setHeight(detailXFrame.getHeight() + heightChange);
-		}
-		
-		return jasperDesign;
+		return fundEntry;
 	}
 	
 }

@@ -36,7 +36,7 @@ public class EDBarcodeReportUtil {
 			StringReader reader = new StringReader(xml);
 			form = (SR12011FormReport) jaxbUnmarshaller.unmarshal(reader);
 			
-			logger.debug("Object: " + form.toString());
+			//logger.debug("Object: \n" + form.toString());
 
 		} catch (JAXBException e) {
 			logger.error(e.getMessage(), e);
@@ -71,7 +71,7 @@ public class EDBarcodeReportUtil {
 			form.getTaxpayerInfoReport().setTaxpayerId(xmlData.getSubmitOnlineHeader().getTaxpayerId());
 			form.getSummaryReport().setSubmissionDate(xmlData.getSubmitOnlineHeader().getSubmissionDate());
 			
-			//logger.debug("Object: " + form.toString());
+			//logger.debug("Object: \n" + form.toString());
 			
 		} catch (JAXBException e) {
 			logger.error(e.getMessage(), e);

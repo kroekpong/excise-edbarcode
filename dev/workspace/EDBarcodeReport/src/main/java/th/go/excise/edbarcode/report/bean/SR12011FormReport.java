@@ -15,7 +15,10 @@ public class SR12011FormReport {
 	private TaxpayerInfoReport taxpayerInfoReport;
 	private List<GoodsEntryReport> goodsListReport;
 	private SummaryReport summaryReport;
+	private List<FundEntryInfo> fundListInfo;
 	
+	// Internal Data
+	private String formId;
 	
 	@XmlElement(name = "TaxpayerInfo")
 	public TaxpayerInfoReport getTaxpayerInfoReport() {
@@ -45,6 +48,24 @@ public class SR12011FormReport {
 		this.summaryReport = summaryReport;
 	}
 	
+	@XmlElementWrapper(name = "FundListInfo")
+	@XmlElement(name = "FundEntryInfo")
+	public List<FundEntryInfo> getFundListInfo() {
+		return fundListInfo;
+	}
+
+	public void setFundListInfo(List<FundEntryInfo> fundListInfo) {
+		this.fundListInfo = fundListInfo;
+	}
+
+	public String getFormId() {
+		return formId;
+	}
+
+	public void setFormId(String formId) {
+		this.formId = formId;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
