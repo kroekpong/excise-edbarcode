@@ -718,7 +718,6 @@
 			<SumAllTaxByValue>9818.00</SumAllTaxByValue>
 			<SumAllTaxByQuantity>5498.86</SumAllTaxByQuantity>
 			<SumAllTax>15316.86</SumAllTax>
-			<TaxLessType></TaxLessType>
 			<TaxLessFrom></TaxLessFrom>
 			<TaxLessAmount>0.00</TaxLessAmount>
 			<TaxDeductionOnBookNo></TaxDeductionOnBookNo>

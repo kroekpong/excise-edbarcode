@@ -10,7 +10,7 @@
 		<InternetUniqueId>00009862</InternetUniqueId>
 		<IpAddress>192.168.1.16</IpAddress>
 		<SubmissionEmail>my@mail.com</SubmissionEmail>
-		<SubmissionDate></SubmissionDate>
+		<SubmissionDate>20150930</SubmissionDate>
 	</SubmitOnlineHeader>
 	<SR12011Info>
 		<TaxpayerInfo>
@@ -106,7 +106,6 @@
 			<SumAllTaxByValue>1394.98</SumAllTaxByValue>
 			<SumAllTaxByQuantity>1111.35</SumAllTaxByQuantity>
 			<SumAllTax>2506.33</SumAllTax>
-			<TaxLessType/>
 			<TaxLessFrom/>
 			<TaxLessAmount>0</TaxLessAmount>
 			<TaxDeductionOnBookNo/>

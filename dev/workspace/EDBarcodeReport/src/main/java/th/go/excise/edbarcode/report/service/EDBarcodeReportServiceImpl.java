@@ -287,7 +287,6 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 				paramMap.put("sumAllTaxByValue2", decimalFormatZeroDigit.format(Math.floor(new BigDecimal(form.getSummaryReport().getSumAllTaxByValue()).doubleValue())));
 				paramMap.put("sumAllTaxByQuantity", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getSumAllTaxByQuantity())));
 				paramMap.put("sumAllTax", decimalFormatTwoDigit.format(new BigDecimal(form.getSummaryReport().getSumAllTax())));
-				paramMap.put("taxLessType", form.getSummaryReport().getTaxLessType());
 				paramMap.put("taxLessFrom", form.getSummaryReport().getTaxLessFrom());
 				paramMap.put("taxLessAmount", decimalFormatTwoDigit.format(new BigDecimal(EDBarcodeReportUtil.blankToZero(form.getSummaryReport().getTaxLessAmount()))));
 				paramMap.put("taxDeductionOnBookNo", form.getSummaryReport().getTaxDeductionOnBookNo());
