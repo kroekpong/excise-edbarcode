@@ -1,12 +1,12 @@
 package th.go.excise.edbarcode.report.service;
 
-import th.go.excise.edbarcode.report.bean.FundEntryInfo;
+import th.go.excise.edbarcode.report.bean.FundEntryReport;
 import th.go.excise.edbarcode.report.bean.SR12011FormReport;
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 
 public class FundBarcodeData {
 	
-	public void generateBarcodeForFundReport(StringBuilder builder, SR12011FormReport form, FundEntryInfo fundEntry) {
+	public void generateBarcodeForFundReport(StringBuilder builder, SR12011FormReport form, FundEntryReport fundEntry) {
 		generateBarcodePageData(builder, form.getFormId(), fundEntry.getFundType(), 1, 1);
 		generateBarcodeHeaderData(builder, form);
 		generateBarcodeSummaryData(builder, form, fundEntry);
@@ -38,11 +38,11 @@ public class FundBarcodeData {
 		builder.append(form.getTaxpayerInfoReport().getTaxpayerId());
 	}
 	
-	private void generateBarcodeSummaryData(StringBuilder builder, SR12011FormReport form, FundEntryInfo fundEntry) {
+	private void generateBarcodeSummaryData(StringBuilder builder, SR12011FormReport form, FundEntryReport fundEntry) {
 		builder.append(ReportConstant.SEPERATE_LINE);
 		builder.append(ReportConstant.EVENT_CODE.SUMMARY);
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(form.getSummaryReport().getPaymentExciseAmount().replaceAll(",", ""));// FIXME
+		builder.append(form.getSummaryReport().getPaymentExciseAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(fundEntry.getFundAmt().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);

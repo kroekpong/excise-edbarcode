@@ -10,7 +10,6 @@ public class SummaryReport {
 	private String sumAllTaxByValue;
 	private String sumAllTaxByQuantity;
 	private String sumAllTax;
-	private String taxLessType;
 	private String taxLessFrom;
 	private String taxLessAmount;
 	private String taxDeductionOnBookNo;
@@ -56,15 +55,6 @@ public class SummaryReport {
 
 	public void setSumAllTax(String sumAllTax) {
 		this.sumAllTax = sumAllTax;
-	}
-
-	@XmlElement(name = "TaxLessType")
-	public String getTaxLessType() {
-		return taxLessType;
-	}
-
-	public void setTaxLessType(String taxLessType) {
-		this.taxLessType = taxLessType;
 	}
 
 	@XmlElement(name = "TaxLessFrom")

@@ -30,8 +30,7 @@ public class InsertPOSO0112OperationServiceImpl implements InsertPOSO0112Operati
 			logger.info(" ##################################### After Call InsertPOSO0112OperationService response:  " + response);
 
 		} catch (Exception ex) {
-			logger.info(" ############## Error Call InsertPOSO0112OperationService :" + ex.getMessage());
-			ex.printStackTrace();
+			logger.error(" ############## Error Call InsertPOSO0112OperationService :" + ex.getMessage());
 		}
 
 		return response;

@@ -84,7 +84,6 @@ public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 		DecimalFormat decimalFormatFourDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.FOUR_DIGIT);
 		
 		String xmlDataString = request.getBinaryInformation().getXmlDataBinary();
-		System.out.println(xmlDataString);
 		
 		JAXBContext jaxbContext = JAXBContext.newInstance(XmlData.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -100,8 +99,8 @@ public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 		Header wsHeader = new Header();
 		wsHeader.setSystemID(WebServiceConstant.PCC.SYSTEM_ID);
 		wsHeader.setServiceID(WebServiceConstant.PCC.SERVICE_ID);
-		wsHeader.setUserId("BARCODE");
-		wsHeader.setPassword("11111111");
+		wsHeader.setUserId("BARCODE");// FIXME move to PARAM_CONFIG
+		wsHeader.setPassword("11111111");// FIXME move to PARAM_CONFIG
 		wsHeader.setIPAddress(submitOnlineHeader.getIpAddress());
 		
 		// Body
@@ -112,15 +111,15 @@ public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 		wsPoso0112FormInfo.setPinNitId(sr12011Info.getTaxpayerInfo().getTin());
 		wsPoso0112FormInfo.setSubbmissionEmail(submitOnlineHeader.getSubmissionEmail());
 		wsPoso0112FormInfo.setFormCode(WebServiceConstant.PCC.FORM_CODE);
-		wsPoso0112FormInfo.setFormType("");// No Data, Can input empty String??
-		wsPoso0112FormInfo.setFormEffectiveDate(DateUtils.wsDateFormat.format(calendar));// Current Date, yyyyMMdd
+		wsPoso0112FormInfo.setFormType("");// No Data, empty String
+		wsPoso0112FormInfo.setFormEffectiveDate(submitOnlineHeader.getSubmissionDate());// Current Date, yyyyMMdd
 		wsPoso0112FormInfo.setFormReferenceNumber(request.getDataInformation().getReferenceNumber());
-		wsPoso0112FormInfo.setPaymentReferenceId(0);// FIXME No Data, Input??
-		wsPoso0112FormInfo.setBankReferenceId("");// No Data, Can input empty String??
+		wsPoso0112FormInfo.setPaymentReferenceId(0);// No Data, default 0
+		wsPoso0112FormInfo.setBankReferenceId("");// No Data, empty String
 		wsPoso0112FormInfo.setPayType12(WebServiceConstant.PCC.PAY_TYPE);
 		wsPoso0112FormInfo.setTaxMonth(calendar.get(Calendar.MONTH) + 1);// Current Month, 1-12
 		wsPoso0112FormInfo.setTaxYear(calendar.get(Calendar.YEAR));// Current Year, YYYY -> 2015
-		wsPoso0112FormInfo.setIncCode("0");// FIXME No Data, Can input empty String??
+		wsPoso0112FormInfo.setIncCode("0");// No Data, default 0
 		wsPoso0112FormInfo.setFactoryDateBegin(DateUtils.wsDateFormat.format(calendar));// Current Date, yyyyMMdd
 		wsPoso0112FormInfo.setFactoryDateEnd(DateUtils.wsDateFormat.format(calendar));// Current Date, yyyyMMdd
 		wsPoso0112FormInfo.setExciseTax(sr12011Info.getSummaryInfo().getSumAllTax().doubleValue());
@@ -129,8 +128,8 @@ public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 		wsPoso0112FormInfo.setSurchargeAmt(0.0);// No Data, Can default to zero
 		wsPoso0112FormInfo.setMoiRate(decimalFormatZeroDigit.format(sr12011Info.getSummaryInfo().getMoiRate()));
 		wsPoso0112FormInfo.setMoitax(decimalFormatTwoDigit.format(sr12011Info.getSummaryInfo().getPaymentMunicipalAmount()));
-		wsPoso0112FormInfo.setSumCreditExciseTax(0);// FIXME
-		wsPoso0112FormInfo.setSumCreditMoiTax(0);// FIXME
+		wsPoso0112FormInfo.setSumCreditExciseTax(sr12011Info.getSummaryInfo().getTaxDeductionOnBookAmount().doubleValue());
+		wsPoso0112FormInfo.setSumCreditMoiTax(sr12011Info.getSummaryInfo().getSumCreditMoiTax().doubleValue());
 		wsPoso0112FormInfo.setNetExciseTax(sr12011Info.getSummaryInfo().getPaymentExciseAmount().doubleValue());
 		wsPoso0112FormInfo.setNetMoiTax(sr12011Info.getSummaryInfo().getPaymentMunicipalAmount().doubleValue());
 		wsPoso0112FormInfo.setPrnType(sr12011Info.getSummaryInfo().getPrintType());

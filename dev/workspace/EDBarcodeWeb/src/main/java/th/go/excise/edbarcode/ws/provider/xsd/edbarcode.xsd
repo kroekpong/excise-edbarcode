@@ -195,6 +195,7 @@
 			<element name="TaxpayerInfo"				type="tns:TaxpayerInfo"		minOccurs="0" />
 			<element name="GoodsListInfo"				type="tns:GoodsListInfo"	minOccurs="0" />
 			<element name="SummaryInfo"					type="tns:SummaryInfo"		minOccurs="0" />
+			<element name="FundListInfo"				type="tns:FundListInfo"		minOccurs="0" />
 		</sequence>
 	</complexType>
 	
@@ -272,7 +273,6 @@
 			<element name="SumAllTaxByValue"					type="decimal"		minOccurs="1" />
 			<element name="SumAllTaxByQuantity"					type="decimal"		minOccurs="1" />
 			<element name="SumAllTax"							type="decimal"		minOccurs="1" />
-			<element name="TaxLessType"							type="string"		minOccurs="0" />
 			<element name="TaxLessFrom"							type="string"		minOccurs="0" />
 			<element name="TaxLessAmount"						type="decimal"		minOccurs="0" />
 			<element name="TaxDeductionOnBookNo"				type="string"		minOccurs="0" />
@@ -283,10 +283,28 @@
 			<element name="PaymentFundTVAmount"					type="decimal"		minOccurs="1" />
 			<element name="PaymentFundSportAmount"				type="decimal"		minOccurs="1" />
 			<element name="MoiRate"								type="decimal"		minOccurs="1" />
+			<element name="MoiTax"								type="decimal"		minOccurs="1" />
+			<element name="SumCreditMoiTax"						type="decimal"		minOccurs="1" />
 			<element name="PrintType"							type="string"		minOccurs="1" />
 			<element name="PaymentExciseAndMunicipalTaxAmount"	type="decimal"		minOccurs="1" />
 			<element name="PaymentOtherAmount"					type="decimal"		minOccurs="0" />
 			<element name="PaymentNetTaxAmount"					type="decimal"		minOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="FundListInfo">
+		<sequence>
+			<element name="FundEntryInfo"				type="tns:FundEntryInfo"	minOccurs="0"	maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="FundEntryInfo">
+		<sequence>
+			<element name="FundType"					type="string"		minOccurs="1" />
+			<element name="FundAmount"					type="decimal"		minOccurs="1" />
+			<element name="FundRate"					type="decimal"		minOccurs="1" />
+			<element name="CreditAmount"				type="decimal"		minOccurs="1" />
+			<element name="NetAmount"					type="decimal"		minOccurs="1" />
 		</sequence>
 	</complexType>
 

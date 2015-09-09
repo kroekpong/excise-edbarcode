@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class FundEntryInfo {
+public class FundEntryReport {
 	
 	private String fundType;
 	private String fundAmt;

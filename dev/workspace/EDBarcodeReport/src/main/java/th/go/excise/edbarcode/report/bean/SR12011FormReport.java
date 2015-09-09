@@ -15,7 +15,7 @@ public class SR12011FormReport {
 	private TaxpayerInfoReport taxpayerInfoReport;
 	private List<GoodsEntryReport> goodsListReport;
 	private SummaryReport summaryReport;
-	private List<FundEntryInfo> fundListInfo;
+	private List<FundEntryReport> fundListReport;
 	
 	// Internal Data
 	private String formId;
@@ -50,14 +50,14 @@ public class SR12011FormReport {
 	
 	@XmlElementWrapper(name = "FundListInfo")
 	@XmlElement(name = "FundEntryInfo")
-	public List<FundEntryInfo> getFundListInfo() {
-		return fundListInfo;
+	public List<FundEntryReport> getFundListReport() {
+		return fundListReport;
 	}
 
-	public void setFundListInfo(List<FundEntryInfo> fundListInfo) {
-		this.fundListInfo = fundListInfo;
+	public void setFundListReport(List<FundEntryReport> fundListReport) {
+		this.fundListReport = fundListReport;
 	}
-
+	
 	public String getFormId() {
 		return formId;
 	}

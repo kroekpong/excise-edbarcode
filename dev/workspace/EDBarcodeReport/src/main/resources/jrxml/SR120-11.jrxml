@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-09-08T11:40:26 -->
+<!-- 2015-09-09T10:43:16 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SR120-11" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="b028837b-4b98-440d-8ef1-edc36f8c0def">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="StyleFont" fontName="TH Sarabun New" fontSize="10"/>
@@ -24,7 +24,6 @@
 	<parameter name="sumAllTaxByValue2" class="java.lang.String"/>
 	<parameter name="sumAllTaxByQuantity" class="java.lang.String"/>
 	<parameter name="sumAllTax" class="java.lang.String"/>
-	<parameter name="taxLessType" class="java.lang.String"/>
 	<parameter name="taxLessFrom" class="java.lang.String"/>
 	<parameter name="taxLessAmount" class="java.lang.String"/>
 	<parameter name="taxDeductionOnBookNo" class="java.lang.String"/>
@@ -815,7 +814,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="TH Sarabun New" size="9"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{taxLessType}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{taxLessAmount}.equals("0.00") ? "" : $P{taxLessAmount}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement style="StyleFont" x="135" y="48" width="50" height="12" uuid="a69ce022-2092-4983-85f7-7976e612731f">
