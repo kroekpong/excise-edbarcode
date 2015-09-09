@@ -35,6 +35,11 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.col13 = 0;
 	$scope.onlinesubmitData = {};
 	$scope.onlinesubmitData.date = "";
+	$scope.sumscope = {};
+	$scope.sumscope.taxcol9 = {};
+	$scope.sumscope.taxcol9.sss = 0;
+	$scope.sumscope.taxcol9.sst = 0;
+	$scope.sumscope.taxcol9.kkt = 0;
 	/**
 	 * อัตราภาษี <MunicipalRateAmount>10</MunicipalRateAmount>
 	 * <FundSSSRateAmount>2.0</FundSSSRateAmount> <FundSSTRateAmount>1.5</FundSSTRateAmount>
@@ -54,9 +59,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		$scope.FundSSTRateAmountRate = HistoryList.FundSSTRateAmountRate;
 		$scope.FundKKTRateAmountRate = HistoryList.FundKKTRateAmountRate;
 		$scope.inputSum8 = HistoryList.inputSum8;
-		$scope.sumTax8 = HistoryList.sumTax8;
+		$scope.sumscope.sumTax8 = HistoryList.sumTax8;
 		$scope.inputSum9 = HistoryList.inputSum9;
-		$scope.sumTax9 = HistoryList.sumTax9;
+		$scope.sumscope.sumTax9 = HistoryList.sumTax9;
 		$scope.roundTaxDate = new Date(parseInt(HistoryList.submitDate));
 
 		localStorage["historyItems"] = JSON.stringify([]);
@@ -175,7 +180,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			var gl = new GridItem();
 			gl.Goods = angular.copy(tempSelect[_i]);
 			$scope.gridList.push(gl);
-
+			console.log(gl);
 			/**
 			 * อัตราภาษี <MunicipalRateAmount>10</MunicipalRateAmount>
 			 * <FundSSSRateAmount>2.0</FundSSSRateAmount>
@@ -293,23 +298,28 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		if (_GridItem.Goods.DeclarePrice > 0) {
 			price = _GridItem.Goods.DeclarePrice;
 		}
-		return _GridItem.PriceAmountTax = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.TaxRateByPriceAmount * price / 100;
+		
+		_GridItem.PriceAmountTax = _GridItem.GoodsCount *_GridItem.Goods.TaxRateByPriceAmount * price / 100
+			
+		return  _GridItem.Goods.TaxRateByPriceAmount * price / 100;
 	};
 
 	$scope.calcQuantityAmount = function(_GridItem) {
 		/** "ภาษีปริมาณ(บาท/ลิตร/100)(2.1)" */
 		var tax1 = 0;
 		if (_GridItem.Goods.Degree <= _GridItem.Goods.DegreeMin) {
-			tax1 = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.Degree * _GridItem.Goods.TaxRateByQuantityAmount / 100;
+			tax1 = (_GridItem.Goods.GoodsSize * 1) * _GridItem.Goods.Degree * _GridItem.Goods.TaxRateByQuantityAmount / 100;
 
 		} else {
 			// OVER LOAD
-			tax1 = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.DegreeMin * _GridItem.Goods.TaxRateByQuantityAmount / 100;
+			tax1 = (_GridItem.Goods.GoodsSize * 1) * _GridItem.Goods.DegreeMin * _GridItem.Goods.TaxRateByQuantityAmount / 100;
 		}
 
 		/** "ภาษีปริมาณ(บาทต่อลิตร)(2.2)" */
-		var tax2 = (_GridItem.Goods.GoodsSize * _GridItem.GoodsCount) * _GridItem.Goods.RatePerLitre;
-		return _GridItem.QuantityAmountTax = Math.max(tax1, tax2);
+		var tax2 = (_GridItem.Goods.GoodsSize * 1) * _GridItem.Goods.RatePerLitre;
+		var max =  Math.max(tax1, tax2);
+		_GridItem.QuantityAmountTax = max * _GridItem.GoodsCount;
+		return max;
 
 	};
 
@@ -346,13 +356,28 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 	$scope.sumNetTax = function() {
 		$scope.totalTax = $scope.sumCalcPriceAmountValue + $scope.sumCalcQuantityAmountValue;
-		$scope.royalTotal = $scope.totalTax * $scope.MunicipalRateAmountRate * 0.01;
-		$scope.sss = $scope.totalTax * $scope.FundSSSRateAmountRate * 0.01;
-		$scope.sst = $scope.totalTax * $scope.FundSSTRateAmountRate * 0.01;
-		$scope.kkt = $scope.totalTax * $scope.FundKKTRateAmountRate * 0.01;
-		$scope.col10 = $scope.totalTax - $scope.toNumber($scope.sumTax8) - $scope.toNumber($scope.sumTax9);
+		$scope.difcol7andcol8 = $scope.totalTax - $scope.toNumber($scope.sumscope.sumTax8);
+		$scope.col10 = $scope.totalTax - $scope.toNumber($scope.sumscope.sumTax8) - $scope.toNumber($scope.sumscope.sumTax9);
+		
+		$scope.royalTotal = $scope.col10 * $scope.MunicipalRateAmountRate * 0.01;
+		$scope.sss = $scope.difcol7andcol8 * $scope.FundSSSRateAmountRate * 0.01;
+		$scope.sst = $scope.difcol7andcol8 * $scope.FundSSTRateAmountRate * 0.01;
+		$scope.kkt = $scope.difcol7andcol8 * $scope.FundKKTRateAmountRate * 0.01;
 		$scope.col12 = $scope.col10 + $scope.royalTotal;
 		$scope.col14 = $scope.col12 + $scope.col13;
+		
+		// cal หักคืนภาษีสุรา
+		var taxcol9 = $scope.toNumber($scope.sumscope.sumTax9);
+		if( taxcol9 > 0){
+			console.log("taxcol9",taxcol9);
+			$scope.sumscope.taxcol9.sss = taxcol9 * $scope.FundSSSRateAmountRate * 0.01;
+			$scope.sumscope.taxcol9.sst = taxcol9 * $scope.FundSSTRateAmountRate * 0.01;
+			$scope.sumscope.taxcol9.kkt = taxcol9 * $scope.FundKKTRateAmountRate * 0.01;
+		}else{
+			$scope.sumscope.taxcol9.sss = 0;
+			$scope.sumscope.taxcol9.sst = 0;
+			$scope.sumscope.taxcol9.kkt = 0;
+		}
 
 		return $scope.totalTax;
 	};
@@ -568,9 +593,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SummaryInfo.push($soapService.getObjectItem("SumAllTax", $scope.totalTax.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("TaxLessType", ""));
 		SummaryInfo.push($soapService.getObjectItem("TaxLessFrom", ($scope.inputSum8 == undefined) ? "" : $scope.inputSum8));
-		SummaryInfo.push($soapService.getObjectItem("TaxLessAmount", $scope.toNumber($scope.sumTax8).toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("TaxLessAmount", $scope.toNumber($scope.sumscope.sumTax8).toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo", ($scope.inputSum9 == undefined) ? "" : $scope.inputSum9));
-		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", $scope.toNumber($scope.sumTax9).toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", $scope.toNumber($scope.sumscope.sumTax8).toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount", $scope.totalTax.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentMunicipalAmount", $scope.royalTotal.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount", $scope.sss.toFixed(2)));
@@ -665,10 +690,12 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	 * คืนภาษีสุราตามหนังสือกรมฯ ที่
 	 */
 	if ($scope.historyMode == false) {
-		$scope.sumTax8 = $scope.toStringDec(0, 2);
-		$scope.sumTax9 = $scope.toStringDec(0, 2);
+//		$scope.sumTax8 = $scope.toStringDec(0, 2);
+//		$scope.sumTax9 = $scope.toStringDec(0, 2);
+		$scope.sumscope.sumTax8 = $scope.toStringDec(0, 2);
+		$scope.sumscope.sumTax9 = $scope.toStringDec(0, 2);
 	}
-
+	
 	/***************************************************************************
 	 * Save Draft
 	 * 
