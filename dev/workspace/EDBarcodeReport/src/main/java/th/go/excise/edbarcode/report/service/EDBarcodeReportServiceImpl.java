@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import th.go.excise.edbarcode.report.bean.FundEntryInfo;
+import th.go.excise.edbarcode.report.bean.FundEntryReport;
 import th.go.excise.edbarcode.report.bean.GoodsEntryReport;
 import th.go.excise.edbarcode.report.bean.SR12011FormReport;
 import th.go.excise.edbarcode.report.bean.TaxpayerInfoReport;
@@ -359,7 +359,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.SSS1_01));
 		
 		// Get FundEntry from fundList
-		FundEntryInfo fundEntry = getFundEntryFromFundList(form.getFundListInfo(), ReportConstant.FUND_TYPE.SSS1_01);
+		FundEntryReport fundEntry = getFundEntryFromFundList(form.getFundListReport(), ReportConstant.FUND_TYPE.SSS1_01);
 		
 		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry);
 		
@@ -375,7 +375,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.SST1_01));
 		
 		// Get FundEntry from fundList
-		FundEntryInfo fundEntry = getFundEntryFromFundList(form.getFundListInfo(), ReportConstant.FUND_TYPE.SST1_01);
+		FundEntryReport fundEntry = getFundEntryFromFundList(form.getFundListReport(), ReportConstant.FUND_TYPE.SST1_01);
 		
 		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry);
 		
@@ -391,7 +391,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("logoImage", ReportUtil.getImageFile(ReportConstant.REPORT.KKT1_01));
 		
 		// Get FundEntry from fundList
-		FundEntryInfo fundEntry = getFundEntryFromFundList(form.getFundListInfo(), ReportConstant.FUND_TYPE.KKT1_01);
+		FundEntryReport fundEntry = getFundEntryFromFundList(form.getFundListReport(), ReportConstant.FUND_TYPE.KKT1_01);
 		
 		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry);
 		
@@ -400,7 +400,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		return jasperPrint;
 	}
 	
-	private JasperPrint getFundReport(String fileName, Map<String, Object> paramMap, SR12011FormReport form, FundEntryInfo fundEntry) throws JRException, IOException, ParseException {
+	private JasperPrint getFundReport(String fileName, Map<String, Object> paramMap, SR12011FormReport form, FundEntryReport fundEntry) throws JRException, IOException, ParseException {
 		logger.info("Prepare data for Fund Report");
 		
 		// Header Data
@@ -473,9 +473,9 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		paramMap.put("telNumber", taxpayerInfo.getTaxpayerAddressReport().getTelNumber());
 	}
 	
-	private FundEntryInfo getFundEntryFromFundList(List<FundEntryInfo> fundList, String fundType) {
-		FundEntryInfo fundEntry = null;
-		for (FundEntryInfo fundEntryInfo : fundList) {
+	private FundEntryReport getFundEntryFromFundList(List<FundEntryReport> fundList, String fundType) {
+		FundEntryReport fundEntry = null;
+		for (FundEntryReport fundEntryInfo : fundList) {
 			if (fundType.equals(fundEntryInfo.getFundType())) {
 				fundEntry = fundEntryInfo;
 				break;
