@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.ws.client.sta.oxm.Body;
 import th.go.excise.edbarcode.ws.client.sta.oxm.Error;
+import th.go.excise.edbarcode.ws.client.sta.oxm.HeaderResponse;
 import th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest;
 import th.go.excise.edbarcode.ws.client.sta.oxm.StaBacResponse;
 
@@ -73,6 +74,10 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 			logger.error(e.getMessage(), e);
 			response = new StaBacResponse();
 			setError(response, e.getMessage());
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			response = new StaBacResponse();
+			setError(response, "Service has problem, Please contact administrator");
 		}
 		
 		logger.info(" ##################################### After Call GetLicenseNGoodsInfoService.doService response:  " + response);
@@ -80,7 +85,7 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		return response;
 	}
 	
-	private String sendBacRequest(String xmlData) {
+	private String sendBacRequest(String xmlData) throws Exception {
 		String xmlResult = null;
 
 		try {
@@ -98,6 +103,8 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 			logger.error(e.getMessage(), e);
 		} catch (NotBoundException e) {
 			logger.error(e.getMessage(), e);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 		}
 		
 		return xmlResult;
@@ -109,9 +116,13 @@ public class GetLicenseNGoodsInfoServiceImpl implements GetLicenseNGoodsInfoServ
 		error.setDescription(message);
 		error.setAction(WebServiceConstant.STA.TRAN_CODE_GET_LICENSE_AND_GOODS_INFO);
 		
+		HeaderResponse header = new HeaderResponse();
+		header.setResultCode(WebServiceConstant.STATUS_CODE.ERROR);
+		
 		Body body = new Body();
 		body.setError(error);
 		
+		response.setHeader(header);
 		response.setBody(body);
 	}
 
