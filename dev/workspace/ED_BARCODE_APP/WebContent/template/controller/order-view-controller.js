@@ -369,7 +369,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		// cal หักคืนภาษีสุรา
 		var taxcol9 = $scope.toNumber($scope.sumscope.sumTax9);
 		if( taxcol9 > 0){
-			console.log("taxcol9",taxcol9);
+//			console.log("taxcol9",taxcol9);
 			$scope.sumscope.taxcol9.sss = taxcol9 * $scope.FundSSSRateAmountRate * 0.01;
 			$scope.sumscope.taxcol9.sst = taxcol9 * $scope.FundSSTRateAmountRate * 0.01;
 			$scope.sumscope.taxcol9.kkt = taxcol9 * $scope.FundKKTRateAmountRate * 0.01;
@@ -613,33 +613,29 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		var FundEntryInfo = [];
 		
 		
-		var taxRate = $scope.FundSSSRateAmountRate * $scope.FundSSSRateAmountRate * 0.01;
 		FundEntryInfo = $soapService.getObject("FundEntryInfo");
 		FundEntryInfo.push($soapService.getObjectItem("FundType", "S"));
-		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.totalTax.toFixed(2)));
+		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.sss.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundSSSRateAmountRate.toFixed(2)));
-		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", taxRate));
-		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.totalTax-taxRate ).toFixed(2) ));
+		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", $scope.sumscope.taxcol9.sss.toFixed(2)));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.sss-$scope.sumscope.taxcol9.sss ).toFixed(2) ));
 		FundListInfo.push(FundEntryInfo);
 		
-		var taxRate = $scope.FundSSSRateAmountRate * $scope.FundSSTRateAmountRate * 0.01;
 		FundEntryInfo = $soapService.getObject("FundEntryInfo");
 		FundEntryInfo.push($soapService.getObjectItem("FundType", "T"));
-		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.totalTax.toFixed(2)));
+		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.sst.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundSSTRateAmountRate.toFixed(2)));
-		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", taxRate));
-		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.totalTax-taxRate ).toFixed(2) ));
+		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", $scope.sumscope.taxcol9.sst.toFixed(2)));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.sst-$scope.sumscope.taxcol9.sst ).toFixed(2) ));
 		FundListInfo.push(FundEntryInfo);
 		
-		var taxRate = $scope.FundSSSRateAmountRate * $scope.FundKKTRateAmountRate * 0.01;
 		FundEntryInfo = $soapService.getObject("FundEntryInfo");
 		FundEntryInfo.push($soapService.getObjectItem("FundType", "K"));
-		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.totalTax.toFixed(2)));
+		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.kkt.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundKKTRateAmountRate.toFixed(2)));
-		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", taxRate));
-		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.totalTax-taxRate ).toFixed(2) ));
+		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", $scope.sumscope.taxcol9.kkt.toFixed(2)));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.kkt-$scope.sumscope.taxcol9.kkt ).toFixed(2) ));
 		FundListInfo.push(FundEntryInfo);
-		
 		
 		
 		var str = EbarcodeSubmitOnlineRequest.getString();
