@@ -2,10 +2,15 @@ package th.go.excise.edbarcode.ws.provider.service;
 
 import java.lang.reflect.InvocationTargetException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ws.transport.context.TransportContext;
+import org.springframework.ws.transport.context.TransportContextHolder;
+import org.springframework.ws.transport.http.HttpServletConnection;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.ws.client.barcode.submitonline.service.SubmitOnlineBackService;
@@ -75,7 +80,7 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		wsSubmitOnlineHeader.setCusId(request.getSubmitOnlineHeader().getCusId());
 		wsSubmitOnlineHeader.setExciseOfficeId(request.getSubmitOnlineHeader().getExciseOfficeId());
 		wsSubmitOnlineHeader.setInternetUniqueId(request.getSubmitOnlineHeader().getInternetUniqueId());
-		wsSubmitOnlineHeader.setIpAddress(request.getSubmitOnlineHeader().getIpAddress());
+		wsSubmitOnlineHeader.setIpAddress(getClientIpAddress());
 		wsSubmitOnlineHeader.setRegistratronId(request.getSubmitOnlineHeader().getRegistratronId());
 		wsSubmitOnlineHeader.setSubmissionEmail(request.getSubmitOnlineHeader().getSubmissionEmail());
 		wsSubmitOnlineHeader.setSubmissionDate(request.getSubmitOnlineHeader().getSubmissionDate());
@@ -196,5 +201,13 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		
 		return response;
 	}
-
+	
+	private String getClientIpAddress() {
+		TransportContext context = TransportContextHolder.getTransportContext();
+		HttpServletConnection connection = (HttpServletConnection )context.getConnection();
+		HttpServletRequest request = connection.getHttpServletRequest();
+		String ipAddress = request.getRemoteAddr();
+		return ipAddress;
+	}
+	
 }
