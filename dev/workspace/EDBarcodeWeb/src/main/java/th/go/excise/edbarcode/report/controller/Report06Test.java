@@ -5,7 +5,6 @@ import java.util.List;
 
 import th.go.excise.edbarcode.report.domain.R006DDomain;
 import th.go.excise.edbarcode.report.domain.R006HDomain;
-import th.go.excise.edbarcode.report.domain.R008DDomain;
 
 public class Report06Test {
 	

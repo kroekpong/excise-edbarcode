@@ -1,6 +1,7 @@
 package th.go.excise.edbarcode.report.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -122,7 +123,7 @@ public class Report18Test {
 		detailList4.add(d41);
 		detailList4.add(d42);
 		
-		Map<String,List<R018DDomain>> degee = null;
+		Map<String,List<R018DDomain>> degee = new HashMap();
 		
 		degee.put("28", detailList1);
 		degee.put("30", detailList2);
@@ -146,5 +147,4 @@ public class Report18Test {
 		return returnObj;
 		
 	}
-
 }
