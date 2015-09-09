@@ -11,6 +11,7 @@ import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.ws.client.barcode.submitonline.service.SubmitOnlineBackService;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineResponse;
+import th.go.excise.edbarcode.ws.provider.oxm.FundEntryInfo;
 import th.go.excise.edbarcode.ws.provider.oxm.GoodsEntryInfo;
 
 import com.baiwa.framework.common.util.NumberUtils;
@@ -159,13 +160,27 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		wsSummaryInfo.setTaxDeductionOnBookAmount(NumberUtils.nullToZero(request.getSR12011Info().getSummaryInfo().getTaxDeductionOnBookAmount()));
 		wsSummaryInfo.setTaxDeductionOnBookNo(request.getSR12011Info().getSummaryInfo().getTaxDeductionOnBookNo());
 		wsSummaryInfo.setTaxLessAmount(NumberUtils.nullToZero(request.getSR12011Info().getSummaryInfo().getTaxLessAmount()));
-		wsSummaryInfo.setTaxLessFrom(request.getSR12011Info().getSummaryInfo().getTaxLessType());
-		wsSummaryInfo.setTaxLessType(request.getSR12011Info().getSummaryInfo().getTaxLessType());
+		wsSummaryInfo.setTaxLessFrom(request.getSR12011Info().getSummaryInfo().getTaxLessFrom());
+		wsSummaryInfo.setMoiTax(request.getSR12011Info().getSummaryInfo().getMoiTax());
+		wsSummaryInfo.setSumCreditMoiTax(request.getSR12011Info().getSummaryInfo().getSumCreditMoiTax());
+		
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.FundListInfo wsFundListInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.FundListInfo();
+		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.FundEntryInfo wsFundEntryInfo = null;
+		for(FundEntryInfo fundEntryInfo : request.getSR12011Info().getFundListInfo().getFundEntryInfo() ) {
+			wsFundEntryInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.FundEntryInfo();
+			wsFundEntryInfo.setFundType(fundEntryInfo.getFundType());
+			wsFundEntryInfo.setFundRate(NumberUtils.nullToZero(fundEntryInfo.getFundRate()));
+			wsFundEntryInfo.setFundAmount(NumberUtils.nullToZero(fundEntryInfo.getFundAmount()));
+			wsFundEntryInfo.setCreditAmount(NumberUtils.nullToZero(fundEntryInfo.getCreditAmount()));
+			wsFundEntryInfo.setNetAmount(NumberUtils.nullToZero(fundEntryInfo.getNetAmount()));
+			wsFundListInfo.getFundEntryInfo().add(wsFundEntryInfo);
+		}
 		
 		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SR12011Info wsSR12011Info = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.SR12011Info();
 		wsSR12011Info.setTaxpayerInfo(wsTaxpayerInfo);
 		wsSR12011Info.setGoodsListInfo(wsGoodsListInfo);
 		wsSR12011Info.setSummaryInfo(wsSummaryInfo);
+		wsSR12011Info.setFundListInfo(wsFundListInfo);
 		
 		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest wsRequest = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.EbarcodeSubmitOnlineRequest();
 		wsRequest.setSubmitOnlineHeader(wsSubmitOnlineHeader);
