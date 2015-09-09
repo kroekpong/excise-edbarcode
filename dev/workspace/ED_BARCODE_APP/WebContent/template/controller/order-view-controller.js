@@ -130,14 +130,14 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		}
 	};
 
+	$scope.filterItem = JSON.parse(localStorage["FilterGoods"]);
 	function createFilterFor(query, type) {
 		var lowercaseQuery = angular.lowercase(query);
 		return function filterFn(state) {
 			if (type === "Degree") {
-				return (state.Degree.toString().indexOf(lowercaseQuery) === 0);
+				return (state.toString().indexOf(lowercaseQuery) >= 0);
 			} else {
-				var dis = angular.lowercase(state.BrandName);
-				// console.log(lowercaseQuery,state.GoodsDescriptionText);
+				var dis = angular.lowercase(state.toString());
 				return (dis.indexOf(lowercaseQuery) >= 0);
 			}
 		};
@@ -145,7 +145,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 	$scope.querySearch = function(query, type) {
 		console.log(query);
-		var results = query ? $scope.searchProduct.filter(createFilterFor(query, type)) : $scope.searchProduct;
+		var data = $scope.filterItem[type];
+		var results = query ? data.filter(createFilterFor(query, type)) : data;
 		return results;
 	};
 

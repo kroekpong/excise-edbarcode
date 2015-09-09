@@ -27,6 +27,32 @@ module.controller('loadingAppCtrl', function($scope, $location , $fileUtils , $c
 	
 	localStorage["CurrentVersionDate"] = (localStorage["CurrentVersionDate"] == undefined)? Date.parse(new Date()) : localStorage["CurrentVersionDate"] ;
 	
+
+		// createFilter
+	var goodList = JSON.parse(localStorage["GoodsList"]);
+	var bandNameSet = new Set();
+	var degreeSet = new Set();
+	for ( var _i in goodList) {
+		var item = goodList[_i];
+		bandNameSet.add(item.BrandName);
+		degreeSet.add(item.Degree);
+	}
+
+	var array1 = [];
+	bandNameSet.forEach(function(value) {
+		array1.push(value);
+	});
+	var array2 = [];
+	degreeSet.forEach(function(value) {
+		array2.push(value);
+	});
+
+	// console.log(bandNameSet,degreeSet);
+	localStorage["FilterGoods"] = JSON.stringify({
+		"BrandName" : array1,
+		"Degree" : array2
+	});
+
 //	goto loading
 	setTimeout(function() {
 		window.location="index.html";

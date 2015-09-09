@@ -76,13 +76,11 @@
 										md-selected-item="selectedItem1"
 										md-search-text="userSearch.BrandName"
 										md-items="item in querySearch(userSearch.BrandName,'BrandName')"
-										md-item-text="item.BrandName"
+										md-item-text="item"
 										md-min-length="3"
 										placeholder="เครืองหมายการค้าหลัก">
 									<md-item-template>
-										<span md-highlight-text="ausearchText" md-highlight-flags="^i">{{item.BrandName}}</span>
-										<span md-highlight-text="ausearchText" >(ขนาด {{item.GoodsSize}} )</span>
-										<span md-highlight-text="ausearchText" >(ดีกรี {{item.Degree}} )</span>
+										<span md-highlight-text="ausearchText" md-highlight-flags="^i">{{item}}</span>
 									</md-item-template>
 									<md-not-found>
 										No matches found for "{{userSearch.BrandName}}".
@@ -98,13 +96,11 @@
 										md-selected-item="selectedItem2"
 										md-search-text="userSearch.Degree"
 										md-items="item in querySearch(userSearch.Degree,'Degree')"
-										md-item-text="item.Degree"
+										md-item-text="item"
 										md-min-length="1"
 										placeholder="ดีกรี">
 									<md-item-template>
-										<span md-highlight-text="ausearchText" >{{item.GoodsDescriptionText}}</span>
-										<span md-highlight-text="ausearchText">(ขนาด {{item.GoodsSize}} )</span>
-										<span md-highlight-text="ausearchText" md-highlight-flags="^i">(ดีกรี {{item.Degree}} )</span>
+										<span md-highlight-text="ausearchText" >{{item}}</span>
 									</md-item-template>
 									<md-not-found>
 										No matches found for "{{userSearch.Degree}}".
