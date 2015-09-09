@@ -1,6 +1,7 @@
 package th.go.excise.edbarcode.ws.provider.service;
 
 import java.io.StringReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
+import th.go.excise.edbarcode.report.bean.FundEntryReport;
 import th.go.excise.edbarcode.report.bean.GoodsEntryReport;
 import th.go.excise.edbarcode.report.bean.SR12011FormReport;
 import th.go.excise.edbarcode.report.bean.SummaryReport;
@@ -23,6 +25,7 @@ import th.go.excise.edbarcode.report.service.EDBarcodeReportServiceImpl;
 import th.go.excise.edbarcode.ws.provider.bean.XmlData;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeGetSR12011ReportRequest;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeGetSR12011ReportResponse;
+import th.go.excise.edbarcode.ws.provider.oxm.FundEntryInfo;
 import th.go.excise.edbarcode.ws.provider.oxm.GoodsEntryInfo;
 import th.go.excise.edbarcode.ws.provider.oxm.PDFDocument;
 import th.go.excise.edbarcode.ws.provider.oxm.SR12011Info;
@@ -66,7 +69,7 @@ public class GetSR12011ReportServiceImpl implements GetSR12011ReportService {
 		return response;
 	}
 	
-	private SR12011FormReport prepareSR12011FormObject(EbarcodeGetSR12011ReportRequest request) throws JAXBException {
+	private SR12011FormReport prepareSR12011FormObject(EbarcodeGetSR12011ReportRequest request) throws JAXBException, ParseException {
 		String xmlDataString = request.getBinaryInformation().getXmlDataBinary();
 		System.out.println(xmlDataString);
 		
@@ -133,7 +136,6 @@ public class GetSR12011ReportServiceImpl implements GetSR12011ReportService {
 		summary.setSumAllTaxByValue(NumberUtils.nullToZero(sr12011Info.getSummaryInfo().getSumAllTaxByValue()).toString());
 		summary.setSumAllTaxByQuantity(NumberUtils.nullToZero(sr12011Info.getSummaryInfo().getSumAllTaxByQuantity()).toString());
 		summary.setSumAllTax(NumberUtils.nullToZero(sr12011Info.getSummaryInfo().getSumAllTax()).toString());
-		summary.setTaxLessType(sr12011Info.getSummaryInfo().getTaxLessType());
 		summary.setTaxLessFrom(sr12011Info.getSummaryInfo().getTaxLessFrom());
 		summary.setTaxLessAmount(NumberUtils.nullToZero(sr12011Info.getSummaryInfo().getTaxLessAmount()).toString());
 		summary.setTaxDeductionOnBookNo(sr12011Info.getSummaryInfo().getTaxDeductionOnBookNo());
@@ -148,12 +150,29 @@ public class GetSR12011ReportServiceImpl implements GetSR12011ReportService {
 		summary.setPaymentExciseAndMunicipalTaxAmount(NumberUtils.nullToZero(sr12011Info.getSummaryInfo().getPaymentExciseAndMunicipalTaxAmount()).toString());
 		summary.setPaymentOtherAmount(NumberUtils.nullToZero(sr12011Info.getSummaryInfo().getPaymentOtherAmount()).toString());
 		summary.setPaymentNetTaxAmount(NumberUtils.nullToZero(sr12011Info.getSummaryInfo().getPaymentNetTaxAmount()).toString());
+		
+		// For Staff (2)
 		summary.setReferenceNumber(request.getDataInformation().getReferenceNumber());
+		summary.setSubmissionDate(submitOnlineHeader.getSubmissionDate());
+		
+		// FundEntryList
+		List<FundEntryReport> fundEntryReportList = new ArrayList<FundEntryReport>();
+		FundEntryReport fundEntryReport = null;
+		for (FundEntryInfo fundEntryInfo : sr12011Info.getFundListInfo().getFundEntryInfo()) {
+			fundEntryReport = new FundEntryReport();
+			fundEntryReport.setFundType(fundEntryInfo.getFundType());
+			fundEntryReport.setFundRate(NumberUtils.nullToZero(fundEntryInfo.getFundRate()).toString());
+			fundEntryReport.setFundAmt(NumberUtils.nullToZero(fundEntryInfo.getFundAmount()).toString());
+			fundEntryReport.setCreditAmt(NumberUtils.nullToZero(fundEntryInfo.getCreditAmount()).toString());
+			fundEntryReport.setNetAmt(NumberUtils.nullToZero(fundEntryInfo.getNetAmount()).toString());
+			fundEntryReportList.add(fundEntryReport);
+		}
 		
 		SR12011FormReport formReport = new SR12011FormReport();
 		formReport.setTaxpayerInfoReport(taxpayerInfo);
 		formReport.setGoodsListReport(goodsEntryReportList);
 		formReport.setSummaryReport(summary);
+		formReport.setFundListReport(fundEntryReportList);
 		
 		return formReport;
 	}
