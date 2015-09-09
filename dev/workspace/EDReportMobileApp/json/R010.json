@@ -1,0 +1,36 @@
+{
+	"orderNo": null,
+	"listR010DDomain": [{
+		"typeName": "สุราแช่",
+		"companyName": "สยามไวน์ซอสซิ่ง",
+		"goodsName": "Wine Cooler Cocktail",
+		"degree": "5.0",
+		"size": "0.275",
+		"pric1": "250",
+		"price2": "0",
+		"pricedif": "-250",
+		"pricedifpercent": "-100.00"
+	},
+	{
+		"typeName": "สุราแช่",
+		"companyName": "เสิร์ฟ ออล",
+		"goodsName": "Wine Cooler Jus Black",
+		"degree": "5.0",
+		"size": "0.275",
+		"pric1": "250",
+		"price2": "0",
+		"pricedif": "-250",
+		"pricedifpercent": "-100.00"
+	},
+	{
+		"typeName": "สุราแช่",
+		"companyName": "สยามไวเนอรี่",
+		"goodsName": "Zearch Wine Cooler",
+		"degree": "5.0",
+		"size": "0.275",
+		"pric1": "250",
+		"price2": "0",
+		"pricedif": "-250",
+		"pricedifpercent": "-100.00"
+	}]
+}

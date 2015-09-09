@@ -1,0 +1,104 @@
+{
+	"month": "ต.ค. 2557",
+	"degee": {
+		"30": [{
+			"volumespec": "0.333",
+			"volume": "200",
+			"tax": "110",
+			"volumeold": "200",
+			"taxold": "110",
+			"volumedif": "0",
+			"taxdif": "0",
+			"volumedifpercent": "0.00",
+			"taxdifpercent": "0.00"
+		},
+		{
+			"volumespec": "0.625",
+			"volume": "250",
+			"tax": "125",
+			"volumeold": "250",
+			"taxold": "125",
+			"volumedif": "0",
+			"taxdif": "0",
+			"volumedifpercent": "0.00",
+			"taxdifpercent": "0.00"
+		}],
+		"40": [{
+			"volumespec": "0.333",
+			"volume": "600",
+			"tax": "300",
+			"volumeold": "550",
+			"taxold": "275",
+			"volumedif": "50",
+			"taxdif": "25",
+			"volumedifpercent": "9.09",
+			"taxdifpercent": "9.09"
+		},
+		{
+			"volumespec": "0.625",
+			"volume": "340",
+			"tax": "170",
+			"volumeold": "340",
+			"taxold": "170",
+			"volumedif": "0",
+			"taxdif": "0",
+			"volumedifpercent": "0.00",
+			"taxdifpercent": "0.00"
+		}],
+		"35": [{
+			"volumespec": "0.333",
+			"volume": "500",
+			"tax": "250",
+			"volumeold": "520",
+			"taxold": "260",
+			"volumedif": "-20",
+			"taxdif": "-10",
+			"volumedifpercent": "-3.85",
+			"taxdifpercent": "-3.85"
+		},
+		{
+			"volumespec": "0.625",
+			"volume": "350",
+			"tax": "175",
+			"volumeold": "360",
+			"taxold": "190",
+			"volumedif": "-10",
+			"taxdif": "-15",
+			"volumedifpercent": "-2.78",
+			"taxdifpercent": "-7.89"
+		}],
+		"28": [{
+			"volumespec": "0.333",
+			"volume": "300",
+			"tax": "150",
+			"volumeold": "280",
+			"taxold": "140",
+			"volumedif": "20",
+			"taxdif": "10",
+			"volumedifpercent": "7.14",
+			"taxdifpercent": "7.14"
+		},
+		{
+			"volumespec": "0.625",
+			"volume": "400",
+			"tax": "200",
+			"volumeold": "350",
+			"taxold": "175",
+			"volumedif": "50",
+			"taxdif": "25",
+			"volumedifpercent": "14.29",
+			"taxdifpercent": "14.29"
+		}]
+	},
+	"sum": {
+		"volumespec": null,
+		"volume": "2940",
+		"tax": "1480",
+		"volumeold": "2850",
+		"taxold": "1445",
+		"volumedif": "90",
+		"taxdif": "35",
+		"volumedifpercent": "23.90",
+		"taxdifpercent": "18.78"
+	}
+}

@@ -1,0 +1,48 @@
+{
+	"orderNo": null,
+	"listR008DDomain": [{
+		"typeName": "สุราแช่",
+		"companyName": "สยามไวน์ซอสซิ่ง",
+		"goodsName": "Wine Cooler Cocktail",
+		"degree": "5.0",
+		"size": "0.275",
+		"volume": "3000",
+		"vat": "1500",
+		"volumeOld": "2800",
+		"vatOld": "1400",
+		"volumedif": "200",
+		"vatdif": "100",
+		"volumedifpercent": "7.14",
+		"vatdifpercent": "7.14"
+	},
+	{
+		"typeName": "สุราแช่",
+		"companyName": "เสิร์ฟ ออล",
+		"goodsName": "Wine Cooler Jus Black",
+		"degree": "5.0",
+		"size": "0.275",
+		"volume": "4000",
+		"vat": "2000",
+		"volumeOld": "3500",
+		"vatOld": "1750",
+		"volumedif": "500",
+		"vatdif": "250",
+		"volumedifpercent": "14.29",
+		"vatdifpercent": "14.29"
+	}],
+	"sum": {
+		"typeName": null,
+		"companyName": null,
+		"goodsName": null,
+		"degree": null,
+		"size": null,
+		"volume": null,
+		"vat": null,
+		"volumeOld": null,
+		"vatOld": null,
+		"volumedif": null,
+		"vatdif": null,
+		"volumedifpercent": null,
+		"vatdifpercent": null
+	}
+}
