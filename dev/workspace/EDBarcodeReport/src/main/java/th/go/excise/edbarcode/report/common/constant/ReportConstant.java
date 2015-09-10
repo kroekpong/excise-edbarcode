@@ -51,6 +51,8 @@ public class ReportConstant {
 		public static final String SHORT = "dd/MM/yyyy";
 	}
 	
+	public static final int FROM_ID_LENGTH = 8;
+	
 	public static final String FORM_CODE_SR = "SR";
 	
 	public static final class FUND_TYPE {

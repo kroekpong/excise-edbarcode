@@ -29,6 +29,9 @@ public class SummaryReport {
 	private String referenceNumber;
 	private String submissionDate;
 	
+	// Extra
+	private String exciseAmountSubtractTaxLessAmount;
+	
 	
 	@XmlElement(name = "SumAllTaxByValue")
 	public String getSumAllTaxByValue() {
@@ -197,6 +200,15 @@ public class SummaryReport {
 
 	public void setSubmissionDate(String submissionDate) {
 		this.submissionDate = submissionDate;
+	}
+
+	@XmlElement(name = "ExciseAmountSubtractTaxLessAmount")
+	public String getExciseAmountSubtractTaxLessAmount() {
+		return exciseAmountSubtractTaxLessAmount;
+	}
+
+	public void setExciseAmountSubtractTaxLessAmount(String exciseAmountSubtractTaxLessAmount) {
+		this.exciseAmountSubtractTaxLessAmount = exciseAmountSubtractTaxLessAmount;
 	}
 
 	@Override

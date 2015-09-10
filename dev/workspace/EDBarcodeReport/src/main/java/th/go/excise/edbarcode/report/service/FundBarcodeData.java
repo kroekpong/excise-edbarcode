@@ -42,11 +42,13 @@ public class FundBarcodeData {
 		builder.append(ReportConstant.SEPERATE_LINE);
 		builder.append(ReportConstant.EVENT_CODE.SUMMARY);
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(form.getSummaryReport().getPaymentExciseAmount().replaceAll(",", ""));
+		builder.append(form.getSummaryReport().getSumAllTax().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(fundEntry.getFundAmt().replaceAll(",", ""));
+		builder.append(form.getSummaryReport().getExciseAmountSubtractTaxLessAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(fundEntry.getFundRate());
+		builder.append(ReportConstant.SEPERATE_STRING);
+		builder.append(fundEntry.getFundAmt().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(fundEntry.getCreditAmt().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);

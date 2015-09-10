@@ -61,9 +61,9 @@ public class SR12011BarcodeData {
 			builder.append("#");
 			builder.append(goodsEntry.getUnitCode());			
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getGoodsPiece().replaceAll(",", ""));
+			builder.append(goodsEntry.getGoodsSize().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
-			builder.append(goodsEntry.getGoodsQuantity().replaceAll(",", ""));
+			builder.append(goodsEntry.getGoodsPiece().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
 			builder.append(goodsEntry.getUnitPrice().replaceAll(",", ""));
 			builder.append(ReportConstant.SEPERATE_STRING);
@@ -93,23 +93,9 @@ public class SR12011BarcodeData {
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(summary.getTaxDeductionOnBookAmount().replaceAll(",", ""));
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentExciseAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(summary.getPaymentMunicipalPercent());
 		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentMunicipalAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentExciseAndMunicipalTaxAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(summary.getPaymentOtherAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentNetTaxAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentFundHealthAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentFundTVAmount().replaceAll(",", ""));
-		builder.append(ReportConstant.SEPERATE_STRING);
-		builder.append(summary.getPaymentFundSportAmount().replaceAll(",", ""));
 	}
 	
 	public void generateBarcodeReferenceData(StringBuilder builder, String referenceNumber) {

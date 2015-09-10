@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -21,6 +20,7 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleExporterInputItem;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,7 +48,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		
 		try {
 			// Generate formId
-			String formId = UUID.randomUUID().toString();
+			String formId = RandomStringUtils.random(ReportConstant.FROM_ID_LENGTH, true, true);
 			form.setFormId(formId);
 			
 			List<ExporterInputItem> items = new ArrayList<ExporterInputItem>();
@@ -100,7 +100,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 			form.getSummaryReport().setReferenceNumber(referenceNumber);
 			
 			// Generate formId
-			String formId = UUID.randomUUID().toString();
+			String formId = RandomStringUtils.random(ReportConstant.FROM_ID_LENGTH, true, true);
 			form.setFormId(formId);
 			
 			File outputDic = new File(outputPath);
@@ -424,9 +424,8 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		DecimalFormat decimalFormat = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
 		
 		// Excise Amount
-		String exciseAmount = decimalFormat.format(new BigDecimal(form.getSummaryReport().getPaymentExciseAmount()));
-		paramMap.put("exciseAmountBaht", exciseAmount.split("\\.")[0]);
-		paramMap.put("exciseAmountStang", exciseAmount.split("\\.")[1]);
+		paramMap.put("exciseAmountBaht", form.getSummaryReport().getExciseAmountSubtractTaxLessAmount().split("\\.")[0]);
+		paramMap.put("exciseAmountStang", form.getSummaryReport().getExciseAmountSubtractTaxLessAmount().split("\\.")[1]);
 		
 		// Fund, Credit and Net Amount
 		String fundAmount = decimalFormat.format(new BigDecimal(fundEntry.getFundAmt()));
