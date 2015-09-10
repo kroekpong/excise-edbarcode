@@ -162,9 +162,9 @@ public class GetSR12011ReportServiceImpl implements GetSR12011ReportService {
 			fundEntryReport = new FundEntryReport();
 			fundEntryReport.setFundType(fundEntryInfo.getFundType());
 			fundEntryReport.setFundRate(NumberUtils.nullToZero(fundEntryInfo.getFundRate()).toString());
-			fundEntryReport.setFundAmt(NumberUtils.nullToZero(fundEntryInfo.getFundAmount()).toString());
-			fundEntryReport.setCreditAmt(NumberUtils.nullToZero(fundEntryInfo.getCreditAmount()).toString());
-			fundEntryReport.setNetAmt(NumberUtils.nullToZero(fundEntryInfo.getNetAmount()).toString());
+			fundEntryReport.setFundAmt(NumberUtils.nullToZero(fundEntryInfo.getFundAmt()).toString());
+			fundEntryReport.setCreditAmt(NumberUtils.nullToZero(fundEntryInfo.getCreditAmt()).toString());
+			fundEntryReport.setNetAmt(NumberUtils.nullToZero(fundEntryInfo.getNetAmt()).toString());
 			fundEntryReportList.add(fundEntryReport);
 		}
 		
