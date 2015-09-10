@@ -353,17 +353,17 @@
 		
 									<tr>
 										<td>
-																																		(๗) รวมภาษีสุรา (๖.๑) + (๖.๒)
+											(๗) รวมภาษีสุรา (๖.๑) + (๖.๒)
 										</td>
 										<td style="text-align: right;" >
-																																		{{toStringDec(sumNetTax(),2)}}	
+											{{toStringDec(sumNetTax(),2)}}	
 										</td>
 									</tr>
 		
 									<tr>
 										<td>
-																																		(๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
-											<input type="text" ng-model="inputSum8" style="padding:3px;" ng-disabled="historyMode" />
+											(๘) หัก ค่าภาษีสุรา ... ที่ชำระไว้แล้วจาก
+											<input type="text" ng-model="sumscope.inputSum8" style="padding:3px;" ng-disabled="historyMode" />
 										</td>
 										<td style="text-align: right;" >
 											<!-- 		                            {{toStringDec(sumTax8,2)}} -->
@@ -374,7 +374,7 @@
 									<tr>
 										<td>
 																																		(๙) หัก คืนภาษีสุราตามหนังสือกรมฯ ที่ 	
-											<input type="text" ng-model="inputSum9"  style="padding:3px;" ng-disabled="historyMode" />
+											<input type="text" ng-model="sumscope.inputSum9"  style="padding:3px;" ng-disabled="historyMode" />
 										</td>
 										<td style="text-align: right;" >
 											<!-- 		                            {{toStringDec(sumTax9,2)}} -->

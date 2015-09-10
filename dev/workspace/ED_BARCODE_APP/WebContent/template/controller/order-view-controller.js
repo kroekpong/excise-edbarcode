@@ -592,11 +592,10 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByValue", $scope.sumCalcPriceAmountValue.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByQuantity", $scope.sumCalcQuantityAmountValue.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("SumAllTax", $scope.totalTax.toFixed(2)));
-		SummaryInfo.push($soapService.getObjectItem("TaxLessType", ""));
-		SummaryInfo.push($soapService.getObjectItem("TaxLessFrom", ($scope.inputSum8 == undefined) ? "" : $scope.inputSum8));
+		SummaryInfo.push($soapService.getObjectItem("TaxLessFrom", ($scope.sumscope.inputSum8 == undefined) ? "" : $scope.sumscope.inputSum8));
 		SummaryInfo.push($soapService.getObjectItem("TaxLessAmount", $scope.toNumber($scope.sumscope.sumTax8).toFixed(2)));
-		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo", ($scope.inputSum9 == undefined) ? "" : $scope.inputSum9));
-		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", $scope.toNumber($scope.sumscope.sumTax8).toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo", ($scope.sumscope.inputSum9 == undefined) ? "" : $scope.sumscope.inputSum9));
+		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", $scope.toNumber($scope.sumscope.sumTax9).toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount", $scope.totalTax.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentMunicipalAmount", $scope.royalTotal.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount", $scope.sss.toFixed(2)));
