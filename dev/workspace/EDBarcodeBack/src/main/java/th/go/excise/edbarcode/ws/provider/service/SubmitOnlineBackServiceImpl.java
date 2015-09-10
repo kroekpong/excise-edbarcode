@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
-import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 import th.go.excise.edbarcode.ws.client.sta.service.AddNewFormSR12011Service;
 import th.go.excise.edbarcode.ws.provider.bean.XmlData;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSubmitOnlineRequest;
@@ -65,7 +64,7 @@ public class SubmitOnlineBackServiceImpl implements SubmitOnlineBackService {
 
 	private th.go.excise.edbarcode.ws.client.sta.oxm.StaBacRequest prepareWsRequest(EbarcodeSubmitOnlineRequest request) throws JAXBException, IOException {
 		
-		DecimalFormat decimalFormatTwoDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
+		DecimalFormat decimalFormatTwoDigit = new DecimalFormat("0.00");
 		
 		// Prepare Request Header
 		th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest wsHeader = new th.go.excise.edbarcode.ws.client.sta.oxm.HeaderRequest();
