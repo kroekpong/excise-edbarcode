@@ -29,18 +29,28 @@ _pageData.template = {
 	companyRow : ' ' ,
 	productRow : '<tr class="tr-product">' 
 		+'<td >{rowNum}</td>'
+		+'<td >{typeName}</td>'
 		+'<td >{companyName}</td>'
 		+'<td >{goodsName}</td>'
 		+'<td class="right">{degree}</td>'
 		+'<td class="right">{size}</td>'
+		+'<td class="right">{volume}</td> '
 		+'<td class="right">{vat}</td> '
+		+'<td class="right">{volumeOld}</td>'
 		+'<td class="right">{vatOld}</td>'
-		+'<td class="right">{vatdif}</td> '
+		+'<td class="right">{volumedif}</td>'
+		+'<td class="right">{vatdif}</td>'
+		+'<td class="right">{volumedifpercent}</td>'
 		+'<td class="right">{vatdifpercent}</td> </tr>' ,
 	summaryRow : '<tr class="tr-summary"> <td class="summary" colspan="6" ><b>รวม</b></td>'
-		+'<td class="summary">{sumBottle}</td>'
-		+'<td class="summary">{sumLite}</td>'
-		+'<td class="summary">{sumVat}</td> </tr>',
+		+'<td class="summary">{sum1}</td>'
+		+'<td class="summary">{sum2}</td>'
+		+'<td class="summary">{sum3}</td>'
+		+'<td class="summary">{sum4}</td>'
+		+'<td class="summary">{sum5}</td>'
+		+'<td class="summary">{sum6}</td>'
+		+'<td class="summary">{sum7}</td>'
+		+'<td class="summary">{sum8}</td> </tr>',
 	headerRow : '<tr class="header">'
 		+	'<th rowspan="2" style="width:49px">ลำดับ</strong></th>'
 		+	'<th rowspan="2" style="width:164px">ชื่อสุรา</th>'
@@ -118,9 +128,18 @@ function genReport(datas){
 		dataTable += col1; 		
 	
 		var sumRow = _pageData.template.summaryRow;	
-		var sumBottle = 0;
-		var sumLite = 0;
-		var sumVat = 0;
+
+		var sum1 = 0;
+		var sum2 = 0;
+		var sum3 = 0;
+		var sum4 = 0;
+		var sum5 = 0;
+		var sum6 = 0;
+		var sum7 = 0;
+		var sum8 = 0;
+
+
+
 		$.each( productList, function( j, pval ){
 				
 			var companyName = pval.companyName ;		
@@ -135,32 +154,44 @@ function genReport(datas){
 			var vatOld= pval.vatOld ;
 			var vatdif= pval.vatdif ;
 			var vatdifpercent= pval.vatdifpercent ;
-			
+
 			var col2 = _pageData.template.productRow;
 			col2 = col2.replace('{rowNum}' , (j+1));
+			col2 = col2.replace('{typeName}' , pval.typeName);
 			col2 = col2.replace('{companyName}' , companyName);
 			col2 = col2.replace('{goodsName}' , checkNum(goodsName));
 			col2 = col2.replace('{degree}' , checkNum(degree));
 			col2 = col2.replace('{size}' , checkNum(size));
-			col2 = col2.replace('{price1}' , checkNum(price1));
-			col2 = col2.replace('{price2}' , checkNum(price2));		
-			col2 = col2.replace('{quantityBottle}' , checkNum(quantityBottle));		
-			col2 = col2.replace('{quantityLite}' , checkNum(quantityLite));		
-			col2 = col2.replace('{vat}' , checkNum(vat));
-			col2 = col2.replace('{vatOld}' , checkNum(vatOld));
-			col2 = col2.replace('{vatdif}' , checkNum(vatdif));
-			col2 = col2.replace('{vatdifpercent}' , checkNum(vatdifpercent));		
+			col2 = col2.replace('{volume}' , checkNum(pval.volume));
+			col2 = col2.replace('{vat}' , checkNum(pval.vat));		
+			col2 = col2.replace('{volumeOld}' , checkNum(pval.volumeOld));		
+			col2 = col2.replace('{volumedif}' , checkNum(pval.volumedif));		
+			col2 = col2.replace('{vatdif}' , checkNum(pval.vatdif));
+			col2 = col2.replace('{vatOld}' , checkNum(pval.vatOld));
+			col2 = col2.replace('{vatdif}' , checkNum(pval.vatdif));
+			col2 = col2.replace('{volumedifpercent}' , checkNum(pval.volumedifpercent));	
+			col2 = col2.replace('{vatdifpercent}' , checkNum(pval.vatdifpercent));	
 			dataTable += col2;
-			
-			sumBottle += parseNum(quantityBottle);
-			sumLite += parseNum(quantityLite);
-			sumVat += parseNum(vat);
-			 
+		
+			sum1 += parseNum(pval.volume);
+			sum2 += parseNum(pval.vat);
+			sum3 += parseNum(pval.volumeOld);
+			sum4 += parseNum(pval.vatOld);
+			sum5 += parseNum(pval.volumedif);
+			sum6 += parseNum(pval.vatdif);
+			sum7 += parseNum(pval.volumedifpercent);
+			sum8 += parseNum(pval.vatdifpercent);
 		});
 		
-		sumRow = sumRow.replace('{sumBottle}' , formatNum(0,sumBottle));		
-		sumRow = sumRow.replace('{sumLite}' , formatNum(3,sumLite));		
-		sumRow = sumRow.replace('{sumVat}' , formatNum(2,sumVat));		
+		sumRow = sumRow.replace('{sum1}' , formatNum(0,sum1));		
+		sumRow = sumRow.replace('{sum2}' , formatNum(3,sum2));		
+		sumRow = sumRow.replace('{sum3}' , formatNum(2,sum3));
+		sumRow = sumRow.replace('{sum4}' , formatNum(2,sum4));		
+		sumRow = sumRow.replace('{sum5}' , formatNum(2,sum5));		
+		sumRow = sumRow.replace('{sum6}' , formatNum(2,sum6));		
+		sumRow = sumRow.replace('{sum7}' , formatNum(2,sum7));
+		sumRow = sumRow.replace('{sum8}' , formatNum(2,sum8/productList.length));		
+
 		
 		dataTable+= sumRow;
 		//console.log(dataTable);
