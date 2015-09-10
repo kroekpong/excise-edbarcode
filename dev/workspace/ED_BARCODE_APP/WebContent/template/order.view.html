@@ -278,8 +278,9 @@
 										<td style="text-align: right;">{{toStringDec(item.Goods.Degree,2)}}</td>
 										<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize)}}</td>
 										<td style="text-align: center;"> 
-											<input type="number" style="text-align: right;padding:3px; width:90px;" ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode" />
-																																		{{item.Goods.GoodsSizeUnitDescriptionText}}
+											<input type="number" style="text-align: right;padding:3px; width:90px;" 
+											ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode" />
+												{{item.Goods.GoodsSizeUnitDescriptionText}}
 										</td>
 
 										<td style="text-align: right;">{{toStringDec(item.col45=item.Goods.GoodsSize*item.GoodsCount)}}</td>
@@ -384,10 +385,10 @@
 		
 									<tr>
 										<td>
-																																		(๑๐) คงเหลือภาษีสุรา	
+												(๑๐) คงเหลือภาษีสุรา	
 										</td>
 										<td style="text-align: right;" >
-																																		{{toStringDec(col10,2)}}		
+												{{toStringDec(col10,2)}}		
 										</td>
 									</tr>
 									<tr>

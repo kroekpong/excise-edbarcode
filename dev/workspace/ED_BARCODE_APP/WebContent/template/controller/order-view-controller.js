@@ -341,7 +341,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		}
 		$scope.sumCalcPriceAmountValue = Math.floor(sum);
 //		console.log("sumCalcPriceAmountValue", $scope.sumCalcPriceAmountValue);
-		return Math.floor(sum);
+		$scope.realsumCalcPriceAmountValue = sum;
+		return sum;
 	};
 
 	$scope.sumCalcQuantityAmount = function() {
@@ -589,14 +590,14 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 
 		var SummaryInfo = $soapService.getObject("SummaryInfo");
 		SR12011Info.push(SummaryInfo);
-		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByValue", $scope.sumCalcPriceAmountValue.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByValue", $scope.realsumCalcPriceAmountValue.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("SumAllTaxByQuantity", $scope.sumCalcQuantityAmountValue.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("SumAllTax", $scope.totalTax.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("TaxLessFrom", ($scope.sumscope.inputSum8 == undefined) ? "" : $scope.sumscope.inputSum8));
 		SummaryInfo.push($soapService.getObjectItem("TaxLessAmount", $scope.toNumber($scope.sumscope.sumTax8).toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookNo", ($scope.sumscope.inputSum9 == undefined) ? "" : $scope.sumscope.inputSum9));
 		SummaryInfo.push($soapService.getObjectItem("TaxDeductionOnBookAmount", $scope.toNumber($scope.sumscope.sumTax9).toFixed(2)));
-		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount", $scope.totalTax.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAmount", $scope.col10.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentMunicipalAmount", $scope.royalTotal.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentFundHealthAmount", $scope.sss.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentFundTVAmount", $scope.sst.toFixed(2)));
@@ -721,5 +722,15 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			$mdToast.show($mdToast.simple().content("ทำรายการเรียบร้อย ที่ ฉบับร่าง").position($scope.getToastPosition()).hideDelay(6000));
 		});
 	}
+	
+	
+	/******
+	 * INPUT NUMBER
+	 * 
+	 * ****/
+	$scope.inputNumberOnly = function ( event ){
+		var key = event.which || event.keyCode; 
+		console.log(key);
+	};
 
 });
