@@ -570,7 +570,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			GoodsEntryInfo.push($soapService.getObjectItem("TaxAmount", TaxAmount.toFixed(4)));
 			GoodsEntryInfo.push($soapService.getObjectItem("SeqNo", index));
 			GoodsEntryInfo.push($soapService.getObjectItem("ProductTypeDesc", item.Goods.ProductTypeDescriptionText));
-			GoodsEntryInfo.push($soapService.getObjectItem("GoodsDesc", item.Goods.GoodsDescriptionText));
+			GoodsEntryInfo.push($soapService.getObjectItem("GoodsDesc",item.Goods.ProductTypeDescriptionText + " " + item.Goods.BrandName));
 			GoodsEntryInfo.push($soapService.getObjectItem("Degree", item.Goods.Degree));
 			GoodsEntryInfo.push($soapService.getObjectItem("GoodsSize", item.Goods.GoodsSize));
 			GoodsEntryInfo.push($soapService.getObjectItem("GoodsPiece", item.GoodsCount));
