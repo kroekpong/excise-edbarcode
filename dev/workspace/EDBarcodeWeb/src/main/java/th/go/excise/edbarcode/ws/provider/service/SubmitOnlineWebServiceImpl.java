@@ -175,9 +175,9 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 			wsFundEntryInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.FundEntryInfo();
 			wsFundEntryInfo.setFundType(fundEntryInfo.getFundType());
 			wsFundEntryInfo.setFundRate(NumberUtils.nullToZero(fundEntryInfo.getFundRate()));
-			wsFundEntryInfo.setFundAmount(NumberUtils.nullToZero(fundEntryInfo.getFundAmount()));
-			wsFundEntryInfo.setCreditAmount(NumberUtils.nullToZero(fundEntryInfo.getCreditAmount()));
-			wsFundEntryInfo.setNetAmount(NumberUtils.nullToZero(fundEntryInfo.getNetAmount()));
+			wsFundEntryInfo.setFundAmt(NumberUtils.nullToZero(fundEntryInfo.getFundAmt()));
+			wsFundEntryInfo.setCreditAmt(NumberUtils.nullToZero(fundEntryInfo.getCreditAmt()));
+			wsFundEntryInfo.setNetAmt(NumberUtils.nullToZero(fundEntryInfo.getNetAmt()));
 			wsFundListInfo.getFundEntryInfo().add(wsFundEntryInfo);
 		}
 		

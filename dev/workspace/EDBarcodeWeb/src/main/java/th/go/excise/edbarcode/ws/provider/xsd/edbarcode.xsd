@@ -301,10 +301,10 @@
 	<complexType name="FundEntryInfo">
 		<sequence>
 			<element name="FundType"					type="string"		minOccurs="1" />
-			<element name="FundAmount"					type="decimal"		minOccurs="1" />
+			<element name="FundAmt"						type="decimal"		minOccurs="1" />
 			<element name="FundRate"					type="decimal"		minOccurs="1" />
-			<element name="CreditAmount"				type="decimal"		minOccurs="1" />
-			<element name="NetAmount"					type="decimal"		minOccurs="1" />
+			<element name="CreditAmt"					type="decimal"		minOccurs="1" />
+			<element name="NetAmt"						type="decimal"		minOccurs="1" />
 		</sequence>
 	</complexType>
 
