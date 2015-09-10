@@ -279,7 +279,7 @@
 										<td style="text-align: right;">{{toStringDec(item.Goods.GoodsSize)}}</td>
 										<td style="text-align: center;"> 
 											<input type="number" style="text-align: right;padding:3px; width:90px;" 
-											ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode" />
+											ng-model="item.GoodsCount" placeholder="จำนวน"  ng-disabled="historyMode" inputnumberonly />
 												{{item.Goods.GoodsSizeUnitDescriptionText}}
 										</td>
 
@@ -287,8 +287,8 @@
 
 										<td>
 
-											<input type="number" style="text-align: right;width:90px;padding:3px;" ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode" />
-
+											<input type="number" style="text-align: right;width:90px;padding:3px;"
+											 ng-model="item.Goods.GoodsPrice" placeholder="ตามแจ้ง"  ng-disabled="historyMode" inputnumberonly/>
 										</td>
 
 										<td style="text-align: right;">{{toStringDec(item.Goods.DeclarePrice,2)}}</td>
@@ -368,7 +368,7 @@
 										</td>
 										<td style="text-align: right;" >
 											<!-- 		                            {{toStringDec(sumTax8,2)}} -->
-											<input type="text" ng-model="sumscope.sumTax8" style="text-align: right;padding:3px;" ng-disabled="historyMode" />	
+											<input type="text" ng-model="sumscope.sumTax8" style="text-align: right;padding:3px;" ng-disabled="historyMode" inputnumberonly/>	
 										</td>
 									</tr>
 		
@@ -379,7 +379,7 @@
 										</td>
 										<td style="text-align: right;" >
 											<!-- 		                            {{toStringDec(sumTax9,2)}} -->
-											<input type="text" ng-model="sumscope.sumTax9" style="text-align: right;padding:3px;" ng-disabled="historyMode" />	
+											<input type="text" ng-model="sumscope.sumTax9" style="text-align: right;padding:3px;" ng-disabled="historyMode" inputnumberonly/>	
 										</td>
 									</tr>
 		
@@ -393,39 +393,37 @@
 									</tr>
 									<tr>
 										<td>
-		
-																																		(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทย ร้อยละ {{MunicipalRateAmountRate}} 
+										(๑๑) ภาษีเก็บเพิ่มเพื่อกระทรวงมหาดไทย ร้อยละ {{MunicipalRateAmountRate}} 
 										</td>
 										<td style="text-align: right;" >
-																																		{{toStringDec(royalTotal,2)}}		
+											{{toStringDec(royalTotal,2)}}	
 										</td>
 									</tr>
 		
 									<tr>
 										<td>
-																																		(๑๒) รวมภาษีที่ต้องชำระทั้งสิ้น (๑๐) + (๑๑)
+											(๑๒) รวมภาษีที่ต้องชำระทั้งสิ้น (๑๐) + (๑๑)
 										</td>
 										<td style="text-align: right;" >
-																																		{{toStringDec(col12,2)}}	
+											{{toStringDec(col12,2)}}	
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											(๑๓) อื่นๆ
+										</td>
+										<td style="text-align: right;" >
+											{{toStringDec(col13,2)}}			
 										</td>
 									</tr>
 		
 									<tr>
 										<td>
-																																		(๑๓) อื่นๆ
+											(๑๔) รวม (๑๒) + (๑๓)
 										</td>
 										<td style="text-align: right;" >
-																																		{{toStringDec(col13,2)}}			
-										</td>
-									</tr>
-		
-									<tr>
-										<td>
-		
-																																		(๑๔) รวม (๑๒) + (๑๓)
-										</td>
-										<td style="text-align: right;" >
-																																		{{toStringDec(col14,2,2)}}	
+											{{toStringDec(col14,2,2)}}	
 										</td>
 									</tr>
 		
@@ -447,7 +445,7 @@
 											ภาษีเก็บเพิ่ม สสส ร้อยละ {{FundSSSRateAmountRate}}
 										</td>
 										<td style="text-align: right;" >
-											{{toStringDec(sss-sumscope.taxcol9.sss,2)}}		
+											{{toStringDec(sumscope.taxcol9.sssDisplay,2)}}		
 										</td>
 									</tr>
 									<tr>
@@ -455,7 +453,7 @@
 											ภาษีเก็บเพิ่ม สสท ร้อยละ {{FundSSTRateAmountRate}}
 										</td>
 										<td style="text-align: right;" >
-											{{toStringDec(sst-sumscope.taxcol9.sst,2)}}		
+											{{toStringDec(sumscope.taxcol9.sstDisplay,2)}}
 										</td>
 									</tr>
 									<tr>
@@ -463,7 +461,7 @@
 											ภาษีเก็บเพิ่ม กกท ร้อยละ {{FundKKTRateAmountRate}}
 										</td>
 										<td style="text-align: right;" >
-											{{toStringDec(kkt-sumscope.taxcol9.kkt,2)}}		
+											{{toStringDec(sumscope.taxcol9.kktDisplay,2)}}		
 										</td>
 									</tr>
 								</table>

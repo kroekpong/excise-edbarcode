@@ -12,6 +12,7 @@ module.config(function($mdThemingProvider) {
 });
 
 module.directive("datepicker",function(){
+	console.log("datepicker");
 	  return {
 	    restrict:"A",
 	    link:function(scope,el,attr){
@@ -21,6 +22,38 @@ module.directive("datepicker",function(){
 			      });
 	    }
 	  };
+});
+
+module.directive("inputnumberonly",function(){
+	console.log("inputnumberonly");
+	return {
+		restrict:"A",
+		link:function(scope,element,attr){
+			
+			element.on('keypress', function(event) {
+//				console.log("event",event);
+//				console.log("selector",this.value);
+				
+				var key = event.which || event.keyCode; 
+//				console.log("keypress",key);
+				var isNumber = false;
+				if(key >=48 && key <=57){
+					isNumber = true;
+				}
+//				if(key >=96 && key <=105){
+//					isNumber = true;
+//				}
+				if(key == 46){
+					var haveDot = (this.value.indexOf(".") > 0);
+					if(!haveDot)
+						isNumber = true;
+				}
+				if(!isNumber){
+					event.preventDefault();
+				}
+		      });
+		}
+	};
 });
 
 module.config(function($stateProvider, $urlRouterProvider) {

@@ -40,6 +40,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.sumscope.taxcol9.sss = 0;
 	$scope.sumscope.taxcol9.sst = 0;
 	$scope.sumscope.taxcol9.kkt = 0;
+	$scope.sumscope.taxcol9.sssDisplay = 0;
+	$scope.sumscope.taxcol9.sstDisplay = 0;
+	$scope.sumscope.taxcol9.kktDisplay = 0;
 	/**
 	 * อัตราภาษี <MunicipalRateAmount>10</MunicipalRateAmount>
 	 * <FundSSSRateAmount>2.0</FundSSSRateAmount> <FundSSTRateAmount>1.5</FundSSTRateAmount>
@@ -114,6 +117,12 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.floorNumber = function(_number) {
 		return Math.floor(_number);
 	}
+	
+	$scope.floorNumber2POS = function(_number) {
+		var str = _number.toFixed(4);
+			str = str.substr(0,str.length-2);
+		return parseFloat(str).toFixed(2);
+	}
 
 	$scope.navigaTor = function(_index) {
 		$scope.step = [ false, false, false, false, false, false ];
@@ -160,6 +169,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 	$scope.resetProductChecked = function() {
 		tempSelect = [];
 		productCheck = [];
+		$scope.userSearch.BrandName = "";
+		$scope.userSearch.Degree = "";
 	};
 
 	$scope.productCheckedClick = function(_goodId, product) {
@@ -362,6 +373,9 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		$scope.col10 = $scope.totalTax - $scope.toNumber($scope.sumscope.sumTax8) - $scope.toNumber($scope.sumscope.sumTax9);
 		
 		$scope.royalTotal = $scope.col10 * $scope.MunicipalRateAmountRate * 0.01;
+		// ปัดเศษ หลักที่สามทิ้ง
+		$scope.royalTotal =  parseFloat($scope.floorNumber2POS($scope.royalTotal));
+		
 		$scope.sss = $scope.difcol7andcol8 * $scope.FundSSSRateAmountRate * 0.01;
 		$scope.sst = $scope.difcol7andcol8 * $scope.FundSSTRateAmountRate * 0.01;
 		$scope.kkt = $scope.difcol7andcol8 * $scope.FundKKTRateAmountRate * 0.01;
@@ -375,12 +389,29 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 			$scope.sumscope.taxcol9.sss = taxcol9 * $scope.FundSSSRateAmountRate * 0.01;
 			$scope.sumscope.taxcol9.sst = taxcol9 * $scope.FundSSTRateAmountRate * 0.01;
 			$scope.sumscope.taxcol9.kkt = taxcol9 * $scope.FundKKTRateAmountRate * 0.01;
+
+			// ปัดเศษ หลักที่สามทิ้ง
+			$scope.sumscope.taxcol9.sss =  parseFloat($scope.floorNumber2POS($scope.sumscope.taxcol9.sss));
+			$scope.sumscope.taxcol9.sst =  parseFloat($scope.floorNumber2POS($scope.sumscope.taxcol9.sst));
+			$scope.sumscope.taxcol9.kkt =  parseFloat($scope.floorNumber2POS($scope.sumscope.taxcol9.kkt));
+			
+//			console.log("$scope.sumscope.taxcol9.sss" , $scope.sumscope.taxcol9.sss);
+//			console.log("$scope.sumscope.taxcol9.sst" , $scope.sumscope.taxcol9.sst);
+//			console.log("$scope.sumscope.taxcol9.kkt" , $scope.sumscope.taxcol9.kkt);
+			
 		}else{
 			$scope.sumscope.taxcol9.sss = 0;
 			$scope.sumscope.taxcol9.sst = 0;
 			$scope.sumscope.taxcol9.kkt = 0;
 		}
 
+		// kong toon
+		// ปัดเศษ หลักที่สามทิ้ง
+		$scope.sumscope.taxcol9.sssDisplay  = parseFloat($scope.floorNumber2POS($scope.sss - $scope.sumscope.taxcol9.sss));
+		$scope.sumscope.taxcol9.sstDisplay =  parseFloat($scope.floorNumber2POS($scope.sst - $scope.sumscope.taxcol9.sst));
+		$scope.sumscope.taxcol9.kktDisplay  =  parseFloat($scope.floorNumber2POS($scope.kkt - $scope.sumscope.taxcol9.kkt));
+//		console.log("$scope.sumscope.taxcol9.sssDisplay",$scope.sumscope.taxcol9.sssDisplay);
+		
 		return $scope.totalTax;
 	};
 
@@ -622,7 +653,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.sss.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundSSSRateAmountRate.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", $scope.sumscope.taxcol9.sss.toFixed(2)));
-		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.sss-$scope.sumscope.taxcol9.sss ).toFixed(2) ));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.sumscope.taxcol9.sssDisplay ).toFixed(2) ));
 		FundListInfo.push(FundEntryInfo);
 		
 		FundEntryInfo = $soapService.getObject("FundEntryInfo");
@@ -630,7 +661,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.sst.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundSSTRateAmountRate.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", $scope.sumscope.taxcol9.sst.toFixed(2)));
-		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.sst-$scope.sumscope.taxcol9.sst ).toFixed(2) ));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.sumscope.taxcol9.sstDisplay ).toFixed(2) ));
 		FundListInfo.push(FundEntryInfo);
 		
 		FundEntryInfo = $soapService.getObject("FundEntryInfo");
@@ -638,7 +669,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		FundEntryInfo.push($soapService.getObjectItem("FundAmt", $scope.kkt.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("FundRate", $scope.FundKKTRateAmountRate.toFixed(2)));
 		FundEntryInfo.push($soapService.getObjectItem("CreditAmt", $scope.sumscope.taxcol9.kkt.toFixed(2)));
-		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.kkt-$scope.sumscope.taxcol9.kkt ).toFixed(2) ));
+		FundEntryInfo.push($soapService.getObjectItem("NetAmt", ($scope.sumscope.taxcol9.kktDisplay ).toFixed(2) ));
 		FundListInfo.push(FundEntryInfo);
 		
 		
