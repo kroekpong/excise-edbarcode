@@ -608,6 +608,7 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAndMunicipalTaxAmount", $scope.col12.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentOtherAmount", $scope.col13.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentNetTaxAmount", $scope.col14.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("ExciseAmountSubtractTaxLessAmount", ($scope.totalTax-$scope.toNumber($scope.sumscope.sumTax8)).toFixed(2)));
 
 		//kong toon
 		var FundListInfo = $soapService.getObject("FundListInfo");
