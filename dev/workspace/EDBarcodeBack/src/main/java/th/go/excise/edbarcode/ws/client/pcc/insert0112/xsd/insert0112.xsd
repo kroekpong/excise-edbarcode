@@ -1,72 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema elementFormDefault="qualified"
-	targetNamespace="http://com.pccth.bcsservice/"
+	targetNamespace="http://bcsservice.pccth.com/"
 	xmlns="http://www.w3.org/2001/XMLSchema"
 	xmlns:conv="http://www.openuri.org/2002/04/wsdl/conversation/"
 	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/"
 	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
-	xmlns:tns="http://com.pccth.bcsservice/"
+	xmlns:tns="http://bcsservice.pccth.com/"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	
 	<complexType name="InquiryBcsReqHeader">
 		<sequence>
-			<element name="body" nillable="true" type="tns:Body"/>
-			<element name="header" nillable="true" type="tns:Header"/>
+			<element name="header"				nillable="true"		type="tns:Header"/>
+			<element name="body"				nillable="true"		type="tns:Body"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="Header">
+		<sequence>
+			<element name="serviceID"			nillable="true"		type="string"/>
+			<element name="systemID"			nillable="true"		type="string"/>
+			<element name="IPAddress"			nillable="true"		type="string"/>
+			<element name="userId"				nillable="true"		type="string"/>
+			<element name="password"			nillable="true"		type="string"/>
 		</sequence>
 	</complexType>
 	
 	<complexType name="Body">
 		<sequence>
-			<element name="poso112FormInfo" nillable="true" type="tns:POSO0112FormInfo"/>
-			<element name="poso130FormInfo" nillable="true" type="tns:POSO130FormInfo"/>
+			<element name="poso112FormInfo"		nillable="true"		type="tns:POSO0112FormInfo"/>
 		</sequence>
 	</complexType>
 	
 	<complexType name="POSO0112FormInfo">
 		<sequence>
-			<element name="formReferenceNumber" nillable="true" type="string"/>
-			<element name="formType" nillable="true" type="string"/>
-			<element name="surchargeAmt" type="double"/>
-			<element name="tin" nillable="true" type="string"/>
-			<element name="paymentReferenceId" type="int"/>
-			<element name="moiRate" nillable="true" type="string"/>
-			<element name="factoryDateEnd" nillable="true" type="string"/>
-			<element name="payType12" nillable="true" type="string"/>
-			<element name="customerId" nillable="true" type="string"/>
-			<element name="taxYear" type="int"/>
-			<element name="sumCreditMoiTax" type="double"/>
-			<element name="subbmissionEmail" nillable="true" type="string"/>
-			<element name="penaltyAmt" type="double"/>
-			<element maxOccurs="unbounded" minOccurs="0" name="credit" nillable="true" type="tns:Credit"/>
-			<element maxOccurs="unbounded" minOccurs="0" name="pso112Goods" nillable="true" type="tns:PSO112Goods"/>
-			<element name="regId" nillable="true" type="string"/>
-			<element name="incCode" nillable="true" type="string"/>
-			<element name="taxMonth" type="int"/>
-			<element name="pinNitId" nillable="true" type="string"/>
-			<element name="recType" nillable="true" type="string"/>
-			<element name="formCode" nillable="true" type="string"/>
-			<element name="reduceAmt" type="double"/>
-			<element name="bankReferenceId" nillable="true" type="string"/>
-			<element name="exciseTax" type="double"/>
-			<element name="sumCreditExciseTax" type="double"/>
-			<element name="netMoiTax" type="double"/>
-			<element name="moitax" nillable="true" type="string"/>
-			<element name="netExciseTax" type="double"/>
-			<element name="formEffectiveDate" nillable="true" type="string"/>
-			<element name="factoryDateBegin" nillable="true" type="string"/>
-			<element name="prnType" nillable="true" type="string"/>
+			<element name="registrationId"		nillable="true"		type="string"/>
+			<element name="customerId"			nillable="true"		type="string"/>
+			<element name="factoryId"			nillable="true"		type="string"/>
+			<element name="tin"					nillable="true"		type="string"/>
+			<element name="pinNitId"			nillable="true"		type="string"/>
+			<element name="ipAddress"			nillable="true"		type="string"/>
+			<element name="internetId"			nillable="true"		type="string"/>
+			<element name="subbmissionEmail"	nillable="true"		type="string"/>
+			<element name="submitDateTime"		nillable="true"		type="string"/>
+			<element name="formType"			nillable="true"		type="string"/>
+			<element name="formCode"			nillable="true"		type="string"/>
+			<element name="formEffectiveDate"	nillable="true"		type="string"/>
+			<element name="formReferenceNumber"	nillable="true"		type="string"/>
+			<element name="paymentReferenceId"	type="int"/>
+			<element name="bankReferenceId"		nillable="true"		type="string"/>
+			<element name="payType12"			nillable="true"		type="string"/>
+			<element name="taxMonth"			type="int"/>
+			<element name="taxYear"				type="int"/>
+			<element name="incomeCode"			nillable="true"		type="string"/>
+			<element name="factoryDateBegin"	nillable="true"		type="string"/>
+			<element name="factoryDateEnd"		nillable="true"		type="string"/>
+			<element name="taxvalAmt"			nillable="true"		type="string"/>
+			<element name="taxqtyAmt"			nillable="true"		type="string"/>
+			<element name="exciseTax"			type="double"/>
+			<element name="reduceAmt"			type="double"/>
+			<element name="penaltyAmt"			type="double"/>
+			<element name="surchargeAmt"		type="double"/>
+			<element name="moiRate"				nillable="true"		type="string"/>
+			<element name="moiTax"				nillable="true"		type="string"/>
+			<element name="sumCreditExciseTax"	type="double"/>
+			<element name="sumCreditMoiTax"		type="double"/>
+			<element name="netExciseTax"		type="double"/>
+			<element name="netMoiTax"			type="double"/>
+			<element name="netSssTax"			type="double"/>
+			<element name="netSstTax"			type="double"/>
+			<element name="netKprTax"			type="double"/>
+			<element name="prnType"				nillable="true"		type="string"/>
+			<element name="recType"				nillable="true"		type="string"/>
+			<element maxOccurs="unbounded"		minOccurs="0"		name="pso112Goods"	nillable="true"		type="tns:PSO112Goods"/>
+			<element maxOccurs="unbounded"		minOccurs="0"		name="fund"			nillable="true"		type="tns:Fund"/>
+			<element maxOccurs="unbounded"		minOccurs="0"		name="credit"		nillable="true"		type="tns:Credit"/>
 		</sequence>
 	</complexType>
 	
-	<complexType name="Credit">
+	<complexType name="GoodsInformation">
 		<sequence>
-			<element name="rtnCtlNo" nillable="true" type="string"/>
-			<element name="credtiMoiTax" nillable="true" type="string"/>
-			<element name="creditExciseTax" nillable="true" type="string"/>
+			<element name="productCode"			nillable="true"		type="string"/>
+			<element name="categoryCode1"		nillable="true"		type="string"/>
+			<element name="categoryName1"		nillable="true"		type="string"/>
+			<element name="categoryCode2"		nillable="true"		type="string"/>
+			<element name="categoryName2"		nillable="true"		type="string"/>
+			<element name="categoryCode3"		nillable="true"		type="string"/>
+			<element name="categoryName3"		nillable="true"		type="string"/>
+			<element name="categoryCode4"		nillable="true"		type="string"/>
+			<element name="categoryName4"		nillable="true"		type="string"/>
+			<element name="categoryCode5"		nillable="true"		type="string"/>
+			<element name="categoryName5"		nillable="true"		type="string"/>
+			<element name="unitCode"			nillable="true"		type="string"/>
 		</sequence>
 	</complexType>
 	
@@ -74,71 +102,43 @@
 		<complexContent>
 			<extension base="tns:GoodsInformation">
 				<sequence>
-					<element name="taxQuantityNumber" nillable="true" type="string"/>
-					<element name="declarePrice" nillable="true" type="string"/>
-					<element name="rateFlag" nillable="true" type="string"/>
-					<element name="priceFlag" nillable="true" type="string"/>
-					<element name="taxQuantityPerUnit" nillable="true" type="string"/>
-					<element name="taxQuantity" nillable="true" type="string"/>
-					<element name="taxValue" nillable="true" type="string"/>
-					<element name="informPrice" nillable="true" type="string"/>
-					<element name="unitPirce" nillable="true" type="string"/>
-					<element name="goodsNum" nillable="true" type="string"/>
-					<element name="taxAmount" nillable="true" type="string"/>
-					<element name="goodsValue" nillable="true" type="string"/>
+					<element name="rateFlag"			nillable="true"		type="string"/>
+					<element name="taxQuantity"			nillable="true"		type="string"/>
+					<element name="taxQuantityNumber"	nillable="true"		type="string"/>
+					<element name="taxQuantityPerUnit"	nillable="true"		type="string"/>
+					<element name="taxValue"			nillable="true"		type="string"/>
+					<element name="priceFlag"			nillable="true"		type="string"/>
+					<element name="informPrice"			nillable="true"		type="string"/>
+					<element name="declarePrice"		nillable="true"		type="string"/>
+					<element name="unitPirce"			nillable="true"		type="string"/>
+					<element name="goodsNum"			nillable="true"		type="string"/>
+					<element name="goodsValue"			nillable="true"		type="string"/>
+					<element name="taxvalUnit"			nillable="true"		type="string"/>
+					<element name="taxqtyUnit1"			nillable="true"		type="string"/>
+					<element name="taxqtyUnit2"			nillable="true"		type="string"/>
+					<element name="taxvalAmt"			nillable="true"		type="string"/>
+					<element name="taxqtyAmt"			nillable="true"		type="string"/>
 				</sequence>
 			</extension>
 		</complexContent>
 	</complexType>
 	
-	<complexType name="GoodsInformation">
+	<complexType name="Fund">
 		<sequence>
-			<element name="categoryName5" nillable="true" type="string"/>
-			<element name="categoryName2" nillable="true" type="string"/>
-			<element name="categoryCode4" nillable="true" type="string"/>
-			<element name="categoryName1" nillable="true" type="string"/>
-			<element name="categoryCode3" nillable="true" type="string"/>
-			<element name="productCode" nillable="true" type="string"/>
-			<element name="categoryName4" nillable="true" type="string"/>
-			<element name="categoryName3" nillable="true" type="string"/>
-			<element name="categoryCode5" nillable="true" type="string"/>
-			<element name="categoryCode2" nillable="true" type="string"/>
-			<element name="categoryCode1" nillable="true" type="string"/>
-			<element name="unitCode" nillable="true" type="string"/>
+			<element name="fundType" 			nillable="true"		type="string"/>
+			<element name="fundAmt"				type="double"/>
+			<element name="fundRate"			type="double"/>
+			<element name="creditAmt"			type="double"/>
+			<element name="netAmt"				type="double"/>
 		</sequence>
 	</complexType>
 	
-	<complexType name="PSO130Goods">
-		<complexContent>
-			<extension base="tns:GoodsInformation">
-				<sequence>
-					<element name="taxQuantity" nillable="true" type="string"/>
-					<element name="receiptNo" nillable="true" type="string"/>
-					<element name="moiTax" nillable="true" type="string"/>
-					<element name="taxValue" nillable="true" type="string"/>
-					<element name="goodsNum" nillable="true" type="string"/>
-					<element name="exciseTax" nillable="true" type="string"/>
-					<element name="receiptDate" nillable="true" type="string"/>
-					<element name="sumTax" nillable="true" type="string"/>
-				</sequence>
-			</extension>
-		</complexContent>
-	</complexType>
-	
-	<complexType name="POSO130FormInfo">
+	<complexType name="Credit">
 		<sequence>
-			<element name="RTNCTLNO" nillable="true" type="string"/>
-			<element maxOccurs="unbounded" minOccurs="0" name="pso130Goods" nillable="true" type="tns:PSO130Goods"/>
-		</sequence>
-	</complexType>
-	
-	<complexType name="Header">
-		<sequence>
-			<element name="IPAddress" nillable="true" type="string"/>
-			<element name="serviceID" nillable="true" type="string"/>
-			<element name="userId" nillable="true" type="string"/>
-			<element name="systemID" nillable="true" type="string"/>
-			<element name="password" nillable="true" type="string"/>
+			<element name="RTNCTLNO"			nillable="true"		type="string"/>
+			<element name="creditExciseTax"		nillable="true"		type="string"/>
+			<element name="credtiMoiTax"		nillable="true"		type="string"/>
+			<element name="formRemark"			nillable="true"		type="string"/>
 		</sequence>
 	</complexType>
 	
@@ -147,7 +147,7 @@
 	<element name="InsertPOSO0112Operation">
 		<complexType>
 			<sequence>
-				<element name="arg0" nillable="true" type="tns:InquiryBcsReqHeader"/>
+				<element name="arg0"			nillable="true"		type="tns:InquiryBcsReqHeader"/>
 			</sequence>
 		</complexType>
 	</element>
@@ -157,16 +157,16 @@
 	<element name="InsertPOSO0112OperationResponse">
 		<complexType>
 			<sequence>
-				<element name="return" nillable="true" type="tns:InquiryBcsResHeader"/>
+				<element name="return"			nillable="true"		type="tns:InquiryBcsResHeader"/>
 			</sequence>
 		</complexType>
 	</element>
 	
 	<complexType name="InquiryBcsResHeader">
 		<sequence>
-			<element name="returnCode" nillable="true" type="string"/>
-			<element name="returnDesc" nillable="true" type="string"/>
-			<element name="header" nillable="true" type="tns:Header"/>
+			<element name="header"				nillable="true"		type="tns:Header"/>
+			<element name="returnCode"			nillable="true"		type="string"/>
+			<element name="returnDesc"			nillable="true"		type="string"/>
 		</sequence>
 	</complexType>
 

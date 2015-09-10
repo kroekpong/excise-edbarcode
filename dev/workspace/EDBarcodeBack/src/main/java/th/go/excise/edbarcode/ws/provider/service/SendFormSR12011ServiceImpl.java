@@ -1,6 +1,7 @@
 package th.go.excise.edbarcode.ws.provider.service;
 
 import java.io.StringReader;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -9,6 +10,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,10 @@ import org.springframework.stereotype.Service;
 
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.common.util.DateUtils;
-import th.go.excise.edbarcode.report.common.constant.ReportConstant;
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.client.InsertPOSO0112OperationService;
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.Body;
+import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.Credit;
+import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.Fund;
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.Header;
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.InquiryBcsReqHeader;
 import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.InsertPOSO0112Operation;
@@ -28,6 +31,7 @@ import th.go.excise.edbarcode.ws.client.pcc.insert0112.oxm.PSO112Goods;
 import th.go.excise.edbarcode.ws.provider.bean.XmlData;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Request;
 import th.go.excise.edbarcode.ws.provider.oxm.EbarcodeSendFormSR12011Response;
+import th.go.excise.edbarcode.ws.provider.oxm.FundEntryInfo;
 import th.go.excise.edbarcode.ws.provider.oxm.GoodsEntryInfo;
 import th.go.excise.edbarcode.ws.provider.oxm.SR12011Info;
 import th.go.excise.edbarcode.ws.provider.oxm.SubmitOnlineHeader;
@@ -79,9 +83,9 @@ public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 		
 		Calendar calendar = Calendar.getInstance(Locale.US);
 		
-		DecimalFormat decimalFormatZeroDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.ZERO_DIGIT);
-		DecimalFormat decimalFormatTwoDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.TWO_DIGIT);
-		DecimalFormat decimalFormatFourDigit = new DecimalFormat(ReportConstant.DECIMAL_FORMAT.FOUR_DIGIT);
+		DecimalFormat decimalFormatZeroDigit = new DecimalFormat("0");
+		DecimalFormat decimalFormatTwoDigit = new DecimalFormat("0.00");
+		DecimalFormat decimalFormatFourDigit = new DecimalFormat("0.0000");
 		
 		String xmlDataString = request.getBinaryInformation().getXmlDataBinary();
 		
@@ -105,33 +109,42 @@ public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 		
 		// Body
 		POSO0112FormInfo wsPoso0112FormInfo = new POSO0112FormInfo();
-		wsPoso0112FormInfo.setRegId(submitOnlineHeader.getRegistratronId());
+		wsPoso0112FormInfo.setRegistrationId(submitOnlineHeader.getRegistratronId());
 		wsPoso0112FormInfo.setCustomerId(submitOnlineHeader.getCusId());
+		wsPoso0112FormInfo.setFactoryId(submitOnlineHeader.getTaxpayerId());
 		wsPoso0112FormInfo.setTin(sr12011Info.getTaxpayerInfo().getTin());
 		wsPoso0112FormInfo.setPinNitId(sr12011Info.getTaxpayerInfo().getTin());
+		wsPoso0112FormInfo.setIpAddress(submitOnlineHeader.getIpAddress());
+		wsPoso0112FormInfo.setInternetId(submitOnlineHeader.getInternetUniqueId());
 		wsPoso0112FormInfo.setSubbmissionEmail(submitOnlineHeader.getSubmissionEmail());
-		wsPoso0112FormInfo.setFormCode(WebServiceConstant.PCC.FORM_CODE);
+		wsPoso0112FormInfo.setSubmitDateTime(DateUtils.wsDateFormat.format(calendar));
 		wsPoso0112FormInfo.setFormType("");// No Data, empty String
-		wsPoso0112FormInfo.setFormEffectiveDate(submitOnlineHeader.getSubmissionDate());// Current Date, yyyyMMdd
+		wsPoso0112FormInfo.setFormCode(WebServiceConstant.PCC.FORM_CODE);// FIXME Move to PT
+		wsPoso0112FormInfo.setFormEffectiveDate(submitOnlineHeader.getSubmissionDate());
 		wsPoso0112FormInfo.setFormReferenceNumber(request.getDataInformation().getReferenceNumber());
 		wsPoso0112FormInfo.setPaymentReferenceId(0);// No Data, default 0
-		wsPoso0112FormInfo.setBankReferenceId("");// No Data, empty String
+		wsPoso0112FormInfo.setBankReferenceId("0");// No Data, default 0
 		wsPoso0112FormInfo.setPayType12(WebServiceConstant.PCC.PAY_TYPE);
 		wsPoso0112FormInfo.setTaxMonth(calendar.get(Calendar.MONTH) + 1);// Current Month, 1-12
 		wsPoso0112FormInfo.setTaxYear(calendar.get(Calendar.YEAR));// Current Year, YYYY -> 2015
-		wsPoso0112FormInfo.setIncCode("0");// No Data, default 0
-		wsPoso0112FormInfo.setFactoryDateBegin(DateUtils.wsDateFormat.format(calendar));// Current Date, yyyyMMdd
-		wsPoso0112FormInfo.setFactoryDateEnd(DateUtils.wsDateFormat.format(calendar));// Current Date, yyyyMMdd
+		wsPoso0112FormInfo.setIncomeCode("0");// No Data, default 0
+		wsPoso0112FormInfo.setFactoryDateBegin("");
+		wsPoso0112FormInfo.setFactoryDateEnd("");
+		wsPoso0112FormInfo.setTaxvalAmt(decimalFormatZeroDigit.format(Math.floor(sr12011Info.getSummaryInfo().getSumAllTaxByValue().doubleValue())));
+		wsPoso0112FormInfo.setTaxqtyAmt(decimalFormatTwoDigit.format(sr12011Info.getSummaryInfo().getSumAllTaxByQuantity()));
 		wsPoso0112FormInfo.setExciseTax(sr12011Info.getSummaryInfo().getSumAllTax().doubleValue());
 		wsPoso0112FormInfo.setReduceAmt(sr12011Info.getSummaryInfo().getTaxLessAmount().doubleValue());
 		wsPoso0112FormInfo.setPenaltyAmt(0.0);// No Data, Can default to zero
 		wsPoso0112FormInfo.setSurchargeAmt(0.0);// No Data, Can default to zero
 		wsPoso0112FormInfo.setMoiRate(decimalFormatZeroDigit.format(sr12011Info.getSummaryInfo().getMoiRate()));
-		wsPoso0112FormInfo.setMoitax(decimalFormatTwoDigit.format(sr12011Info.getSummaryInfo().getPaymentMunicipalAmount()));
+		wsPoso0112FormInfo.setMoiTax(decimalFormatTwoDigit.format(sr12011Info.getSummaryInfo().getPaymentMunicipalAmount()));
 		wsPoso0112FormInfo.setSumCreditExciseTax(sr12011Info.getSummaryInfo().getTaxDeductionOnBookAmount().doubleValue());
 		wsPoso0112FormInfo.setSumCreditMoiTax(sr12011Info.getSummaryInfo().getSumCreditMoiTax().doubleValue());
 		wsPoso0112FormInfo.setNetExciseTax(sr12011Info.getSummaryInfo().getPaymentExciseAmount().doubleValue());
 		wsPoso0112FormInfo.setNetMoiTax(sr12011Info.getSummaryInfo().getPaymentMunicipalAmount().doubleValue());
+		wsPoso0112FormInfo.setNetSssTax(sr12011Info.getSummaryInfo().getPaymentFundHealthAmount().doubleValue());
+		wsPoso0112FormInfo.setNetSstTax(sr12011Info.getSummaryInfo().getPaymentFundTVAmount().doubleValue());
+		wsPoso0112FormInfo.setNetKprTax(sr12011Info.getSummaryInfo().getPaymentFundSportAmount().doubleValue());
 		wsPoso0112FormInfo.setPrnType(sr12011Info.getSummaryInfo().getPrintType());
 		wsPoso0112FormInfo.setRecType(WebServiceConstant.PCC.RECORD_TYPE);
 		
@@ -161,8 +174,30 @@ public class SendFormSR12011ServiceImpl implements SendFormSR12011Service {
 			wsPso112Goods.setUnitPirce(decimalFormatFourDigit.format(goodsEntryInfo.getUnitPrice()));
 			wsPso112Goods.setGoodsNum(decimalFormatFourDigit.format(goodsEntryInfo.getGoodsNum()));
 			wsPso112Goods.setGoodsValue(decimalFormatFourDigit.format(goodsEntryInfo.getGoodsValue()));
-			wsPso112Goods.setTaxAmount(decimalFormatTwoDigit.format(goodsEntryInfo.getTaxAmount()));
+			wsPso112Goods.setTaxvalUnit(decimalFormatFourDigit.format(goodsEntryInfo.getTaxByValue()));
+			wsPso112Goods.setTaxqtyUnit1(decimalFormatFourDigit.format(goodsEntryInfo.getTaxByQuantity()));
+			wsPso112Goods.setTaxqtyUnit2(decimalFormatFourDigit.format(goodsEntryInfo.getTaxByQuantityOver()));
+			wsPso112Goods.setTaxvalAmt(decimalFormatTwoDigit.format(goodsEntryInfo.getNetTaxByValue()));
+			wsPso112Goods.setTaxqtyAmt(decimalFormatTwoDigit.format(goodsEntryInfo.getNetTaxByQuantity()));
 			wsPoso0112FormInfo.getPso112Goods().add(wsPso112Goods);
+		}
+		
+		Fund wsFund = null;
+		for (FundEntryInfo fundEntryInfo : sr12011Info.getFundListInfo().getFundEntryInfo()) {
+			wsFund = new Fund();
+			wsFund.setFundType(fundEntryInfo.getFundType());
+			wsFund.setFundRate(fundEntryInfo.getFundRate().doubleValue());
+			wsFund.setFundAmt(fundEntryInfo.getFundAmt().doubleValue());
+			wsFund.setCreditAmt(fundEntryInfo.getCreditAmt().doubleValue());
+			wsFund.setNetAmt(fundEntryInfo.getNetAmt().doubleValue());
+			wsPoso0112FormInfo.getFund().add(wsFund);
+		}
+		
+		if (StringUtils.isNotEmpty(sr12011Info.getSummaryInfo().getTaxDeductionOnBookNo())) {
+			Credit wsCredit = new Credit();
+			wsCredit.setRTNCTLNO(sr12011Info.getSummaryInfo().getTaxDeductionOnBookNo());
+			wsCredit.setCreditExciseTax(decimalFormatTwoDigit.format(sr12011Info.getSummaryInfo().getTaxDeductionOnBookAmount()));
+			wsCredit.setCredtiMoiTax(decimalFormatTwoDigit.format(BigDecimal.ZERO));
 		}
 		
 		Body wsBody = new Body();
