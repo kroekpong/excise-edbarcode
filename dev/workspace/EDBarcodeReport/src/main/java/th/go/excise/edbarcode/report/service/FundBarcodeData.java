@@ -1,8 +1,15 @@
 package th.go.excise.edbarcode.report.service;
 
+import java.io.InputStream;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.design.JRDesignElement;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import th.go.excise.edbarcode.report.bean.FundEntryReport;
 import th.go.excise.edbarcode.report.bean.SR12011FormReport;
 import th.go.excise.edbarcode.report.common.constant.ReportConstant;
+import th.go.excise.edbarcode.report.common.util.ReportUtil;
 
 public class FundBarcodeData {
 	
@@ -60,6 +67,18 @@ public class FundBarcodeData {
 		builder.append(ReportConstant.EVENT_CODE.REFERENCE);
 		builder.append(ReportConstant.SEPERATE_STRING);
 		builder.append(referenceNumber);
+	}
+	
+	public JasperDesign getJasperDesignWithResizeQrCode(String reportName) throws JRException {
+		InputStream jrxmlFile = ReportUtil.getReportFile(reportName + "." + ReportConstant.FILE.JRXML);
+		JasperDesign jasperDesign = JRXmlLoader.load(jrxmlFile);
+		
+		JRDesignElement qrCode = (JRDesignElement) jasperDesign.getSummary().getElementByKey("qrCode");
+		qrCode.setX(285);
+		qrCode.setHeight(55);
+		qrCode.setWidth(55);
+		
+		return jasperDesign;
 	}
 	
 }

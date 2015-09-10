@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-09-08T16:56:44 -->
+<!-- 2015-09-10T22:24:53 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SSS1_01" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b028837b-4b98-440d-8ef1-edc36f8c0def">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="StyleFont" fontName="TH Sarabun New" fontSize="9"/>
@@ -1873,10 +1873,8 @@
 					<textFieldExpression><![CDATA[$P{netAmountString}]]></textFieldExpression>
 				</textField>
 				<componentElement>
-					<reportElement x="250" y="80" width="90" height="90" uuid="70e4800c-a270-4eb7-88f8-7234e10d6f2a">
+					<reportElement key="qrCode" x="250" y="80" width="90" height="90" uuid="70e4800c-a270-4eb7-88f8-7234e10d6f2a">
 						<property name="com.jaspersoft.studio.unit.margin" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" margin="0">
 						<jr:codeExpression><![CDATA[$P{barcodeData}]]></jr:codeExpression>

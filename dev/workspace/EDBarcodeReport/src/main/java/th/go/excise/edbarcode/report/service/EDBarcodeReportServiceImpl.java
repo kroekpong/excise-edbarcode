@@ -361,7 +361,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		// Get FundEntry from fundList
 		FundEntryReport fundEntry = getFundEntryFromFundList(form.getFundListReport(), ReportConstant.FUND_TYPE.SSS1_01);
 		
-		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry);
+		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry, ReportConstant.REPORT.SSS1_01);
 		
 		logger.info("Inside getSSS101Report() - End");
 		
@@ -377,7 +377,7 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		// Get FundEntry from fundList
 		FundEntryReport fundEntry = getFundEntryFromFundList(form.getFundListReport(), ReportConstant.FUND_TYPE.SST1_01);
 		
-		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry);
+		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry, ReportConstant.REPORT.SST1_01);
 		
 		logger.info("Inside getSST101Report() - End");
 		
@@ -393,14 +393,14 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		// Get FundEntry from fundList
 		FundEntryReport fundEntry = getFundEntryFromFundList(form.getFundListReport(), ReportConstant.FUND_TYPE.KKT1_01);
 		
-		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry);
+		JasperPrint jasperPrint = getFundReport(ReportConstant.REPORT.SSS1_01, paramMap, form, fundEntry, ReportConstant.REPORT.KKT1_01);
 		
 		logger.info("Inside getKKT101Report() - End");
 		
 		return jasperPrint;
 	}
 	
-	private JasperPrint getFundReport(String fileName, Map<String, Object> paramMap, SR12011FormReport form, FundEntryReport fundEntry) throws JRException, IOException, ParseException {
+	private JasperPrint getFundReport(String fileName, Map<String, Object> paramMap, SR12011FormReport form, FundEntryReport fundEntry, String reportName) throws JRException, IOException, ParseException {
 		logger.info("Prepare data for Fund Report");
 		
 		// Header Data
@@ -456,8 +456,18 @@ public class EDBarcodeReportServiceImpl implements EDBarcodeReportService {
 		logger.debug("Data in barcode:\n" + builder);
 		paramMap.put("barcodeData", builder.toString());
 		
-		//return ReportUtil.complieReportWithJrxml(fileName, paramMap);
-		return ReportUtil.getJasperPrintWithJasper(fileName, paramMap);
+		JasperPrint jasperPrint = null;
+		
+		// Offline
+		if (!isRefNumFlag) {
+			jasperPrint = ReportUtil.getJasperPrintWithJasper(reportName, paramMap);
+		// Online
+		} else {
+			// Resize QR-Code
+			jasperPrint = ReportUtil.complieReportWithJasperDesign(fundBarcodeData.getJasperDesignWithResizeQrCode(reportName), paramMap);
+		}
+		
+		return jasperPrint;
 	}
 	
 	private void putAddressData(Map<String, Object> paramMap, TaxpayerInfoReport taxpayerInfo) {
