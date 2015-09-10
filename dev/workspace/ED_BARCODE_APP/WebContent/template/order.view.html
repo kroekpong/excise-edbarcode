@@ -229,7 +229,7 @@
 								<!-- 	 		ng-click="clickLoadDraff()" ng-show="haveSaveDraff&&!historyMode"> โหลดรายการทำค้างใว้ล่าสุด </md-button> -->
 
 								<md-button class="md-raised " style="width:200px;" 
-										ng-click="clickSaveDraft($event)" ng-show="haveSaveDraff&&!historyMode"  ng-disabled="gridList.length==0"> บันทึกฉบับร่าง </md-button>
+										ng-click="clickSaveDraft($event)" ng-show="!historyMode"  ng-disabled="gridList.length==0"> บันทึกฉบับร่าง </md-button>
 
 							</div>
 
