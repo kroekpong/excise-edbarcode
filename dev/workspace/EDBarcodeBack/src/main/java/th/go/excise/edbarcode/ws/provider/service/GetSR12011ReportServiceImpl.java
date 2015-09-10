@@ -155,6 +155,9 @@ public class GetSR12011ReportServiceImpl implements GetSR12011ReportService {
 		summary.setReferenceNumber(request.getDataInformation().getReferenceNumber());
 		summary.setSubmissionDate(submitOnlineHeader.getSubmissionDate());
 		
+		// Extra Field
+		summary.setExciseAmountSubtractTaxLessAmount(NumberUtils.nullToZero(sr12011Info.getSummaryInfo().getExciseAmountSubtractTaxLessAmount()).toString());
+		
 		// FundEntryList
 		List<FundEntryReport> fundEntryReportList = new ArrayList<FundEntryReport>();
 		FundEntryReport fundEntryReport = null;
