@@ -168,6 +168,7 @@ public class SubmitOnlineWebServiceImpl implements SubmitOnlineWebService {
 		wsSummaryInfo.setTaxLessFrom(request.getSR12011Info().getSummaryInfo().getTaxLessFrom());
 		wsSummaryInfo.setMoiTax(request.getSR12011Info().getSummaryInfo().getMoiTax());
 		wsSummaryInfo.setSumCreditMoiTax(request.getSR12011Info().getSummaryInfo().getSumCreditMoiTax());
+		wsSummaryInfo.setExciseAmountSubtractTaxLessAmount(request.getSR12011Info().getSummaryInfo().getExciseAmountSubtractTaxLessAmount());
 		
 		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.FundListInfo wsFundListInfo = new th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.FundListInfo();
 		th.go.excise.edbarcode.ws.client.barcode.submitonline.oxm.FundEntryInfo wsFundEntryInfo = null;
