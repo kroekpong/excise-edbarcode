@@ -603,6 +603,8 @@ module.controller('order.view.controller', function($scope, $rootScope, $locatio
 		SummaryInfo.push($soapService.getObjectItem("PaymentFundTVAmount", $scope.sst.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentFundSportAmount", $scope.kkt.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("MoiRate", $scope.MunicipalRateAmountRate.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("MoiTax", $scope.royalTotal.toFixed(2)));
+		SummaryInfo.push($soapService.getObjectItem("SumCreditMoiTax", "0.00"));
 		SummaryInfo.push($soapService.getObjectItem("PrintType", stempType));
 		SummaryInfo.push($soapService.getObjectItem("PaymentExciseAndMunicipalTaxAmount", $scope.col12.toFixed(2)));
 		SummaryInfo.push($soapService.getObjectItem("PaymentOtherAmount", $scope.col13.toFixed(2)));
