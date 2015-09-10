@@ -120,6 +120,7 @@
 			<PaymentExciseAndMunicipalTaxAmount>2756.96</PaymentExciseAndMunicipalTaxAmount>
 			<PaymentOtherAmount>0</PaymentOtherAmount>
 			<PaymentNetTaxAmount>2756.96</PaymentNetTaxAmount>
+			<ExciseAmountSubtractTaxLessAmount>2506.33</ExciseAmountSubtractTaxLessAmount>
 		</SummaryInfo>
 		<FundListInfo>
 			<FundEntryInfo>

@@ -670,6 +670,7 @@
 			<PaymentFundHealthAmount>315237.96</PaymentFundHealthAmount>
 			<PaymentFundTVAmount>236428.47</PaymentFundTVAmount>
 			<PaymentFundSportAmount>315237.96</PaymentFundSportAmount>
+			<ExciseAmountSubtractTaxLessAmount>14328998.00</ExciseAmountSubtractTaxLessAmount>
 		</SummaryInfo>
 		<FundListInfo>
 			<FundEntryInfo>
