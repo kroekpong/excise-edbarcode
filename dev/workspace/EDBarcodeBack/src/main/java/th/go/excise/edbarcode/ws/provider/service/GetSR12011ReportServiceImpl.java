@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import th.co.baiwa.framework.common.util.NumberUtils;
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.report.bean.FundEntryReport;
 import th.go.excise.edbarcode.report.bean.GoodsEntryReport;
@@ -30,8 +31,6 @@ import th.go.excise.edbarcode.ws.provider.oxm.GoodsEntryInfo;
 import th.go.excise.edbarcode.ws.provider.oxm.PDFDocument;
 import th.go.excise.edbarcode.ws.provider.oxm.SR12011Info;
 import th.go.excise.edbarcode.ws.provider.oxm.SubmitOnlineHeader;
-
-import com.baiwa.framework.common.util.NumberUtils;
 
 @Service("getSR12011ReportService")
 public class GetSR12011ReportServiceImpl implements GetSR12011ReportService {
