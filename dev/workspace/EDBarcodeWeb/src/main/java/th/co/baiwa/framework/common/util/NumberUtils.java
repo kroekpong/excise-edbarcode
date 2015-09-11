@@ -1,4 +1,4 @@
-package com.baiwa.framework.common.util;
+package th.co.baiwa.framework.common.util;
 
 import java.math.BigDecimal;
 

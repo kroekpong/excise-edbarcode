@@ -1,4 +1,4 @@
-package com.baiwa.framework.persistence.dao;
+package th.co.baiwa.framework.persistence.dao;
 
 import java.math.BigDecimal;
 import java.sql.Connection;

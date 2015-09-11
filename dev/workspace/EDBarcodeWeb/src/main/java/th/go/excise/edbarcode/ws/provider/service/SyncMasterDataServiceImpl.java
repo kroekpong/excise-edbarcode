@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import th.co.baiwa.framework.common.util.NumberUtils;
 import th.go.excise.edbarcode.common.constant.WebServiceConstant;
 import th.go.excise.edbarcode.common.util.DateUtils;
 import th.go.excise.edbarcode.ws.client.sta.service.GetLicenseNGoodsInfoService;
@@ -23,8 +24,6 @@ import th.go.excise.edbarcode.ws.provider.oxm.LicenseInfo;
 import th.go.excise.edbarcode.ws.provider.oxm.LicenseList;
 import th.go.excise.edbarcode.ws.provider.oxm.TaxpayerDetail;
 import th.go.excise.edbarcode.ws.provider.oxm.TaxpayerList;
-
-import com.baiwa.framework.common.util.NumberUtils;
 
 @Service("syncMasterDataService")
 public class SyncMasterDataServiceImpl implements SyncMasterDataService {
