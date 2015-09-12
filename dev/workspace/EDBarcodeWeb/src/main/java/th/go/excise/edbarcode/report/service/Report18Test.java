@@ -1,4 +1,4 @@
-package th.go.excise.edbarcode.report.controller;
+package th.go.excise.edbarcode.report.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;

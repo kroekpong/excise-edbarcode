@@ -12,21 +12,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import th.go.excise.edbarcode.demo.service.ExciseDemoService;
 import th.go.excise.edbarcode.report.domain.R018HDomain;
+import th.go.excise.edbarcode.report.service.R018Service;
 
 @Controller
-public class R018Controller {
+public class R018AjaxController  {
 	
 	private static final Logger logger = LogManager.getLogger();
 	
 	@Autowired
-	private ExciseDemoService exciseDemoService;
+	private R018Service r018Service;
 	
 	@RequestMapping(value = "/getR018", method = RequestMethod.GET, headers = "Accept=application/json")
 	public @ResponseBody R018HDomain getR018(HttpServletRequest httpRequest) {
 		logger.info("Inside getR018()");
  
 		
-		return Report18Test.getR018Test();
+		return r018Service.getMockReportData();
 	}
 	
 	
